@@ -1,7 +1,7 @@
 # cs9roject
 ### Project Course in Computer Science - Group 9
 
-**team:**
+**team:**  
 *Alaa Alwan*  
 *Alexander Lennartsson*  
 *Anders Olsson*  
