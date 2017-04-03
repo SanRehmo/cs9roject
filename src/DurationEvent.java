@@ -1,4 +1,4 @@
-package cs_9roject;
+package cs9roject;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
@@ -33,6 +33,7 @@ public class DurationEvent extends Event {
 	
 	private void setDuration(Duration interval){
 		duration = interval;
+		endTime = startTime.plus(duration);
 	}
 	
 	public Duration getDuration(){
