@@ -9,7 +9,8 @@ public class TimelinesMain {
 	static String path = "c:\\tilelines.data";
 
 	public static void main(String[] args) {
-
+		
+		// Add 2 timlines to the object timelines. Every timeline has 2 events
 		LocalDateTime startTimeline= LocalDateTime.now();
 		LocalDateTime endTimeline= startTimeline.plusDays(15);
 		timelines.addTimeline(startTimeline, endTimeline);
@@ -23,11 +24,15 @@ public class TimelinesMain {
 		timelines.getTimelines().get(1).addEvent(event3);
 		timelines.getTimelines().get(1).addEvent(event4);
 		
+		// Save timelines to database
 		dao.save(path, timelines);
+		
+		// Load timelines from database
 		Timelines timelines2= dao.load(path);
 		
-		// timelines2= timelines;
+		//timelines2= timelines;
 		
+		// Check if saved and loaded time lines are same. All printing should be True
 		System.out.println((timelines.getTimelines().size()==timelines2.getTimelines().size()));
 		System.out.println((timelines.getTimelines().get(0).getEvents().size()==(timelines2.getTimelines().get(0).getEvents().size())));
 		System.out.println((timelines.getTimelines().get(1).getEvents().size()==(timelines2.getTimelines().get(1).getEvents().size())));
