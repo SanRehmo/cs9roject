@@ -69,7 +69,7 @@ public class Timeline {
 		return endTime;
 	}
 	
-	private void setDuration(Duration interval){
+	public void setDuration(Duration interval){
 		duration = interval;
 		endTime = startTime.plus(duration);
 	}

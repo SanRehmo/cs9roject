@@ -3,17 +3,20 @@ package cs9roject;
 import java.time.Duration;
 import java.time.LocalDateTime;
 
+import javafx.scene.image.Image;
+
 public class DurationEvent extends Event {
 	private Duration duration;
 	
 	private LocalDateTime endTime;
 	
-	public DurationEvent(String Title, String Description,LocalDateTime StartTime, LocalDateTime EndtTime ){
+	public DurationEvent(String Title, String Description,LocalDateTime StartTime, LocalDateTime EndtTime , Image EventImage ){
 		title=Title;
 		description= Description;
 		startTime=StartTime;
 		endTime=EndtTime;
 		duration = Duration.between(startTime, endTime);
+		eventImage=EventImage;
 
 	}
 	
@@ -31,7 +34,7 @@ public class DurationEvent extends Event {
 		return endTime;
 	}
 	
-	private void setDuration(Duration interval){
+	public void setDuration(Duration interval){
 		duration = interval;
 		endTime = startTime.plus(duration);
 	}

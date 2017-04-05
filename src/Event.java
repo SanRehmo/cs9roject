@@ -2,6 +2,8 @@ package cs9roject;
 
 import java.time.LocalDateTime;
 
+import javafx.scene.image.Image;
+
 public class Event {
 	private static int count=0;
 	protected int eventId;
@@ -9,6 +11,7 @@ public class Event {
 	protected String description= new String ();
 	protected LocalDateTime startTime;
 	protected boolean isDurationEvent= true;
+	protected Image eventImage = null;
 	
 	public Event(){
 		eventId= count++;
@@ -52,6 +55,14 @@ public class Event {
 	
 	public boolean isDurationEvent (){
 		return isDurationEvent;
+	}
+	
+	public void setImage(Image EventImage){
+		eventImage = EventImage;
+	}
+	
+	public Image getImage (){
+		return eventImage;
 	}
 
 }

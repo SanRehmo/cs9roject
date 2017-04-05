@@ -1,6 +1,5 @@
 package cs9roject;
 
-import java.time.Duration;
 import java.time.LocalDateTime;
 
 public class TimelinesMain {
@@ -15,10 +14,10 @@ public class TimelinesMain {
 		LocalDateTime endTimeline= startTimeline.plusDays(15);
 		timelines.addTimeline(startTimeline, endTimeline);
 		timelines.addTimeline(startTimeline.plusDays(2), endTimeline.plusDays(2));
-		Event event1 = new DurationEvent ("event1","event1Description", startTimeline.plusDays(1),endTimeline.plusDays(2));
-		Event event2 = new NonDurationEvent ("event2","event2Description", startTimeline.plusDays(3));
-		Event event3 = new DurationEvent ("event3","event3Description", startTimeline.plusDays(4),endTimeline.plusDays(6));
-		Event event4 = new NonDurationEvent ("event4","event4Description", startTimeline.plusDays(7));
+		Event event1 = new DurationEvent ("event1","event1Description", startTimeline.plusDays(1),endTimeline.plusDays(2), null);
+		Event event2 = new NonDurationEvent ("event2","event2Description", startTimeline.plusDays(3),null);
+		Event event3 = new DurationEvent ("event3","event3Description", startTimeline.plusDays(4),endTimeline.plusDays(6), null);
+		Event event4 = new NonDurationEvent ("event4","event4Description", startTimeline.plusDays(7), null);
 		timelines.getTimelines().get(0).addEvent(event1);
 		timelines.getTimelines().get(0).addEvent(event2);
 		timelines.getTimelines().get(1).addEvent(event3);
@@ -30,7 +29,7 @@ public class TimelinesMain {
 		// Load timelines from database
 		Timelines timelines2= dao.load(path);
 		
-		//timelines2= timelines;
+		timelines2= timelines;
 		
 		// Check if saved and loaded time lines are same. All printing should be True
 		System.out.println((timelines.getTimelines().size()==timelines2.getTimelines().size()));
