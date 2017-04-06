@@ -22,7 +22,7 @@ public class Main {
 
         try {
             connection = DriverManager
-                    .getConnection("jdbc:mysql://localhost:3306/bedrock","root", "cs9roject");
+                    .getConnection("jdbc:mysql://localhost:3306/bedrock?useSSL=false", "root", "cs9roject");
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -30,13 +30,13 @@ public class Main {
         }
 
         if (connection != null) {
-            String query = "SELECT * FROM employee WHERE jobTitle=\"Neighbor\"";
+            String query = "SELECT * FROM Events";
             try {
                 stmt = connection.createStatement();
                 ResultSet rs = stmt.executeQuery(query);
-                System.out.println("All Neighbors in the database:");
                 while(rs.next()) {
-                    System.out.println(rs.getString("Name"));
+                    System.out.print("Title of Event #" + rs.getString("EVENT_ID") + ": ");
+                    System.out.println(rs.getString("TITLE"));
                 }
             } catch (Exception ex) {
                 System.out.println("EX");

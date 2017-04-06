@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="bedrock@localhost">
+  <database-model serializer="dbm" rdbms="MYSQL" format-version="4.1">
+    <root id="1"/>
+    <schema id="2" parent="1" name="bedrock">
+      <Current>1</Current>
+      <Visible>1</Visible>
+    </schema>
+    <schema id="3" parent="1" name="information_schema"/>
+    <schema id="4" parent="1" name="mysql"/>
+    <schema id="5" parent="1" name="performance_schema"/>
+    <schema id="6" parent="1" name="sys"/>
+    <table id="7" parent="2" name="Events"/>
+    <table id="8" parent="2" name="Projects"/>
+    <table id="9" parent="2" name="Timelines"/>
+    <table id="10" parent="2" name="employee"/>
+    <column id="11" parent="7" name="EVENT_ID">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="12" parent="7" name="TITLE">
+      <Position>2</Position>
+      <DataType>varchar(50)|0</DataType>
+    </column>
+    <column id="13" parent="7" name="START_TIME">
+      <Position>3</Position>
+      <DataType>varchar(50)|0</DataType>
+    </column>
+    <column id="14" parent="7" name="END_TIME">
+      <Position>4</Position>
+      <DataType>varchar(50)|0</DataType>
+    </column>
+    <key id="15" parent="7" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>EVENT_ID</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="16" parent="8" name="PROJECT_ID">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="17" parent="8" name="TIMELINE_ID">
+      <Position>2</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <index id="18" parent="8" name="TIMELINE_ID">
+      <ColNames>TIMELINE_ID</ColNames>
+    </index>
+    <key id="19" parent="8" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>PROJECT_ID</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="20" parent="8" name="Projects_ibfk_1">
+      <ColNames>TIMELINE_ID</ColNames>
+      <RefSchemaName>bedrock</RefSchemaName>
+      <RefTableName>Timelines</RefTableName>
+      <RefColNames>TIMELINE_ID</RefColNames>
+    </foreign-key>
+    <column id="21" parent="9" name="TIMELINE_ID">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="22" parent="9" name="EVENT_ID">
+      <Position>2</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <index id="23" parent="9" name="EVENT_ID">
+      <ColNames>EVENT_ID</ColNames>
+    </index>
+    <key id="24" parent="9" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>TIMELINE_ID</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="25" parent="9" name="Timelines_ibfk_1">
+      <ColNames>EVENT_ID</ColNames>
+      <RefSchemaName>bedrock</RefSchemaName>
+      <RefTableName>Events</RefTableName>
+      <RefColNames>EVENT_ID</RefColNames>
+    </foreign-key>
+    <column id="26" parent="10" name="Name">
+      <Position>1</Position>
+      <DataType>char(20)|0</DataType>
+    </column>
+    <column id="27" parent="10" name="Dept">
+      <Position>2</Position>
+      <DataType>char(20)|0</DataType>
+    </column>
+    <column id="28" parent="10" name="jobTitle">
+      <Position>3</Position>
+      <DataType>char(20)|0</DataType>
+    </column>
+  </database-model>
+</dataSource>
