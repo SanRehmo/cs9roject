@@ -3,7 +3,7 @@ package cs9roject;
 import java.time.LocalDateTime;
 
 public class TimelinesMain {
-	static Timelines timelines = new Timelines();
+	static TimelineList timelines = new TimelineList();
 	static TimelinesDAO dao= new TimelinesDAO();
 	static String path = "c:\\tilelines.data";
 
@@ -27,7 +27,7 @@ public class TimelinesMain {
 		dao.save(path, timelines);
 		
 		// Load timelines from database
-		Timelines timelines2= dao.load(path);
+		TimelineList timelines2= dao.load(path);
 		
 		timelines2= timelines;
 		

@@ -4,10 +4,10 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Timelines {
+public class TimelineList {
 	protected List<Timeline> timelines= new ArrayList<Timeline>();
 	
-	public Timelines(){
+	public TimelineList(){
 		
 	}
 	

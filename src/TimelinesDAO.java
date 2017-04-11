@@ -6,12 +6,12 @@ public class TimelinesDAO {
 		
 	}
 	
-	public Timelines load (String path){
+	public TimelineList load (String path){
 		return null;
 		
 	}
 	
-	public void save (String path, Timelines timelines){
+	public void save (String path, TimelineList timelines){
 		
 	}
 
