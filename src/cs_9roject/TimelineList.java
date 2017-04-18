@@ -1,6 +1,6 @@
-package cs9roject;
+package cs_9roject;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,9 +11,13 @@ public class TimelineList {
 		
 	}
 	
-	public void addTimeline(LocalDateTime StartTime, LocalDateTime EndTime){
-		Timeline temp= new Timeline(StartTime, EndTime);
+	public void addTimeline(LocalDate StartDate, LocalDate EndDate, String Title){
+		Timeline temp= new Timeline(StartDate, EndDate, Title);
 		timelines.add(temp);
+	}
+	
+	public void addTimeline(Timeline timeline){
+		timelines.add(timeline);
 	}
 	
 	public Timeline getTimeline(int ID){
