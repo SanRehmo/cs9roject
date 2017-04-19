@@ -39,7 +39,6 @@ public class Main extends Application {
         stage.setScene(new Scene(createMode));  
         stage.setTitle("CreateMode");
         stage.show();	
-<<<<<<< HEAD
 	}
 	
 	public static void showShowTimeline() throws IOException{
@@ -50,22 +49,6 @@ public class Main extends Application {
         stage2.setScene(new Scene(showTimeline));  
         stage2.setTitle("Timelines");
         stage2.show();	
-=======
-        
-        System.out.println("createmode");
-	}
-	
-	public static void showShowTimeline() throws IOException{
-		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(Main.class.getResource("view/showTimelines.fxml"));
-		FlowPane showTimeline = loader.load();
-		Stage stage2 = new Stage();
-        stage2.setScene(new Scene(showTimeline));  
-        stage2.setTitle("Timelines");
-        stage2.show();	
-        
-        System.out.println("showtimeline");
->>>>>>> refs/remotes/origin/master
 	}
 	
 	public static void showEventHandler() throws IOException{
@@ -77,10 +60,6 @@ public class Main extends Application {
         stage2.setTitle("EventHandler");
         stage2.show();	
 		
-	}
-	
-	public static void test(){
-		System.out.println("funkar");
 	}
 
 	public static void main(String[] args) {
