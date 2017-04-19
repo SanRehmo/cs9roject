@@ -39,8 +39,6 @@ public class Main extends Application {
         stage.setScene(new Scene(createMode));  
         stage.setTitle("CreateMode");
         stage.show();	
-        
-        System.out.println("createmode");
 	}
 	
 	public static void showShowTimeline() throws IOException{
@@ -51,8 +49,6 @@ public class Main extends Application {
         stage2.setScene(new Scene(showTimeline));  
         stage2.setTitle("Timelines");
         stage2.show();	
-        
-        System.out.println("showtimeline");
 	}
 	
 	public static void showEventHandler() throws IOException{
