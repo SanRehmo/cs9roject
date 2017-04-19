@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.BoxBlur?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Rectangle?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.view.eventHandlerController">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f7f7f7" height="59.0" layoutX="11.0" layoutY="29.0" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="OUTSIDE" width="379.0">
+         <effect>
+            <BoxBlur />
+         </effect>
+      </Rectangle>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f7f7f7" height="149.0" layoutX="14.0" layoutY="244.0" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="OUTSIDE" width="375.0">
+         <effect>
+            <BoxBlur />
+         </effect>
+      </Rectangle>
+      <ImageView fx:id="eventImage_imageView" fitHeight="130.0" fitWidth="167.0" layoutX="212.0" layoutY="256.0" onMouseClicked="#eventImage" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@emptyMME.gif" />
+         </image>
+      </ImageView>
+      <TextField fx:id="NameEvent_textField" layoutX="18.0" layoutY="44.0" onAction="#nameEvent" prefHeight="27.0" prefWidth="150.0" promptText="Name event">
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
+         <effect>
+            <DropShadow />
+         </effect>
+      </TextField>
+      <ComboBox fx:id="color_ComboBox" layoutX="188.0" layoutY="43.0" onAction="#selectEventColor" prefHeight="25.0" prefWidth="122.0" promptText="Color">
+         <padding>
+            <Insets left="5.0" right="5.0" top="5.0" />
+         </padding></ComboBox>
+      <Button fx:id="delete_btn" layoutX="326.0" layoutY="43.0" mnemonicParsing="false" onAction="#delete" text="Delete" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f7f7f7" height="122.0" layoutX="14.0" layoutY="108.0" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="OUTSIDE" width="373.0">
+         <effect>
+            <BoxBlur />
+         </effect></Rectangle>
+      <CheckBox fx:id="duration_checkBox" layoutX="25.0" layoutY="138.0" mnemonicParsing="false" onAction="#eventDuration" text="Duration" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fafafa" height="59.0" layoutX="228.0" layoutY="140.0" stroke="BLACK" strokeType="INSIDE" width="150.0" />
+      <TextField fx:id="startTextField" disable="true" layoutX="237.0" layoutY="155.0" onAction="#setEventStart" prefHeight="27.0" prefWidth="58.0" promptText="Start" />
+      <TextField fx:id="endTextField" disable="true" layoutX="310.0" layoutY="155.0" onAction="#setEventEnd" prefHeight="27.0" prefWidth="58.0" promptText="End" />
+      <TextField fx:id="description" alignment="TOP_LEFT" layoutX="22.0" layoutY="256.0" onAction="#decsription" prefHeight="124.0" prefWidth="167.0" promptText="Description" />
+      <ComboBox fx:id="Reccuring_ComboBox" layoutX="100.0" layoutY="169.0" onAction="#recurring" onDragDetected="#recurring" prefHeight="27.0" prefWidth="101.0" promptText="Never" />
+      <Label fx:id="recurring_label" layoutX="27.0" layoutY="174.0" prefHeight="17.0" prefWidth="66.0" text="Recurring:" />
+   </children>
+</Pane>
