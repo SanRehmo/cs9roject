@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.shape.Line?>
+
+<FlowPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="659.0" prefWidth="1036.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.view.StartingModeController">
+   <children>
+      <ScrollPane fx:id="start_scrollpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="364.0" prefWidth="809.0">
+         <content>
+          <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="363.0" prefWidth="805.0" />
+         </content>
+      </ScrollPane>
+      <ButtonBar buttonMinWidth="0.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="118.0" prefWidth="267.0" translateX="800.0" translateY="-405.0">
+        <buttons>
+          <Button mnemonicParsing="false" onAction="#createMode" text="Add new timeline" translateX="93.0" translateY="31.0" />
+            <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#showTimeline" prefHeight="25.0" prefWidth="150.0" text="Timelines to show" translateX="-36.0" />
+        </buttons>
+      </ButtonBar>
+      <ImageView fitHeight="43.0" fitWidth="43.0" onMouseClicked="#createTimeline" pickOnBounds="true" preserveRatio="true" translateX="734.0" translateY="223.0">
+         <image>
+            <Image url="http://www.unh.edu/it/sites/www.unh.edu.it/files/question-mark.png" />
+         </image>
+      </ImageView>
+      <Line endX="366.0" rotate="-90.0" strokeWidth="2.0" translateX="315.0" translateY="-241.0" />
+      <Line endX="707.0" startX="-100.0" strokeWidth="2.0" translateY="-118.0" />
+   </children>
+</FlowPane>
