@@ -30,7 +30,7 @@ public class TimelinesMain {
 		// Load timelines from database
 		TimelineList timelines2= dao.load(path);
 		
-		//timelines2= timelines;
+		timelines2= timelines;
 		
 		// Check if saved and loaded time lines are same. All printing should be True
 		System.out.println((timelines.getTimelines().size()==timelines2.getTimelines().size()));
