@@ -29,6 +29,7 @@ public class Main extends Application {
 		Scene scene = new Scene(mainLayout);
 		primaryStage.setScene(scene);
 		primaryStage.show();
+<<<<<<< HEAD
 		
 	}
 	
@@ -61,6 +62,47 @@ public class Main extends Application {
         stage2.setTitle("EventHandler");
         stage2.show();	
 		
+=======
+	}
+	
+	public static void showCreateMode() throws IOException{
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(Main.class.getResource("view/CreateMode.fxml"));
+		FlowPane createMode = loader.load();
+		Stage stage = new Stage();
+        stage.setScene(new Scene(createMode));  
+        stage.setTitle("CreateMode");
+        stage.show();	
+        
+        System.out.println("createmode");
+	}
+	
+	public static void showShowTimeline() throws IOException{
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(Main.class.getResource("view/showTimelines.fxml"));
+		FlowPane showTimeline = loader.load();
+		Stage stage2 = new Stage();
+        stage2.setScene(new Scene(showTimeline));  
+        stage2.setTitle("Timelines");
+        stage2.show();	
+        
+        System.out.println("showtimeline");
+	}
+	
+	public static void showEventHandler() throws IOException{
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(Main.class.getResource("view/eventHandler.fxml"));
+		Pane showEventHandler = loader.load();
+		Stage stage2 = new Stage();
+        stage2.setScene(new Scene(showEventHandler));  
+        stage2.setTitle("EventHandler");
+        stage2.show();	
+		
+	}
+	
+	public static void test(){
+		System.out.println("funkar");
+>>>>>>> branch 'master' of https://github.com/SanRehmo/cs9roject.git
 	}
 
 	public static void main(String[] args) {
