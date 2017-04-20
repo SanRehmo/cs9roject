@@ -29,8 +29,6 @@ public class Main extends Application {
 		Scene scene = new Scene(mainLayout);
 		primaryStage.setScene(scene);
 		primaryStage.show();
-<<<<<<< HEAD
-		
 	}
 	
 	public static void showCreateMode() throws IOException{
@@ -61,8 +59,6 @@ public class Main extends Application {
         stage2.setScene(new Scene(showEventHandler));  
         stage2.setTitle("EventHandler");
         stage2.show();	
-		
-=======
 	}
 	
 	public static void showCreateMode() throws IOException{
@@ -73,8 +69,6 @@ public class Main extends Application {
         stage.setScene(new Scene(createMode));  
         stage.setTitle("CreateMode");
         stage.show();	
-        
-        System.out.println("createmode");
 	}
 	
 	public static void showShowTimeline() throws IOException{
@@ -98,11 +92,6 @@ public class Main extends Application {
         stage2.setTitle("EventHandler");
         stage2.show();	
 		
-	}
-	
-	public static void test(){
-		System.out.println("funkar");
->>>>>>> branch 'master' of https://github.com/SanRehmo/cs9roject.git
 	}
 
 	public static void main(String[] args) {
