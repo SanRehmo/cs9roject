@@ -68,29 +68,41 @@
       <Position>2</Position>
       <DataType>int(11)|0</DataType>
     </column>
-    <index id="23" parent="9" name="EVENT_ID">
+    <column id="23" parent="9" name="START_TIME">
+      <Position>3</Position>
+      <DataType>datetime|0</DataType>
+    </column>
+    <column id="24" parent="9" name="END_TIME">
+      <Position>4</Position>
+      <DataType>datetime|0</DataType>
+    </column>
+    <column id="25" parent="9" name="TITLE">
+      <Position>5</Position>
+      <DataType>varchar(50)|0</DataType>
+    </column>
+    <index id="26" parent="9" name="EVENT_ID">
       <ColNames>EVENT_ID</ColNames>
     </index>
-    <key id="24" parent="9" name="PRIMARY">
+    <key id="27" parent="9" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>TIMELINE_ID</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="25" parent="9" name="Timelines_ibfk_1">
+    <foreign-key id="28" parent="9" name="Timelines_ibfk_1">
       <ColNames>EVENT_ID</ColNames>
       <RefSchemaName>bedrock</RefSchemaName>
       <RefTableName>Events</RefTableName>
       <RefColNames>EVENT_ID</RefColNames>
     </foreign-key>
-    <column id="26" parent="10" name="Name">
+    <column id="29" parent="10" name="Name">
       <Position>1</Position>
       <DataType>char(20)|0</DataType>
     </column>
-    <column id="27" parent="10" name="Dept">
+    <column id="30" parent="10" name="Dept">
       <Position>2</Position>
       <DataType>char(20)|0</DataType>
     </column>
-    <column id="28" parent="10" name="jobTitle">
+    <column id="31" parent="10" name="jobTitle">
       <Position>3</Position>
       <DataType>char(20)|0</DataType>
     </column>
