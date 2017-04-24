@@ -5,11 +5,14 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TimelinesDAO {
 	public TimelinesDAO (){
 		
 	}
+
 
 	public Project load(int ID) {
 
@@ -40,7 +43,6 @@ public class TimelinesDAO {
 					timeline = new Timeline(start_time, end_time, title);
 					result.addTimeline(timeline);
 					// TESTING
-					System.out.println(result.getTimeline(count));
 
 					count++;
 				}
@@ -53,8 +55,70 @@ public class TimelinesDAO {
 		return result;
 	}
 
-	public void save(String path, Project timelines) {
-		
+    public List<Project> loadAllProjects() {
+
+        List<Project> result = new ArrayList<Project>();
+        Connection connection = null;
+        Statement stmt = null;
+        Timeline timeline = null;
+
+        try {
+            connection = Database.establishConnection();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        if (connection != null) {
+            String query = "SELECT * FROM Projects";
+            try {
+                stmt = connection.createStatement();
+                ResultSet rs = stmt.executeQuery(query);
+                int count = 1;
+                while (rs.next()) {
+                    result.add(load(count));
+                    count++;
+                }
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        } else {
+            System.out.println("Failed to make connection");
+        }
+        return result;
+    }
+
+
+	public void save(Project project) {
+
+		Connection connection = null;
+		Statement stmt;
+
+		try {
+			connection = Database.establishConnection();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+
+
+		for (int i = 0; i < project.TimelineID.size(); i++) {
+
+			if (connection != null) {
+
+				String update = "INSERT INTO Projects " + "VALUES (" + project.ProjectID + ", " + project.TimelineID.get(i) + ")";
+
+				try {
+					stmt = connection.createStatement();
+					stmt.executeUpdate(update);
+                    System.out.println("Project with the Project_ID: " + project.ProjectID + " and the Timeline_ID(s):" + project.TimelineID.get(i) + " has been saved!");
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+				}
+
+			} else {
+				System.out.println("Failed to make connection");
+			}
+		}
 	}
 
 }
+
