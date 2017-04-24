@@ -1,6 +1,8 @@
 package gui;
 
 import java.io.IOException;
+import java.time.format.DateTimeFormatter;
+
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -87,7 +89,31 @@ public class CreateModeController {
 		hbox.setAlignment(Pos.CENTER);
 		pane.getChildren().add(hbox);
 		
+		//Test
+		dayCounter();
+		
 		return pane;
 		
+	}
+	
+	/**
+	 * Calculation month for how long the timeline is
+	 * @return timeline length
+	 */
+	public int dayCounter() {
+		String start = StartDate.getValue().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+		String end = EndDate.getValue().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+		
+		String startMonth = start.substring(0,4);
+		String endMonth = end.substring(0,4);
+		String startDay = start.substring(5, 6);
+		String endDay = end.substring(5, 6);
+		
+		int startCalc = (Integer.parseInt(startMonth) * 12) + Integer.parseInt(startDay);
+		int endCalc = (Integer.parseInt(endMonth) * 12) + Integer.parseInt(endDay);
+		
+		
+		
+		return endCalc - startCalc;
 	}
 }
