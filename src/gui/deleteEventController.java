@@ -1,4 +1,4 @@
- package gui;
+package gui;
 /**
  * Sample Skeleton for 'deleteEventPopUp.fxml' Controller Class
  */
