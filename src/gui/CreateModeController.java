@@ -43,7 +43,7 @@ public class CreateModeController {
     VBox vbox = new VBox();
 	    
 	@FXML
-	private void Test() throws IOException{
+	private void addTimeline() throws IOException{
 		if(OnlyYears.isSelected()){
 		vbox.getChildren().addAll(generateYearTimeL());
 		}

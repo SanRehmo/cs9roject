@@ -19,7 +19,7 @@
       </ScrollPane>
       <ButtonBar buttonMinWidth="0.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="118.0" prefWidth="267.0" translateX="800.0" translateY="-405.0">
         <buttons>
-          <Button mnemonicParsing="false" onAction="#testMode" text="Add new timeline" translateX="93.0" translateY="31.0" />
+          <Button mnemonicParsing="false" onAction="#createMode" text="Add new timeline" translateX="93.0" translateY="31.0" />
             <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#showTimeline" prefHeight="25.0" prefWidth="150.0" text="Timelines to show" translateX="-36.0" />
         </buttons>
       </ButtonBar>

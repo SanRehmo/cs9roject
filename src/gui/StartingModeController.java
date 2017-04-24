@@ -22,7 +22,7 @@ public class StartingModeController {
     private Button helpButton;
 	
 	
-	public void testMode() throws IOException{
+	public void createMode() throws IOException{
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(Main.class.getResource("CreateMode.fxml"));
 		FlowPane createMode = loader.load();
