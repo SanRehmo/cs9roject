@@ -27,7 +27,7 @@ public class StartingModeController {
 		loader.setLocation(Main.class.getResource("CreateMode.fxml"));
 		FlowPane createMode = loader.load();
 		CreateModeController c = (CreateModeController) loader.getController();
-		c.primaryTextArea = start_scrollpane;
+		c.primaryScrollpane = start_scrollpane;
 			
 		Stage stage = new Stage();
 	    stage.setScene(new Scene(createMode));  

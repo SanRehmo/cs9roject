@@ -17,7 +17,7 @@ import gui.Main;
 
 public class CreateModeController {
 
-	public ScrollPane primaryTextArea;
+	public ScrollPane primaryScrollpane;
 
 	
 	@FXML
@@ -44,19 +44,24 @@ public class CreateModeController {
 	    
 	@FXML
 	private void Test() throws IOException{
-		vbox.getChildren().addAll(generatTimeLine());			
+		if(OnlyYears.isSelected()){
+		vbox.getChildren().addAll(generateYearTimeL());
+		}
+		else{
+			vbox.getChildren().addAll(generateTimeL());			
+		}
 		
-		primaryTextArea.setContent(vbox); 
+		primaryScrollpane.setContent(vbox); 
 		
 	}
 	
-	public Line HoricontellLine() {
+	public Line verticalLine() {
 		Line timeLine = new Line(50,10,50,100);
 		timeLine.setStrokeWidth(3);
 		return timeLine;
 	}
 	
-	public Line VerticalLine() {
+	public Line clickAbleHline() {
 		Line timeLine = new Line(0, 50, 100, 50);
 		timeLine.setStrokeWidth(5);
 		timeLine.setOnMouseClicked(e ->{
@@ -72,16 +77,40 @@ public class CreateModeController {
 		return timeLine;
 	}
 	
-	public Pane generatTimeLine() {
+	public Line Hline(){
+		Line timeLine = new Line(0, 50, 100, 50);
+		timeLine.setStrokeWidth(5);
+		return timeLine;
+	}
+	
+	public Pane generateTimeL(){
 		Pane pane = new Pane();
 		HBox hbox = new HBox();
 		for(int i = 0; i < 10; i++) {
-			HoricontellLine().setLayoutY(50);
-			VerticalLine().setLayoutY(50);
-			hbox.getChildren().addAll(HoricontellLine(),VerticalLine());
+			verticalLine().setLayoutY(50);
+			clickAbleHline().setLayoutY(50);
+			hbox.getChildren().addAll(verticalLine(),Hline());
 		}
 		
-		hbox.getChildren().add(HoricontellLine());
+		hbox.getChildren().add(verticalLine());
+		hbox.setLayoutX(5);
+		hbox.setLayoutY(30);
+		hbox.setAlignment(Pos.CENTER);
+		pane.getChildren().add(hbox);
+		
+		return pane;
+	}
+	
+	public Pane generateYearTimeL() {
+		Pane pane = new Pane();
+		HBox hbox = new HBox();
+		for(int i = 0; i < 10; i++) {
+			verticalLine().setLayoutY(50);
+			clickAbleHline().setLayoutY(50);
+			hbox.getChildren().addAll(verticalLine(),clickAbleHline());
+		}
+		
+		hbox.getChildren().add(verticalLine());
 		hbox.setLayoutX(5);
 		hbox.setLayoutY(30);
 		hbox.setAlignment(Pos.CENTER);
