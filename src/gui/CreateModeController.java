@@ -3,6 +3,7 @@ package gui;
 import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 
+import cs_9roject.Timeline;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -21,7 +22,6 @@ public class CreateModeController {
 
 	public ScrollPane primaryScrollpane;
 
-	
 	@FXML
     private TextField TimelineName;
 
@@ -53,8 +53,8 @@ public class CreateModeController {
 			vbox.getChildren().addAll(generateTimeL());			
 		}
 		
-		primaryScrollpane.setContent(vbox); 
-		
+		primaryScrollpane.setContent(vbox);	
+				
 	}
 	
 	public Line verticalLine(int size) {
@@ -105,10 +105,8 @@ public class CreateModeController {
 		Pane pane = new Pane();
 		HBox hbox = new HBox();
 		for(int j = 0; j<5; j++){
-
-		hbox.getChildren().addAll(verticalLine(100),Hline(12));
-		for(int i = 0; i < 12; i++) {
-			
+			hbox.getChildren().addAll(verticalLine(100),Hline(12));
+		for(int i = 0; i < 12; i++) {	
 			hbox.getChildren().addAll(verticalLine(50),Hline(12));
 		}
 		}
@@ -118,11 +116,7 @@ public class CreateModeController {
 		hbox.setAlignment(Pos.CENTER);
 		pane.getChildren().add(hbox);
 		
-		//Test
-		dayCounter();
-		
-		return pane;
-		
+		return pane;	
 	}
 	
 	/**
@@ -140,8 +134,6 @@ public class CreateModeController {
 		
 		int startCalc = (Integer.parseInt(startMonth) * 12) + Integer.parseInt(startDay);
 		int endCalc = (Integer.parseInt(endMonth) * 12) + Integer.parseInt(endDay);
-		
-		
 		
 		return endCalc - startCalc;
 	}
