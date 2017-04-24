@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Rectangle?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.eventHandlerController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="436.0" prefWidth="401.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.eventHandlerController">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f7f7f7" height="59.0" layoutX="11.0" layoutY="29.0" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="OUTSIDE" width="379.0">
          <effect>
@@ -54,5 +54,6 @@
       <TextField fx:id="description" alignment="TOP_LEFT" layoutX="22.0" layoutY="256.0" onAction="#decsription" prefHeight="124.0" prefWidth="167.0" promptText="Description" />
       <ComboBox fx:id="Reccuring_ComboBox" layoutX="100.0" layoutY="169.0" onAction="#recurring" onDragDetected="#recurring" prefHeight="27.0" prefWidth="101.0" promptText="Never" />
       <Label fx:id="recurring_label" layoutX="27.0" layoutY="174.0" prefHeight="17.0" prefWidth="66.0" text="Recurring:" />
+      <Button fx:id="btnSave" layoutX="337.0" layoutY="403.0" mnemonicParsing="false" onAction="#saveEvent" text="Save" />
    </children>
 </Pane>
