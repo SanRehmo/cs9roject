@@ -5,6 +5,10 @@ import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
+import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Line;
@@ -13,7 +17,26 @@ import gui.Main;
 
 public class CreateModeController {
 	
-		
+	@FXML
+    private TextField TimelineName;
+
+    @FXML
+    private DatePicker StartDate;
+
+    @FXML
+    private DatePicker EndDate;
+
+    @FXML
+    private CheckBox OnlyYears;
+
+    @FXML
+    private Button CreateButton;
+    
+    @FXML
+	private void print(){
+    	System.out.println("hello alaa");
+    }
+	
 	@FXML
 	private void Test() throws IOException{
 		FXMLLoader loader = new FXMLLoader();

@@ -24,7 +24,7 @@
       </ButtonBar>
       <ImageView fitHeight="43.0" fitWidth="43.0" onMouseClicked="#createTimeline" pickOnBounds="true" preserveRatio="true" translateX="734.0" translateY="223.0">
          <image>
-            <Image url="http://www.unh.edu/it/sites/www.unh.edu.it/files/question-mark.png" />
+            <Image url="@question-mark.png" />
          </image>
       </ImageView>
       <Line endX="366.0" rotate="-90.0" strokeWidth="2.0" translateX="315.0" translateY="-241.0" />
