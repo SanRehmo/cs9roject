@@ -34,7 +34,8 @@ public class StartingModeController {
 		Stage stage = new Stage();
 	    stage.setScene(new Scene(createMode));  
 	    stage.setTitle("CreateMode");
-	    stage.show();	        
+	    stage.show();	 
+	    
 	}
 	
 	@FXML
