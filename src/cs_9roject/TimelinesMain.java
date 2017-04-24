@@ -1,20 +1,18 @@
 package cs_9roject;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-
 public class TimelinesMain {
     static Project timelines = new Project();
     static TimelinesDAO dao= new TimelinesDAO();
 
 	public static void main(String[] args) {
-		
+
+	    /*
+        ArrayList<Event> empty = new ArrayList<Event>();
 		// Add 2 timlines to the object timelines. Every timeline has 2 events
 		LocalDate startTimeline= LocalDate.now();
 		LocalDate endTimeline= startTimeline.plusDays(15);
-		timelines.addTimeline(startTimeline, endTimeline, "Timeline1");
-		timelines.addTimeline(startTimeline.plusDays(2), endTimeline.plusDays(2), "Timeline2");
+		timelines.addTimeline(startTimeline, endTimeline, "Timeline1", empty);
+		timelines.addTimeline(startTimeline.plusDays(2), endTimeline.plusDays(2), "Timeline2", empty);
 		Event event1 = new DurationEvent ("event1","event1Description", LocalDateTime.now().plusDays(1),LocalDateTime.now().plusDays(2), null);
 		Event event2 = new NonDurationEvent ("event2","event2Description", LocalDateTime.now().plusDays(3),null);
 		Event event3 = new DurationEvent ("event3","event3Description", LocalDateTime.now().plusDays(4),LocalDateTime.now().plusDays(6), null);
@@ -23,30 +21,35 @@ public class TimelinesMain {
 		timelines.getTimelines().get(0).addEvent(event2);
 		timelines.getTimelines().get(1).addEvent(event3);
 		timelines.getTimelines().get(1).addEvent(event4);
-		
-		// Save timelines to database
+		*/
+        // Save timelines to database
         // dao.save(path, timelines);
 
-        // Load timelines from database
-        Project timelines2 = dao.load(1);
 
+
+
+        /*
         // Save timeline to database
-
         // creating dummy project
         ArrayList<Integer> timelineIDs = new ArrayList<>();
-        timelineIDs.add(2);
-        timelineIDs.add(3);
         timelineIDs.add(4);
+        timelineIDs.add(5);
         Project timelines3 = new Project();
         timelines3.ProjectID = 3;
         timelines3.TimelineID = timelineIDs;
 
-        dao.save(timelines3);
+        try {
+            dao.save(timelines3);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            System.out.println("Database Query Error");
+        }
+        */
 
 
         // Test load all
 
-        System.out.println(dao.loadAllProjects());
+        // System.out.println(dao.loadAllProjects());
 
         // timelines2= timelines;
 
@@ -67,9 +70,16 @@ public class TimelinesMain {
 		System.out.println((timelines.getTimelines().get(1).getEvents().get(1).getDescription()==timelines2.getTimelines().get(1).getEvents().get(1).getDescription()));
 */
 
-        // DB test for LOADING
-        System.out.println(timelines2.timelines.get(0).title);
+        // Load project from database
+        Project project = dao.load(3);
 
+        // DB test for LOADING
+
+        for (int i = 1; i < project.timelines.size(); i++) {
+
+            Timeline timeline = project.timelines.get(i);
+            System.out.println(timeline.getEvents().get(i));
+        }
         // DB test for SAVING
 
     }

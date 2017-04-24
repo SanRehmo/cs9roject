@@ -1,26 +1,19 @@
 package cs_9roject;
 
 import java.time.Duration;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
-
-import javafx.scene.image.Image;
 
 public class DurationEvent extends Event {
 	private Duration duration;
 	
 	private LocalDateTime endTime;
-	
-	public DurationEvent(String Title, String Description,LocalDateTime StartTime, LocalDateTime EndtTime , Image EventImage ){
-		title=Title;
-		description= Description;
-		startTime=StartTime;
-		endTime=EndtTime;
-		duration = Duration.between(startTime, endTime);
-		eventImage=EventImage;
 
+	public DurationEvent(int eventID, String eventTitle, java.time.LocalDate eventStart_time, LocalDate eventEnd_time) {
+		super(eventID, eventTitle, eventStart_time, eventEnd_time);
 	}
-	
-	public void setStartTime(LocalDateTime StartTime){
+
+	public void setStartTime(LocalDate StartTime) {
 		startTime = StartTime;
 		duration = Duration.between(startTime, endTime);
 	}
@@ -33,12 +26,14 @@ public class DurationEvent extends Event {
 	public LocalDateTime getEndTime(){
 		return endTime;
 	}
-	
+
+	/*
 	public void setDuration(Duration interval){
 		duration = interval;
 		endTime = startTime.plus(duration);
 	}
-	
+	*/
+
 	public Duration getDuration(){
 		return duration;
 	}

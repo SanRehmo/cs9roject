@@ -14,8 +14,8 @@ public class Timeline {
 	protected Period duration;
 	protected String title;
 	List<Event> events = new ArrayList<Event>();
-	
-	public Timeline(LocalDate StartDate, LocalDate EndDate, String Title){
+
+	public Timeline(LocalDate StartDate, LocalDate EndDate, String Title, List<Event> events) {
 		timelineId = count++;
 		startDate= StartDate;
 		endDate= EndDate;

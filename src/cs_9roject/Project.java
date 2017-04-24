@@ -8,18 +8,20 @@ public class Project {
 
 	protected List<Timeline> timelines= new ArrayList<Timeline>();
 	int ProjectID;
-	ArrayList<Integer> TimelineID;
+    ArrayList<Timeline> Timelines;
+    ArrayList<Event> Events;
+
 
 	public Project() {
 		
 	}
-	
-	public void addTimeline(LocalDate StartDate, LocalDate EndDate, String Title){
-		Timeline temp= new Timeline(StartDate, EndDate, Title);
-		timelines.add(temp);
-	}
-	
-	public void addTimeline(Timeline timeline){
+
+    public void addTimeline(LocalDate StartDate, LocalDate EndDate, String Title, List<Event> eventList) {
+        Timeline temp = new Timeline(StartDate, EndDate, Title, eventList);
+        timelines.add(temp);
+    }
+
+    public void addTimeline(Timeline timeline){
 		timelines.add(timeline);
 	}
 	
