@@ -20,8 +20,6 @@ public class Main extends Application {
 		this.primaryStage.setTitle("Show timeline");	
 		this.primaryStage.setResizable(false);
 	showMainView();
-
-	
 	}
 	
 	private void showMainView() throws IOException{
@@ -33,19 +31,7 @@ public class Main extends Application {
 		primaryStage.show();
 		
 	}
-	
-	
-	public static void showShowTimeline() throws IOException{
-		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(Main.class.getResource("showTimelines.fxml"));
-		FlowPane showTimeline = loader.load();
-		Stage stage2 = new Stage();
-        stage2.setScene(new Scene(showTimeline));  
-        stage2.setTitle("Timelines");
-        stage2.show();	
-        
-        System.out.println("showtimeline");
-	}
+		
 	
 	public static void showEventHandler() throws IOException{
 		FXMLLoader loader = new FXMLLoader();

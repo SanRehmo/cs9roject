@@ -37,7 +37,13 @@ public class StartingModeController {
 	
 	@FXML
 	private void showTimeline() throws IOException{
-		Main.showShowTimeline();
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(Main.class.getResource("showTimelines.fxml"));
+		FlowPane showTimeline = loader.load();
+		Stage stage2 = new Stage();
+	    stage2.setScene(new Scene(showTimeline));  
+	    stage2.setTitle("Timelines");
+	    stage2.show();	
 	}
 	
 }
