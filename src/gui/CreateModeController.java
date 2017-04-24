@@ -53,7 +53,8 @@ public class CreateModeController {
 			vbox.getChildren().addAll(generateTimeL());			
 		}
 		
-		primaryScrollpane.setContent(vbox);		
+		primaryScrollpane.setContent(vbox);	
+				
 	}
 	
 	public Line verticalLine(int size) {
