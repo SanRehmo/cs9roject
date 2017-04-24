@@ -1,6 +1,8 @@
 package gui;
 
 import java.io.IOException;
+import java.time.format.DateTimeFormatter;
+
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -45,7 +47,7 @@ public class CreateModeController {
 	@FXML
 	private void addTimeline() throws IOException{
 		if(OnlyYears.isSelected()){
-		vbox.getChildren().addAll(generateYearTimeL());
+		vbox.getChildren().addAll(zoomedTimeline());
 		}
 		else{
 			vbox.getChildren().addAll(generateTimeL());			
@@ -55,14 +57,14 @@ public class CreateModeController {
 		
 	}
 	
-	public Line verticalLine() {
-		Line timeLine = new Line(50,10,50,100);
+	public Line verticalLine(int size) {
+		Line timeLine = new Line(50,0,50,size);
 		timeLine.setStrokeWidth(3);
 		return timeLine;
 	}
 	
-	public Line clickAbleHline() {
-		Line timeLine = new Line(0, 50, 100, 50);
+	public Line clickAbleHline(int size) {
+		Line timeLine = new Line(0, 50, size, 50);
 		timeLine.setStrokeWidth(5);
 		timeLine.setOnMouseClicked(e ->{
 			try {
@@ -77,8 +79,8 @@ public class CreateModeController {
 		return timeLine;
 	}
 	
-	public Line Hline(){
-		Line timeLine = new Line(0, 50, 100, 50);
+	public Line Hline(int size){
+		Line timeLine = new Line(0, 50, size, 50);
 		timeLine.setStrokeWidth(5);
 		return timeLine;
 	}
@@ -86,13 +88,11 @@ public class CreateModeController {
 	public Pane generateTimeL(){
 		Pane pane = new Pane();
 		HBox hbox = new HBox();
-		for(int i = 0; i < 10; i++) {
-			verticalLine().setLayoutY(50);
-			clickAbleHline().setLayoutY(50);
-			hbox.getChildren().addAll(verticalLine(),Hline());
+		for(int i = 0; i < 5; i++) {
+			hbox.getChildren().addAll(verticalLine(100),Hline(250));
 		}
 		
-		hbox.getChildren().add(verticalLine());
+		hbox.getChildren().add(verticalLine(100));
 		hbox.setLayoutX(5);
 		hbox.setLayoutY(30);
 		hbox.setAlignment(Pos.CENTER);
@@ -101,16 +101,18 @@ public class CreateModeController {
 		return pane;
 	}
 	
-	public Pane generateYearTimeL() {
+	public Pane zoomedTimeline() {
 		Pane pane = new Pane();
 		HBox hbox = new HBox();
-		for(int i = 0; i < 10; i++) {
-			verticalLine().setLayoutY(50);
-			clickAbleHline().setLayoutY(50);
-			hbox.getChildren().addAll(verticalLine(),clickAbleHline());
+		for(int j = 0; j<5; j++){
+
+		hbox.getChildren().addAll(verticalLine(100),Hline(12));
+		for(int i = 0; i < 12; i++) {
+			
+			hbox.getChildren().addAll(verticalLine(50),Hline(12));
 		}
-		
-		hbox.getChildren().add(verticalLine());
+		}
+		hbox.getChildren().addAll(Hline(10), verticalLine(12));
 		hbox.setLayoutX(5);
 		hbox.setLayoutY(30);
 		hbox.setAlignment(Pos.CENTER);
