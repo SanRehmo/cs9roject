@@ -1,21 +1,24 @@
 package gui;
 
 import java.io.IOException;
-
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.shape.Line;
 import gui.Main;
 
 
 public class CreateModeController {
+
+	public ScrollPane primaryTextArea;
+
 	
 	@FXML
     private TextField TimelineName;
@@ -36,13 +39,15 @@ public class CreateModeController {
 	private void print(){
     	System.out.println("hello alaa");
     }
-	
+    
+    VBox vbox = new VBox();
+	    
 	@FXML
 	private void Test() throws IOException{
-		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(Main.class.getResource("StartingMode.fxml"));
-		StartingModeController myController = loader.getController();
-        myController.createTimeline();
+		vbox.getChildren().addAll(generatTimeLine());			
+		
+		primaryTextArea.setContent(vbox); 
+		
 	}
 	
 	public Line HoricontellLine() {
@@ -85,5 +90,4 @@ public class CreateModeController {
 		return pane;
 		
 	}
-
 }

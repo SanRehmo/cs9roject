@@ -34,16 +34,6 @@ public class Main extends Application {
 		
 	}
 	
-	public static void showCreateMode() throws IOException{
-		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(Main.class.getResource("CreateMode.fxml"));
-		FlowPane createMode = loader.load();
-		Stage stage = new Stage();
-        stage.setScene(new Scene(createMode));  
-        stage.setTitle("CreateMode");
-        stage.show();	
-        
-	}
 	
 	public static void showShowTimeline() throws IOException{
 		FXMLLoader loader = new FXMLLoader();
@@ -65,13 +55,6 @@ public class Main extends Application {
         stage2.setScene(new Scene(showEventHandler));  
         stage2.setTitle("EventHandler");
         stage2.show();		
-	}
-	
-
-	public static void test() throws IOException{
-		FXMLLoader loader = new FXMLLoader(Main.class.getResource("StartingMode.fxml"));
-        gui.StartingModeController myController = loader.getController();
-        myController.createTimeline();       
 	}
 
 	public static void main(String[] args) {
