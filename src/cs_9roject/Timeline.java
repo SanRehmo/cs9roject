@@ -13,7 +13,7 @@ public class Timeline {
 	protected LocalDate endDate;
 	protected Period duration;
 	protected String title;
-	protected List<Event> events= new ArrayList<Event>();
+	List<Event> events = new ArrayList<Event>();
 	
 	public Timeline(LocalDate StartDate, LocalDate EndDate, String Title){
 		timelineId = count++;
@@ -22,7 +22,8 @@ public class Timeline {
 		title= Title;
 		duration = Period.between(startDate, endDate);
 	}
-	
+
+
 	public Timeline(){
 		timelineId = count++;
 		startDate= LocalDate.now();

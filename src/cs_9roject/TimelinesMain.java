@@ -1,12 +1,11 @@
 package cs_9roject;
 
-import java.time.LocalDateTime;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class TimelinesMain {
-	static TimelineList timelines = new TimelineList();
-	static TimelinesDAO dao= new TimelinesDAO();
-	static String path = "c:\\tilelines.data";
+    static Project timelines = new Project();
+    static TimelinesDAO dao= new TimelinesDAO();
 
 	public static void main(String[] args) {
 		
@@ -25,14 +24,14 @@ public class TimelinesMain {
 		timelines.getTimelines().get(1).addEvent(event4);
 		
 		// Save timelines to database
-		dao.save(path, timelines);
-		
-		// Load timelines from database
-		TimelineList timelines2= dao.load(path);
-		
-		timelines2= timelines;
-		
-		// Check if saved and loaded time lines are same. All printing should be True
+        // dao.save(path, timelines);
+
+        // Load timelines from database
+        Project timelines2 = dao.load(1);
+
+        // timelines2= timelines;
+        /*
+        // Check if saved and loaded time lines are same. All printing should be True
 		System.out.println((timelines.getTimelines().size()==timelines2.getTimelines().size()));
 		System.out.println((timelines.getTimelines().get(0).getEvents().size()==(timelines2.getTimelines().get(0).getEvents().size())));
 		System.out.println((timelines.getTimelines().get(1).getEvents().size()==(timelines2.getTimelines().get(1).getEvents().size())));
@@ -46,7 +45,12 @@ public class TimelinesMain {
 		System.out.println((timelines.getTimelines().get(0).getEvents().get(1).getDescription()==timelines2.getTimelines().get(0).getEvents().get(1).getDescription()));
 		System.out.println((timelines.getTimelines().get(1).getEvents().get(0).getDescription()==timelines2.getTimelines().get(1).getEvents().get(0).getDescription()));
 		System.out.println((timelines.getTimelines().get(1).getEvents().get(1).getDescription()==timelines2.getTimelines().get(1).getEvents().get(1).getDescription()));
-		
-	}
+		*/
+
+        for (int i = 0; i < timelines2.timelines.size(); i++) {
+            System.out.println(timelines2.getTimeline(i));
+        }
+
+    }
 
 }

@@ -1,17 +1,17 @@
 package test;
 
-import static org.junit.Assert.*;
+import cs_9roject.Project;
+import cs_9roject.Timeline;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-
-import cs_9roject.Timeline;
-import cs_9roject.TimelineList;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class TimelineTest {
 	
@@ -64,12 +64,12 @@ public class TimelineTest {
 	
 	@Test
 	public void timelineListTest() {
-		TimelineList timelines =  timelinesBuilder (20);
+		Project timelines = timelinesBuilder(20);
 		assertEquals(timelines.getTimelines().size(), 20);
 		}
-	
-	private TimelineList timelinesBuilder (int size){ // private method to support the test and generate timelines
-		TimelineList timelines = new TimelineList();
+
+	private Project timelinesBuilder(int size) { // private method to support the test and generate timelines
+		Project timelines = new Project();
 		for (int i=0; i<size ; i++)
 			timelines.addTimeline(new Timeline());
 		return timelines;
