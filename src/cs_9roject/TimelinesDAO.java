@@ -30,8 +30,6 @@ public class TimelinesDAO {
 
 		if (connection != null) {
 
-
-            String query = "SELECT * FROM Timelines";
 			try {
 
                 stmt = connection.createStatement();
@@ -48,8 +46,9 @@ public class TimelinesDAO {
                 }
 
 				stmt = connection.createStatement();
-				ResultSet rs = stmt.executeQuery(query);
-				while (rs.next()) {
+                String query = "SELECT * FROM Timelines";
+                ResultSet rs = stmt.executeQuery(query);
+                while (rs.next()) {
 					// result.addTimeline(new Timeline(rs.getDate("START_TIME").toLocalDate(), rs.getDate("END_TIME").toLocalDate(), rs.getString("TITLE")));
 
                     LocalDate timelineStart_time = rs.getDate("START_TIME").toLocalDate();
@@ -116,16 +115,16 @@ public class TimelinesDAO {
 		}
 
 
-        for (int i = 0; i < project.Timelines.size(); i++) {
+        for (int i = 0; i < project.timelines.size(); i++) {
 
 			if (connection != null) {
 
-                String update = "INSERT INTO Projects " + "VALUES (" + project.ProjectID + ", " + project.Timelines.get(i) + ")";
+                String update = "INSERT INTO Projects " + "VALUES (" + project.ProjectID + ", " + project.timelines.get(i) + ")";
 
 				try {
 					stmt = connection.createStatement();
 					stmt.executeUpdate(update);
-                    System.out.println("Project with the Project_ID: " + project.ProjectID + " and the Timeline_ID(s):" + project.Timelines.get(i) + " has been saved!");
+                    System.out.println("Project with the Project_ID: " + project.ProjectID + " and the Timeline_ID(s):" + project.timelines.get(i) + " has been saved!");
                 } catch (Exception ex) {
                     ex.printStackTrace();
 				}

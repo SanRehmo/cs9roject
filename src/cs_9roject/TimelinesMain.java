@@ -75,10 +75,14 @@ public class TimelinesMain {
 
         // DB test for LOADING
 
-        for (int i = 1; i < project.timelines.size(); i++) {
+        for (int i = 0; i < project.timelines.size(); i++) {
 
             Timeline timeline = project.timelines.get(i);
-            System.out.println(timeline.getEvents().get(i));
+
+            // WORKS!
+            System.out.println(timeline.getTitle());
+            // Event access not working yet
+            // System.out.println(timeline.getEvent(i).title);
         }
         // DB test for SAVING
 
