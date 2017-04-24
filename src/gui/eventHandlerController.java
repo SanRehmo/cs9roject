@@ -16,6 +16,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -59,10 +60,10 @@ public class eventHandlerController {
     private Label recurring_label;
 
     @FXML
-    private TextField startTextField;
+    private DatePicker startTextField;
 
     @FXML
-    private TextField endTextField;
+    private DatePicker endTextField;
     
     @FXML
     private TextField description;
