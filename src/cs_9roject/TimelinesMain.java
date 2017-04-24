@@ -2,6 +2,7 @@ package cs_9roject;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 public class TimelinesMain {
     static Project timelines = new Project();
@@ -29,7 +30,26 @@ public class TimelinesMain {
         // Load timelines from database
         Project timelines2 = dao.load(1);
 
+        // Save timeline to database
+
+        // creating dummy project
+        ArrayList<Integer> timelineIDs = new ArrayList<>();
+        timelineIDs.add(2);
+        timelineIDs.add(3);
+        timelineIDs.add(4);
+        Project timelines3 = new Project();
+        timelines3.ProjectID = 3;
+        timelines3.TimelineID = timelineIDs;
+
+        dao.save(timelines3);
+
+
+        // Test load all
+
+        System.out.println(dao.loadAllProjects());
+
         // timelines2= timelines;
+
         /*
         // Check if saved and loaded time lines are same. All printing should be True
 		System.out.println((timelines.getTimelines().size()==timelines2.getTimelines().size()));
@@ -45,11 +65,12 @@ public class TimelinesMain {
 		System.out.println((timelines.getTimelines().get(0).getEvents().get(1).getDescription()==timelines2.getTimelines().get(0).getEvents().get(1).getDescription()));
 		System.out.println((timelines.getTimelines().get(1).getEvents().get(0).getDescription()==timelines2.getTimelines().get(1).getEvents().get(0).getDescription()));
 		System.out.println((timelines.getTimelines().get(1).getEvents().get(1).getDescription()==timelines2.getTimelines().get(1).getEvents().get(1).getDescription()));
-		*/
+*/
 
-        for (int i = 0; i < timelines2.timelines.size(); i++) {
-            System.out.println(timelines2.getTimeline(i));
-        }
+        // DB test for LOADING
+        System.out.println(timelines2.timelines.get(0).title);
+
+        // DB test for SAVING
 
     }
 
