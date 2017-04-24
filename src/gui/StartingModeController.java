@@ -2,6 +2,8 @@ package gui;
 
 
 import java.io.IOException;
+
+import cs_9roject.Timeline;
 import javafx.fxml.*;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;

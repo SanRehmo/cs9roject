@@ -3,6 +3,7 @@ package gui;
 import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 
+import cs_9roject.Timeline;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -21,7 +22,6 @@ public class CreateModeController {
 
 	public ScrollPane primaryScrollpane;
 
-	
 	@FXML
     private TextField TimelineName;
 
@@ -53,8 +53,7 @@ public class CreateModeController {
 			vbox.getChildren().addAll(generateTimeL());			
 		}
 		
-		primaryScrollpane.setContent(vbox); 
-		
+		primaryScrollpane.setContent(vbox);		
 	}
 	
 	public Line verticalLine(int size) {
