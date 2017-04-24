@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 import javafx.scene.image.Image;
 
 public class DurationEvent extends Event {
+	private int lol;
 	private Duration duration;
 	
 	private LocalDateTime endTime;
