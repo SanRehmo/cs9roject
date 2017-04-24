@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
- 
+
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.effect.Reflection?>
@@ -13,7 +13,7 @@
    <children>
       <ImageView fx:id="warningImage" fitHeight="119.0" fitWidth="98.0" layoutX="185.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="file:///Users/andersolsson/git/cs9roject1/src/warning-triangular-signal.jpg" />
+            <Image url="file:///Users/andersolsson/git/cs9roject1/src/gui/warning-triangular-signal.jpg" />
          </image>
          <effect>
             <Reflection />
