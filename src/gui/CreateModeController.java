@@ -31,6 +31,11 @@ public class CreateModeController {
 
     @FXML
     private Button CreateButton;
+    
+    @FXML
+	private void print(){
+    	System.out.println("hello alaa");
+    }
 	
 	@FXML
 	private void Test() throws IOException{
