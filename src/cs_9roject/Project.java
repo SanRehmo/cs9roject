@@ -5,7 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Project {
+
 	protected List<Timeline> timelines= new ArrayList<Timeline>();
+	int ProjectID;
+	ArrayList<Integer> TimelineID;
 
 	public Project() {
 		

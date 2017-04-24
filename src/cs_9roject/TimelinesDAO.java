@@ -40,7 +40,6 @@ public class TimelinesDAO {
 					timeline = new Timeline(start_time, end_time, title);
 					result.addTimeline(timeline);
 					// TESTING
-					System.out.println(result.getTimeline(count));
 
 					count++;
 				}
@@ -53,8 +52,37 @@ public class TimelinesDAO {
 		return result;
 	}
 
-	public void save(String path, Project timelines) {
-		
+	public void save(Project project) {
+
+		Connection connection = null;
+		Statement stmt;
+
+		try {
+			connection = Database.establishConnection();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+
+
+		for (int i = 0; i < project.TimelineID.size(); i++) {
+
+			if (connection != null) {
+
+				String update = "INSERT INTO Projects " + "VALUES (" + project.ProjectID + ", " + project.TimelineID.get(i) + ")";
+
+				try {
+					stmt = connection.createStatement();
+					stmt.executeUpdate(update);
+					System.out.println(project + " has been saved!");
+				} catch (Exception ex) {
+					ex.printStackTrace();
+				}
+
+			} else {
+				System.out.println("Failed to make connection");
+			}
+		}
 	}
 
 }
+
