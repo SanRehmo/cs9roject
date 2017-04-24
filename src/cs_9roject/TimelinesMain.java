@@ -32,6 +32,7 @@ public class TimelinesMain {
 
         // Save timeline to database
 
+        // creating dummy project
         ArrayList<Integer> timelineIDs = new ArrayList<>();
         timelineIDs.add(2);
         timelineIDs.add(3);
@@ -41,6 +42,11 @@ public class TimelinesMain {
         timelines3.TimelineID = timelineIDs;
 
         dao.save(timelines3);
+
+
+        // Test load all
+
+        System.out.println(dao.loadAllProjects());
 
         // timelines2= timelines;
 
@@ -65,7 +71,6 @@ public class TimelinesMain {
         System.out.println(timelines2.timelines.get(0).title);
 
         // DB test for SAVING
-        System.out.println();
 
     }
 
