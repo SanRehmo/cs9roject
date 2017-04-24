@@ -22,12 +22,12 @@ public class StartingModeController {
     private Button helpButton;
 	
 	
-	public void testMode() throws IOException{
+	public void createMode() throws IOException{
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(Main.class.getResource("CreateMode.fxml"));
 		FlowPane createMode = loader.load();
 		CreateModeController c = (CreateModeController) loader.getController();
-		c.primaryTextArea = start_scrollpane;
+		c.primaryScrollpane = start_scrollpane;
 			
 		Stage stage = new Stage();
 	    stage.setScene(new Scene(createMode));  
