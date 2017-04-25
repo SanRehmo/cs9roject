@@ -2,19 +2,19 @@ package cs_9roject;
 
 import javafx.scene.image.Image;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class Event {
 	private static int count=0;
 	protected int eventid;
 	protected String title= new String ();
 	protected String description= new String ();
-	protected LocalDate startTime;
-	protected LocalDate endTime;
+	protected LocalDateTime startTime;
+	protected LocalDateTime endTime;
 	protected boolean isDurationEvent= true;
 	protected Image eventImage = null;
 
-	public Event(int eventID, String eventTitle, LocalDate eventStart_time, LocalDate eventEnd_time) {
+	public Event(int eventID, String eventTitle, LocalDateTime eventStart_time, LocalDateTime eventEnd_time) {
 		eventid = eventID;
 		title = eventTitle;
 		startTime = eventStart_time;
@@ -47,11 +47,11 @@ public class Event {
 		return description;
 	}
 
-	public void setStartTime(LocalDate StartTime) {
+	public void setStartTime(LocalDateTime StartTime) {
 		startTime = StartTime;
 	}
 
-	public LocalDate getStartTime() {
+	public LocalDateTime getStartTime() {
 		return startTime;
 	}
 	
