@@ -6,6 +6,7 @@ import cs_9roject.Project;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -13,14 +14,14 @@ import javafx.stage.Stage;
 public class Main extends Application {
 	
 	private Stage primaryStage;
-	public FlowPane mainLayout;
+	public BorderPane mainLayout;
 	public static Project project = new Project();
 	
 	@Override
 	public void start(Stage primaryStage) throws IOException {
 		this.primaryStage = primaryStage;
 		this.primaryStage.setTitle("Show timeline");	
-		this.primaryStage.setResizable(false);
+		this.primaryStage.setResizable(true);
 	showMainView();
 	}
 	
@@ -31,6 +32,7 @@ public class Main extends Application {
 		Scene scene = new Scene(mainLayout);
 		primaryStage.setScene(scene);
 		primaryStage.show();
+		
 		
 	}
 		

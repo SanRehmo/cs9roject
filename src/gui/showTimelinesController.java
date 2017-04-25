@@ -13,6 +13,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 public class showTimelinesController {
 	
@@ -66,10 +67,12 @@ public class showTimelinesController {
 				scrollBox.getChildren().add(generateTimeL(Main.project.getTimeline(i).getTitle()));
 				}
 			
-			}	
+			}	 
 		}
 		
 	primaryScrollpane.setContent(scrollBox);
+	 Stage stage = (Stage) doneButton.getScene().getWindow();
+	 stage.close();	
 	}
 	
 	public Line verticalLine(int size) {

@@ -1,37 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.FlowPane?>
-<?import javafx.scene.shape.Line?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
 
-<FlowPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="659.0" prefWidth="1036.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.StartingModeController">
-   <children>
-      <ScrollPane fx:id="start_scrollpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="364.0" prefWidth="809.0">
-         <content>
-          <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="363.0" prefWidth="805.0" />
-         </content>
-      </ScrollPane>
-      <ButtonBar buttonMinWidth="0.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="118.0" prefWidth="267.0" translateX="800.0" translateY="-405.0">
-        <buttons>
-          <Button mnemonicParsing="false" onAction="#createMode" text="Add new timeline" translateX="93.0" translateY="31.0" />
-            <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#showTimeline" prefHeight="25.0" prefWidth="150.0" text="Timelines to show" translateX="-36.0" />
-        </buttons>
-      </ButtonBar>
-      <ImageView fitHeight="43.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true" translateX="734.0" translateY="223.0">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="337.0" prefWidth="602.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.StartingModeController">
+   <right>
+      <VBox prefHeight="273.0" prefWidth="135.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button mnemonicParsing="false" onAction="#showTimeline" prefHeight="25.0" prefWidth="130.0" text="Timelines to show">
+               <VBox.margin>
+                  <Insets top="5.0" />
+               </VBox.margin>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#createMode" prefHeight="25.0" prefWidth="130.0" text="Add new timeline">
+               <VBox.margin>
+                  <Insets top="5.0" />
+               </VBox.margin>
+            </Button>
+         </children>
+      </VBox>
+   </right>
+   <bottom>
+      <ImageView fitHeight="64.0" fitWidth="66.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="BOTTOM_RIGHT">
          <image>
             <Image url="@question-mark.png" />
          </image>
          <effect>
-            <DropShadow />
+            <DropShadow height="64.0" radius="31.870000000000005" width="65.48" />
          </effect>
       </ImageView>
-      <Line endX="366.0" rotate="-90.0" strokeWidth="2.0" translateX="315.0" translateY="-241.0" />
-      <Line endX="707.0" startX="-100.0" strokeWidth="2.0" translateY="-118.0" />
-   </children>
-</FlowPane>
+   </bottom>
+   <center>
+      <ScrollPane fx:id="start_scrollpane" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="417.0" />
+        </content>
+         <BorderPane.margin>
+            <Insets bottom="40.0" right="30.0" />
+         </BorderPane.margin>
+      </ScrollPane>
+   </center>
+</BorderPane>
