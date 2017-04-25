@@ -40,12 +40,7 @@ public class CreateModeController {
 
     @FXML
     private Button CreateButton;
-    
-    @FXML
-	private void print(){
-    	
-    }
-    
+        
     VBox vbox = new VBox();
 	    
 	@FXML
@@ -69,7 +64,7 @@ public class CreateModeController {
 			else {
 				Alert alert = new Alert(AlertType.ERROR);
 				alert.setTitle("ERROR!");
-				alert.setHeaderText("Cannot adding timeline!");
+				alert.setHeaderText("Cannot add timeline!");
 				alert.setContentText("End time should be after start time");
 				alert.showAndWait();
 			}	
@@ -77,7 +72,7 @@ public class CreateModeController {
 		else{
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("ERROR!");
-			alert.setHeaderText("Cannot adding timeline!");
+			alert.setHeaderText("Cannot add timeline!");
 			alert.setContentText("End or Start time is not selected");
 			alert.showAndWait();
 		}

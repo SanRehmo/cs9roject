@@ -3,7 +3,6 @@ package gui;
 
 import java.io.IOException;
 
-import cs_9roject.Timeline;
 import javafx.fxml.*;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -43,6 +42,9 @@ public class StartingModeController {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(Main.class.getResource("showTimelines.fxml"));
 		FlowPane showTimeline = loader.load();
+		showTimelinesController c = (showTimelinesController) loader.getController();
+		c.primaryScrollpane = start_scrollpane;
+		
 		Stage stage2 = new Stage();
 	    stage2.setScene(new Scene(showTimeline));  
 	    stage2.setTitle("Timelines");
