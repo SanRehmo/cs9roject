@@ -2,6 +2,7 @@ package gui;
 
 import java.io.IOException;
 
+import cs_9roject.Project;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -13,6 +14,7 @@ public class Main extends Application {
 	
 	private Stage primaryStage;
 	public FlowPane mainLayout;
+	public static Project project = new Project();
 	
 	@Override
 	public void start(Stage primaryStage) throws IOException {

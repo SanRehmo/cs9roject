@@ -6,7 +6,10 @@ import java.time.format.DateTimeFormatter;
 import cs_9roject.Timeline;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.ScrollPane;
@@ -15,6 +18,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Line;
+import javafx.stage.Stage;
 import gui.Main;
 
 
@@ -23,7 +27,7 @@ public class CreateModeController {
 	public ScrollPane primaryScrollpane;
 
 	@FXML
-    private TextField TimelineName;
+    public TextField TimelineName;
 
     @FXML
     private DatePicker StartDate;
@@ -39,23 +43,45 @@ public class CreateModeController {
     
     @FXML
 	private void print(){
-    	System.out.println("hello alaa");
+    	
     }
     
     VBox vbox = new VBox();
 	    
 	@FXML
 	private void addTimeline() throws IOException{
-		if(OnlyYears.isSelected()){
-		vbox.getChildren().addAll(zoomedTimeline());
+		if (StartDate.getValue()!=null && EndDate.getValue()!=null){
+			if (EndDate.getValue().isAfter(StartDate.getValue()) ){
+				if (TimelineName.getText().isEmpty()){
+					Alert alert = new Alert(AlertType.CONFIRMATION);
+					alert.setTitle("Please confirm");
+					alert.setHeaderText("You are going to create new timeline without name!");
+					alert.setContentText("Are you sure you like to proceed?");
+					if (alert.showAndWait().get() == ButtonType.CANCEL){
+						return;
+					}
+				}
+				Timeline temp = new Timeline(StartDate.getValue(),EndDate.getValue(),TimelineName.getText(), OnlyYears.isSelected() );
+			    Main.project.addTimeline(temp);
+			    Stage stage = (Stage) CreateButton.getScene().getWindow();
+			    stage.close();	
+			}
+			else {
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setTitle("ERROR!");
+				alert.setHeaderText("Cannot adding timeline!");
+				alert.setContentText("End time should be after start time");
+				alert.showAndWait();
+			}	
 		}
 		else{
-			vbox.getChildren().addAll(generateTimeL());			
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("ERROR!");
+			alert.setHeaderText("Cannot adding timeline!");
+			alert.setContentText("End or Start time is not selected");
+			alert.showAndWait();
 		}
-		
-		primaryScrollpane.setContent(vbox);	
-				
-	}
+    }
 	
 	public Line verticalLine(int size) {
 		Line timeLine = new Line(50,0,50,size);

@@ -13,14 +13,28 @@ public class Timeline {
 	protected LocalDate endDate;
 	protected Period duration;
 	protected String title;
+	protected Boolean isOnlyYears=false;
+	
 	List<Event> events = new ArrayList<Event>();
 
-	public Timeline(LocalDate StartDate, LocalDate EndDate, String Title, List<Event> events) {
+	public Timeline(LocalDate StartDate, LocalDate EndDate, String Title, List<Event> Events) {
 		timelineId = count++;
 		startDate= StartDate;
 		endDate= EndDate;
 		title= Title;
+		if (title==null) title="timeline " + timelineId;
 		duration = Period.between(startDate, endDate);
+		events=Events;
+	}
+	
+	public Timeline(LocalDate StartDate, LocalDate EndDate, String Title, Boolean IsOnlyYears) {
+		timelineId = count++;
+		startDate= StartDate;
+		endDate= EndDate;
+		title= Title;
+		if (title==null) title="timeline " + timelineId;
+		duration = Period.between(startDate, endDate);
+		isOnlyYears=IsOnlyYears;
 	}
 
 
@@ -28,7 +42,7 @@ public class Timeline {
 		timelineId = count++;
 		startDate= LocalDate.now();
 		endDate= startDate.plusDays(444);
-		title= "Title " + timelineId;
+		title= "timeline " + timelineId;
 		duration = Period.between(startDate, endDate);
 	}
 	
@@ -106,6 +120,14 @@ public class Timeline {
 	
 	public int getTimelineId(){
 		return timelineId;
+	}
+	
+	public void setIsOnlyYears(Boolean IsOnlyYears){
+		isOnlyYears = IsOnlyYears;
+	}
+	
+	public Boolean getIsOnlyYears(){
+		return isOnlyYears;
 	}
 	
 	public boolean equals(Timeline timeline){
