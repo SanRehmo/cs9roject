@@ -5,24 +5,33 @@ import javafx.scene.image.Image;
 import java.time.LocalDateTime;
 
 public class Event {
-	private static int count=0;
+	private static int count=0;	// Variable to give unique ID for each Event
 	protected int eventid;
 	protected String title= new String ();
 	protected String description= new String ();
 	protected LocalDateTime startTime;
 	protected LocalDateTime endTime;
-	protected boolean isDurationEvent= true;
+	protected boolean isDurationEvent= true;	// Boolean variable to define event's type
 	protected Image eventImage = null;
-
+	
+	// Create new event with specific ID. Almost used when importing events from database
 	public Event(int eventID, String eventTitle, LocalDateTime eventStart_time, LocalDateTime eventEnd_time) {
 		eventid = eventID;
 		title = eventTitle;
 		startTime = eventStart_time;
 		endTime = eventEnd_time;
 
-		eventID = count++;
 	}
 	
+	// Create new event with new ID.
+	public Event(String eventTitle, LocalDateTime eventStart_time, LocalDateTime eventEnd_time) {
+		eventid = count++;
+		title = eventTitle;
+		startTime = eventStart_time;
+		endTime = eventEnd_time;
+	}
+	
+	// all next methods are (getters and setters)
 	public void setEventId(int ID){
 		eventid = ID;
 	}
