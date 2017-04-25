@@ -46,7 +46,7 @@ public class CreateModeController {
 	@FXML
 	private void addTimeline() throws IOException{
 		if (StartDate.getValue()!=null && EndDate.getValue()!=null){
-			if (EndDate.getValue().isAfter(StartDate.getValue()) ){
+			if (EndDate.getValue().isAfter(StartDate.getValue()) || EndDate.getValue().equals(StartDate.getValue()) ){
 				if (TimelineName.getText().replaceAll("\\s+","").isEmpty()){
 					Alert alert = new Alert(AlertType.CONFIRMATION);
 					alert.setTitle("Please confirm");
