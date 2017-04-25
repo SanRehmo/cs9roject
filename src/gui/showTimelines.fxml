@@ -15,7 +15,7 @@
             <ScrollBar orientation="VERTICAL" prefHeight="145.0" prefWidth="14.0" translateX="234.0" />
          </content>
       </ScrollPane>
-      <Button fx:id="doneButton" mnemonicParsing="false" text="Done" translateX="200.0" translateY="5.0" />
+      <Button fx:id="doneButton" mnemonicParsing="false" onAction="#showTimeline" text="Done" translateX="200.0" translateY="5.0" />
       <CheckBox fx:id="displayAll" mnemonicParsing="false" text="Display all" translateX="-41.0" translateY="6.0" />
    </children>
 </FlowPane>
