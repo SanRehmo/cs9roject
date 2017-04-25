@@ -11,17 +11,22 @@ public class Event {
 	protected String description= new String ();
 	protected LocalDateTime startTime;
 	protected LocalDateTime endTime;
-	protected boolean isDurationEvent= true;	// Boolean variable to define event's type
-	protected Image eventImage = null;
-	
-	// Create new event with specific ID. Almost used when importing events from database
-	public Event(int eventID, String eventTitle, LocalDateTime eventStart_time, LocalDateTime eventEnd_time) {
+    protected boolean isDurationEvent = true;
+    protected int imageid = 0;
+    protected Image eventImage = null;
+    protected String imagepath = "";
+
+    // mine
+    // Create new event with specific ID. Almost used when importing events from database
+    public Event(int eventID, String eventTitle, LocalDateTime eventStart_time, LocalDateTime eventEnd_time, String Description, int imageID) {
+
 		eventid = eventID;
 		title = eventTitle;
 		startTime = eventStart_time;
 		endTime = eventEnd_time;
-
-	}
+        description = Description;
+        imageid = imageID;
+    }
 	
 	// Create new event with new ID.
 	public Event(String eventTitle, LocalDateTime eventStart_time, LocalDateTime eventEnd_time) {
@@ -30,8 +35,8 @@ public class Event {
 		startTime = eventStart_time;
 		endTime = eventEnd_time;
 	}
-	
-	// all next methods are (getters and setters)
+
+    // all next methods are (getters and setters)
 	public void setEventId(int ID){
 		eventid = ID;
 	}

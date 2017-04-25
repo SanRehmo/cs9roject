@@ -84,7 +84,7 @@ public class TimelinesMain {
 
             // WORKS!
             System.out.println(timeline.getEvent(i).getTitle());
-            System.out.println(timeline.getEvent(i).getStartTime());
+            // System.out.println(timeline.getEvent(i).getDescription());
         }
     }
 
