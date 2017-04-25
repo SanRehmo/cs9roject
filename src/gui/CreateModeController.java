@@ -47,7 +47,7 @@ public class CreateModeController {
 	private void addTimeline() throws IOException{
 		if (StartDate.getValue()!=null && EndDate.getValue()!=null){
 			if (EndDate.getValue().isAfter(StartDate.getValue()) ){
-				if (TimelineName.getText().isEmpty()){
+				if (TimelineName.getText().replaceAll("\\s+","").isEmpty()){
 					Alert alert = new Alert(AlertType.CONFIRMATION);
 					alert.setTitle("Please confirm");
 					alert.setHeaderText("You are going to create new timeline without name!");
@@ -59,7 +59,7 @@ public class CreateModeController {
 				Timeline temp = new Timeline(StartDate.getValue(),EndDate.getValue(),TimelineName.getText(), OnlyYears.isSelected() );
 			    Main.project.addTimeline(temp);
 			    Stage stage = (Stage) CreateButton.getScene().getWindow();
-			    stage.close();	
+			    stage.close();
 			}
 			else {
 				Alert alert = new Alert(AlertType.ERROR);

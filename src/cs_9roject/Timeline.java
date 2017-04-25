@@ -22,7 +22,7 @@ public class Timeline {
 		startDate= StartDate;
 		endDate= EndDate;
 		title= Title;
-		if (title==null) title="timeline " + timelineId;
+		if (title.replaceAll("\\s+","").isEmpty()) title="timeline " + timelineId;
 		duration = Period.between(startDate, endDate);
 		events=Events;
 	}
@@ -32,7 +32,7 @@ public class Timeline {
 		startDate= StartDate;
 		endDate= EndDate;
 		title= Title;
-		if (title==null) title="timeline " + timelineId;
+		if (title.replaceAll("\\s+","").isEmpty()) title="timeline " + timelineId;
 		duration = Period.between(startDate, endDate);
 		isOnlyYears=IsOnlyYears;
 	}
