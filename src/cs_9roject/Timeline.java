@@ -58,7 +58,7 @@ public class Timeline {
 	
 	// get event from timeline
 	public Event getEvent(int ID){
-		for (Event e : events ) 
+		for (Event e : events )
 			if (e.getEventId()==ID)
 				return e;
 		return null;

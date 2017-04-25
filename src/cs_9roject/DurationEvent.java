@@ -8,8 +8,8 @@ public class DurationEvent extends Event {
 	
 	private LocalDateTime endTime;
 
-	public DurationEvent(int eventID, String eventTitle, java.time.LocalDateTime eventStart_time, LocalDateTime eventEnd_time) {
-		super(eventID, eventTitle, eventStart_time, eventEnd_time);
+	public DurationEvent(int eventID, String eventTitle, java.time.LocalDateTime eventStart_time, LocalDateTime eventEnd_time, String description, int imageID) {
+		super(eventID, eventTitle, eventStart_time, eventEnd_time, description, imageID);
 	}
 
 	public void setStartTime(LocalDateTime StartTime) {

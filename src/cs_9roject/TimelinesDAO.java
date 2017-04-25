@@ -42,8 +42,11 @@ public class TimelinesDAO {
                     String eventTitle = rss.getString("TITLE");
                     LocalDateTime eventStart_time = LocalDateTime.of(rss.getDate("START_DATE").toLocalDate(), rss.getTime("START_TIME").toLocalTime());
                     LocalDateTime eventEnd_time = LocalDateTime.of(rss.getDate("END_DATE").toLocalDate(), rss.getTime("END_TIME").toLocalTime());
+                    int eventImageID = rss.getInt("IMAGE_ID");
+                    String eventDescription = rss.getString("DESCRIPTION");
 
-                    Event event = new Event(eventID, eventTitle, eventStart_time, eventEnd_time);
+
+                    Event event = new Event(eventID, eventTitle, eventStart_time, eventEnd_time, eventDescription, eventImageID);
                     eventList.add(event);
                 }
 
