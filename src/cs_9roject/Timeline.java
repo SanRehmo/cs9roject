@@ -17,8 +17,8 @@ public class Timeline {
 	
 	List<Event> events = new ArrayList<Event>();
 
-	public Timeline(LocalDate StartDate, LocalDate EndDate, String Title, List<Event> Events) {
-		timelineId = count++;
+	public Timeline(int timelineID, LocalDate StartDate, LocalDate EndDate, String Title, List<Event> Events) {
+		timelineId = timelineID;
 		startDate= StartDate;
 		endDate= EndDate;
 		title= Title;

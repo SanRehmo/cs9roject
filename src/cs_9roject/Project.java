@@ -1,6 +1,5 @@
 package cs_9roject;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,11 +12,6 @@ public class Project {
 	public Project() {
 		
 	}
-
-    public void addTimeline(LocalDate StartDate, LocalDate EndDate, String Title, List<Event> eventList) {
-        Timeline temp = new Timeline(StartDate, EndDate, Title, eventList);
-        timelines.add(temp);
-    }
 
     public void addTimeline(Timeline timeline){
 		timelines.add(timeline);

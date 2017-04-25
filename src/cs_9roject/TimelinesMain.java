@@ -81,8 +81,9 @@ public class TimelinesMain {
 
             // WORKS!
             System.out.println(timeline.getTitle());
+
             // Event access not working yet
-            // System.out.println(timeline.getEvent(i).title);
+            System.out.println(timeline.getEvent(i).title);
         }
         // DB test for SAVING
 
