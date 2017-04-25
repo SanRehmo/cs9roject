@@ -11,22 +11,19 @@ import javafx.scene.text.Text;
 
 public class deleteEventController {
 
-    @FXML // fx:id="btnOk"
-    private Button btnOk; // Value injected by FXMLLoader
+    @FXML
+    private ImageView warningImage;
 
-    @FXML // fx:id="ImageWarning"
-    private ImageView ImageWarning; // Value injected by FXMLLoader
+    @FXML
+    private Text DeleteEventText;
 
-    @FXML // fx:id="WarningText"
-    private Text WarningText; // Value injected by FXMLLoader
+    @FXML
+    private CheckBox DeleteAllEventCheckBox;
 
-    @FXML // fx:id="deleteEvent"
-    private CheckBox deleteEvent; // Value injected by FXMLLoader
+    @FXML
+    private Button cancelBtn;
 
-    @FXML // fx:id="deleteEvents"
-    private CheckBox deleteEvents; // Value injected by FXMLLoader
-
-    @FXML // fx:id="btnCancel"
-    private Button btnCancel; // Value injected by FXMLLoader
+    @FXML
+    private Button okBtn;
 
 }

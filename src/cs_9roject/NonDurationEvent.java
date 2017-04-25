@@ -1,16 +1,10 @@
 package cs_9roject;
 
-import java.time.LocalDateTime;
-
-import javafx.scene.image.Image;
+import java.time.LocalDate;
 
 public class NonDurationEvent extends Event {
-	public NonDurationEvent(String Title, String Description,LocalDateTime StartTime, Image EventImage ){
-		title=Title;
-		description= Description;
-		startTime=StartTime;
-		isDurationEvent= false;
-		eventImage= EventImage;
+	public NonDurationEvent(int eventID, String eventTitle, java.time.LocalDate eventStart_time, LocalDate eventEnd_time) {
+		super(eventID, eventTitle, eventStart_time, eventEnd_time);
 
 	}
 

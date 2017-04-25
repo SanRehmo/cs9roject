@@ -4,19 +4,16 @@ package gui;
 import java.io.IOException;
 
 import javafx.fxml.*;
-import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
-import javafx.scene.shape.Line;
+import javafx.scene.layout.FlowPane;
 import javafx.stage.Stage;
 import gui.Main;
 
 public class StartingModeController {
 
-	Stage newStage = new Stage();
+	  
 	
 	@FXML
 	private ScrollPane start_scrollpane;
@@ -25,76 +22,33 @@ public class StartingModeController {
 	@FXML
     private Button helpButton;
 	
-	@FXML
+	
 	public void createMode() throws IOException{
-		Main.showCreateMode();
-		System.out.print("Testtest");
-		
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(Main.class.getResource("CreateMode.fxml"));
+		FlowPane createMode = loader.load();
+		CreateModeController c = (CreateModeController) loader.getController();
+		c.primaryScrollpane = start_scrollpane;
+			
+		Stage stage = new Stage();
+	    stage.setScene(new Scene(createMode));  
+	    stage.setTitle("CreateMode");
+	    stage.show();	 
+	    
 	}
 	
 	@FXML
 	private void showTimeline() throws IOException{
-		Main.showShowTimeline();
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(Main.class.getResource("showTimelines.fxml"));
+		FlowPane showTimeline = loader.load();
+		showTimelinesController c = (showTimelinesController) loader.getController();
+		c.primaryScrollpane = start_scrollpane;
+		
+		Stage stage2 = new Stage();
+	    stage2.setScene(new Scene(showTimeline));  
+	    stage2.setTitle("Timelines");
+	    stage2.show();	
 	}
 	
-	VBox vbox = new VBox();
-	
-	@FXML
-	public void createTimeline() throws IOException{
-		
-		vbox.getChildren().addAll(generatTimeLine());			
-		
-		start_scrollpane.setContent(vbox); 
-		
-	} 
-	
-	public void ScrollPane(ScrollPane x) {
-        this.start_scrollpane = x;
-   }
-	
-	
-	public ScrollPane getPane(){
-		return start_scrollpane;
-	}
-	
-	public Line HoricontellLine() {
-		Line timeLine = new Line(50,10,50,100);
-		timeLine.setStrokeWidth(3);
-		return timeLine;
-	}
-	
-	public Line VerticalLine() {
-		Line timeLine = new Line(0, 50, 100, 50);
-		timeLine.setStrokeWidth(5);
-		timeLine.setOnMouseClicked(e ->{
-			try {
-				Main.showEventHandler();
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-			
-		});
-		
-		return timeLine;
-	}
-	
-	public Pane generatTimeLine() {
-		Pane pane = new Pane();
-		HBox hbox = new HBox();
-		for(int i = 0; i < 10; i++) {
-			HoricontellLine().setLayoutY(50);
-			VerticalLine().setLayoutY(50);
-			hbox.getChildren().addAll(HoricontellLine(),VerticalLine());
-		}
-		
-		hbox.getChildren().add(HoricontellLine());
-		hbox.setLayoutX(5);
-		hbox.setLayoutY(30);
-		hbox.setAlignment(Pos.CENTER);
-		pane.getChildren().add(hbox);
-		
-		return pane;
-		
-	}
 }
