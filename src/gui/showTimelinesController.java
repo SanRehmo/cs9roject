@@ -1,6 +1,7 @@
 package gui;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -67,6 +68,7 @@ public class showTimelinesController {
 			for(int i=0; i<timelines.size(); i++){
 				if(timelines.get(i).isSelected()){
 				scrollBox.getChildren().add(generateTimeL(Main.project.getTimeline(i).getTitle()));
+				System.out.println(dayCounter(Main.project.getTimeline(i).getStartDate(),Main.project.getTimeline(i).getEndDate()));
 				}
 			
 			}	 
@@ -74,6 +76,7 @@ public class showTimelinesController {
 		
 	primaryScrollpane.setContent(scrollBox);
 	 Stage stage = (Stage) doneButton.getScene().getWindow();
+	 
 	 stage.close();	
 	}
 	
@@ -146,7 +149,7 @@ public class showTimelinesController {
 	 * Calculation month for how long the timeline is
 	 * @return timeline length
 	 */
-	public int dayCounter(DatePicker StartDate, DatePicker EndDate) {
+	/*public int dayCounter(LocalDate StartDate, LocalDate EndDate) {
 		String start = StartDate.getValue().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
 		String end = EndDate.getValue().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
 		
@@ -159,8 +162,21 @@ public class showTimelinesController {
 		int endCalc = (Integer.parseInt(endMonth) * 12) + Integer.parseInt(endDay);
 		
 		return endCalc - startCalc;
+	}*/
+    
+	public int dayCounter(LocalDate StartDate, LocalDate EndDate) {
+		int start = StartDate.getMonthValue();
+		int end = EndDate.getMonthValue();
+		
+		/*String startMonth = start.substring(0,4);
+		String endMonth = end.substring(0,4);
+		String startDay = start.substring(5, 6);
+		String endDay = end.substring(5, 6);
+		*/
+		System.out.println(start);
+		System.out.println(end);
+		
+		return start - end;
+    
 	}
-    
-    
-
 }
