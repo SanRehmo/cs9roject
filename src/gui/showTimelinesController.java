@@ -66,11 +66,7 @@ public class showTimelinesController {
 			for(int i=0; i<timelines.size(); i++){
 				if(timelines.get(i).isSelected()){
 				scrollBox.getChildren().add(generateTimeL(Main.project.getTimeline(i).getTitle()));
-				System.out.println(yearCounter(Main.project.getTimeline(i).getStartDate(),Main.project.getTimeline(i).getEndDate()));
-				System.out.println(monthCounter(Main.project.getTimeline(i).getStartDate(),Main.project.getTimeline(i).getEndDate()));
-
-				}
-			
+				}	
 			}	 
 		}
 		
@@ -165,9 +161,6 @@ public class showTimelinesController {
 	  else{
 		  temp += (endMonth - startMonth)%12 -(endYear - startYear)+temp*12;
 	  }
-	  
-	  
-	  
 	  
 	  return temp;
 
