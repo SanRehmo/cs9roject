@@ -4,6 +4,7 @@ import javafx.scene.image.Image;
 
 import java.time.LocalDateTime;
 
+// This class to present Event. it has 2 children: DurationEvent and NonDurationEvent
 public class Event {
 	private static int count=0;	// Variable to give unique ID for each Event
 	protected int eventid;
@@ -29,11 +30,12 @@ public class Event {
     }
 	
 	// Create new event with new ID.
-	public Event(String eventTitle, LocalDateTime eventStart_time, LocalDateTime eventEnd_time) {
+	public Event(String eventTitle, LocalDateTime eventStart_time, String Description, Image EventImage) {
 		eventid = count++;
 		title = eventTitle;
 		startTime = eventStart_time;
-		endTime = eventEnd_time;
+		description=Description;
+		eventImage=EventImage;
 	}
 
     // all next methods are (getters and setters)

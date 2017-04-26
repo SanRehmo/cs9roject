@@ -77,13 +77,7 @@ public class eventHandlerController {
     @FXML
     void delete(ActionEvent event) throws IOException {
     	
-    	FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(Main.class.getResource("deleteEventPopUp.fxml"));
-		Pane showEventHandler = loader.load();
-		Stage stage2 = new Stage();
-        stage2.setScene(new Scene(showEventHandler));  
-        stage2.setTitle("Delete");
-        stage2.show();	
+    		
     }
     	
     /**
@@ -131,6 +125,7 @@ public class eventHandlerController {
 		}
 			
 		eventImage_imageView.setImage(new Image(url.toExternalForm()));
+		
     }
 
     /**

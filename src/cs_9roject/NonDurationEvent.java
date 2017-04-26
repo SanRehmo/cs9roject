@@ -2,10 +2,23 @@ package cs_9roject;
 
 import java.time.LocalDateTime;
 
-public class NonDurationEvent extends Event {
-	public NonDurationEvent(int eventID, String eventTitle, java.time.LocalDateTime eventStart_time, LocalDateTime eventEnd_time, String description, int imageID) {
-		super(eventID, eventTitle, eventStart_time, eventEnd_time, description, imageID);
+import javafx.scene.image.Image;
 
+//This class to present Non-Duration Event
+public class NonDurationEvent extends Event {
+	
+	
+	// mine
+    // Create new event with specific ID. Almost used when importing events from database
+	public NonDurationEvent(int eventID, String eventTitle, LocalDateTime eventStart_time, LocalDateTime eventEnd_time, String description, int imageID) {
+		super(eventID, eventTitle, eventStart_time, eventEnd_time, description, imageID);
+		isDurationEvent=false;
+	}
+	
+	// Create new event with new ID.
+	public NonDurationEvent(String eventTitle, LocalDateTime eventStart_time, String description, Image EventImage) {
+		super(eventTitle, eventStart_time, description, EventImage);
+		isDurationEvent=false;
 	}
 
 }
