@@ -7,7 +7,9 @@ import javafx.fxml.*;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import gui.Main;
 
@@ -49,6 +51,11 @@ public class StartingModeController {
 	    stage2.setScene(new Scene(showTimeline));  
 	    stage2.setTitle("Timelines");
 	    stage2.show();	
+	}
+	
+	@FXML
+	private void showEventHandler() throws IOException{
+		Main.showEventHandler();
 	}
 	
 }
