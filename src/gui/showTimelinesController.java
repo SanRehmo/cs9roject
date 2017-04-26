@@ -58,14 +58,14 @@ public class showTimelinesController {
 	public void showTimeline(){
 		if(displayAll.isSelected()){
 			for(int i=0; i<timelines.size(); i++){
-			scrollBox.getChildren().add(generateTimeL(Main.project.getTimeline(i).getTitle()));
+			scrollBox.getChildren().add(generateTimeL(i));
 			}
 			
 		}
 		else{
 			for(int i=0; i<timelines.size(); i++){
 				if(timelines.get(i).isSelected()){
-				scrollBox.getChildren().add(generateTimeL(Main.project.getTimeline(i).getTitle()));
+				scrollBox.getChildren().add(generateTimeL(i));
 				}	
 			}	 
 		}
@@ -104,9 +104,9 @@ public class showTimelinesController {
 		return timeLine;
 	}
 	
-	public Pane generateTimeL(String Timelinename){
+	public Pane generateTimeL(int id){
 		Text title = new Text();
-		title.setText(Timelinename);
+		title.setText(Main.project.getTimeline(id).getTitle());
 		Pane pane = new Pane();
 		HBox hbox = new HBox();
 		hbox.getChildren().add(title);
