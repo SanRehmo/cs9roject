@@ -1,12 +1,14 @@
 package gui;
 
 import java.io.IOException;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -144,7 +146,7 @@ public class showTimelinesController {
 	 * Calculation month for how long the timeline is
 	 * @return timeline length
 	 */
-	/*public int dayCounter() {
+	public int dayCounter(DatePicker StartDate, DatePicker EndDate) {
 		String start = StartDate.getValue().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
 		String end = EndDate.getValue().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
 		
@@ -157,7 +159,7 @@ public class showTimelinesController {
 		int endCalc = (Integer.parseInt(endMonth) * 12) + Integer.parseInt(endDay);
 		
 		return endCalc - startCalc;
-	}*/
+	}
     
     
 
