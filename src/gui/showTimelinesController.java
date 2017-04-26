@@ -165,6 +165,4 @@ public class showTimelinesController {
 	  return temp;
 
 	 }
-	
-//	Hej 
 }
