@@ -1,8 +1,11 @@
 package cs_9roject;
 
 import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
 
 import java.time.LocalDateTime;
+
+
 
 // This class to present Event. it has 2 children: DurationEvent and NonDurationEvent
 public class Event {
@@ -16,6 +19,7 @@ public class Event {
     protected int imageid = 0;
     protected Image eventImage = null;
     protected String imagepath = "";
+    protected Color eventColor=Color.RED;
 
     // mine
     // Create new event with specific ID. Almost used when importing events from database
@@ -30,12 +34,13 @@ public class Event {
     }
 	
 	// Create new event with new ID.
-	public Event(String eventTitle, LocalDateTime eventStart_time, String Description, Image EventImage) {
+	public Event(String eventTitle, LocalDateTime eventStart_time, String Description, Image EventImage, Color EventColor) {
 		eventid = count++;
 		title = eventTitle;
 		startTime = eventStart_time;
 		description=Description;
 		eventImage=EventImage;
+		eventColor=EventColor;
 	}
 
     // all next methods are (getters and setters)
@@ -85,6 +90,15 @@ public class Event {
 	
 	public Image getImage (){
 		return eventImage;
+	}
+	
+
+	public void setColor(Color EventColor){
+		eventColor = EventColor;
+	}
+	
+	public Color getColor (){
+		return eventColor;
 	}
 
 }

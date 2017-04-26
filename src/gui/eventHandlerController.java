@@ -1,9 +1,15 @@
 package gui;
 
+
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+
+import cs_9roject.DurationEvent;
+import cs_9roject.Event;
+import cs_9roject.NonDurationEvent;
+import cs_9roject.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -20,8 +26,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 public class eventHandlerController {
 	
@@ -32,7 +41,7 @@ public class eventHandlerController {
 	boolean recurring = false;
 	
 	ObservableList<String> color_Combo = FXCollections.observableArrayList(
-			"Red", "Green", "Blue", "Orage");
+			"Red", "Green", "Blue", "Orange");
 	
 	ObservableList<String> Reccuring_ComboBox_Value = FXCollections.observableArrayList(
 			"Every day", "Every week", "Every month", "Every year");
@@ -54,6 +63,9 @@ public class eventHandlerController {
 
     @FXML
     private Label recurring_label;
+    
+    @FXML
+    private Button btnSave;
 
     @FXML
     private DatePicker startTextField;
@@ -233,8 +245,68 @@ public class eventHandlerController {
     	return text;
     }
     @FXML
-    public void saveEvent() throws IOException {
-    	//TO-DO.
+    public void saveEvent() throws IOException {	// Add event
+    	int TimelineID=0;
+    	Image image = eventImage_imageView.getImage();
+    	
+    	// Check if start and end date are selected
+    	if (startTextField.getValue()==null || (endTextField.getValue()==null && duration_checkBox.isSelected() )){
+    		Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("ERROR!");
+			alert.setHeaderText("Cannot add event!");
+			alert.setContentText("End or Start date is not selected");
+			alert.showAndWait();
+    	}
+    	
+    	// Check if end date is after or equals start date
+    	else if (duration_checkBox.isSelected() && startTextField.getValue().isAfter(endTextField.getValue())){
+    		Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("ERROR!");
+			alert.setHeaderText("Cannot add event!");
+			alert.setContentText("End date should be after or equals start date");
+			alert.showAndWait();
+    	}
+    	
+    	// Check if the user enters an event's name
+    	else if (NameEvent_textField.getText().replaceAll("\\s+","").isEmpty()){
+    		Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("ERROR!");
+			alert.setHeaderText("Cannot add event!");
+			alert.setContentText("Event should have name");
+			alert.showAndWait();
+    	}
+    	
+    	// Check if the user selects an event's color
+    	else if (color_ComboBox.getValue()==null){
+    		Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("ERROR!");
+			alert.setHeaderText("Cannot add event!");
+			alert.setContentText("Please select a color");
+			alert.showAndWait();
+    	}
+    	
+    	// If all inputs are correct then add event
+    	else {
+    		Event e = new Event(null, null, null, null, null);
+        	Color color = Color.valueOf(color_ComboBox.getValue());
+        	
+        	// Check if it is duration or non-duration event
+        	if (duration_checkBox.isSelected()){
+        		e = new DurationEvent(NameEvent_textField.getText(), LocalDateTime.of(startTextField.getValue(), LocalTime.of(00, 00)), LocalDateTime.of(endTextField.getValue(), LocalTime.of(00, 00)), description.getText(),image, color );
+        	}
+        	else{
+        		e = new NonDurationEvent(NameEvent_textField.getText(), LocalDateTime.of(startTextField.getValue(), LocalTime.of(00, 00)), description.getText(),image, color );
+        	}
+        	
+        	// Search for time line by its ID to add the event
+        	for (Timeline temp : Main.project.getTimelines())
+        		if (temp.getTimelineId()==TimelineID){
+        			temp.addEvent(e);
+        			Stage stage = (Stage) btnSave.getScene().getWindow();
+    			    stage.close();
+        		}
+    	}
+    	
     	
     }
 }

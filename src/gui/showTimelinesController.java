@@ -34,7 +34,7 @@ public class showTimelinesController {
 		 for(int i=0; i<Main.project.getTimelines().size(); i++){
 			 HBox hbox = new HBox();
 			 Pane pane = new Pane();
-			 CheckBox cbi = new CheckBox( Main.project.getTimeline(i).getTitle());
+			 CheckBox cbi = new CheckBox( Main.project.getTimeline(i).getTitle() +" ( " + Main.project.getTimeline(i).getEvents().size() +" event(s) )" );
 			 timelines.add(cbi);
 			 hbox.getChildren().addAll(cbi);
 			 hbox.setLayoutX(10);

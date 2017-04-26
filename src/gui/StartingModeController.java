@@ -5,8 +5,10 @@ import java.io.IOException;
 
 import javafx.fxml.*;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
@@ -55,6 +57,14 @@ public class StartingModeController {
 	
 	@FXML
 	private void showEventHandler() throws IOException{
+		if (Main.project.getTimelines().size()==0){
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("ERROR!");
+			alert.setHeaderText("Cannot add event!");
+			alert.setContentText("You should have att least 1 timeline to add events");
+			alert.showAndWait();
+			return;
+		}
 		Main.showEventHandler();
 	}
 	

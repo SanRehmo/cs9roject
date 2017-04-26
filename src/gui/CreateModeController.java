@@ -40,8 +40,11 @@ public class CreateModeController {
 	    
 	@FXML
 	private void addTimeline() throws IOException{
+		// Check if start and end date are selected
 		if (StartDate.getValue()!=null && EndDate.getValue()!=null){
-			if (EndDate.getValue().isAfter(StartDate.getValue()) || EndDate.getValue().equals(StartDate.getValue()) ){
+			// Check if end date is after or equals start date
+			if (!StartDate.getValue().isAfter(EndDate.getValue())){
+				// Check if the user inputs timeline's name
 				if (TimelineName.getText().replaceAll("\\s+","").isEmpty()){
 					Alert alert = new Alert(AlertType.CONFIRMATION);
 					alert.setTitle("Please confirm");
@@ -51,6 +54,7 @@ public class CreateModeController {
 						return;
 					}
 				}
+				// if all inputs was correct then add timeline
 				Timeline temp = new Timeline(StartDate.getValue(),EndDate.getValue(),TimelineName.getText(), OnlyYears.isSelected() );
 			    Main.project.addTimeline(temp);
 			    Stage stage = (Stage) CreateButton.getScene().getWindow();
@@ -60,7 +64,7 @@ public class CreateModeController {
 				Alert alert = new Alert(AlertType.ERROR);
 				alert.setTitle("ERROR!");
 				alert.setHeaderText("Cannot add timeline!");
-				alert.setContentText("End time should be after start time");
+				alert.setContentText("End date should be after or equals start date");
 				alert.showAndWait();
 			}	
 		}

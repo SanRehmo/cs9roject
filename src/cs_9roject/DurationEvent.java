@@ -3,6 +3,7 @@ package cs_9roject;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
 
 //This class to present Duration Event
 public class DurationEvent extends Event {
@@ -17,8 +18,8 @@ public class DurationEvent extends Event {
 	}
 	
 	// Create new event with new ID.
-		public DurationEvent(String eventTitle, LocalDateTime eventStart_time, LocalDateTime eventEnd_time, String description, Image EventImage) {
-			super(eventTitle, eventStart_time, description, EventImage);
+		public DurationEvent(String eventTitle, LocalDateTime eventStart_time, LocalDateTime eventEnd_time, String description, Image EventImage, Color EventColor) {
+			super(eventTitle, eventStart_time, description, EventImage, EventColor);
 			endTime = eventEnd_time;
 			imageid=eventid;
 		}

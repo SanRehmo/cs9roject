@@ -43,7 +43,7 @@
          <padding>
             <Insets left="5.0" right="5.0" top="5.0" />
          </padding></ComboBox>
-      <Button fx:id="delete_btn" layoutX="326.0" layoutY="43.0" mnemonicParsing="false" onAction="#delete" text="Delete" />
+      <Button fx:id="delete_btn" disable="true" layoutX="326.0" layoutY="43.0" mnemonicParsing="false" onAction="#delete" text="Delete" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f7f7f7" height="122.0" layoutX="14.0" layoutY="108.0" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="OUTSIDE" width="373.0">
          <effect>
             <BoxBlur />
