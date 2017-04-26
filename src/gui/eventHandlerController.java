@@ -77,7 +77,6 @@ public class eventHandlerController {
     @FXML
     void delete(ActionEvent event) throws IOException {
     	
-<<<<<<< HEAD
     	Alert alert = new Alert(AlertType.CONFIRMATION);
     	alert.setTitle("Delete");
     	alert.setHeaderText("Delete event");
@@ -93,9 +92,6 @@ public class eventHandlerController {
     	
     	alert.showAndWait();
 
-=======
-    		
->>>>>>> refs/remotes/origin/develop
     }
     	
     	
