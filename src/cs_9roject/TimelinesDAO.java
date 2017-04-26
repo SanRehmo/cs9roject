@@ -170,5 +170,16 @@ public class TimelinesDAO {
     public boolean isConnected() {
         return (connection != null);
     }
+
+    public void stressTest() {
+
+        String query = "SELECT * FROM Projects";
+
+        if (isConnected()) {
+            while (true) {
+                execute(query);
+            }
+        }
+    }
 }
 
