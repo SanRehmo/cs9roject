@@ -10,6 +10,8 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+// @TODO: Make timeline display after it's created (no need to select it afterwards, make optional)
+
 public class Main extends Application {
 	
 	private Stage primaryStage;

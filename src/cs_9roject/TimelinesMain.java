@@ -1,10 +1,5 @@
 package cs_9roject;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-
-
 public class TimelinesMain {
     static Project timelines = new Project();
     static TimelinesDAO dao= new TimelinesDAO();
@@ -19,6 +14,7 @@ public class TimelinesMain {
 
         // uncomment for testing
         // DB test for LOADING
+
         for (int i = 1; i < project.timelines.size(); i++) {
 
             Timeline timeline = project.getTimeline(i);
@@ -33,7 +29,7 @@ public class TimelinesMain {
 
         // Uncomment for testing
         // DB test for SAVING
-
+        /*
         Project testProject = new Project();
 
         Event testEvent = new Event(42, "DB TEST", LocalDateTime.now(), LocalDateTime.of(2042, 01, 01, 12, 42, 42), "Used to test DB", 69);
@@ -49,8 +45,9 @@ public class TimelinesMain {
         testProject.ProjectID = 69;
         testProject.addTimeline(testTimeline);
 
-
         dao.save(testProject);
+
+        */
     }
 
 }

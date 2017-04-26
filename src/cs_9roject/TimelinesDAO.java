@@ -126,9 +126,6 @@ public class TimelinesDAO {
                     Date startDate = Date.valueOf(tl.startDate);
                     Date endDate = Date.valueOf(tl.endDate);
 
-                    System.out.println(startDate);
-                    System.out.println(endDate);
-
                     String timelines = "INSERT INTO Timelines " + "VALUES (" + tl.timelineId + ", " + ev.eventid + ", '" + startDate + "', '" + endDate + "', '" + tl.title + "')";
                     execute(timelines);
 

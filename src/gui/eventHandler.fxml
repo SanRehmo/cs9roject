@@ -1,20 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.CheckBox?>
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.DatePicker?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.effect.BoxBlur?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Rectangle?>
-
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="436.0" prefWidth="401.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.eventHandlerController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="436.0"
+      prefWidth="401.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="gui.eventHandlerController">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f7f7f7" height="59.0" layoutX="11.0" layoutY="29.0" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="OUTSIDE" width="379.0">
          <effect>
@@ -54,7 +50,9 @@
       <ComboBox fx:id="Reccuring_ComboBox" layoutX="25.0" layoutY="191.0" onAction="#recurring" onDragDetected="#recurring" prefHeight="27.0" prefWidth="101.0" promptText="Never" />
       <Label fx:id="recurring_label" layoutX="27.0" layoutY="174.0" prefHeight="17.0" prefWidth="66.0" text="Recurring:" />
       <Button fx:id="btnSave" layoutX="337.0" layoutY="403.0" mnemonicParsing="false" onAction="#saveEvent" text="Save" />
-      <DatePicker fx:id="startTextField" layoutX="145.0" layoutY="157.0" onAction="#setEventStart" prefHeight="25.0" prefWidth="105.0" promptText="Start" />
-      <DatePicker fx:id="endTextField" disable="true" layoutX="268.0" layoutY="157.0" onAction="#setEventEnd" prefHeight="25.0" prefWidth="105.0" promptText="End" />
+      <DatePicker fx:id="startTextField" editable="false" layoutX="145.0" layoutY="157.0" onAction="#setEventStart"
+                  prefHeight="25.0" prefWidth="105.0" promptText="Start"/>
+      <DatePicker fx:id="endTextField" disable="true" editable="false" layoutX="268.0" layoutY="157.0"
+                  onAction="#setEventEnd" prefHeight="25.0" prefWidth="105.0" promptText="End"/>
    </children>
 </Pane>

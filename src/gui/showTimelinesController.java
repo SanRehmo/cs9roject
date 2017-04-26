@@ -1,10 +1,5 @@
 package gui;
 
-import java.io.IOException;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -18,6 +13,11 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
 public class showTimelinesController {
 	
 	public ScrollPane primaryScrollpane;
@@ -30,7 +30,7 @@ public class showTimelinesController {
 	VBox scrollBox = new VBox();
 	
 	 @FXML
-	    public void initialize() {  //Reading every timeline and print there names in checkboxex 		 
+	 public void initialize() {  //Reading every timeline and print there names in checkboxes
 		 for(int i=0; i<Main.project.getTimelines().size(); i++){
 			 HBox hbox = new HBox();
 			 Pane pane = new Pane();
