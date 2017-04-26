@@ -32,7 +32,12 @@ public class Main extends Application {
 		Scene scene = new Scene(mainLayout);
 		primaryStage.setScene(scene);
 		primaryStage.show();
+<<<<<<< HEAD
 
+=======
+		showEventHandler();
+		
+>>>>>>> refs/remotes/origin/develop
 	}
 		
 	public static void showEventHandler() throws IOException{
