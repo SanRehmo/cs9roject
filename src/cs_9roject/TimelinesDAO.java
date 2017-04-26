@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,9 +40,13 @@ public class TimelinesDAO {
 
                     int eventID = rss.getInt("EVENT_ID");
                     String eventTitle = rss.getString("TITLE");
-                    LocalDate eventStart_time = rss.getDate("START_TIME").toLocalDate();
-                    LocalDate eventEnd_time = rss.getDate("END_TIME").toLocalDate();
-                    Event event = new Event(eventID, eventTitle, eventStart_time, eventEnd_time);
+                    LocalDateTime eventStart_time = LocalDateTime.of(rss.getDate("START_DATE").toLocalDate(), rss.getTime("START_TIME").toLocalTime());
+                    LocalDateTime eventEnd_time = LocalDateTime.of(rss.getDate("END_DATE").toLocalDate(), rss.getTime("END_TIME").toLocalTime());
+                    int eventImageID = rss.getInt("IMAGE_ID");
+                    String eventDescription = rss.getString("DESCRIPTION");
+
+
+                    Event event = new Event(eventID, eventTitle, eventStart_time, eventEnd_time, eventDescription, eventImageID);
                     eventList.add(event);
                 }
 
@@ -49,16 +54,14 @@ public class TimelinesDAO {
                 String query = "SELECT * FROM Timelines";
                 ResultSet rs = stmt.executeQuery(query);
                 while (rs.next()) {
-					// result.addTimeline(new Timeline(rs.getDate("START_TIME").toLocalDate(), rs.getDate("END_TIME").toLocalDate(), rs.getString("TITLE")));
 
-                    LocalDate timelineStart_time = rs.getDate("START_TIME").toLocalDate();
-                    LocalDate timelineEnd_time = rs.getDate("END_TIME").toLocalDate();
+                    int timelineID = rs.getInt("TIMELINE_ID");
+                    LocalDate timelineStart = rs.getDate("START_DATE").toLocalDate();
+                    LocalDate timelineEnd = rs.getDate("END_DATE").toLocalDate();
                     String timelineTitle = rs.getString("TITLE");
 
-                    timeline = new Timeline(timelineStart_time, timelineEnd_time, timelineTitle, eventList);
+                    timeline = new Timeline(timelineID, timelineStart, timelineEnd, timelineTitle, eventList);
                     result.addTimeline(timeline);
-					// TESTING
-
 				}
 
 			} catch (Exception ex) {
