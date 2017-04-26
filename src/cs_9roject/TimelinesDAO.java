@@ -1,9 +1,7 @@
 package cs_9roject;
 
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -14,10 +12,10 @@ public class TimelinesDAO {
 		
 	}
 
+    Connection connection = null;
 
-	public Project load(int ID) {
+    public Project load(int ID) {
 
-		Connection connection = null;
 		Statement stmt = null;
 		Project result = new Project();
 		Timeline timeline = null;
@@ -108,35 +106,72 @@ public class TimelinesDAO {
 
 	public void save(Project project) {
 
-		Connection connection = null;
-		Statement stmt;
+        if (isConnected()) {
 
-		try {
-			connection = Database.establishConnection();
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
+            // Projects loop
+            for (int i = 0; i < project.timelines.size(); i++) {
+
+                Timeline tl = project.timelines.get(i);
+                String projects = "INSERT INTO Projects " + "VALUES (" + project.ProjectID + ", " + project.timelines.get(i).timelineId + ")";
+                execute(projects);
 
 
-        for (int i = 0; i < project.timelines.size(); i++) {
+                // Timelines & Events loop
+                for (int j = 0; j < tl.events.size(); j++) {
 
-			if (connection != null) {
 
-                String update = "INSERT INTO Projects " + "VALUES (" + project.ProjectID + ", " + project.timelines.get(i) + ")";
+                    Event ev = tl.events.get(j);
 
-				try {
-					stmt = connection.createStatement();
-					stmt.executeUpdate(update);
-                    System.out.println("Project with the Project_ID: " + project.ProjectID + " and the Timeline_ID(s):" + project.timelines.get(i) + " has been saved!");
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-				}
+                    // extracting Date and Time from LocalDateTime
+                    Date startDate = Date.valueOf(tl.startDate);
+                    Date endDate = Date.valueOf(tl.endDate);
 
-			} else {
-				System.out.println("Failed to make connection");
-			}
-		}
-	}
+                    System.out.println(startDate);
+                    System.out.println(endDate);
 
+                    String timelines = "INSERT INTO Timelines " + "VALUES (" + tl.timelineId + ", " + ev.eventid + ", '" + startDate + "', '" + endDate + "', '" + tl.title + "')";
+                    execute(timelines);
+
+                    // extracting Date and Time from LocalDateTime
+                    startDate = Date.valueOf(ev.startTime.toLocalDate());
+                    Time startTime = Time.valueOf(ev.startTime.toLocalTime());
+                    endDate = Date.valueOf(ev.endTime.toLocalDate());
+                    Time endTime = Time.valueOf(ev.endTime.toLocalTime());
+
+                    String events = "INSERT INTO Events " + "VALUES (" + ev.eventid + ", '" + ev.title + "', '" + startTime + "', '" + endTime + "', '" + startDate + "', '" + endDate + "', '" + ev.description + "', " + ev.imageid + ")";
+                    execute(events);
+
+
+                }
+            }
+        }
+    }
+
+    public void execute(String query) {
+
+
+        Statement stmt = null;
+
+        try {
+            connection = Database.establishConnection();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        if (connection != null) {
+
+            try {
+                stmt = connection.createStatement();
+                stmt.executeUpdate(query);
+                System.out.println(query + " executed.");
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
+
+    public boolean isConnected() {
+        return (connection != null);
+    }
 }
 
