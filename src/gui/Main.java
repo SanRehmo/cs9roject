@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import cs_9roject.Project;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
@@ -32,7 +33,6 @@ public class Main extends Application {
 		Scene scene = new Scene(mainLayout);
 		primaryStage.setScene(scene);
 		primaryStage.show();
-		
 		
 	}
 		

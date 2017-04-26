@@ -54,7 +54,7 @@
       <ComboBox fx:id="Reccuring_ComboBox" layoutX="25.0" layoutY="191.0" onAction="#recurring" onDragDetected="#recurring" prefHeight="27.0" prefWidth="101.0" promptText="Never" />
       <Label fx:id="recurring_label" layoutX="27.0" layoutY="174.0" prefHeight="17.0" prefWidth="66.0" text="Recurring:" />
       <Button fx:id="btnSave" layoutX="337.0" layoutY="403.0" mnemonicParsing="false" onAction="#saveEvent" text="Save" />
-      <DatePicker fx:id="startTextField" disable="true" layoutX="145.0" layoutY="157.0" onAction="#setEventStart" prefHeight="25.0" prefWidth="105.0" promptText="Start" />
+      <DatePicker fx:id="startTextField" layoutX="145.0" layoutY="157.0" onAction="#setEventStart" prefHeight="25.0" prefWidth="105.0" promptText="Start" />
       <DatePicker fx:id="endTextField" disable="true" layoutX="268.0" layoutY="157.0" onAction="#setEventEnd" prefHeight="25.0" prefWidth="105.0" promptText="End" />
    </children>
 </Pane>

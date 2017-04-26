@@ -4,13 +4,12 @@ import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
@@ -21,7 +20,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -68,26 +66,36 @@ public class eventHandlerController {
     
     @FXML
     private ComboBox<String> Reccuring_ComboBox;
+    
+    public static boolean recurringDelete = false;
 
     /**
-     * Show alert massage when activated
+     * Show alert message when user want to delete event. 
      * @param event
      * @throws IOException 
      */
     @FXML
     void delete(ActionEvent event) throws IOException {
     	
-    	FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(Main.class.getResource("deleteEventPopUp.fxml"));
-		Pane showEventHandler = loader.load();
-		Stage stage2 = new Stage();
-        stage2.setScene(new Scene(showEventHandler));  
-        stage2.setTitle("Delete");
-        stage2.show();	
+    	Alert alert = new Alert(AlertType.CONFIRMATION);
+    	alert.setTitle("Delete");
+    	alert.setHeaderText("Delete event");
+    	
+    	CheckBox checkBox = new CheckBox("Delete all recurring events");
+    	alert.getDialogPane().setContent(checkBox);
+    	
+    	checkBox.setIndeterminate(false);
+    	
+//    	Checks if the user wants to delete all recurring events.
+    	if(checkBox.isSelected())
+    		eventHandlerController.recurringDelete = true;
+    	
+    	alert.showAndWait();
     }
     	
+    	
     /**
-     * Enables to set start and end time for duration;
+     * Enables to set end time for duration.
      * @param event
      */
     @FXML
@@ -95,19 +103,16 @@ public class eventHandlerController {
     	
     	if(this.duration == false) {
     		this.duration = true;
-    		startTextField.disableProperty().set(false);
     		endTextField.disableProperty().set(false);
     	}
     	else {
     		this.duration = false;
-    		startTextField.disableProperty().set(true);
     		endTextField.disableProperty().set(true);
     	}
-    	
     }
 
     /**
-     * Change the image for the event 
+     * Change the image for the event.
      * @param event
      */
     @FXML
@@ -134,9 +139,9 @@ public class eventHandlerController {
     }
 
     /**
-     * Gives the event a name 
-     * @param event
-     * @return name of the event 
+     * Gives the event a name.
+     * @param event.
+     * @return name of the event.
      */
     @FXML
     String nameEvent(ActionEvent event) {
@@ -148,9 +153,9 @@ public class eventHandlerController {
     }
 
     /**
-     * Select recurring for the event
-     * @param event
-     * @return the recurring of the event 
+     * Select recurring for the event.
+     * @param event.
+     * @return the recurring of the event. 
      */
     @FXML
     public String recurring(ActionEvent event) {
@@ -159,9 +164,9 @@ public class eventHandlerController {
     }
 
     /**
-     * Select color for the event
-     * @param event
-     * @return returns the color of the event 
+     * Select color for the event.
+     * @param event.
+     * @return returns the color of the event. 
      */
     @FXML
     String selectEventColor(ActionEvent event) {
@@ -169,22 +174,41 @@ public class eventHandlerController {
     	return this.color_ComboBox.getValue();
     }
 
+    /**
+     * Gets end value from the date pricker
+     * @param event
+     */
     @FXML
     void setEventEnd(ActionEvent event) {
     	
-    	//TO-DO
-
+    	this.endTextField.getValue();
     }
     
-
+    /**
+     * Gets start value from the date pricker
+     * @param event
+     */
     @FXML
     void setEventStart(ActionEvent event) {
     	
-    	//TO-DO 
-    	
-
+    	this.startTextField.getValue();
     }
     
+    /**
+     * Get value from start date of event.
+     * @return value of start date for event.
+     */
+    public DatePicker getStartValue() {
+    	return this.startTextField;
+    }
+    
+    /**
+     * Get value from end date of event.
+     * @return value of end date for event.
+     */
+    public DatePicker getEndValue() {
+    	return this.endTextField;
+    }
     
     /**
      * Gives options in the comboBox
@@ -208,10 +232,8 @@ public class eventHandlerController {
     }
     @FXML
     public void saveEvent() throws IOException {
-    	
-    	
+    	//TO-DO.
     	
     }
-   
 }
 
