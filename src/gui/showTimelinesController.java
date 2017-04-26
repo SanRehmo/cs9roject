@@ -2,14 +2,12 @@ package gui;
 
 import java.io.IOException;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -68,7 +66,9 @@ public class showTimelinesController {
 			for(int i=0; i<timelines.size(); i++){
 				if(timelines.get(i).isSelected()){
 				scrollBox.getChildren().add(generateTimeL(Main.project.getTimeline(i).getTitle()));
-				System.out.println(dayCounter(Main.project.getTimeline(i).getStartDate(),Main.project.getTimeline(i).getEndDate()));
+				System.out.println(yearCounter(Main.project.getTimeline(i).getStartDate(),Main.project.getTimeline(i).getEndDate()));
+				System.out.println(monthCounter(Main.project.getTimeline(i).getStartDate(),Main.project.getTimeline(i).getEndDate()));
+
 				}
 			
 			}	 
@@ -145,38 +145,31 @@ public class showTimelinesController {
 		return pane;	
 	}
 	
-	/**
-	 * Calculation month for how long the timeline is
-	 * @return timeline length
-	 */
-	/*public int dayCounter(LocalDate StartDate, LocalDate EndDate) {
-		String start = StartDate.getValue().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
-		String end = EndDate.getValue().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
-		
-		String startMonth = start.substring(0,4);
-		String endMonth = end.substring(0,4);
-		String startDay = start.substring(5, 6);
-		String endDay = end.substring(5, 6);
-		
-		int startCalc = (Integer.parseInt(startMonth) * 12) + Integer.parseInt(startDay);
-		int endCalc = (Integer.parseInt(endMonth) * 12) + Integer.parseInt(endDay);
-		
-		return endCalc - startCalc;
-	}*/
-    
-	public int dayCounter(LocalDate StartDate, LocalDate EndDate) {
-		int start = StartDate.getMonthValue();
-		int end = EndDate.getMonthValue();
-		
-		/*String startMonth = start.substring(0,4);
-		String endMonth = end.substring(0,4);
-		String startDay = start.substring(5, 6);
-		String endDay = end.substring(5, 6);
-		*/
-		System.out.println(start);
-		System.out.println(end);
-		
-		return start - end;
-    
-	}
+	public int yearCounter(LocalDate StartDate, LocalDate EndDate) {
+		  return EndDate.getYear() - StartDate.getYear();
+		 }
+	
+	public int monthCounter(LocalDate StartDate, LocalDate EndDate) {
+	  
+	  int startMonth = StartDate.getMonthValue();
+	  int endMonth = EndDate.getMonthValue();
+	  
+	  int startYear = StartDate.getYear();
+	  int endYear = EndDate.getYear();
+	  
+	  int temp = endYear - startYear;
+	  
+	  if(temp<1){
+		  temp += (endMonth - startMonth)%12 -(endYear - startYear);
+	  }
+	  else{
+		  temp += (endMonth - startMonth)%12 -(endYear - startYear)+temp*12;
+	  }
+	  
+	  
+	  
+	  
+	  return temp;
+
+	 }
 }
