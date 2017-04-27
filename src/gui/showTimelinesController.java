@@ -113,10 +113,17 @@ public class showTimelinesController {
 		Text title = new Text();
 		title.setText(Main.project.getTimeline(id).getTitle());
 		
+		int name = Main.project.getTimeline(id).getTitle().length();
+		System.out.print(name);
+		
+		//Name length represent by rectangle.
+		Rectangle rectangle = new Rectangle(name + 10, 20);
+		rectangle.setFill(Color.TRANSPARENT);
+		
 				
 		Pane pane = new Pane();
 		HBox hbox = new HBox();
-		hbox.getChildren().add(title);
+		hbox.getChildren().add(rectangle);
 		for(int i = 0; i < 5; i++) {
 			hbox.getChildren().addAll(verticalLine(100),Hline(250));
 		}
