@@ -12,6 +12,7 @@ public class Database {
 
     public static Connection establishConnection() {
 
+        // attempts to load the JDBC driver
         try {
             Class.forName("com.mysql.jdbc.Driver");
         } catch (ClassNotFoundException e) {

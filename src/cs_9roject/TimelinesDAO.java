@@ -8,9 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TimelinesDAO {
-	public TimelinesDAO (){
-		
-	}
 
     Connection connection = null;
 
