@@ -199,7 +199,7 @@ public class showTimelinesController {
 		  yearBox.getChildren().addAll(title,rectangle);  
 	
 		  for(int i = 0; i < Math.floor((yearCounter(startDate,endDate)+(yearCounter(startDate,endDate)/5))); i+=Math.floor(yearCounter(startDate,endDate)/5)) {
-		  Rectangle rec = new Rectangle(228, 20);
+		  Rectangle rec = new Rectangle(228, 1);
 		  rec.setFill(Color.TRANSPARENT);
 	      String temp =String.valueOf(startDate.getYear()+i); //- startDate.getYear()));
 		  Text text = new Text();
