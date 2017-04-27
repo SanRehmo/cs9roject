@@ -9,27 +9,34 @@ import java.util.List;
 
 public class TimelinesDAO {
 
-    Connection connection = null;
+    private Connection connection = null;
+    List<List<Event>> listOfEventLists = new ArrayList<List<Event>>();
 
+    // used to load a project from the DB through an ID
     public Project load(int ID) {
 
-		Statement stmt = null;
-		Project result = new Project();
-		Timeline timeline = null;
+        Statement stmt = null;
+        Project result = new Project();
+        Timeline timeline = null;
         ArrayList<Event> eventList = new ArrayList<Event>();
 
+        // attempt to establish a connection to the DB
         try {
             connection = Database.establishConnection();
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
 
-		if (connection != null) {
+        if (connection != null) {
 
-			try {
+            try {
 
+                int count = 0;
+
+                // load all events in the project
                 stmt = connection.createStatement();
-                ResultSet rss = stmt.executeQuery("SELECT * FROM Events");
+                ResultSet rss = stmt.executeQuery("SELECT Timelines.TIMELINE_ID, Events.EVENT_ID, Events.Title, Events.START_DATE, Events.END_DATE, Events.START_TIME, Events.END_TIME, Events.DESCRIPTION, Events.IMAGE_ID"
+                        + " FROM Projects JOIN (Timelines, Events) ON Projects.TIMELINE_ID=Timelines.TIMELINE_ID WHERE Timelines.EVENT_ID=Events.EVENT_ID AND PROJECT_ID=" + ID);
 
                 while (rss.next()) {
 
@@ -39,16 +46,20 @@ public class TimelinesDAO {
                     LocalDateTime eventEnd_time = LocalDateTime.of(rss.getDate("END_DATE").toLocalDate(), rss.getTime("END_TIME").toLocalTime());
                     int eventImageID = rss.getInt("IMAGE_ID");
                     String eventDescription = rss.getString("DESCRIPTION");
+                    int timelineID = rss.getInt("TIMELINE_ID");
 
-
-                    Event event = new Event(eventID, eventTitle, eventStart_time, eventEnd_time, eventDescription, eventImageID);
+                    Event event = new Event(timelineID, eventID, eventTitle, eventStart_time, eventEnd_time, eventDescription, eventImageID);
                     eventList.add(event);
                 }
 
-				stmt = connection.createStatement();
-                String query = "SELECT * FROM Timelines";
-                ResultSet rs = stmt.executeQuery(query);
+
+                // load all timelines in the project
+                stmt = connection.createStatement();
+                ResultSet rs = stmt.executeQuery("SELECT Timelines.TIMELINE_ID, Timelines.EVENT_ID, Timelines.START_DATE, Timelines.END_DATE, Timelines.TITLE"
+                        + " FROM Projects JOIN (Timelines, Events) ON Projects.TIMELINE_ID=Timelines.TIMELINE_ID WHERE Timelines.EVENT_ID=Events.EVENT_ID AND PROJECT_ID=" + ID);
+
                 while (rs.next()) {
+
 
                     int timelineID = rs.getInt("TIMELINE_ID");
                     LocalDate timelineStart = rs.getDate("START_DATE").toLocalDate();
@@ -56,18 +67,22 @@ public class TimelinesDAO {
                     String timelineTitle = rs.getString("TITLE");
 
                     timeline = new Timeline(timelineID, timelineStart, timelineEnd, timelineTitle, eventList);
+
                     result.addTimeline(timeline);
-				}
 
-			} catch (Exception ex) {
-				ex.printStackTrace();
-			}
-		} else {
-			System.out.println("Failed to make connection");
-		}
-		return result;
-	}
+                }
 
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        } else {
+            System.out.println("Failed to make connection");
+        }
+        return result;
+    }
+
+
+    // load all Projects at once
     public List<Project> loadAllProjects() {
 
         List<Project> result = new ArrayList<Project>();
@@ -101,7 +116,8 @@ public class TimelinesDAO {
     }
 
 
-	public void save(Project project) {
+    // save a Project
+    public void save(Project project) {
 
         if (isConnected()) {
 
@@ -141,6 +157,7 @@ public class TimelinesDAO {
         }
     }
 
+    // helper method to execute a query on the DB
     public void execute(String query) {
 
 
@@ -164,10 +181,13 @@ public class TimelinesDAO {
         }
     }
 
+    // helper method to check if JDBC is connectedd
     public boolean isConnected() {
         return (connection != null);
     }
 
+    // helper method to stress test the DB with infinite queries
+    // provokes connection refusal from DB
     public void stressTest() {
 
         String query = "SELECT * FROM Projects";

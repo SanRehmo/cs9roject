@@ -1,9 +1,10 @@
 package cs_9roject;
 
-import java.time.Duration;
-import java.time.LocalDateTime;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
+
+import java.time.Duration;
+import java.time.LocalDateTime;
 
 //This class to present Duration Event
 public class DurationEvent extends Event {
@@ -13,8 +14,8 @@ public class DurationEvent extends Event {
 	
 	// mine
     // Create new event with specific ID. Almost used when importing events from database
-	public DurationEvent(int eventID, String eventTitle, LocalDateTime eventStart_time, LocalDateTime eventEnd_time, String description, int imageID) {
-		super(eventID, eventTitle, eventStart_time, eventEnd_time, description, imageID);
+	public DurationEvent(int timelineID, int eventID, String eventTitle, LocalDateTime eventStart_time, LocalDateTime eventEnd_time, String description, int imageID) {
+		super(timelineID, eventID, eventTitle, eventStart_time, eventEnd_time, description, imageID);
 	}
 	
 	// Create new event with new ID.

@@ -6,9 +6,10 @@ import java.util.List;
 // This class present object and save all timelines inside it
 public class Project {
 
-	protected List<Timeline> timelines= new ArrayList<Timeline>();
-	int ProjectID;
+    protected List<Timeline> timelines = new ArrayList<Timeline>();
+    int ProjectID;
 	String projectName;
+    ArrayList<Timeline> timelineList = new ArrayList<Timeline>();
 
 
 	public Project() {

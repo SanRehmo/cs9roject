@@ -14,7 +14,6 @@ public class Timeline {
 	protected Period duration;
 	protected String title;
 	protected Boolean isOnlyYears=false;	// Boolean variable to define timeline's type
-	
 	List<Event> events = new ArrayList<Event>();
 	
 	

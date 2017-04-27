@@ -1,8 +1,5 @@
 package cs_9roject;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 
 public class TimelinesMain {
     static Project timelines = new Project();
@@ -15,21 +12,40 @@ public class TimelinesMain {
 
         // Load project from database
         Project project = dao.load(3);
+        System.out.println("SIZE: " + project.getTimelines().size());
 
         // uncomment for testing
         // DB test for LOADING
 
-        for (int i = 1; i < project.timelines.size(); i++) {
+        for (int i = 0; i < project.timelines.size(); i++) {
 
-            Timeline timeline = project.getTimeline(i);
-
-            // WORKS!
-            System.out.println(timeline.getTitle());
+            Timeline timeline = project.getTimeline(project.getTimelines().get(i).getTimelineId());
 
             // WORKS!
-            System.out.println(timeline.getEvent(i).getTitle());
-            // System.out.println(timeline.getEvent(i).getDescription());
+            System.out.println("ID: " + timeline.getTimelineId() + ", TITLE: " + timeline.getTitle());
+
+
+            for (Event event : timeline.events) {
+                // EXTREMELY IMPORTANT LINE
+                if (timeline.getTimelineId() == event.timelineid)
+                    System.out.println("EV_ID: " + event.getEventId() + ", EV_TITLE: " + event.getTitle());
+            }
+
+            // WORKS!
+            // System.out.println(timeline.getEvent(i).getTitle());
+            //System.out.println(timeline.getEvent(i).getDescription());
+
+
+/*
+                for (Event event : timeline.getEvents()) {
+
+                    Event tmp = timeline.getEvents().get(k);
+                    System.out.println("EVENT ID: " + tmp.eventid + ", EVENT TITLE: " + tmp.title);
+                }
+*/
         }
+
+
 
         // run this to provoke the DB to get into connection refuse state due to too many connection attempts
         //
@@ -37,7 +53,7 @@ public class TimelinesMain {
 
         // Uncomment for testing
         // DB test for SAVING
-
+        /*
         Project testProject = new Project();
 
         Event testEvent = new Event(10, "DB TEST", LocalDateTime.now(), LocalDateTime.of(2042, 01, 01, 12, 42, 42), "Used to test DB", 69);
@@ -54,7 +70,7 @@ public class TimelinesMain {
         testProject.addTimeline(testTimeline);
 
         dao.save(testProject);
-
+        */
     }
 
 }

@@ -20,11 +20,13 @@ public class Event {
     protected Image eventImage = null;
     protected String imagepath = "";
     protected Color eventColor=Color.RED;
+	protected int timelineid;
 
     // mine
     // Create new event with specific ID. Almost used when importing events from database
-    public Event(int eventID, String eventTitle, LocalDateTime eventStart_time, LocalDateTime eventEnd_time, String Description, int imageID) {
+	public Event(int timelineID, int eventID, String eventTitle, LocalDateTime eventStart_time, LocalDateTime eventEnd_time, String Description, int imageID) {
 
+		timelineid = timelineID;
 		eventid = eventID;
 		title = eventTitle;
 		startTime = eventStart_time;

@@ -1,9 +1,9 @@
 package cs_9roject;
 
-import java.time.LocalDateTime;
-
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
+
+import java.time.LocalDateTime;
 
 //This class to present Non-Duration Event
 public class NonDurationEvent extends Event {
@@ -11,8 +11,8 @@ public class NonDurationEvent extends Event {
 	
 	// mine
     // Create new event with specific ID. Almost used when importing events from database
-	public NonDurationEvent(int eventID, String eventTitle, LocalDateTime eventStart_time, LocalDateTime eventEnd_time, String description, int imageID) {
-		super(eventID, eventTitle, eventStart_time, eventEnd_time, description, imageID);
+	public NonDurationEvent(int timelineID, int eventID, String eventTitle, LocalDateTime eventStart_time, LocalDateTime eventEnd_time, String description, int imageID) {
+		super(timelineID, eventID, eventTitle, eventStart_time, eventEnd_time, description, imageID);
 		isDurationEvent=false;
 	}
 	
