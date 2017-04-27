@@ -60,14 +60,14 @@ public class showTimelinesController {
 	public void showTimeline(){
 		if(displayAll.isSelected()){
 			for(int i=0; i<timelines.size(); i++){
-			scrollBox.getChildren().add(generateTimeL(i));
+			scrollBox.getChildren().addAll(yearShow(i),generateTimeL(i));
 			}
 			
 		}
 		else{
 			for(int i=0; i<timelines.size(); i++){
 				if(timelines.get(i).isSelected()){
-				scrollBox.getChildren().add(generateTimeL(i));
+				scrollBox.getChildren().addAll(yearShow(i),generateTimeL(i));
 				}	
 			}	 
 		}
@@ -171,7 +171,11 @@ public class showTimelinesController {
 
 	 }
 	
-	public Pane yearShow(LocalDate startDate, LocalDate endDate) {
+	public Pane yearShow(int id) {
+		
+		  LocalDate startDate = Main.project.getTimeline(id).getStartDate();
+		  LocalDate endDate = Main.project.getTimeline(id).getEndDate();
+		
 		  Pane pane = new Pane();
 		  
 		  HBox yearBox = new HBox();
