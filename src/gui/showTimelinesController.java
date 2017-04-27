@@ -10,6 +10,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -112,6 +113,7 @@ public class showTimelinesController {
 	public Pane generateTimeL(int id){
 		Text title = new Text();
 		title.setText(Main.project.getTimeline(id).getTitle());
+		title.setFont(Font.font ("Verdana", 20));
 		
 		int name = Main.project.getTimeline(id).getTitle().length();
 		System.out.print(name);
@@ -191,6 +193,7 @@ public class showTimelinesController {
 		  
 		  Text title = new Text();
 		  title.setText(Main.project.getTimeline(id).getTitle());
+		  title.setFont(Font.font ("Verdana", 20));
 		  yearBox.getChildren().add(title);  
 	
 		  for(int i = 0; i < yearCounter(startDate,endDate)+(yearCounter(startDate,endDate)/5); i+=(yearCounter(startDate,endDate)/5)) {
