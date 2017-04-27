@@ -17,6 +17,8 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import javafx.scene.paint.Color;
+
 
 public class showTimelinesController {
 	
@@ -181,7 +183,10 @@ public class showTimelinesController {
 		  HBox yearBox = new HBox();
 	
 		  for(int i = 0; i < yearCounter(startDate,endDate)+(yearCounter(startDate,endDate)/4); i+=(yearCounter(startDate,endDate)/4)) {
-		  Rectangle rec = new Rectangle(20, 20);  
+		  Rectangle rec = new Rectangle(230, 20);
+		  rec.setFill(Color.TRANSPARENT);
+		 
+		  
 	      String temp =String.valueOf(startDate.getYear()+i); //- startDate.getYear()));
 		  Text text = new Text();
 		  text.setText(temp);
