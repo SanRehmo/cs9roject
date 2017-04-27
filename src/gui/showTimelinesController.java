@@ -51,7 +51,7 @@ public class showTimelinesController {
 	
 
 	@FXML
-	private ScrollPane show_scrollpane;
+	private ScrollPane show_scrollpane; //ScrollPane from starting window
 
 	@FXML
 	private Button doneButton;
@@ -60,35 +60,33 @@ public class showTimelinesController {
 	private CheckBox displayAll;
 	
 	@FXML
-	public void showTimeline(){
-		if(displayAll.isSelected()){
+	public void showTimeline(){	//Method that is showing the timelines in the scrollPane
+		if(displayAll.isSelected()){//If DisplayAll is selected the program will show every timeline
 			for(int i=0; i<timelines.size(); i++){
 			scrollBox.getChildren().addAll(yearShow(i),generateTimeL(i));
 			}
 			
 		}
 		else{
-			for(int i=0; i<timelines.size(); i++){
+			for(int i=0; i<timelines.size(); i++){	//Just displaying the checked timelines
 				if(timelines.get(i).isSelected()){
 				scrollBox.getChildren().addAll(yearShow(i),generateTimeL(i));
 				}	
 			}	 
 		}
-		
-	// scrollBox.getChildren().add(yearShow(Main.project.getTimeline(0).getStartDate(),Main.project.getTimeline(0).getEndDate()));     Shows years of first timeline
 	 primaryScrollpane.setContent(scrollBox);
 	 Stage stage = (Stage) doneButton.getScene().getWindow();
 	 
 	 stage.close();	
 	}
 	
-	public Line verticalLine(int size) {
+	public Line verticalLine(int size) {		//Making every vertical lines in a timeline
 		Line timeLine = new Line(50,0,50,size);
 		timeLine.setStrokeWidth(3);
 		return timeLine;
 	}
 	
-	public Line clickAbleHline(int size) {
+	public Line clickAbleHline(int size) {	//Making a horizontal line that will open eventhandler when you press the line
 		Line timeLine = new Line(0, 50, size, 50);
 		timeLine.setStrokeWidth(5);
 		timeLine.setOnMouseClicked(e ->{
@@ -104,29 +102,29 @@ public class showTimelinesController {
 		return timeLine;
 	}
 	
-	public Line Hline(int size){
+	public Line Hline(int size){		//Making non clickable horizontal line
 		Line timeLine = new Line(0, 50, size, 50);
 		
 		return timeLine;
 	}
 	
-	public Pane generateTimeL(int id){
+	public Pane generateTimeL(int id){	//Method that is making timelines with horizontal and vertical lines
 		Text title = new Text();
 		title.setText(Main.project.getTimeline(id).getTitle());
 		title.setFont(Font.font ("Verdana", 20));
 		
-		int size = (int) title.getBoundsInLocal().getWidth();
+		int size = (int) title.getBoundsInLocal().getWidth();	//Making a gap before every timeline so the name will show right
 		
 		//Name length represent by rectangle.
 		Rectangle rectangle = new Rectangle(size + 50, 20);
 		rectangle.setFill(Color.TRANSPARENT);
-		
-				
+			
 		Pane pane = new Pane();
 		HBox hbox = new HBox();
 		hbox.getChildren().add(rectangle);
+		
 		for(int i = 0; i < 5; i++) {
-			hbox.getChildren().addAll(verticalLine(100),Hline(250));
+			hbox.getChildren().addAll(verticalLine(100),Hline(250));  //generating timeline
 		}
 		
 		hbox.getChildren().addAll(verticalLine(100));
@@ -138,7 +136,7 @@ public class showTimelinesController {
 		return pane;
 	}
 	
-	public Pane zoomedTimeline() {
+	public Pane zoomedTimeline() {			//This will be the final timeline that you click on to get to the calendar
 		Pane pane = new Pane();
 		HBox hbox = new HBox();
 		for(int j = 0; j<5; j++){
@@ -156,11 +154,11 @@ public class showTimelinesController {
 		return pane;	
 	}
 	
-	public int yearCounter(LocalDate StartDate, LocalDate EndDate) {
+	public int yearCounter(LocalDate StartDate, LocalDate EndDate) {	//Counting the years
 		  return EndDate.getYear() - StartDate.getYear();
 		 }
 	
-	public int monthCounter(LocalDate StartDate, LocalDate EndDate) {
+	public int monthCounter(LocalDate StartDate, LocalDate EndDate) {	//Counting months
 	  
 	  int startMonth = StartDate.getMonthValue();
 	  int endMonth = EndDate.getMonthValue();
@@ -181,7 +179,7 @@ public class showTimelinesController {
 
 	 }
 	
-	public Pane yearShow(int id) {
+	public Pane yearShow(int id) {			//Method that is displaying the name and years over the timeline
 		
 		  LocalDate startDate = Main.project.getTimeline(id).getStartDate();
 		  LocalDate endDate = Main.project.getTimeline(id).getEndDate();

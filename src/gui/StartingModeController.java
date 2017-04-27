@@ -9,9 +9,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import gui.Main;
 
@@ -27,6 +25,10 @@ public class StartingModeController {
     private Button helpButton;
 	
 	
+	
+	/**
+     * Method for displaying the createMode window.
+     */
 	public void createMode() throws IOException{
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(Main.class.getResource("CreateMode.fxml"));
@@ -41,6 +43,10 @@ public class StartingModeController {
 	    
 	}
 	
+	
+	/**
+     * Method for displaying Timelines to show window.
+     */
 	@FXML
 	private void showTimeline() throws IOException{
 		FXMLLoader loader = new FXMLLoader();
@@ -55,6 +61,10 @@ public class StartingModeController {
 	    stage2.show();	
 	}
 	
+	
+	/**
+     * Method for displaying Eventhandler the window, this window will later be displayed by clicking on the timeline and not on the button "EventHandler"
+     */
 	@FXML
 	private void showEventHandler() throws IOException{
 		if (Main.project.getTimelines().size()==0){
