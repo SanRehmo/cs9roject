@@ -115,11 +115,10 @@ public class showTimelinesController {
 		title.setText(Main.project.getTimeline(id).getTitle());
 		title.setFont(Font.font ("Verdana", 20));
 		
-		int name = Main.project.getTimeline(id).getTitle().length();
-		System.out.print(name);
+		int size = (int) title.getBoundsInLocal().getWidth();
 		
 		//Name length represent by rectangle.
-		Rectangle rectangle = new Rectangle(name + 10, 20);
+		Rectangle rectangle = new Rectangle(size + 50, 20);
 		rectangle.setFill(Color.TRANSPARENT);
 		
 				
