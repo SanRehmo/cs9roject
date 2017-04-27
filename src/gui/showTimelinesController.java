@@ -184,10 +184,14 @@ public class showTimelinesController {
 		
 		  LocalDate startDate = Main.project.getTimeline(id).getStartDate();
 		  LocalDate endDate = Main.project.getTimeline(id).getEndDate();
-		
+		  
 		  Pane pane = new Pane();
 		  
 		  HBox yearBox = new HBox();
+		  
+		  Text title = new Text();
+		  title.setText(Main.project.getTimeline(id).getTitle());
+		  yearBox.getChildren().add(title);  
 	
 		  for(int i = 0; i < yearCounter(startDate,endDate)+(yearCounter(startDate,endDate)/5); i+=(yearCounter(startDate,endDate)/5)) {
 		  Rectangle rec = new Rectangle(230, 20);
