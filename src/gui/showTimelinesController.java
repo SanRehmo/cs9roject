@@ -182,16 +182,13 @@ public class showTimelinesController {
 		  
 		  HBox yearBox = new HBox();
 	
-		  for(int i = 0; i < yearCounter(startDate,endDate)+(yearCounter(startDate,endDate)/4); i+=(yearCounter(startDate,endDate)/4)) {
+		  for(int i = 0; i < yearCounter(startDate,endDate)+(yearCounter(startDate,endDate)/5); i+=(yearCounter(startDate,endDate)/5)) {
 		  Rectangle rec = new Rectangle(230, 20);
 		  rec.setFill(Color.TRANSPARENT);
-		 
-		  
 	      String temp =String.valueOf(startDate.getYear()+i); //- startDate.getYear()));
 		  Text text = new Text();
-		  text.setText(temp);
-			  
-		   yearBox.getChildren().addAll(text,rec);
+		  text.setText(temp);	  
+		  yearBox.getChildren().addAll(text,rec);
 		  }
 		  
 		  pane.getChildren().add(yearBox);
