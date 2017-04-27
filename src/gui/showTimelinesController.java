@@ -190,10 +190,13 @@ public class showTimelinesController {
 		  
 		  HBox yearBox = new HBox();
 		  
+		  Rectangle rectangle = new Rectangle(50, 20);
+		  rectangle.setFill(Color.TRANSPARENT);
+		  
 		  Text title = new Text();
 		  title.setText(Main.project.getTimeline(id).getTitle());
 		  title.setFont(Font.font ("Verdana", 20));
-		  yearBox.getChildren().add(title);  
+		  yearBox.getChildren().addAll(title,rectangle);  
 	
 		  for(int i = 0; i < yearCounter(startDate,endDate)+(yearCounter(startDate,endDate)/5); i+=(yearCounter(startDate,endDate)/5)) {
 		  Rectangle rec = new Rectangle(230, 20);
