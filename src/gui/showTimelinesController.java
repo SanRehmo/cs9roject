@@ -190,7 +190,7 @@ public class showTimelinesController {
 		  
 		  HBox yearBox = new HBox();
 		  
-		  Rectangle rectangle = new Rectangle(50, 20);
+		  Rectangle rectangle = new Rectangle(45, 20);
 		  rectangle.setFill(Color.TRANSPARENT);
 		  
 		  Text title = new Text();
