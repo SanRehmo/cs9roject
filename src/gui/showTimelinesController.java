@@ -63,14 +63,14 @@ public class showTimelinesController {
 	public void showTimeline(){	//Method that is showing the timelines in the scrollPane
 		if(displayAll.isSelected()){//If DisplayAll is selected the program will show every timeline
 			for(int i=0; i<timelines.size(); i++){
-			scrollBox.getChildren().addAll(yearShow(i),generateTimeL(i));
+			scrollBox.getChildren().addAll(yearShow(i),generateTimeL(i),spaceBetween());
 			}
 			
 		}
 		else{
 			for(int i=0; i<timelines.size(); i++){	//Just displaying the checked timelines
 				if(timelines.get(i).isSelected()){
-				scrollBox.getChildren().addAll(yearShow(i),generateTimeL(i));
+				scrollBox.getChildren().addAll(yearShow(i),generateTimeL(i),spaceBetween());
 				}	
 			}	 
 		}
@@ -129,7 +129,7 @@ public class showTimelinesController {
 		
 		hbox.getChildren().addAll(verticalLine(100));
 		hbox.setLayoutX(5);
-		hbox.setLayoutY(30);
+		hbox.setLayoutY(0);
 		hbox.setAlignment(Pos.CENTER);
 		pane.getChildren().addAll(hbox);
 		
@@ -154,8 +154,8 @@ public class showTimelinesController {
 		return pane;	
 	}
 	
-	public int yearCounter(LocalDate StartDate, LocalDate EndDate) {	//Counting the years
-		  return EndDate.getYear() - StartDate.getYear();
+	public double yearCounter(LocalDate StartDate, LocalDate EndDate) {	//Counting the years
+		  return Math.round(EndDate.getYear() - StartDate.getYear());
 		 }
 	
 	public int monthCounter(LocalDate StartDate, LocalDate EndDate) {	//Counting months
@@ -180,7 +180,6 @@ public class showTimelinesController {
 	 }
 	
 	public Pane yearShow(int id) {			//Method that is displaying the name and years over the timeline
-		
 		  LocalDate startDate = Main.project.getTimeline(id).getStartDate();
 		  LocalDate endDate = Main.project.getTimeline(id).getEndDate();
 		  
@@ -195,8 +194,9 @@ public class showTimelinesController {
 		  title.setText(Main.project.getTimeline(id).getTitle());
 		  title.setFont(Font.font ("Verdana", 20));
 		  yearBox.getChildren().addAll(title,rectangle);  
-	
-		  for(int i = 0; i <= Math.floor((yearCounter(startDate,endDate))-Math.floor(yearCounter(startDate,endDate)/5)); i+=Math.floor(yearCounter(startDate,endDate)/5)) {
+		  
+		  if(yearCounter(startDate,endDate)>5){
+		  for(int i = 0; i <= (yearCounter(startDate,endDate)-Math.floor(yearCounter(startDate,endDate)/5)); i+=Math.round((yearCounter(startDate,endDate)/5))) {
 		  Rectangle rec = new Rectangle(228, 1);
 		  rec.setFill(Color.TRANSPARENT);
 	      String temp =String.valueOf(startDate.getYear()+i); //- startDate.getYear()));
@@ -204,7 +204,7 @@ public class showTimelinesController {
 		  text.setText(temp);	  
 		  yearBox.getChildren().addAll(text,rec);
 		  }
-		  
+		  }
 		  String temp =String.valueOf(endDate.getYear());
 		  Text text = new Text();
 		  text.setText(temp);
@@ -215,5 +215,20 @@ public class showTimelinesController {
 		  
 		  return pane;
 		 }
+	
+	public Pane spaceBetween(){
+	      Pane pane = new Pane();
+		  
+		  HBox blank = new HBox();
+		  
+		  Rectangle rectangle = new Rectangle(45, 80);
+		  rectangle.setFill(Color.TRANSPARENT);
+		  
+		  blank.getChildren().add(rectangle);
+		  
+		  pane.getChildren().add(blank);
+		  
+		  return pane;		
+	}
 	
 }
