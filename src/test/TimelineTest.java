@@ -6,11 +6,11 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import static org.junit.Assert.*;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.junit.Assert.assertEquals;
 
 public class TimelineTest {
 	
@@ -26,10 +26,6 @@ public class TimelineTest {
 	public void tearDown() throws Exception {	// Do after every test
 		System.out.println("Done with test " + count + "\n");
 	}
-	
-	// Test U.1 timeline1
-	
-	
 	
 	@Test
 	public void timelineIdTest() {
@@ -48,18 +44,6 @@ public class TimelineTest {
 		timeline1.setStartTime(date);
 		timeline1.setEndDate(date.plusDays(30));
 		timeline1.setTitle("test");
-
-		/*
-		Timeline timeline2 = new Timeline(date,date.plusDays(30),"test" );
-		assertEquals(timeline1.getTimelineId(), 10000);
-		assertEquals(timeline1.getStartDate(), date);
-		assertEquals(timeline2.getStartDate(), date);
-		assertEquals(timeline1.getEndDate(), date.plusDays(30));
-		assertEquals(timeline2.getEndDate(), date.plusDays(30));
-		assertEquals(timeline1.getTitle(), "test");
-		assertEquals(timeline2.getTitle(), "test");
-		assertTrue(timeline1.equals(timeline2));
-		*/
 		}
 	
 	@Test
