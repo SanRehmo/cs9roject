@@ -251,38 +251,26 @@ public class eventHandlerController {
     	
     	// Check if start and end date are selected
     	if (startTextField.getValue()==null || (endTextField.getValue()==null && duration_checkBox.isSelected() )){
-    		Alert alert = new Alert(AlertType.ERROR);
-			alert.setTitle("ERROR!");
-			alert.setHeaderText("Cannot add event!");
-			alert.setContentText("End or Start date is not selected");
-			alert.showAndWait();
+			
+			alertWindow(AlertType.ERROR, "ERROR!", "Cannot add event!", "End or Start date is not selected");
     	}
     	
     	// Check if end date is after or equals start date
     	else if (duration_checkBox.isSelected() && startTextField.getValue().isAfter(endTextField.getValue())){
-    		Alert alert = new Alert(AlertType.ERROR);
-			alert.setTitle("ERROR!");
-			alert.setHeaderText("Cannot add event!");
-			alert.setContentText("End date should be after or equals start date");
-			alert.showAndWait();
+    		
+			alertWindow(AlertType.ERROR, "ERROR!", "Cannot add event!", "End date should be after or equals start date");
     	}
     	
     	// Check if the user enters an event's name
     	else if (NameEvent_textField.getText().replaceAll("\\s+","").isEmpty()){
-    		Alert alert = new Alert(AlertType.ERROR);
-			alert.setTitle("ERROR!");
-			alert.setHeaderText("Cannot add event!");
-			alert.setContentText("Event should have name");
-			alert.showAndWait();
+    		
+			alertWindow(AlertType.ERROR, "ERROR!", "Cannot add event!", "Event should have name");
     	}
     	
     	// Check if the user selects an event's color
     	else if (color_ComboBox.getValue()==null){
-    		Alert alert = new Alert(AlertType.ERROR);
-			alert.setTitle("ERROR!");
-			alert.setHeaderText("Cannot add event!");
-			alert.setContentText("Please select a color");
-			alert.showAndWait();
+			
+			alertWindow(AlertType.ERROR, "ERROR!", "Cannot add event!", "Please select a color");
     	}
     	
     	// If all inputs are correct then add event
@@ -307,6 +295,23 @@ public class eventHandlerController {
         		}
     	}
     	
+    	
+    }
+    
+    /**
+     * Warning popUp 
+     * @param type of alert
+     * @param Title 
+     * @param headText
+     * @param contentText
+     */
+    public void alertWindow(AlertType type, String Title, String headText, String contentText) {
+    	
+    	Alert alert = new Alert(type);
+		alert.setTitle(Title);
+		alert.setHeaderText(headText);
+		alert.setContentText(contentText);
+		alert.showAndWait();
     	
     }
 }
