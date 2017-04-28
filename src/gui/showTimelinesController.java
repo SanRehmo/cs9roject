@@ -196,7 +196,7 @@ public class showTimelinesController {
 		  title.setFont(Font.font ("Verdana", 20));
 		  yearBox.getChildren().addAll(title,rectangle);  
 	
-		  for(int i = 0; i < Math.floor((yearCounter(startDate,endDate)+(yearCounter(startDate,endDate)/5))); i+=Math.floor(yearCounter(startDate,endDate)/5)) {
+		  for(int i = 0; i <= Math.floor((yearCounter(startDate,endDate))-Math.floor(yearCounter(startDate,endDate)/5)); i+=Math.floor(yearCounter(startDate,endDate)/5)) {
 		  Rectangle rec = new Rectangle(228, 1);
 		  rec.setFill(Color.TRANSPARENT);
 	      String temp =String.valueOf(startDate.getYear()+i); //- startDate.getYear()));
@@ -204,6 +204,12 @@ public class showTimelinesController {
 		  text.setText(temp);	  
 		  yearBox.getChildren().addAll(text,rec);
 		  }
+		  
+		  String temp =String.valueOf(endDate.getYear());
+		  Text text = new Text();
+		  text.setText(temp);
+		  
+		  yearBox.getChildren().add(text);
 		  
 		  pane.getChildren().add(yearBox);
 		  
