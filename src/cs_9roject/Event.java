@@ -3,6 +3,7 @@ package cs_9roject;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 
+import java.sql.Date;
 import java.time.LocalDateTime;
 
 
@@ -15,6 +16,8 @@ public class Event {
 	protected String description= new String ();
 	protected LocalDateTime startTime;
 	protected LocalDateTime endTime;
+    protected Date startDate;
+    protected Date endDate;
     protected boolean isDurationEvent = true;
     protected int imageid = 0;
     protected Image eventImage = null;
@@ -33,6 +36,8 @@ public class Event {
 		endTime = eventEnd_time;
         description = Description;
         imageid = imageID;
+        startDate = Date.valueOf(eventStart_time.toLocalDate());
+        endDate = Date.valueOf(eventEnd_time.toLocalDate());
     }
 	
 	// Create new event with new ID.

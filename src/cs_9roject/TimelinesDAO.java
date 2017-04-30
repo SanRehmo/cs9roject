@@ -189,20 +189,67 @@ public class TimelinesDAO {
         } else return false;
     }
 
-    public boolean deleteAllEvents() {
-        return false;
+    // CAREFUL WITH THIS
+    public boolean deleteAllProjects() {
+
+        int count = 1;
+
+        if (isConnected()) {
+            while (load(count) != null) {
+                delete(load(count));
+                count++;
+            }
+        }
+        return (count > 1);
     }
 
-    public Event modify(Event eventToModify, Event newEvent) {
-        return null;
+    public boolean modify(Event eventToModify, Event newEvent) {
+
+        // secure integrity
+        newEvent.eventid = eventToModify.eventid;
+
+        if (isConnected()) {
+            query = "DELETE FROM Events WHERE EVENT_ID=" + eventToModify.eventid;
+            execute(query);
+            query = "INSERT INTO Events VALUES (" + eventProperties(newEvent) + ")";
+            execute(query);
+            return true;
+        } else return false;
     }
 
-    public Timeline modify(Timeline timelineToModify, Timeline newTimeline) {
-        return null;
+    public boolean modify(Timeline timelineToModify, Timeline newTimeline) {
+
+        newTimeline.timelineId = timelineToModify.timelineId;
+        int count = 1;
+
+        if (isConnected()) {
+            query = "DELETE FROM Timelines WHERE TIMELINE_ID=" + timelineToModify.timelineId;
+            execute(query);
+            while (newTimeline.events.get(count) != null) {
+                query = "INSERT INTO Timelines VALUES (" + newTimeline.timelineId + ", " + newTimeline.events.get(count).eventid + ", "
+                        + newTimeline.startDate + ", " + newTimeline.endDate + ", " + newTimeline.title + ")";
+                execute(query);
+                count++;
+            }
+        }
+        return (count > 1);
     }
 
-    public Project modify(Project projectToModify, Project newProject) {
-        return null;
+    public boolean modify(Project projectToModify, Project newProject) {
+
+        newProject.ProjectID = projectToModify.ProjectID;
+        int count = 1;
+
+        if (isConnected()) {
+            query = "DELETE FROM Projects WHERE PROJECT_ID=" + projectToModify.ProjectID;
+            execute(query);
+            while (newProject.timelines.get(count) != null) {
+                query = "INSERT INTO Projects VALUES (" + newProject.ProjectID + ", " + newProject.timelines.get(count).timelineId + ")";
+                execute(query);
+                count++;
+            }
+        }
+        return (count > 1);
     }
 
 
@@ -247,6 +294,17 @@ public class TimelinesDAO {
                 execute(query);
             }
         }
+    }
+
+    public String eventProperties(Event event) {
+
+        return event.eventid + ", " + event.title + ", " + event.startTime + ", " + event.endTime + ", "
+                + event.startDate + ", " + event.endDate + ", " + event.description + ", " + event.imageid;
+    }
+
+    public String timelineProperties(Timeline timeline) {
+
+        return timeline.timelineId + ", " + timeline.startDate + ", " + timeline.endDate + ", " + timeline.title + ", " + timeline.events;
     }
 }
 

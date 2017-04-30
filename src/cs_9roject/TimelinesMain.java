@@ -46,7 +46,9 @@ public class TimelinesMain {
 */
         }
 
+        // uncomment for testing
         // DB test for DELETING
+        /*
 
         Event event = project.getTimeline(4).getEvent(4);
         System.out.println("=====BEFORE DELETING=====");
@@ -57,6 +59,7 @@ public class TimelinesMain {
         System.out.println("=====AFTER DELETING=====");
         System.out.println("EVENT_ID: " + event.eventid);
 
+        */
 
 
         // run this to provoke the DB to get into connection refuse state due to too many connection attempts
