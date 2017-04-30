@@ -11,6 +11,7 @@ public class TimelinesDAO {
 
     private Connection connection = null;
     List<List<Event>> listOfEventLists = new ArrayList<List<Event>>();
+    String query;
 
     // used to load a project from the DB through an ID
     public Project load(int ID) {
@@ -156,6 +157,55 @@ public class TimelinesDAO {
             }
         }
     }
+
+    public boolean delete(Event event) {
+
+        if (isConnected()) {
+            query = "DELETE FROM Events WHERE EVENT_ID=" + event.eventid;
+            execute(query);
+            query = "UPDATE Timelines SET EVENT_ID=0 WHERE EVENT_ID=" + event.eventid;
+            execute(query);
+            return true;
+        } else return false;
+    }
+
+    public boolean delete(Timeline timeline) {
+
+        if (isConnected()) {
+            query = "DELETE FROM Timelines WHERE TIMELINE_ID=" + timeline.timelineId;
+            execute(query);
+            query = "UPDATE Projects SET TIMELINE_ID=0 WHERE TIMELINE_ID=" + timeline.timelineId;
+            execute(query);
+            return true;
+        } else return false;
+    }
+
+    public boolean delete(Project project) {
+
+        if (isConnected()) {
+            query = "DELETE FROM Projects WHERE PROJECT_ID=" + project.ProjectID;
+            execute(query);
+            return true;
+        } else return false;
+    }
+
+    public boolean deleteAllEvents() {
+        return false;
+    }
+
+    public Event modify(Event eventToModify, Event newEvent) {
+        return null;
+    }
+
+    public Timeline modify(Timeline timelineToModify, Timeline newTimeline) {
+        return null;
+    }
+
+    public Project modify(Project projectToModify, Project newProject) {
+        return null;
+    }
+
+
 
     // helper method to execute a query on the DB
     public void execute(String query) {

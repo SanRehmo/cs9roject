@@ -31,6 +31,7 @@ public class TimelinesMain {
                     System.out.println("EV_ID: " + event.getEventId() + ", EV_TITLE: " + event.getTitle());
             }
 
+
             // WORKS!
             // System.out.println(timeline.getEvent(i).getTitle());
             //System.out.println(timeline.getEvent(i).getDescription());
@@ -44,6 +45,17 @@ public class TimelinesMain {
                 }
 */
         }
+
+        // DB test for DELETING
+
+        Event event = project.getTimeline(4).getEvent(4);
+        System.out.println("=====BEFORE DELETING=====");
+        System.out.println("EVENT_ID: " + event.eventid);
+
+        // WORKS
+        dao.delete(event);
+        System.out.println("=====AFTER DELETING=====");
+        System.out.println("EVENT_ID: " + event.eventid);
 
 
 
