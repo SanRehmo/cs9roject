@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 
 //This class to present Duration Event
 public class DurationEvent extends Event {
+	private int lol;
 	private Duration duration;
 	
 	private LocalDateTime endTime;
