@@ -12,6 +12,7 @@ public class Database {
 
     public static Connection establishConnection() {
 
+        // attempts to load the JDBC driver
         try {
             Class.forName("com.mysql.jdbc.Driver");
         } catch (ClassNotFoundException e) {
@@ -19,9 +20,11 @@ public class Database {
             return null;
         }
 
+        // initialization of variables
         Connection connection = null;
         Statement stmt = null;
 
+        // attempt to connect to our database with our credentials
         try {
             connection = DriverManager
                     .getConnection("jdbc:mysql://localhost:3306/bedrock?useSSL=false", "root", "cs9roject");
@@ -31,6 +34,7 @@ public class Database {
             return null;
         }
 
+        // return the connection object
         return connection;
     }
 }

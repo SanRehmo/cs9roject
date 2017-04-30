@@ -1,20 +1,32 @@
 package cs_9roject;
 
+import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
+
 import java.time.Duration;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+//This class to present Duration Event
 public class DurationEvent extends Event {
 	private int lol;
 	private Duration duration;
 	
 	private LocalDateTime endTime;
-
-	public DurationEvent(int eventID, String eventTitle, java.time.LocalDate eventStart_time, LocalDate eventEnd_time) {
-		super(eventID, eventTitle, eventStart_time, eventEnd_time);
+	
+	// mine
+    // Create new event with specific ID. Almost used when importing events from database
+	public DurationEvent(int timelineID, int eventID, String eventTitle, LocalDateTime eventStart_time, LocalDateTime eventEnd_time, String description, int imageID) {
+		super(timelineID, eventID, eventTitle, eventStart_time, eventEnd_time, description, imageID);
 	}
+	
+	// Create new event with new ID.
+		public DurationEvent(String eventTitle, LocalDateTime eventStart_time, LocalDateTime eventEnd_time, String description, Image EventImage, Color EventColor) {
+			super(eventTitle, eventStart_time, description, EventImage, EventColor);
+			endTime = eventEnd_time;
+			imageid=eventid;
+		}
 
-	public void setStartTime(LocalDate StartTime) {
+	public void setStartTime(LocalDateTime StartTime) {
 		startTime = StartTime;
 		duration = Duration.between(startTime, endTime);
 	}

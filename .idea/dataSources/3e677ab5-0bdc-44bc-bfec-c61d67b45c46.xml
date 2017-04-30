@@ -11,83 +11,147 @@
     <schema id="5" parent="1" name="performance_schema"/>
     <schema id="6" parent="1" name="sys"/>
     <table id="7" parent="2" name="Events"/>
-    <table id="8" parent="2" name="Projects"/>
-    <table id="9" parent="2" name="Timelines"/>
-    <table id="10" parent="2" name="employee"/>
+    <table id="8" parent="2" name="Images"/>
+    <table id="9" parent="2" name="Projects"/>
+    <table id="10" parent="2" name="Timelines"/>
     <column id="11" parent="7" name="EVENT_ID">
       <Position>1</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
     </column>
     <column id="12" parent="7" name="TITLE">
       <Position>2</Position>
       <DataType>varchar(50)|0</DataType>
+      <NotNull>1</NotNull>
     </column>
     <column id="13" parent="7" name="START_TIME">
       <Position>3</Position>
-      <DataType>varchar(50)|0</DataType>
+      <DataType>time|0</DataType>
     </column>
     <column id="14" parent="7" name="END_TIME">
       <Position>4</Position>
-      <DataType>varchar(50)|0</DataType>
+      <DataType>time|0</DataType>
     </column>
-    <column id="15" parent="8" name="PROJECT_ID">
+    <column id="15" parent="7" name="START_DATE">
+      <Position>5</Position>
+      <DataType>date|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="16" parent="7" name="END_DATE">
+      <Position>6</Position>
+      <DataType>date|0</DataType>
+    </column>
+    <column id="17" parent="7" name="DESCRIPTION">
+      <Position>7</Position>
+      <DataType>varchar(100)|0</DataType>
+    </column>
+    <column id="18" parent="7" name="IMAGE_ID">
+      <Position>8</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <index id="19" parent="7" name="UC_IMAGE_ID">
+      <ColNames>IMAGE_ID</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="20" parent="7" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>EVENT_ID</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <key id="21" parent="7" name="UC_IMAGE_ID">
+      <ColNames>IMAGE_ID</ColNames>
+      <UnderlyingIndexName>UC_IMAGE_ID</UnderlyingIndexName>
+    </key>
+    <column id="22" parent="8" name="IMAGE_ID">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="23" parent="8" name="LOCAL">
+      <Position>2</Position>
+      <DataType>tinyint(1)|0</DataType>
+    </column>
+    <column id="24" parent="8" name="PATH">
+      <Position>3</Position>
+      <DataType>varchar(100)|0</DataType>
+    </column>
+    <index id="25" parent="8" name="UC_IMAGE_ID">
+      <ColNames>IMAGE_ID</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="26" parent="8" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>IMAGE_ID</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <key id="27" parent="8" name="UC_IMAGE_ID">
+      <ColNames>IMAGE_ID</ColNames>
+      <UnderlyingIndexName>UC_IMAGE_ID</UnderlyingIndexName>
+    </key>
+    <column id="28" parent="9" name="PROJECT_ID">
       <Position>1</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="16" parent="8" name="TIMELINE_ID">
+    <column id="29" parent="9" name="TIMELINE_ID">
       <Position>2</Position>
       <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <index id="17" parent="8" name="UC_TIMELINE_ID">
+    <index id="30" parent="9" name="UC_TIMELINE_ID">
       <ColNames>TIMELINE_ID</ColNames>
       <Unique>1</Unique>
     </index>
-    <key id="18" parent="8" name="UC_TIMELINE_ID">
+    <key id="31" parent="9" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>TIMELINE_ID</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <key id="32" parent="9" name="UC_TIMELINE_ID">
       <ColNames>TIMELINE_ID</ColNames>
       <UnderlyingIndexName>UC_TIMELINE_ID</UnderlyingIndexName>
     </key>
-    <column id="19" parent="9" name="TIMELINE_ID">
+    <column id="33" parent="10" name="TIMELINE_ID">
       <Position>1</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="20" parent="9" name="EVENT_ID">
+    <column id="34" parent="10" name="EVENT_ID">
       <Position>2</Position>
       <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="21" parent="9" name="START_TIME">
-      <Position>3</Position>
-      <DataType>datetime|0</DataType>
-    </column>
-    <column id="22" parent="9" name="END_TIME">
-      <Position>4</Position>
-      <DataType>datetime|0</DataType>
-    </column>
-    <column id="23" parent="9" name="TITLE">
+    <column id="35" parent="10" name="TITLE">
       <Position>5</Position>
       <DataType>varchar(50)|0</DataType>
+      <NotNull>1</NotNull>
     </column>
-    <index id="24" parent="9" name="UC_EVENT_ID">
+    <column id="36" parent="10" name="START_DATE">
+      <Position>3</Position>
+      <DataType>date|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="37" parent="10" name="END_DATE">
+      <Position>4</Position>
+      <DataType>date|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="38" parent="10" name="UC_EVENT_ID">
       <ColNames>EVENT_ID</ColNames>
       <Unique>1</Unique>
     </index>
-    <key id="25" parent="9" name="UC_EVENT_ID">
+    <key id="39" parent="10" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>EVENT_ID</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <key id="40" parent="10" name="UC_EVENT_ID">
       <ColNames>EVENT_ID</ColNames>
       <UnderlyingIndexName>UC_EVENT_ID</UnderlyingIndexName>
     </key>
-    <column id="26" parent="10" name="Name">
-      <Position>1</Position>
-      <DataType>char(20)|0</DataType>
-    </column>
-    <column id="27" parent="10" name="Dept">
-      <Position>2</Position>
-      <DataType>char(20)|0</DataType>
-    </column>
-    <column id="28" parent="10" name="jobTitle">
-      <Position>3</Position>
-      <DataType>char(20)|0</DataType>
-    </column>
   </database-model>
 </dataSource>

@@ -1,28 +1,56 @@
 package cs_9roject;
 
 import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
 
-import java.time.LocalDate;
+import java.sql.Date;
+import java.time.LocalDateTime;
 
+
+
+// This class to present Event. it has 2 children: DurationEvent and NonDurationEvent
 public class Event {
-	private static int count=0;
+	private static int count=0;	// Variable to give unique ID for each Event
 	protected int eventid;
 	protected String title= new String ();
 	protected String description= new String ();
-	protected LocalDate startTime;
-	protected LocalDate endTime;
-	protected boolean isDurationEvent= true;
-	protected Image eventImage = null;
+	protected LocalDateTime startTime;
+	protected LocalDateTime endTime;
+    protected Date startDate;
+    protected Date endDate;
+    protected boolean isDurationEvent = true;
+    protected int imageid = 0;
+    protected Image eventImage = null;
+    protected String imagepath = "";
+    protected Color eventColor=Color.RED;
+	protected int timelineid;
 
-	public Event(int eventID, String eventTitle, LocalDate eventStart_time, LocalDate eventEnd_time) {
+    // mine
+    // Create new event with specific ID. Almost used when importing events from database
+	public Event(int timelineID, int eventID, String eventTitle, LocalDateTime eventStart_time, LocalDateTime eventEnd_time, String Description, int imageID) {
+
+		timelineid = timelineID;
 		eventid = eventID;
 		title = eventTitle;
 		startTime = eventStart_time;
 		endTime = eventEnd_time;
-
-		eventID = count++;
-	}
+        description = Description;
+        imageid = imageID;
+        startDate = Date.valueOf(eventStart_time.toLocalDate());
+        endDate = Date.valueOf(eventEnd_time.toLocalDate());
+    }
 	
+	// Create new event with new ID.
+	public Event(String eventTitle, LocalDateTime eventStart_time, String Description, Image EventImage, Color EventColor) {
+		eventid = count++;
+		title = eventTitle;
+		startTime = eventStart_time;
+		description=Description;
+		eventImage=EventImage;
+		eventColor=EventColor;
+	}
+
+    // all next methods are (getters and setters)
 	public void setEventId(int ID){
 		eventid = ID;
 	}
@@ -47,11 +75,11 @@ public class Event {
 		return description;
 	}
 
-	public void setStartTime(LocalDate StartTime) {
+	public void setStartTime(LocalDateTime StartTime) {
 		startTime = StartTime;
 	}
 
-	public LocalDate getStartTime() {
+	public LocalDateTime getStartTime() {
 		return startTime;
 	}
 	
@@ -69,6 +97,15 @@ public class Event {
 	
 	public Image getImage (){
 		return eventImage;
+	}
+	
+
+	public void setColor(Color EventColor){
+		eventColor = EventColor;
+	}
+	
+	public Color getColor (){
+		return eventColor;
 	}
 
 }

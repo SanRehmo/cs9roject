@@ -1,75 +1,89 @@
 package cs_9roject;
 
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 public class TimelinesDAO {
-	public TimelinesDAO (){
-		
-	}
 
+    private Connection connection = null;
+    List<List<Event>> listOfEventLists = new ArrayList<List<Event>>();
+    String query;
 
-	public Project load(int ID) {
+    // used to load a project from the DB through an ID
+    public Project load(int ID) {
 
-		Connection connection = null;
-		Statement stmt = null;
-		Project result = new Project();
-		Timeline timeline = null;
+        Statement stmt = null;
+        Project result = new Project();
+        Timeline timeline = null;
         ArrayList<Event> eventList = new ArrayList<Event>();
 
+        // attempt to establish a connection to the DB
         try {
             connection = Database.establishConnection();
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
 
-		if (connection != null) {
+        if (connection != null) {
 
-			try {
+            try {
 
+                int count = 0;
+
+                // load all events in the project
                 stmt = connection.createStatement();
-                ResultSet rss = stmt.executeQuery("SELECT * FROM Events");
+                ResultSet rss = stmt.executeQuery("SELECT Timelines.TIMELINE_ID, Events.EVENT_ID, Events.Title, Events.START_DATE, Events.END_DATE, Events.START_TIME, Events.END_TIME, Events.DESCRIPTION, Events.IMAGE_ID"
+                        + " FROM Projects JOIN (Timelines, Events) ON Projects.TIMELINE_ID=Timelines.TIMELINE_ID WHERE Timelines.EVENT_ID=Events.EVENT_ID AND PROJECT_ID=" + ID);
 
                 while (rss.next()) {
 
                     int eventID = rss.getInt("EVENT_ID");
                     String eventTitle = rss.getString("TITLE");
-                    LocalDate eventStart_time = rss.getDate("START_TIME").toLocalDate();
-                    LocalDate eventEnd_time = rss.getDate("END_TIME").toLocalDate();
-                    Event event = new Event(eventID, eventTitle, eventStart_time, eventEnd_time);
+                    LocalDateTime eventStart_time = LocalDateTime.of(rss.getDate("START_DATE").toLocalDate(), rss.getTime("START_TIME").toLocalTime());
+                    LocalDateTime eventEnd_time = LocalDateTime.of(rss.getDate("END_DATE").toLocalDate(), rss.getTime("END_TIME").toLocalTime());
+                    int eventImageID = rss.getInt("IMAGE_ID");
+                    String eventDescription = rss.getString("DESCRIPTION");
+                    int timelineID = rss.getInt("TIMELINE_ID");
+
+                    Event event = new Event(timelineID, eventID, eventTitle, eventStart_time, eventEnd_time, eventDescription, eventImageID);
                     eventList.add(event);
                 }
 
-				stmt = connection.createStatement();
-                String query = "SELECT * FROM Timelines";
-                ResultSet rs = stmt.executeQuery(query);
-                while (rs.next()) {
-					// result.addTimeline(new Timeline(rs.getDate("START_TIME").toLocalDate(), rs.getDate("END_TIME").toLocalDate(), rs.getString("TITLE")));
 
-                    LocalDate timelineStart_time = rs.getDate("START_TIME").toLocalDate();
-                    LocalDate timelineEnd_time = rs.getDate("END_TIME").toLocalDate();
+                // load all timelines in the project
+                stmt = connection.createStatement();
+                ResultSet rs = stmt.executeQuery("SELECT Timelines.TIMELINE_ID, Timelines.EVENT_ID, Timelines.START_DATE, Timelines.END_DATE, Timelines.TITLE"
+                        + " FROM Projects JOIN (Timelines, Events) ON Projects.TIMELINE_ID=Timelines.TIMELINE_ID WHERE Timelines.EVENT_ID=Events.EVENT_ID AND PROJECT_ID=" + ID);
+
+                while (rs.next()) {
+
+
+                    int timelineID = rs.getInt("TIMELINE_ID");
+                    LocalDate timelineStart = rs.getDate("START_DATE").toLocalDate();
+                    LocalDate timelineEnd = rs.getDate("END_DATE").toLocalDate();
                     String timelineTitle = rs.getString("TITLE");
 
-                    timeline = new Timeline(timelineStart_time, timelineEnd_time, timelineTitle, eventList);
+                    timeline = new Timeline(timelineID, timelineStart, timelineEnd, timelineTitle, eventList);
+
                     result.addTimeline(timeline);
-					// TESTING
 
-				}
+                }
 
-			} catch (Exception ex) {
-				ex.printStackTrace();
-			}
-		} else {
-			System.out.println("Failed to make connection");
-		}
-		return result;
-	}
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        } else {
+            System.out.println("Failed to make connection");
+        }
+        return result;
+    }
 
+
+    // load all Projects at once
     public List<Project> loadAllProjects() {
 
         List<Project> result = new ArrayList<Project>();
@@ -103,37 +117,194 @@ public class TimelinesDAO {
     }
 
 
-	public void save(Project project) {
+    // save a Project
+    public void save(Project project) {
 
-		Connection connection = null;
-		Statement stmt;
+        if (isConnected()) {
 
-		try {
-			connection = Database.establishConnection();
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
+            // Projects loop
+            for (int i = 0; i < project.timelines.size(); i++) {
+
+                Timeline tl = project.timelines.get(i);
+                String projects = "INSERT INTO Projects " + "VALUES (" + project.ProjectID + ", " + project.timelines.get(i).timelineId + ")";
+                execute(projects);
 
 
-        for (int i = 0; i < project.timelines.size(); i++) {
+                // Timelines & Events loop
+                for (int j = 0; j < tl.events.size(); j++) {
 
-			if (connection != null) {
 
-                String update = "INSERT INTO Projects " + "VALUES (" + project.ProjectID + ", " + project.timelines.get(i) + ")";
+                    Event ev = tl.events.get(j);
 
-				try {
-					stmt = connection.createStatement();
-					stmt.executeUpdate(update);
-                    System.out.println("Project with the Project_ID: " + project.ProjectID + " and the Timeline_ID(s):" + project.timelines.get(i) + " has been saved!");
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-				}
+                    // extracting Date and Time from LocalDateTime
+                    Date startDate = Date.valueOf(tl.startDate);
+                    Date endDate = Date.valueOf(tl.endDate);
 
-			} else {
-				System.out.println("Failed to make connection");
-			}
-		}
-	}
+                    String timelines = "INSERT INTO Timelines " + "VALUES (" + tl.timelineId + ", " + ev.eventid + ", '" + startDate + "', '" + endDate + "', '" + tl.title + "')";
+                    execute(timelines);
 
+                    // extracting Date and Time from LocalDateTime
+                    startDate = Date.valueOf(ev.startTime.toLocalDate());
+                    Time startTime = Time.valueOf(ev.startTime.toLocalTime());
+                    endDate = Date.valueOf(ev.endTime.toLocalDate());
+                    Time endTime = Time.valueOf(ev.endTime.toLocalTime());
+
+                    String events = "INSERT INTO Events " + "VALUES (" + ev.eventid + ", '" + ev.title + "', '" + startTime + "', '" + endTime + "', '" + startDate + "', '" + endDate + "', '" + ev.description + "', " + ev.imageid + ")";
+                    execute(events);
+
+
+                }
+            }
+        }
+    }
+
+    public boolean delete(Event event) {
+
+        if (isConnected()) {
+            query = "DELETE FROM Events WHERE EVENT_ID=" + event.eventid;
+            execute(query);
+            query = "UPDATE Timelines SET EVENT_ID=0 WHERE EVENT_ID=" + event.eventid;
+            execute(query);
+            return true;
+        } else return false;
+    }
+
+    public boolean delete(Timeline timeline) {
+
+        if (isConnected()) {
+            query = "DELETE FROM Timelines WHERE TIMELINE_ID=" + timeline.timelineId;
+            execute(query);
+            query = "UPDATE Projects SET TIMELINE_ID=0 WHERE TIMELINE_ID=" + timeline.timelineId;
+            execute(query);
+            return true;
+        } else return false;
+    }
+
+    public boolean delete(Project project) {
+
+        if (isConnected()) {
+            query = "DELETE FROM Projects WHERE PROJECT_ID=" + project.ProjectID;
+            execute(query);
+            return true;
+        } else return false;
+    }
+
+    // CAREFUL WITH THIS
+    public boolean deleteAllProjects() {
+
+        int count = 1;
+
+        if (isConnected()) {
+            while (load(count) != null) {
+                delete(load(count));
+                count++;
+            }
+        }
+        return (count > 1);
+    }
+
+    public boolean modify(Event eventToModify, Event newEvent) {
+
+        // secure integrity
+        newEvent.eventid = eventToModify.eventid;
+
+        if (isConnected()) {
+            query = "DELETE FROM Events WHERE EVENT_ID=" + eventToModify.eventid;
+            execute(query);
+            query = "INSERT INTO Events VALUES (" + eventProperties(newEvent) + ")";
+            execute(query);
+            return true;
+        } else return false;
+    }
+
+    public boolean modify(Timeline timelineToModify, Timeline newTimeline) {
+
+        newTimeline.timelineId = timelineToModify.timelineId;
+        int count = 1;
+
+        if (isConnected()) {
+            query = "DELETE FROM Timelines WHERE TIMELINE_ID=" + timelineToModify.timelineId;
+            execute(query);
+            while (newTimeline.events.get(count) != null) {
+                query = "INSERT INTO Timelines VALUES (" + newTimeline.timelineId + ", " + newTimeline.events.get(count).eventid + ", "
+                        + newTimeline.startDate + ", " + newTimeline.endDate + ", " + newTimeline.title + ")";
+                execute(query);
+                count++;
+            }
+        }
+        return (count > 1);
+    }
+
+    public boolean modify(Project projectToModify, Project newProject) {
+
+        newProject.ProjectID = projectToModify.ProjectID;
+        int count = 1;
+
+        if (isConnected()) {
+            query = "DELETE FROM Projects WHERE PROJECT_ID=" + projectToModify.ProjectID;
+            execute(query);
+            while (newProject.timelines.get(count) != null) {
+                query = "INSERT INTO Projects VALUES (" + newProject.ProjectID + ", " + newProject.timelines.get(count).timelineId + ")";
+                execute(query);
+                count++;
+            }
+        }
+        return (count > 1);
+    }
+
+
+
+    // helper method to execute a query on the DB
+    public void execute(String query) {
+
+
+        Statement stmt = null;
+
+        try {
+            connection = Database.establishConnection();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        if (connection != null) {
+
+            try {
+                stmt = connection.createStatement();
+                stmt.executeUpdate(query);
+                System.out.println(query + " executed.");
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
+
+    // helper method to check if JDBC is connectedd
+    public boolean isConnected() {
+        return (connection != null);
+    }
+
+    // helper method to stress test the DB with infinite queries
+    // provokes connection refusal from DB
+    public void stressTest() {
+
+        String query = "SELECT * FROM Projects";
+
+        if (isConnected()) {
+            while (true) {
+                execute(query);
+            }
+        }
+    }
+
+    public String eventProperties(Event event) {
+
+        return event.eventid + ", " + event.title + ", " + event.startTime + ", " + event.endTime + ", "
+                + event.startDate + ", " + event.endDate + ", " + event.description + ", " + event.imageid;
+    }
+
+    public String timelineProperties(Timeline timeline) {
+
+        return timeline.timelineId + ", " + timeline.startDate + ", " + timeline.endDate + ", " + timeline.title + ", " + timeline.events;
+    }
 }
 

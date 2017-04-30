@@ -1,8 +1,5 @@
 package gui;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -12,8 +9,17 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Line;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+
+import java.io.IOException;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+import javafx.scene.paint.Color;
+
 
 public class showTimelinesController {
 	
@@ -27,11 +33,11 @@ public class showTimelinesController {
 	VBox scrollBox = new VBox();
 	
 	 @FXML
-	    public void initialize() {  //Reading every timeline and print there names in checkboxex 		 
+	 public void initialize() {  //Reading every timeline and print there names in checkboxes
 		 for(int i=0; i<Main.project.getTimelines().size(); i++){
 			 HBox hbox = new HBox();
 			 Pane pane = new Pane();
-			 CheckBox cbi = new CheckBox( Main.project.getTimeline(i).getTitle());
+			 CheckBox cbi = new CheckBox( Main.project.getTimeline(i).getTitle() +" ( " + Main.project.getTimeline(i).getEvents().size() +" event(s) )" );
 			 timelines.add(cbi);
 			 hbox.getChildren().addAll(cbi);
 			 hbox.setLayoutX(10);
@@ -45,7 +51,7 @@ public class showTimelinesController {
 	
 
 	@FXML
-	private ScrollPane show_scrollpane;
+	private ScrollPane show_scrollpane; //ScrollPane from starting window
 
 	@FXML
 	private Button doneButton;
@@ -54,34 +60,33 @@ public class showTimelinesController {
 	private CheckBox displayAll;
 	
 	@FXML
-	public void showTimeline(){
-		if(displayAll.isSelected()){
+	public void showTimeline(){	//Method that is showing the timelines in the scrollPane
+		if(displayAll.isSelected()){//If DisplayAll is selected the program will show every timeline
 			for(int i=0; i<timelines.size(); i++){
-			scrollBox.getChildren().add(generateTimeL(Main.project.getTimeline(i).getTitle()));
+			scrollBox.getChildren().addAll(yearShow(i),generateTimeL(i),spaceBetween());
 			}
 			
 		}
 		else{
-			for(int i=0; i<timelines.size(); i++){
+			for(int i=0; i<timelines.size(); i++){	//Just displaying the checked timelines
 				if(timelines.get(i).isSelected()){
-				scrollBox.getChildren().add(generateTimeL(Main.project.getTimeline(i).getTitle()));
-				}
-			
+				scrollBox.getChildren().addAll(yearShow(i),generateTimeL(i),spaceBetween());
+				}	
 			}	 
 		}
-		
-	primaryScrollpane.setContent(scrollBox);
+	 primaryScrollpane.setContent(scrollBox);
 	 Stage stage = (Stage) doneButton.getScene().getWindow();
+	 
 	 stage.close();	
 	}
 	
-	public Line verticalLine(int size) {
+	public Line verticalLine(int size) {		//Making every vertical lines in a timeline
 		Line timeLine = new Line(50,0,50,size);
 		timeLine.setStrokeWidth(3);
 		return timeLine;
 	}
 	
-	public Line clickAbleHline(int size) {
+	public Line clickAbleHline(int size) {	//Making a horizontal line that will open eventhandler when you press the line
 		Line timeLine = new Line(0, 50, size, 50);
 		timeLine.setStrokeWidth(5);
 		timeLine.setOnMouseClicked(e ->{
@@ -97,32 +102,41 @@ public class showTimelinesController {
 		return timeLine;
 	}
 	
-	public Line Hline(int size){
+	public Line Hline(int size){		//Making non clickable horizontal line
 		Line timeLine = new Line(0, 50, size, 50);
-		timeLine.setStrokeWidth(5);
+		
 		return timeLine;
 	}
 	
-	public Pane generateTimeL(String Timelinename){
+	public Pane generateTimeL(int id){	//Method that is making timelines with horizontal and vertical lines
 		Text title = new Text();
-		title.setText(Timelinename);
+		title.setText(Main.project.getTimeline(id).getTitle());
+		title.setFont(Font.font ("Verdana", 20));
+		
+		int size = (int) title.getBoundsInLocal().getWidth();	//Making a gap before every timeline so the name will show right
+		
+		//Name length represent by rectangle.
+		Rectangle rectangle = new Rectangle(size + 50, 20);
+		rectangle.setFill(Color.TRANSPARENT);
+			
 		Pane pane = new Pane();
 		HBox hbox = new HBox();
-		hbox.getChildren().add(title);
+		hbox.getChildren().add(rectangle);
+		
 		for(int i = 0; i < 5; i++) {
-			hbox.getChildren().addAll(verticalLine(100),Hline(250));
+			hbox.getChildren().addAll(verticalLine(100),Hline(250));  //generating timeline
 		}
 		
-		hbox.getChildren().add(verticalLine(100));
+		hbox.getChildren().addAll(verticalLine(100));
 		hbox.setLayoutX(5);
-		hbox.setLayoutY(30);
+		hbox.setLayoutY(0);
 		hbox.setAlignment(Pos.CENTER);
-		pane.getChildren().add(hbox);
+		pane.getChildren().addAll(hbox);
 		
 		return pane;
 	}
 	
-	public Pane zoomedTimeline() {
+	public Pane zoomedTimeline() {			//This will be the final timeline that you click on to get to the calendar
 		Pane pane = new Pane();
 		HBox hbox = new HBox();
 		for(int j = 0; j<5; j++){
@@ -140,25 +154,81 @@ public class showTimelinesController {
 		return pane;	
 	}
 	
-	/**
-	 * Calculation month for how long the timeline is
-	 * @return timeline length
-	 */
-	/*public int dayCounter() {
-		String start = StartDate.getValue().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
-		String end = EndDate.getValue().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
-		
-		String startMonth = start.substring(0,4);
-		String endMonth = end.substring(0,4);
-		String startDay = start.substring(5, 6);
-		String endDay = end.substring(5, 6);
-		
-		int startCalc = (Integer.parseInt(startMonth) * 12) + Integer.parseInt(startDay);
-		int endCalc = (Integer.parseInt(endMonth) * 12) + Integer.parseInt(endDay);
-		
-		return endCalc - startCalc;
-	}*/
-    
-    
+	public double yearCounter(LocalDate StartDate, LocalDate EndDate) {	//Counting the years
+		  return Math.round(EndDate.getYear() - StartDate.getYear());
+		 }
+	
+	public int monthCounter(LocalDate StartDate, LocalDate EndDate) {	//Counting months
+	  
+	  int startMonth = StartDate.getMonthValue();
+	  int endMonth = EndDate.getMonthValue();
+	  
+	  int startYear = StartDate.getYear();
+	  int endYear = EndDate.getYear();
+	  
+	  int temp = endYear - startYear;
+	  
+	  if(temp<1){
+		  temp += (endMonth - startMonth)%12 -(endYear - startYear);
+	  }
+	  else{
+		  temp += (endMonth - startMonth)%12 -(endYear - startYear)+temp*12;
+	  }
+	  
+	  return temp;
 
+	 }
+	
+	public Pane yearShow(int id) {			//Method that is displaying the name and years over the timeline
+		  LocalDate startDate = Main.project.getTimeline(id).getStartDate();
+		  LocalDate endDate = Main.project.getTimeline(id).getEndDate();
+		  
+		  Pane pane = new Pane();
+		  
+		  HBox yearBox = new HBox();
+		  
+		  Rectangle rectangle = new Rectangle(45, 20);
+		  rectangle.setFill(Color.TRANSPARENT);
+		  
+		  Text title = new Text();
+		  title.setText(Main.project.getTimeline(id).getTitle());
+		  title.setFont(Font.font ("Verdana", 20));
+		  yearBox.getChildren().addAll(title,rectangle);  
+		  
+		  if(yearCounter(startDate,endDate)>5){
+		  for(int i = 0; i <= (yearCounter(startDate,endDate)-Math.floor(yearCounter(startDate,endDate)/5)); i+=Math.round((yearCounter(startDate,endDate)/5))) {
+		  Rectangle rec = new Rectangle(228, 1);
+		  rec.setFill(Color.TRANSPARENT);
+	      String temp =String.valueOf(startDate.getYear()+i); //- startDate.getYear()));
+		  Text text = new Text();
+		  text.setText(temp);	  
+		  yearBox.getChildren().addAll(text,rec);
+		  }
+		  }
+		  String temp =String.valueOf(endDate.getYear());
+		  Text text = new Text();
+		  text.setText(temp);
+		  
+		  yearBox.getChildren().add(text);
+		  
+		  pane.getChildren().add(yearBox);
+		  
+		  return pane;
+		 }
+	
+	public Pane spaceBetween(){
+	      Pane pane = new Pane();
+		  
+		  HBox blank = new HBox();
+		  
+		  Rectangle rectangle = new Rectangle(45, 80);
+		  rectangle.setFill(Color.TRANSPARENT);
+		  
+		  blank.getChildren().add(rectangle);
+		  
+		  pane.getChildren().add(blank);
+		  
+		  return pane;		
+	}
+	
 }
