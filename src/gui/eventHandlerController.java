@@ -72,19 +72,19 @@ public class eventHandlerController {
     private DatePicker startTextField;
     
     @FXML
-    private Spinner startHH;
+    private Spinner<Integer> startHH;
     
     @FXML
-    private Spinner startMM;
+    private Spinner<Integer> startMM;
 
     @FXML
     private DatePicker endTextField;
     
     @FXML
-    private Spinner endHH;
+    private Spinner<Integer> endHH;
     
     @FXML
-    private Spinner endMM;
+    private Spinner<Integer> endMM;
     
     @FXML
     private TextField description;
@@ -291,10 +291,10 @@ public class eventHandlerController {
         	
         	// Check if it is duration or non-duration event
         	if (duration_checkBox.isSelected()){
-        		e = new DurationEvent(NameEvent_textField.getText(), LocalDateTime.of(startTextField.getValue(), LocalTime.of(00, 00)), LocalDateTime.of(endTextField.getValue(), LocalTime.of(00, 00)), description.getText(),image, color );
+        		e = new DurationEvent(NameEvent_textField.getText(), LocalDateTime.of(startTextField.getValue(), LocalTime.of(startHH.getValue(), startMM.getValue())), LocalDateTime.of(endTextField.getValue(), LocalTime.of(endHH.getValue(), endMM.getValue())), description.getText(),image, color );
         	}
         	else{
-        		e = new NonDurationEvent(NameEvent_textField.getText(), LocalDateTime.of(startTextField.getValue(), LocalTime.of(00, 00)), description.getText(),image, color );
+        		e = new NonDurationEvent(NameEvent_textField.getText(), LocalDateTime.of(startTextField.getValue(), LocalTime.of(startHH.getValue(), startMM.getValue())), description.getText(),image, color );
         	}
         	
         	// Search for time line by its ID to add the event
@@ -303,7 +303,7 @@ public class eventHandlerController {
         			int initialSize = temp.getEvents().size();
         			while (temp.addEvent(e)){
         				if (Reccuring_ComboBox.getValue()==null){
-            				return;
+            				break;
             			}
         				else if (Reccuring_ComboBox.getValue().equals("Every day")){
         					e.setStartTime(e.getStartTime().plusDays(1));
@@ -326,6 +326,7 @@ public class eventHandlerController {
         				alertWindow(AlertType.ERROR, "ERROR!", "Cannot add event!", "Event's start-date is before timeline's start-date. Or Event's end-date is after timeline's end-date. ");
         				return;
         			}
+        			System.out.print(e.getStartTime()+"    "+ e.getEndTime());
         			Stage stage = (Stage) btnSave.getScene().getWindow();
     			    stage.close();
         		}
