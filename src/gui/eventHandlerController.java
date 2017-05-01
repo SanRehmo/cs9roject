@@ -282,6 +282,8 @@ public class eventHandlerController {
 			alertWindow(AlertType.ERROR, "ERROR!", "Cannot add event!", "Please select a color");
     	}
     	
+   
+    	
     	// If all inputs are correct then add event
     	else {
     		Event e = new Event(null, null, null, null, null);
@@ -298,7 +300,32 @@ public class eventHandlerController {
         	// Search for time line by its ID to add the event
         	for (Timeline temp : Main.project.getTimelines())
         		if (temp.getTimelineId()==TimelineID){
-        			temp.addEvent(e);
+        			int initialSize = temp.getEvents().size();
+        			while (temp.addEvent(e)){
+        				if (Reccuring_ComboBox.getValue()==null){
+            				return;
+            			}
+        				else if (Reccuring_ComboBox.getValue().equals("Every day")){
+        					e.setStartTime(e.getStartTime().plusDays(1));
+            				if (e.isDurationEvent()) e.setEndTime(e.getEndTime().plusDays(1));
+        				}
+        				else if (Reccuring_ComboBox.getValue().equals("Every week")){
+        					e.setStartTime(e.getStartTime().plusWeeks(1));
+            				if (e.isDurationEvent()) e.setEndTime(e.getEndTime().plusWeeks(1));
+        				}
+        				else if (Reccuring_ComboBox.getValue().equals("Every month")){
+        					e.setStartTime(e.getStartTime().plusMonths(1));
+            				if (e.isDurationEvent()) e.setEndTime(e.getEndTime().plusMonths(1));
+        				}
+        				else if (Reccuring_ComboBox.getValue().equals("Every year")){
+        					e.setStartTime(e.getStartTime().plusYears(1));
+            				if (e.isDurationEvent()) e.setEndTime(e.getEndTime().plusYears(1));
+        				}	
+        			}
+        			if (temp.getEvents().size()==initialSize){
+        				alertWindow(AlertType.ERROR, "ERROR!", "Cannot add event!", "Event's start-date is before timeline's start-date. Or Event's end-date is after timeline's end-date. ");
+        				return;
+        			}
         			Stage stage = (Stage) btnSave.getScene().getWindow();
     			    stage.close();
         		}

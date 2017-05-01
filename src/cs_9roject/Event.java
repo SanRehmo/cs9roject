@@ -83,6 +83,14 @@ public class Event {
 		return startTime;
 	}
 	
+	public void setEndTime(LocalDateTime EndTime) {
+		endTime = EndTime;
+	}
+	
+	public LocalDateTime getEndTime() {
+		return endTime;
+	}
+	
 	public void setIsDurationEvent(boolean IsDurationEvent){
 		isDurationEvent = IsDurationEvent;
 	}
