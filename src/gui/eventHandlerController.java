@@ -22,6 +22,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.Spinner;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -69,9 +70,21 @@ public class eventHandlerController {
 
     @FXML
     private DatePicker startTextField;
+    
+    @FXML
+    private Spinner startHH;
+    
+    @FXML
+    private Spinner startMM;
 
     @FXML
     private DatePicker endTextField;
+    
+    @FXML
+    private Spinner endHH;
+    
+    @FXML
+    private Spinner endMM;
     
     @FXML
     private TextField description;
@@ -114,14 +127,10 @@ public class eventHandlerController {
     @FXML
     void eventDuration(ActionEvent event) {
     	
-    	if(this.duration == false) {
-    		this.duration = true;
-    		endTextField.disableProperty().set(false);
-    	}
-    	else {
-    		this.duration = false;
-    		endTextField.disableProperty().set(true);
-    	}
+    	this.duration = !this.duration;
+    	endTextField.disableProperty().set(!endTextField.disableProperty().get());
+    	endHH.setDisable(!endHH.isDisabled());
+    	endMM.setDisable(!endMM.isDisabled());
     }
 
     /**

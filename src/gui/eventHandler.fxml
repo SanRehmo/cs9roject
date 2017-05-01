@@ -45,14 +45,34 @@
             <BoxBlur />
          </effect></Rectangle>
       <CheckBox fx:id="duration_checkBox" layoutX="25.0" layoutY="138.0" mnemonicParsing="false" onAction="#eventDuration" text="Duration" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fafafa" height="59.0" layoutX="130.0" layoutY="140.0" stroke="BLACK" strokeType="INSIDE" width="248.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fafafa" height="100.0" layoutX="130.0" layoutY="120.0" stroke="BLACK" strokeType="INSIDE" width="248.0" />
       <TextField fx:id="description" alignment="TOP_LEFT" layoutX="22.0" layoutY="256.0" onAction="#decsription" prefHeight="124.0" prefWidth="167.0" promptText="Description" />
       <ComboBox fx:id="Reccuring_ComboBox" layoutX="25.0" layoutY="191.0" onAction="#recurring" onDragDetected="#recurring" prefHeight="27.0" prefWidth="101.0" promptText="Never" />
       <Label fx:id="recurring_label" layoutX="27.0" layoutY="174.0" prefHeight="17.0" prefWidth="66.0" text="Recurring:" />
       <Button fx:id="btnSave" layoutX="337.0" layoutY="403.0" mnemonicParsing="false" onAction="#saveEvent" text="Save" />
-      <DatePicker fx:id="startTextField" editable="false" layoutX="145.0" layoutY="157.0" onAction="#setEventStart"
+      <DatePicker fx:id="startTextField" editable="false" layoutX="145.0" layoutY="137.0" onAction="#setEventStart"
                   prefHeight="25.0" prefWidth="105.0" promptText="Start"/>
-      <DatePicker fx:id="endTextField" disable="true" editable="false" layoutX="268.0" layoutY="157.0"
+      <DatePicker fx:id="endTextField" disable="true" editable="false" layoutX="268.0" layoutY="137.0"
                   onAction="#setEventEnd" prefHeight="25.0" prefWidth="105.0" promptText="End"/>
+   <Spinner fx:id="startHH" layoutX="145.0" layoutY="167.0" prefWidth="53.0">
+      	<valueFactory>
+        	<SpinnerValueFactory.IntegerSpinnerValueFactory min="0" max="23"/>
+      	</valueFactory>
+      </Spinner>
+      <Spinner fx:id="startMM" layoutX="195.0" layoutY="167.0" prefWidth="53.0">
+      	<valueFactory>
+        	<SpinnerValueFactory.IntegerSpinnerValueFactory min="0" max="59"/>
+      	</valueFactory>
+      </Spinner>
+      <Spinner fx:id="endHH" layoutX="268.0" layoutY="167.0" prefWidth="53.0" disable="true">
+      	<valueFactory>
+        	<SpinnerValueFactory.IntegerSpinnerValueFactory min="0" max="23"/>
+      	</valueFactory>
+      </Spinner>
+      <Spinner fx:id="endMM" layoutX="318.0" layoutY="167.0" prefWidth="53.0" disable="true">
+      	<valueFactory>
+        	<SpinnerValueFactory.IntegerSpinnerValueFactory min="0" max="59"/>
+      	</valueFactory>
+      </Spinner>
    </children>
 </Pane>
