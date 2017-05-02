@@ -31,6 +31,12 @@
                   <Insets top="5.0" />
                </VBox.margin>
             </Button>
+            <Button mnemonicParsing="false" onAction="#loadProject" prefHeight="25.0" prefWidth="161.0"
+                     text="Load Project">
+               <VBox.margin>
+                  <Insets top="5.0" />
+               </VBox.margin>
+            </Button>
          </children>
       </VBox>
    </right>

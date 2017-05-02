@@ -2,11 +2,17 @@ package gui;
 
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
+import cs_9roject.Project;
 import javafx.fxml.*;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceDialog;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.FlowPane;
@@ -61,6 +67,33 @@ public class StartingModeController {
 	    stage2.show();	
 	}
 	
+	/**
+     * Method for displaying all projects in database to load one of them.
+     */
+	@FXML
+	private void loadProject(){
+		List <Project> projects = Main.dao.loadAllProjects();
+		if (projects.size()>0){
+			ChoiceDialog<Project> choiceDialog = new ChoiceDialog<Project>(projects.get(0), projects);
+			choiceDialog.setTitle("Choice Dialog");
+			choiceDialog.setHeaderText("Load project");
+			choiceDialog.setContentText("Choose your project:");
+
+			// Traditional way to get the response value.
+			Optional<Project> result = choiceDialog.showAndWait();
+			if (result.isPresent()){
+			    Main.project=result.get();
+			}
+
+		}
+		else{
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setTitle("INFORMATION!");
+			alert.setHeaderText("Cannot load project!");
+			alert.setContentText("Database are empty!");
+			alert.showAndWait();
+		}
+	}
 	
 	/**
      * Method for displaying Eventhandler the window, this window will later be displayed by clicking on the timeline and not on the button "EventHandler"

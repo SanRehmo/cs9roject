@@ -29,9 +29,13 @@ public class TimelinesDAOtemp {
 			
 			
 			
-			Project timelines2= timelines;
+			Project timelines2= new Project();
+			for (Timeline t : timelines.timelines )
+				timelines2.timelines.add(t);
+			
 			projectList.add(timelines);
 			projectList.add(timelines2);
+			timelines2.addTimeline(new Timeline (startTimeline.plusDays(2), endTimeline.plusDays(2), "Timeline3", false));
 			
 			// Check if saved and loaded time lines are same. All printing should be True
 			System.out.println((timelines.getTimelines().size()==timelines2.getTimelines().size()));

@@ -1,6 +1,7 @@
 package gui;
 
 import cs_9roject.Project;
+import cs_9roject.TimelinesDAOtemp;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -17,6 +18,7 @@ public class Main extends Application {
 	private Stage primaryStage;
 	public BorderPane mainLayout;
 	public static Project project = new Project();
+	public static TimelinesDAOtemp dao = new TimelinesDAOtemp();
 	
 	@Override
 	public void start(Stage primaryStage) throws IOException {

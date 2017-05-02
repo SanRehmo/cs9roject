@@ -7,14 +7,15 @@ import java.util.List;
 public class Project {
 
     protected List<Timeline> timelines = new ArrayList<Timeline>();
-    protected int count=0;
+    protected static int count=0;
     int ProjectID;
-	String projectName;
+    public String projectName;
     ArrayList<Timeline> timelineList = new ArrayList<Timeline>();
 
 
 	public Project() {
 		ProjectID= count++;
+		projectName = "Project " + ProjectID;
 	}
 	
 	// Add new timeline to project
@@ -53,4 +54,9 @@ public class Project {
 	public void removeAllTimelines(){
 		timelines.removeAll(timelines);
 	}
+	
+	@Override
+		public String toString(){
+			return projectName + " (" + timelines.size() + " timeline/s)";
+		}
 }
