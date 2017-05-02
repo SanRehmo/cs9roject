@@ -17,7 +17,7 @@ public class TimelinesDAO {
     public Project load(int ID) {
 
         Statement stmt = null;
-        Project result = new Project();
+        Project result = new Project(ID);
         Timeline timeline = null;
         ArrayList<Event> eventList = new ArrayList<Event>();
 
@@ -111,7 +111,7 @@ public class TimelinesDAO {
                 while (rs.next()) {
                     highestID = rs.getInt("PROJECT_ID");
                 }
-                for (int i = 0; i < highestID; i++) {
+                for (int i = 1; i <= highestID; i++) {
                     result.add(load(i));
                 }
             } catch (Exception ex) {
