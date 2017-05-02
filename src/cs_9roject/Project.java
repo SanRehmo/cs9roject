@@ -7,13 +7,14 @@ import java.util.List;
 public class Project {
 
     protected List<Timeline> timelines = new ArrayList<Timeline>();
+    protected int count=0;
     int ProjectID;
 	String projectName;
     ArrayList<Timeline> timelineList = new ArrayList<Timeline>();
 
 
 	public Project() {
-		
+		ProjectID= count++;
 	}
 	
 	// Add new timeline to project
