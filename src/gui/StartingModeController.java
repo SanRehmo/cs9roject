@@ -2,6 +2,7 @@ package gui;
 
 
 import cs_9roject.Project;
+import cs_9roject.TimelinesDAO;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -19,6 +20,7 @@ import java.util.Optional;
 
 public class StartingModeController {
 
+	TimelinesDAO dao = new TimelinesDAO();
 	  
 	
 	@FXML
@@ -100,7 +102,7 @@ public class StartingModeController {
 	 */
 	@FXML
 	private void deleteProject() throws IOException {
-
+		dao.delete(Main.project);
 	}
 
 	/**
@@ -108,7 +110,7 @@ public class StartingModeController {
 	 */
 	@FXML
 	private void saveProject() throws IOException {
-
+		dao.save(Main.project);
 	}
 
 	/**
