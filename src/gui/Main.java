@@ -1,15 +1,16 @@
 package gui;
 
 import cs_9roject.Project;
+import cs_9roject.Timeline;
 import cs_9roject.TimelinesDAO;
 import cs_9roject.TimelinesDAOtemp;
+import cs_9roject.Event;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 
 // @TODO: Make timeline display after it's created (no need to select it afterwards, make optional)
@@ -21,6 +22,7 @@ public class Main extends Application {
 	public static Project project = new Project();
 	public static TimelinesDAOtemp dao2 = new TimelinesDAOtemp();
 	public static TimelinesDAO dao = new TimelinesDAO();
+	
 	
 	@Override
 	public void start(Stage primaryStage) throws IOException {
@@ -50,6 +52,9 @@ public class Main extends Application {
 	}
 
 	public static void main(String[] args) {
+		Event.setCount(dao.getHighestEventID());
+		Timeline.setCount(dao.getHighestTimelineID());
+		Project.setCount(dao.getHighestProjectID());
 		launch(args);
 	}
 }

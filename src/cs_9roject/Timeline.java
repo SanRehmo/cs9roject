@@ -154,7 +154,9 @@ public class Timeline {
 		return isOnlyYears;
 	}
 	
-	
+	public static void setCount(int Count){
+		count = Count;
+	}
 	
 	
 }

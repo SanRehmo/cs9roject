@@ -115,5 +115,9 @@ public class Event {
 	public Color getColor (){
 		return eventColor;
 	}
+	
+	public static void setCount(int Count){
+		count = Count;
+	}
 
 }

@@ -226,7 +226,7 @@ public class TimelinesDAO {
         return highestID;
     }
 
-    public int getHighestTmelineID() {
+    public int getHighestTimelineID() {
 
         int highestID = 0;
 

@@ -65,4 +65,8 @@ public class Project {
 		public String toString(){
 			return projectName + " (" + timelines.size() + " timeline/s)" + ProjectID;
 		}
+	
+	public static void setCount(int Count){
+		count = Count;
+	}
 }
