@@ -27,7 +27,7 @@ public class Database {
         // attempt to connect to our database with our credentials
         try {
             connection = DriverManager
-                    .getConnection("jdbc:mysql://localhost:3306/bedrock?useSSL=false", "root", "cs9roject");
+                    .getConnection("jdbc:mysql://192.168.1.14:3306/bedrock?useSSL=false", "root", "cs9roject");
 
         } catch (SQLException e) {
             e.printStackTrace();
