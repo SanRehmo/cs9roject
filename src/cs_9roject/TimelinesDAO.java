@@ -133,6 +133,12 @@ public class TimelinesDAO {
     // save a Project
     public void save(Project project) {
 
+        try {
+            connection = Database.establishConnection();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
         if (isConnected()) {
 
             // Projects loop
@@ -159,8 +165,14 @@ public class TimelinesDAO {
                     // extracting Date and Time from LocalDateTime
                     startDate = Date.valueOf(ev.startTime.toLocalDate());
                     Time startTime = Time.valueOf(ev.startTime.toLocalTime());
-                    endDate = Date.valueOf(ev.endTime.toLocalDate());
-                    Time endTime = Time.valueOf(ev.endTime.toLocalTime());
+
+                    endDate = Date.valueOf("0000-01-01");
+                    Time endTime = Time.valueOf("12:00:00");
+
+                    if (ev.isDurationEvent()) {
+                        endDate = Date.valueOf(ev.endTime.toLocalDate());
+                        endTime = Time.valueOf(ev.endTime.toLocalTime());
+                    }
 
                     String events = "INSERT INTO Events " + "VALUES (" + ev.eventid + ", '" + ev.title + "', '" + startTime + "', '" + endTime + "', '" + startDate + "', '" + endDate + "', '" + ev.description + "', " + ev.imageid + ")";
                     execute(events);
@@ -182,8 +194,8 @@ public class TimelinesDAO {
         if (isConnected()) {
             query = "UPDATE Events SET EVENT_ID=0 WHERE EVENT_ID=" + event.eventid;
             execute(query);
-            // query = "UPDATE Timelines SET EVENT_ID=0 WHERE EVENT_ID=" + event.eventid;
-            // execute(query);
+            query = "UPDATE Timelines SET EVENT_ID=0 WHERE EVENT_ID=" + event.eventid;
+            execute(query);
             return true;
         } else return false;
     }
@@ -199,8 +211,8 @@ public class TimelinesDAO {
         if (isConnected()) {
             query = "UPDATE Timelines SET TIMELINE_ID=0 WHERE TIMELINE_ID=" + timeline.timelineId;
             execute(query);
-            //query = "UPDATE Projects SET TIMELINE_ID=0 WHERE TIMELINE_ID=" + timeline.timelineId;
-            //execute(query);
+            query = "UPDATE Projects SET TIMELINE_ID=0 WHERE TIMELINE_ID=" + timeline.timelineId;
+            execute(query);
             for (int i = 0; i < timeline.events.size(); i++) {
                 delete(timeline.events.get(i));
             }
@@ -274,6 +286,7 @@ public class TimelinesDAO {
                 while (rs.next()) {
                     highestID = rs.getInt("TIMELINE_ID");
                 }
+                System.out.println("HIGHEST TIMELINE ID: " + highestID);
             } catch (Exception ex) {
                 ex.printStackTrace();
             }

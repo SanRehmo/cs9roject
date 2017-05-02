@@ -1,16 +1,13 @@
 package gui;
 
-import cs_9roject.Project;
-import cs_9roject.Timeline;
-import cs_9roject.TimelinesDAO;
-import cs_9roject.TimelinesDAOtemp;
-import cs_9roject.Event;
+import cs_9roject.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+
 import java.io.IOException;
 
 // @TODO: Make timeline display after it's created (no need to select it afterwards, make optional)
@@ -52,9 +49,9 @@ public class Main extends Application {
 	}
 
 	public static void main(String[] args) {
-		Event.setCount(dao.getHighestEventID());
-		Timeline.setCount(dao.getHighestTimelineID());
-		Project.setCount(dao.getHighestProjectID());
+		Event.setCount(dao.getHighestEventID() + 1);
+		Timeline.setCount(dao.getHighestTimelineID() + 1);
+		Project.setCount(dao.getHighestProjectID() + 1);
 		launch(args);
 	}
 }
