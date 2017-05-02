@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 
 // This class to present Event. it has 2 children: DurationEvent and NonDurationEvent
 public class Event {
-	private static int count=0;	// Variable to give unique ID for each Event
+	private static int count=1;	// Variable to give unique ID for each Event
 	protected int eventid;
 	protected String title= new String ();
 	protected String description= new String ();

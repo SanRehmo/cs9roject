@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Timeline {
-	private static int count=0;	// Variable to give unique ID for each Timeline
+	private static int count=1;	// Variable to give unique ID for each Timeline
 	protected int timelineId;
 	protected LocalDate startDate;
 	protected LocalDate endDate;
