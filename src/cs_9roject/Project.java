@@ -57,6 +57,6 @@ public class Project {
 	
 	@Override
 		public String toString(){
-			return projectName + " (" + timelines.size() + " timeline/s)";
+			return projectName + " (" + timelines.size() + " timeline/s)" + ProjectID;
 		}
 }

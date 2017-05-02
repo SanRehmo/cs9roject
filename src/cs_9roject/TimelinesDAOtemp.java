@@ -17,7 +17,7 @@ public class TimelinesDAOtemp {
 			LocalDate startTimeline= LocalDate.now();
 			LocalDate endTimeline= startTimeline.plusDays(15);
 			timelines.addTimeline(new Timeline (startTimeline, endTimeline, "Timeline1", false));
-			timelines.addTimeline(new Timeline (startTimeline.plusDays(2), endTimeline.plusDays(2), "Timeline2", false));
+			timelines.addTimeline(new Timeline (startTimeline.plusDays(2), endTimeline.plusYears(13), "Timeline2", false));
 			Event event1 = new DurationEvent ("event1", LocalDateTime.now().plusDays(1),LocalDateTime.now().plusDays(2),"event1Description", null, null);
 			Event event2 = new NonDurationEvent ("event2", LocalDateTime.now().plusDays(3), "event2Description",null, null);
 			Event event3 = new DurationEvent ("event3", LocalDateTime.now().plusDays(4),LocalDateTime.now().plusDays(6),"event3Description", null, null);
@@ -35,7 +35,7 @@ public class TimelinesDAOtemp {
 			
 			projectList.add(timelines);
 			projectList.add(timelines2);
-			timelines2.addTimeline(new Timeline (startTimeline.plusDays(2), endTimeline.plusDays(2), "Timeline3", false));
+			timelines2.addTimeline(new Timeline (startTimeline.plusDays(5), endTimeline.plusYears(2), "Timeline3", false));
 			
 			// Check if saved and loaded time lines are same. All printing should be True
 			System.out.println((timelines.getTimelines().size()==timelines2.getTimelines().size()));
