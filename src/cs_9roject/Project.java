@@ -7,16 +7,22 @@ import java.util.List;
 public class Project {
 
     protected List<Timeline> timelines = new ArrayList<Timeline>();
-    protected static int count=0;
+    protected static int count=1;
     int ProjectID;
     public String projectName;
     ArrayList<Timeline> timelineList = new ArrayList<Timeline>();
 
 
 	public Project() {
-		ProjectID= count++;
+		ProjectID = count++;
 		projectName = "Project " + ProjectID;
 	}
+	
+	public Project(int ID) {
+		ProjectID = ID;
+		projectName = "Project " + ProjectID;
+	}
+	
 	
 	// Add new timeline to project
     public void addTimeline(Timeline timeline){

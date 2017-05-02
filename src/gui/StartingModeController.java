@@ -72,7 +72,9 @@ public class StartingModeController {
      */
 	@FXML
 	private void loadProject(){
-		List <Project> projects = Main.dao.loadAllProjects();
+		List <Project> projects = new ArrayList <Project>();
+		projects.add(Main.dao.load(3));
+		// List <Project> projects = Main.dao.loadAllProjects();
 		if (projects.size()>0){
 			ChoiceDialog<Project> choiceDialog = new ChoiceDialog<Project>(projects.get(0), projects);
 			choiceDialog.setTitle("Choice Dialog");
