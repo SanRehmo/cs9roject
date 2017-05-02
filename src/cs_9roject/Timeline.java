@@ -25,7 +25,10 @@ public class Timeline {
 		title= Title;
 		if (title.replaceAll("\\s+","").isEmpty()) title="timeline " + timelineId;
 		duration = Period.between(startDate, endDate);
-		events=Events;
+		for (Event e : Events) {
+			if (this.getTimelineId() == e.timelineid)
+				events.add(e);
+		}
 	}
 	
 	// Create new timeline with new ID and empty event-list.

@@ -59,18 +59,22 @@ public class TimelinesDAO {
                 ResultSet rs = stmt.executeQuery("SELECT Timelines.TIMELINE_ID, Timelines.EVENT_ID, Timelines.START_DATE, Timelines.END_DATE, Timelines.TITLE"
                         + " FROM Projects JOIN (Timelines, Events) ON Projects.TIMELINE_ID=Timelines.TIMELINE_ID WHERE Timelines.EVENT_ID=Events.EVENT_ID AND PROJECT_ID=" + ID);
 
+                int tmp = 0;
+
                 while (rs.next()) {
 
 
-                    int timelineID = rs.getInt("TIMELINE_ID");
-                    LocalDate timelineStart = rs.getDate("START_DATE").toLocalDate();
-                    LocalDate timelineEnd = rs.getDate("END_DATE").toLocalDate();
-                    String timelineTitle = rs.getString("TITLE");
+                    if (rs.getInt("TIMELINE_ID") != tmp) {
+                        int timelineID = rs.getInt("TIMELINE_ID");
+                        LocalDate timelineStart = rs.getDate("START_DATE").toLocalDate();
+                        LocalDate timelineEnd = rs.getDate("END_DATE").toLocalDate();
+                        String timelineTitle = rs.getString("TITLE");
 
-                    timeline = new Timeline(timelineID, timelineStart, timelineEnd, timelineTitle, eventList);
+                        timeline = new Timeline(timelineID, timelineStart, timelineEnd, timelineTitle, eventList);
 
-                    result.addTimeline(timeline);
-
+                        result.addTimeline(timeline);
+                        tmp = timeline.timelineId;
+                    }
                 }
 
             } catch (Exception ex) {
@@ -97,15 +101,18 @@ public class TimelinesDAO {
             ex.printStackTrace();
         }
 
+        int highestID = 0;
+
         if (connection != null) {
-            String query = "SELECT * FROM Projects";
+            String query = "SELECT PROJECT_ID FROM Projects ORDER BY PROJECT_ID DESC LIMIT 1";
             try {
                 stmt = connection.createStatement();
                 ResultSet rs = stmt.executeQuery(query);
-                int count = 1;
                 while (rs.next()) {
-                    result.add(load(count));
-                    count++;
+                    highestID = rs.getInt("PROJECT_ID");
+                }
+                for (int i = 0; i < highestID; i++) {
+                    result.add(load(i));
                 }
             } catch (Exception ex) {
                 ex.printStackTrace();
