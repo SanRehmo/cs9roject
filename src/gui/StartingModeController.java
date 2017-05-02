@@ -1,23 +1,21 @@
 package gui;
 
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-
 import cs_9roject.Project;
-import javafx.fxml.*;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceDialog;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.FlowPane;
 import javafx.stage.Stage;
-import gui.Main;
+
+import java.io.IOException;
+import java.util.List;
+import java.util.Optional;
 
 public class StartingModeController {
 
@@ -96,7 +94,23 @@ public class StartingModeController {
 			alert.showAndWait();
 		}
 	}
-	
+
+	/**
+	 * Method for deleting Project.
+	 */
+	@FXML
+	private void deleteProject() throws IOException {
+
+	}
+
+	/**
+	 * Method for saving Project.
+	 */
+	@FXML
+	private void saveProject() throws IOException {
+
+	}
+
 	/**
      * Method for displaying Eventhandler the window, this window will later be displayed by clicking on the timeline and not on the button "EventHandler"
      */

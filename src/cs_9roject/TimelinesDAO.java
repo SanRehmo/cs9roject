@@ -183,6 +183,9 @@ public class TimelinesDAO {
             execute(query);
             query = "UPDATE Projects SET TIMELINE_ID=0 WHERE TIMELINE_ID=" + timeline.timelineId;
             execute(query);
+            for (int i = 0; i < timeline.events.size(); i++) {
+                delete(timeline.events.get(i));
+            }
             return true;
         } else return false;
     }
@@ -192,8 +195,77 @@ public class TimelinesDAO {
         if (isConnected()) {
             query = "DELETE FROM Projects WHERE PROJECT_ID=" + project.ProjectID;
             execute(query);
+            for (int i = 0; i < project.timelines.size(); i++) {
+                delete(project.timelines.get(i));
+                for (int j = 0; j < project.timelines.get(i).events.size(); j++) {
+                    delete(project.timelines.get(i).events.get(j));
+                }
+            }
             return true;
         } else return false;
+    }
+
+    public int getHighestProjectID() {
+
+        int highestID = 0;
+
+        if (connection != null) {
+            String query = "SELECT PROJECT_ID FROM Projects ORDER BY PROJECT_ID DESC LIMIT 1";
+            try {
+                Statement stmt = connection.createStatement();
+                ResultSet rs = stmt.executeQuery(query);
+                while (rs.next()) {
+                    highestID = rs.getInt("PROJECT_ID");
+                }
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        } else {
+            System.out.println("Failed to make connection");
+        }
+        return highestID;
+    }
+
+    public int getHighestTmelineID() {
+
+        int highestID = 0;
+
+        if (connection != null) {
+            String query = "SELECT PROJECT_ID FROM Timelines ORDER BY TIMELINE_ID DESC LIMIT 1";
+            try {
+                Statement stmt = connection.createStatement();
+                ResultSet rs = stmt.executeQuery(query);
+                while (rs.next()) {
+                    highestID = rs.getInt("TIMELINE_ID");
+                }
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        } else {
+            System.out.println("Failed to make connection");
+        }
+        return highestID;
+    }
+
+    public int getHighestEventID() {
+
+        int highestID = 0;
+
+        if (connection != null) {
+            String query = "SELECT PROJECT_ID FROM Events ORDER BY EVENT_ID DESC LIMIT 1";
+            try {
+                Statement stmt = connection.createStatement();
+                ResultSet rs = stmt.executeQuery(query);
+                while (rs.next()) {
+                    highestID = rs.getInt("EVENT_ID");
+                }
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        } else {
+            System.out.println("Failed to make connection");
+        }
+        return highestID;
     }
 
     // CAREFUL WITH THIS
