@@ -11,7 +11,7 @@ public class TimelinesMain {
         // TESTING
 
         // Load project from database
-        Project project = dao.load(3);
+        Project project = dao.load(1);
         System.out.println("SIZE: " + project.getTimelines().size());
 
         // uncomment for testing
@@ -27,7 +27,6 @@ public class TimelinesMain {
 
             for (Event event : timeline.events) {
                 // EXTREMELY IMPORTANT LINE
-                if (timeline.getTimelineId() == event.timelineid)
                     System.out.println("EV_ID: " + event.getEventId() + ", EV_TITLE: " + event.getTitle());
             }
 
@@ -86,6 +85,9 @@ public class TimelinesMain {
 
         dao.save(testProject);
         */
+
+        System.out.println("LOAD ALL PROJECTS TEST: " + dao.loadAllProjects().get(1).getTimeline(1).getEvent(1).title);
+
     }
 
 }

@@ -22,6 +22,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.Spinner;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -69,9 +70,21 @@ public class eventHandlerController {
 
     @FXML
     private DatePicker startTextField;
+    
+    @FXML
+    private Spinner<Integer> startHH;
+    
+    @FXML
+    private Spinner<Integer> startMM;
 
     @FXML
     private DatePicker endTextField;
+    
+    @FXML
+    private Spinner<Integer> endHH;
+    
+    @FXML
+    private Spinner<Integer> endMM;
     
     @FXML
     private TextField description;
@@ -114,14 +127,10 @@ public class eventHandlerController {
     @FXML
     void eventDuration(ActionEvent event) {
     	
-    	if(this.duration == false) {
-    		this.duration = true;
-    		endTextField.disableProperty().set(false);
-    	}
-    	else {
-    		this.duration = false;
-    		endTextField.disableProperty().set(true);
-    	}
+    	this.duration = !this.duration;
+    	endTextField.disableProperty().set(!endTextField.disableProperty().get());
+    	endHH.setDisable(!endHH.isDisabled());
+    	endMM.setDisable(!endMM.isDisabled());
     }
 
     /**
@@ -273,6 +282,8 @@ public class eventHandlerController {
 			alertWindow(AlertType.ERROR, "ERROR!", "Cannot add event!", "Please select a color");
     	}
     	
+   
+    	
     	// If all inputs are correct then add event
     	else {
     		Event e = new Event(null, null, null, null, null);
@@ -280,16 +291,42 @@ public class eventHandlerController {
         	
         	// Check if it is duration or non-duration event
         	if (duration_checkBox.isSelected()){
-        		e = new DurationEvent(NameEvent_textField.getText(), LocalDateTime.of(startTextField.getValue(), LocalTime.of(00, 00)), LocalDateTime.of(endTextField.getValue(), LocalTime.of(00, 00)), description.getText(),image, color );
+        		e = new DurationEvent(NameEvent_textField.getText(), LocalDateTime.of(startTextField.getValue(), LocalTime.of(startHH.getValue(), startMM.getValue())), LocalDateTime.of(endTextField.getValue(), LocalTime.of(endHH.getValue(), endMM.getValue())), description.getText(),image, color );
         	}
         	else{
-        		e = new NonDurationEvent(NameEvent_textField.getText(), LocalDateTime.of(startTextField.getValue(), LocalTime.of(00, 00)), description.getText(),image, color );
+        		e = new NonDurationEvent(NameEvent_textField.getText(), LocalDateTime.of(startTextField.getValue(), LocalTime.of(startHH.getValue(), startMM.getValue())), description.getText(),image, color );
         	}
         	
         	// Search for time line by its ID to add the event
         	for (Timeline temp : Main.project.getTimelines())
         		if (temp.getTimelineId()==TimelineID){
-        			temp.addEvent(e);
+        			int initialSize = temp.getEvents().size();
+        			while (temp.addEvent(e)){
+        				if (Reccuring_ComboBox.getValue()==null){
+            				break;
+            			}
+        				else if (Reccuring_ComboBox.getValue().equals("Every day")){
+        					e.setStartTime(e.getStartTime().plusDays(1));
+            				if (e.isDurationEvent()) e.setEndTime(e.getEndTime().plusDays(1));
+        				}
+        				else if (Reccuring_ComboBox.getValue().equals("Every week")){
+        					e.setStartTime(e.getStartTime().plusWeeks(1));
+            				if (e.isDurationEvent()) e.setEndTime(e.getEndTime().plusWeeks(1));
+        				}
+        				else if (Reccuring_ComboBox.getValue().equals("Every month")){
+        					e.setStartTime(e.getStartTime().plusMonths(1));
+            				if (e.isDurationEvent()) e.setEndTime(e.getEndTime().plusMonths(1));
+        				}
+        				else if (Reccuring_ComboBox.getValue().equals("Every year")){
+        					e.setStartTime(e.getStartTime().plusYears(1));
+            				if (e.isDurationEvent()) e.setEndTime(e.getEndTime().plusYears(1));
+        				}	
+        			}
+        			if (temp.getEvents().size()==initialSize){
+        				alertWindow(AlertType.ERROR, "ERROR!", "Cannot add event!", "Event's start-date is before timeline's start-date. Or Event's end-date is after timeline's end-date. ");
+        				return;
+        			}
+        			System.out.print(e.getStartTime()+"    "+ e.getEndTime());
         			Stage stage = (Stage) btnSave.getScene().getWindow();
     			    stage.close();
         		}

@@ -37,7 +37,8 @@ public class showTimelinesController {
 		 for(int i=0; i<Main.project.getTimelines().size(); i++){
 			 HBox hbox = new HBox();
 			 Pane pane = new Pane();
-			 CheckBox cbi = new CheckBox( Main.project.getTimeline(i).getTitle() +" ( " + Main.project.getTimeline(i).getEvents().size() +" event(s) )" );
+			 System.out.println(Main.project.getTimelines().size());
+			 CheckBox cbi = new CheckBox( Main.project.getTimelines().get(i).getTitle() +" ( " + Main.project.getTimelines().get(i).getEvents().size() +" event(s) )" );
 			 timelines.add(cbi);
 			 hbox.getChildren().addAll(cbi);
 			 hbox.setLayoutX(10);
@@ -63,14 +64,14 @@ public class showTimelinesController {
 	public void showTimeline(){	//Method that is showing the timelines in the scrollPane
 		if(displayAll.isSelected()){//If DisplayAll is selected the program will show every timeline
 			for(int i=0; i<timelines.size(); i++){
-			scrollBox.getChildren().addAll(yearShow(i),generateTimeL(i),spaceBetween());
+			scrollBox.getChildren().addAll(yearShow(Main.project.getTimelines().get(i).getTimelineId()),generateTimeL(Main.project.getTimelines().get(i).getTimelineId()),spaceBetween());
 			}
 			
 		}
 		else{
 			for(int i=0; i<timelines.size(); i++){	//Just displaying the checked timelines
 				if(timelines.get(i).isSelected()){
-				scrollBox.getChildren().addAll(yearShow(i),generateTimeL(i),spaceBetween());
+				scrollBox.getChildren().addAll(yearShow(Main.project.getTimelines().get(i).getTimelineId()),generateTimeL(Main.project.getTimelines().get(i).getTimelineId()),spaceBetween());
 				}	
 			}	 
 		}

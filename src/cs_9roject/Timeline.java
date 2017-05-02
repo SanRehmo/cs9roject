@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Timeline {
-	private static int count=0;	// Variable to give unique ID for each Timeline
+	private static int count=1;	// Variable to give unique ID for each Timeline
 	protected int timelineId;
 	protected LocalDate startDate;
 	protected LocalDate endDate;
@@ -25,7 +25,10 @@ public class Timeline {
 		title= Title;
 		if (title.replaceAll("\\s+","").isEmpty()) title="timeline " + timelineId;
 		duration = Period.between(startDate, endDate);
-		events=Events;
+		for (Event e : Events) {
+			if (this.getTimelineId() == e.timelineid)
+				events.add(e);
+		}
 	}
 	
 	// Create new timeline with new ID and empty event-list.
@@ -51,8 +54,12 @@ public class Timeline {
 	}
 	
 	// Add new event to timeline
-	public void addEvent(Event event){
-		events.add(event);
+	public boolean addEvent(Event event){
+		if ((event.isDurationEvent() && !event.getStartTime().toLocalDate().isBefore(startDate) && !event.getEndTime().toLocalDate().isAfter(endDate)) || (!event.isDurationEvent() && !event.getStartTime().toLocalDate().isBefore(startDate))){
+			events.add(event);
+			return true;
+		}
+		return false; 
 	}
 	
 	// get event from timeline
@@ -147,7 +154,9 @@ public class Timeline {
 		return isOnlyYears;
 	}
 	
-	
+	public static void setCount(int Count){
+		count = Count;
+	}
 	
 	
 }
