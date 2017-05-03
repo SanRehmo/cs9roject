@@ -17,7 +17,7 @@ public class Main extends Application {
 	private Stage primaryStage;
 	public BorderPane mainLayout;
 	public static Project project = new Project();
-	public static TimelinesDAOtemp dao2 = new TimelinesDAOtemp();
+	//public static TimelinesDAOtemp dao2 = new TimelinesDAOtemp();
 	public static TimelinesDAO dao = new TimelinesDAO();
 	
 	

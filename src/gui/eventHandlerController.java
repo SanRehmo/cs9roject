@@ -247,7 +247,7 @@ public class eventHandlerController {
     }
     @FXML
     public void saveEvent() throws IOException {	// Add event
-		int TimelineID = 1;
+		int TimelineID = Main.project.getTimelines().get(0).getTimelineId();
 		Image image = eventImage_imageView.getImage();
     	
     	// Check if start and end date are selected
