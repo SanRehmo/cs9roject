@@ -366,7 +366,7 @@ public class showTimelinesController {
 		  
 		  if(yearCounter(startDate,endDate)>5){
 		  for(int i = 0; i <= (yearCounter(startDate,endDate)-Math.floor(yearCounter(startDate,endDate)/5)); i+=Math.round((yearCounter(startDate,endDate)/5))) {
-		  Rectangle rec = new Rectangle(228, 1);
+		  Rectangle rec = new Rectangle(222, 1);
 		  rec.setFill(Color.TRANSPARENT);
 	      String temp =String.valueOf(startDate.getYear()+i); //- startDate.getYear()));
 		  Text text = new Text();
