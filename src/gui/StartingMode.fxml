@@ -13,24 +13,24 @@
        <VBox prefHeight="332.0" prefWidth="172.0" BorderPane.alignment="CENTER">
          <children>
              <Button mnemonicParsing="false" onAction="#showTimeline" prefHeight="25.0" prefWidth="160.0"
-                     text="Timelines to show">
+                     text="Show Timelines">
                <VBox.margin>
                   <Insets top="5.0" />
                </VBox.margin>
             </Button>
              <Button mnemonicParsing="false" onAction="#createMode" prefHeight="25.0" prefWidth="160.0"
-                     text="Add new timeline">
+                     text="Add timeline">
                <VBox.margin>
                   <Insets top="5.0" />
                </VBox.margin>
             </Button>
              <Button mnemonicParsing="false" onAction="#showEventHandler" prefHeight="25.0" prefWidth="161.0"
-                     text="Show Eventhandler">
+                     text="Add Event">
                <VBox.margin>
                   <Insets top="5.0" />
                </VBox.margin>
             </Button>
-            <Button mnemonicParsing="false" onAction="#loadProject" prefHeight="25.0" prefWidth="161.0"
+             <Button mnemonicParsing="false" onAction="#loadProject" prefHeight="25.0" prefWidth="161.0"
                      text="Load Project">
                <VBox.margin>
                   <Insets top="5.0" />
