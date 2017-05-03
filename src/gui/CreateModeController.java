@@ -70,7 +70,4 @@ public class CreateModeController {
 			alert.alertWindow(AlertType.ERROR, "ERROR!", "Cannot add timeline!", "End or Start time is not selected");
 		}
     }
-	
-	
-	
 }
