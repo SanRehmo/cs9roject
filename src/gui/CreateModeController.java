@@ -37,6 +37,8 @@ public class CreateModeController {
     private Button CreateButton;
         
     VBox vbox = new VBox();
+    
+    eventHandlerController alert = new eventHandlerController();
 	    
 	@FXML
 	private void addTimeline() throws IOException{
@@ -61,20 +63,14 @@ public class CreateModeController {
 			    stage.close();
 			}
 			else {
-				Alert alert = new Alert(AlertType.ERROR);
-				alert.setTitle("ERROR!");
-				alert.setHeaderText("Cannot add timeline!");
-				alert.setContentText("End date should be after or equals start date");
-				alert.showAndWait();
+				alert.alertWindow(AlertType.ERROR, "ERROR!", "Cannot add timeline!", "End date should be after or equals start date");
 			}	
 		}
 		else{
-			Alert alert = new Alert(AlertType.ERROR);
-			alert.setTitle("ERROR!");
-			alert.setHeaderText("Cannot add timeline!");
-			alert.setContentText("End or Start time is not selected");
-			alert.showAndWait();
+			alert.alertWindow(AlertType.ERROR, "ERROR!", "Cannot add timeline!", "End or Start time is not selected");
 		}
     }
+	
+	
 	
 }

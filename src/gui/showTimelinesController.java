@@ -88,16 +88,11 @@ public class showTimelinesController {
 	}
 	
 	public Line clickAbleHline(int size) {	//Making a horizontal line that will open eventhandler when you press the line
+		
 		Line timeLine = new Line(0, 50, size, 50);
 		timeLine.setStrokeWidth(5);
 		timeLine.setOnMouseClicked(e ->{
-			try {
-				Main.showEventHandler();
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-			
+			this.scrollBox.getChildren().add(zoomedTimeline());
 		});
 		
 		return timeLine;
@@ -125,7 +120,7 @@ public class showTimelinesController {
 		hbox.getChildren().add(rectangle);
 		
 		for(int i = 0; i < 5; i++) {
-			hbox.getChildren().addAll(verticalLine(100),Hline(250));  //generating timeline
+			hbox.getChildren().addAll(verticalLine(100),clickAbleHline(250));  //generating timeline
 		}
 		
 		hbox.getChildren().addAll(verticalLine(100));

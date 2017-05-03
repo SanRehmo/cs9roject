@@ -47,6 +47,7 @@ public class Main extends Application {
         stage2.setTitle("EventHandler");
         stage2.show();		
 	}
+	
 
 	public static void main(String[] args) {
 		Event.setCount(dao.getHighestEventID() + 1);
