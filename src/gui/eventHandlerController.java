@@ -24,6 +24,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.Optional;
 
 public class eventHandlerController {
 	
@@ -85,6 +86,9 @@ public class eventHandlerController {
     private ComboBox<String> Reccuring_ComboBox;
     
     public static boolean recurringDelete = false;
+    
+    int TimelineID = 0;
+    
 
     /**
      * Show alert message when user want to delete event. 
@@ -229,6 +233,22 @@ public class eventHandlerController {
      */
     @FXML
     private void initialize() {
+    	
+    	ChoiceDialog<Timeline> choiceDialog = new ChoiceDialog<Timeline>(Main.project.getTimelines().get(0), Main.project.getTimelines());
+		choiceDialog.setTitle("Choice Dialog");
+		choiceDialog.setHeaderText("Select a Timeline to add the event");
+		choiceDialog.setContentText("Select a timeline:");
+
+		// Traditional way to get the response value.
+		Optional<Timeline> result = choiceDialog.showAndWait();
+		if (result.isPresent()){
+		    TimelineID= result.get().getTimelineId();
+		}
+		else{
+			alertWindow(AlertType.INFORMATION, "INFORMATION", "You did not select a timeline!", "Event will added to "+ Main.project.getTimelines().get(0));
+			TimelineID = Main.project.getTimelines().get(0).getTimelineId();
+		}
+    	
     	color_ComboBox.setItems(color_Combo);
     	Reccuring_ComboBox.setItems(Reccuring_ComboBox_Value);
     }
@@ -246,7 +266,6 @@ public class eventHandlerController {
     }
     @FXML
     public void saveEvent() throws IOException {	// Add event
-		int TimelineID = Main.project.getTimelines().get(0).getTimelineId();
 		Image image = eventImage_imageView.getImage();
     	
     	// Check if start and end date are selected

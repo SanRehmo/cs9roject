@@ -154,6 +154,11 @@ public class Timeline {
 		return isOnlyYears;
 	}
 	
+	@Override
+	public String toString(){
+		return title + " (" + events.size() + " event/s)" + timelineId;
+	}
+	
 	public static void setCount(int Count){
 		count = Count;
 	}
