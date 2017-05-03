@@ -132,13 +132,33 @@ public class showTimelinesController {
 		return pane;
 	}
 	
+	public Line zommedHline(int size ){		//Making non clickable horizontal line
+		
+		Line timeLine = new Line(0, 50, size, 50);
+		
+		
+		/*
+		 * Thus not work yet
+		 * Color color = Main.project.getTimeline(1).getEvent(0).getColor();
+		 * timeLine.setFill(color);
+		 */
+	
+		 
+		
+		
+		
+		
+		return timeLine;
+	}
+	
+	
 	public Pane zoomedTimeline() {			//This will be the final timeline that you click on to get to the calendar
 		Pane pane = new Pane();
 		HBox hbox = new HBox();
 		for(int j = 0; j<5; j++){
 			hbox.getChildren().addAll(verticalLine(100),Hline(12));
 		for(int i = 0; i < 12; i++) {	
-			hbox.getChildren().addAll(verticalLine(50),Hline(12));
+			hbox.getChildren().addAll(verticalLine(50),zommedHline(12));
 		}
 		}
 		hbox.getChildren().addAll(Hline(10), verticalLine(12));

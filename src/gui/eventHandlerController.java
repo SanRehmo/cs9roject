@@ -162,8 +162,7 @@ public class eventHandlerController {
     String nameEvent(ActionEvent event) {
     	String eventName;
     	eventName = NameEvent_textField.getText();
-
-    	System.out.print(eventName);
+    	
     	return eventName;
     }
 
