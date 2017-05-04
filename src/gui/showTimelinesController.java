@@ -117,10 +117,10 @@ public class showTimelinesController {
 		return timeLine;
 	}
 	
-public Line clickAbleHline(int size, int id, int counter) {	//Making a horizontal line that will open eventhandler when you press the line
+public Line clickAbleHline(int size, int id, int counter, LocalDate startDate, LocalDate endDate) {	//Making a horizontal line that will open eventhandler when you press the line
 		
-		LocalDate startDate = Main.project.getTimeline(id).getStartDate();
-		LocalDate endDate = Main.project.getTimeline(id).getEndDate();
+	//	LocalDate startDate = Main.project.getTimeline(id).getStartDate();
+		//LocalDate endDate = Main.project.getTimeline(id).getEndDate();
 		
 		Line timeLine = new Line(0, 50, size, 50);
 		timeLine.setStrokeWidth(5);
@@ -178,38 +178,38 @@ public Line clickAbleHline(int size, int id, int counter) {	//Making a horizonta
 		HBox hbox = new HBox();
 		hbox.getChildren().add(rectangle);
 		
-		int start = Main.project.getTimeline(id).getStartDate().getYear();
-		int end = Main.project.getTimeline(id).getEndDate().getYear();
+		int start = StartDate.getYear();
+		int end = EndDate.getYear();
 		int temp = end - start;
 		
 		if(temp > 5 || temp == 5) {
 			for(int i = 0; i < 5; i++) {
-				hbox.getChildren().addAll(verticalLine(100),clickAbleHline(250,id,i));  //generating timeline
+				hbox.getChildren().addAll(verticalLine(100),clickAbleHline(250,id,i,StartDate,EndDate));  //generating timeline
 			}
 		}
 		else {
 			switch(temp) {
 		 			case 1: {
 		 				for(int i = 0; i < 1; i++) {
-		 					hbox.getChildren().addAll(verticalLine(100),clickAbleHline(1250,id,i));  //generating timeline
+		 					hbox.getChildren().addAll(verticalLine(100),clickAbleHline(1250,id,i,StartDate,EndDate));  //generating timeline
 		 				}
 		 				break;
 		 			}
 		 			case 2: {
 		 				for(int i = 0; i < 2; i++) {
-		 					hbox.getChildren().addAll(verticalLine(100),clickAbleHline(625,id,i));  //generating timeline
+		 					hbox.getChildren().addAll(verticalLine(100),clickAbleHline(625,id,i,StartDate,EndDate));  //generating timeline
 		 				}
 		 				break;
 		 			}
 		 			case 3: {
 		 				for(int i = 0; i < 3; i++) {
-		 				hbox.getChildren().addAll(verticalLine(100),clickAbleHline(417,id,i));  //generating timeline
+		 				hbox.getChildren().addAll(verticalLine(100),clickAbleHline(417,id,i,StartDate,EndDate));  //generating timeline
 						}
 		 				break;
 		 			}
 		 			case 4: {
 		 				for(int i = 0; i < 4; i++) {
-		 					hbox.getChildren().addAll(verticalLine(100),clickAbleHline(312,id,i));  //generating timeline
+		 					hbox.getChildren().addAll(verticalLine(100),clickAbleHline(312,id,i,StartDate,EndDate));  //generating timeline
 		 				}
 		 				break;
 		 			}
