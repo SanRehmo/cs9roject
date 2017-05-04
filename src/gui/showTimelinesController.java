@@ -149,7 +149,7 @@ public Line clickAbleHline(int size, int id, int counter) {	//Making a horizonta
 			BorderPane boarder = new BorderPane();
 	  		boarder.getChildren().add(zoomBox);
 	  		Stage stage2 = new Stage();
-			stage2.setScene(new Scene(boarder));  
+			stage2.setScene(new Scene(boarder,800,200));  
 			stage2.setTitle("Zoomed timeline");
 			stage2.show();
 					
