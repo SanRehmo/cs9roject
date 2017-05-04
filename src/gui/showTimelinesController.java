@@ -147,7 +147,7 @@ public Line clickAbleHline(int size, int id, int counter, LocalDate startDate, L
 					}	
 		}
 			else {
-				zoomBox.getChildren().add(zoomedTimeline());
+				zoomBox.getChildren().add(zoomedTimeline(id));
 			} 
 		
 		
@@ -230,14 +230,14 @@ public Line clickAbleHline(int size, int id, int counter, LocalDate startDate, L
 		return pane;
 	}
 	
-	public Line zommedHline(int size){		//Making non clickable horizontal line
+	public Line zommedHline(int size, int id){		//Making non clickable horizontal line
 		
 		Line timeLine = new Line(0, 50, size, 50);
 		
 		
 			scrollBox.setOnMouseClicked(new EventHandler<MouseEvent>() {
 				public void handle(MouseEvent e) {
-					showInfoByMonth(0, 2017, 5);
+					showInfoByMonth(id, 2017, 5);
 				}
 			});
 			primaryScrollpane.setContent(scrollBox);
@@ -250,13 +250,13 @@ public Line clickAbleHline(int size, int id, int counter, LocalDate startDate, L
 	}
 	
 	
-	public Pane zoomedTimeline() {			//This will be the final timeline that you click on to get to the calendar
+	public Pane zoomedTimeline(int id) {			//This will be the final timeline that you click on to get to the calendar
 		Pane pane = new Pane();
 		HBox hbox = new HBox();
 		for(int j = 0; j<5; j++){
 			hbox.getChildren().addAll(verticalLine(100),Hline(12));
 		for(int i = 0; i < 12; i++) {	
-			hbox.getChildren().addAll(verticalLine(50),zommedHline(12));
+			hbox.getChildren().addAll(verticalLine(50),zommedHline(12,id));
 		}
 		}
 		hbox.getChildren().addAll(Hline(10), verticalLine(12));
