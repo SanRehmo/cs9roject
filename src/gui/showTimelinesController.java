@@ -259,7 +259,7 @@ public Line clickAbleHline(int size, int id, int counter, LocalDate startDate, L
 			hbox.getChildren().addAll(verticalLine(50),zommedHline(12,id));
 		}
 		}
-		hbox.getChildren().addAll(Hline(10), verticalLine(12));
+		hbox.getChildren().addAll(Hline(8), verticalLine(100));
 		hbox.setLayoutX(5);
 		hbox.setLayoutY(30);
 		hbox.setAlignment(Pos.CENTER);
