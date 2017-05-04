@@ -298,7 +298,7 @@ public Line clickAbleHline(int size, int id, int counter) {	//Making a horizonta
 		  yearBox.getChildren().addAll(title,rectangle);  
 		  
 		  int yearsTemp = (int)yearCounter(startDate, endDate);
-		  System.out.print(yearsTemp);
+		  
 		  
 		  if(yearsTemp > 5 || yearsTemp == 5) {
 			  if(yearCounter(startDate,endDate)>=5){
@@ -350,6 +350,8 @@ public Line clickAbleHline(int size, int id, int counter) {	//Making a horizonta
 				  Text text = new Text();
 				  text.setText(String.valueOf(endDate.getYear()));
 				  yearBox.getChildren().add(text);
+				  
+				  break;
 			  }
 			  case 2: {
 				  for(int i = 0; i < yearsTemp; i++) {
@@ -363,6 +365,8 @@ public Line clickAbleHline(int size, int id, int counter) {	//Making a horizonta
 				  Text text = new Text();
 				  text.setText(String.valueOf(endDate.getYear()));
 				  yearBox.getChildren().add(text);
+				  
+				  break;
 			  }
 			  case 3: {
 				  for(int i = 0; i < yearsTemp; i++) {
@@ -376,6 +380,8 @@ public Line clickAbleHline(int size, int id, int counter) {	//Making a horizonta
 				  Text text = new Text();
 				  text.setText(String.valueOf(endDate.getYear()));
 				  yearBox.getChildren().add(text);
+				  
+				  break;
 			  }
 			  case 4: {
 				  for(int i = 0; i < yearsTemp; i++) {
@@ -390,6 +396,7 @@ public Line clickAbleHline(int size, int id, int counter) {	//Making a horizonta
 				  text.setText(String.valueOf(endDate.getYear()));
 				  yearBox.getChildren().add(text);
 			  }
+			  break;
 			  }
 		  }
 		  
