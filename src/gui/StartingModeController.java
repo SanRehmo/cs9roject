@@ -1,6 +1,7 @@
 package gui;
 
 
+import cs_9roject.Event;
 import cs_9roject.Project;
 import cs_9roject.TimelinesDAO;
 import javafx.fxml.FXML;
@@ -99,6 +100,7 @@ public class StartingModeController {
 			alert.setContentText("Database are empty!");
 			alert.showAndWait();
 		}
+		System.out.println("Current project: "+ Main.project.projectName+" ID: "+ Main.project.ProjectID);
 	}
 
 	/**
@@ -114,6 +116,7 @@ public class StartingModeController {
 			dao.delete(Main.project);
 			Main.project = new Project();
 		}
+		System.out.println("Current project: "+ Main.project.projectName+" ID: "+ Main.project.ProjectID);
 	}
 
 

@@ -55,6 +55,7 @@ public class Main extends Application {
 		Timeline.setCount(dao.getHighestTimelineID() + 1);
 		project.ProjectID =(dao.getHighestProjectID() + 1);
 		Project.setCount(project.ProjectID + 1);
+		System.out.println("Current project: "+ Main.project.projectName+" ID: "+ Main.project.ProjectID);
 		launch(args);
 	}
 }
