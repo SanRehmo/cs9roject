@@ -283,7 +283,6 @@ public Line clickAbleHline(int size, int id, int counter) {	//Making a horizonta
 	 }
 	
 	public Pane yearShow(int id,LocalDate startDate, LocalDate endDate) {			//Method that is displaying the name and years over the timeline
-		 ;
 		  
 		  Pane pane = new Pane();
 		  
