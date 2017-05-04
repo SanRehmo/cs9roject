@@ -8,6 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.stage.Stage;
 
@@ -23,6 +24,8 @@ public class StartingModeController {
 	@FXML
 	private ScrollPane start_scrollpane;
 	
+	@FXML
+    private BorderPane StartBorderPane;
 	
 	@FXML
     private Button helpButton;
@@ -40,6 +43,7 @@ public class StartingModeController {
 		FlowPane createMode = loader.load();
 		CreateModeController c = (CreateModeController) loader.getController();
 		c.primaryScrollpane = start_scrollpane;
+		
 			
 		Stage stage = new Stage();
 	    stage.setScene(new Scene(createMode));  
@@ -59,6 +63,7 @@ public class StartingModeController {
 		FlowPane showTimeline = loader.load();
 		showTimelinesController c = (showTimelinesController) loader.getController();
 		c.primaryScrollpane = start_scrollpane;
+		c.primaryBorderpane = StartBorderPane;
 		
 		Stage stage2 = new Stage();
 	    stage2.setScene(new Scene(showTimeline));  
