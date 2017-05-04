@@ -155,9 +155,46 @@ public class showTimelinesController {
 		HBox hbox = new HBox();
 		hbox.getChildren().add(rectangle);
 		
-		for(int i = 0; i < 5; i++) {
-			hbox.getChildren().addAll(verticalLine(100),clickAbleHline(250,id));  //generating timeline
+		int start = Main.project.getTimeline(id).getStartDate().getYear();
+		int end = Main.project.getTimeline(id).getEndDate().getYear();
+		int temp = end - start;
+		
+		System.out.print(temp);
+		
+		if(temp > 5 || temp == 5) {
+			for(int i = 0; i < 5; i++) {
+				hbox.getChildren().addAll(verticalLine(100),clickAbleHline(250,id));  //generating timeline
+			}
 		}
+		else {
+			switch(temp) {
+			case 1: {
+				for(int i = 0; i < 1; i++) {
+					hbox.getChildren().addAll(verticalLine(100),clickAbleHline(250,id));  //generating timeline
+				}
+				break;
+			}
+			case 2: {
+				for(int i = 0; i < 2; i++) {
+					hbox.getChildren().addAll(verticalLine(100),clickAbleHline(250,id));  //generating timeline
+				}
+				break;
+			}
+			case 3: {
+				for(int i = 0; i < 3; i++) {
+					hbox.getChildren().addAll(verticalLine(100),clickAbleHline(250,id));  //generating timeline
+				}
+				break;
+			}
+			case 4: {
+				for(int i = 0; i < 4; i++) {
+					hbox.getChildren().addAll(verticalLine(100),clickAbleHline(250,id));  //generating timeline
+				}
+				break;
+			}
+			}
+		}
+		
 		
 		hbox.getChildren().addAll(verticalLine(100));
 		hbox.setLayoutX(5);
@@ -172,7 +209,7 @@ public class showTimelinesController {
 		
 		Line timeLine = new Line(0, 50, size, 50);
 		
-		
+	
 			scrollBox.setOnMouseClicked(new EventHandler<MouseEvent>() {
 				public void handle(MouseEvent e) {
 					showInfoByMonth(0, 2017, 5);
@@ -259,44 +296,22 @@ public class showTimelinesController {
 			  		}
 		  
 			  	}
-			  	if(yearCounter(startDate,endDate)%5 > 0){
+			  	else if(yearCounter(startDate,endDate)%5 > 0){
 			  		int years = (int)((yearCounter(startDate,endDate)-(yearCounter(startDate,endDate)%5)));
-			  		int counter = years - years%4;
-			  		if(yearCounter(startDate,endDate)<10){
-			  			for (int i=0; i<=counter; i+=counter/4){
-			  				Rectangle rec = new Rectangle(222, 1);
-			  				rec.setFill(Color.TRANSPARENT);
-			  				String temp =String.valueOf(startDate.getYear()+i); //- startDate.getYear()));
-			  				Text text = new Text();
-			  				text.setText(temp);	  
-			  				yearBox.getChildren().addAll(text,rec);
-				  			}
-			  			String temp =String.valueOf(endDate.getYear());
-			  			Text text = new Text();
-			  			text.setText(temp);
-		  
-			  			yearBox.getChildren().add(text);
-			  		}
-			  	
-			  		else{
-			  			
-			  		}
+			  		int counter = years%4;
 			  	}
+		  
 		  }
-			  		
-			  		pane.getChildren().add(yearBox);
+		  String temp =String.valueOf(endDate.getYear());
+		  Text text = new Text();
+		  text.setText(temp);
 		  
-			  		return pane;
-			 		
-	 			 		
-			}
+		//  yearBox.getChildren().add(text);
 		  
+		  pane.getChildren().add(yearBox);
 		  
-	
-		  
-		  
-		 
-
+		  return pane;
+		 }
 	
 	public Pane spaceBetween(){
 	      Pane pane = new Pane();
