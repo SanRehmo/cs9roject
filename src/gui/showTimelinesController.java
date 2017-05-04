@@ -146,8 +146,15 @@ public Line clickAbleHline(int size, int id, int counter) {	//Making a horizonta
 					zoomBox.getChildren().addAll(yearShow(id,startDate.plusYears(Ycounter*4),startDate.plusYears(Ycounter*5)),generateTimeL(id, startDate.plusYears(Ycounter*4), endDate.plusYears((Ycounter*5))));
 					}	
 		}
+			BorderPane boarder = new BorderPane();
+	  		boarder.getChildren().add(zoomBox);
+	  		Stage stage2 = new Stage();
+			stage2.setScene(new Scene(boarder));  
+			stage2.setTitle("Zoomed timeline");
+			stage2.show();
 					
 		});
+  		
 		return timeLine;
 	}
 	
