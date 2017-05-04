@@ -34,7 +34,7 @@ public class eventHandlerController {
 	boolean duration  = false;
 	boolean recurring = false;
 	
-	ObservableList<String> color_Combo = FXCollections.observableArrayList(
+	public ObservableList<String> color_Combo = FXCollections.observableArrayList(
 			"Red", "Green", "Blue", "Orange");
 	
 	ObservableList<String> Reccuring_ComboBox_Value = FXCollections.observableArrayList(
@@ -86,6 +86,8 @@ public class eventHandlerController {
     private ComboBox<String> Reccuring_ComboBox;
     
     public static boolean recurringDelete = false;
+    
+    public String eventColor;
     
     int TimelineID = 0;
     
@@ -187,9 +189,8 @@ public class eventHandlerController {
      * @return returns the color of the event. 
      */
     @FXML
-    String selectEventColor(ActionEvent event) {
-    	
-    	return this.color_ComboBox.getValue();
+    void selectEventColor(ActionEvent event) {
+    	eventColor = this.color_ComboBox.getValue();
     }
 
     /**

@@ -1,10 +1,13 @@
 package cs_9roject;
 
+import javafx.event.ActionEvent;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 
 import java.sql.Date;
 import java.time.LocalDateTime;
+
+import gui.eventHandlerController;
 
 
 
@@ -119,5 +122,22 @@ public class Event {
 	public static void setCount(int Count){
 		count = Count;
 	}
+	
+	public Color colorFromEventHandler() {
+		
+		eventHandlerController event = new eventHandlerController();
+		Color color = null;
+		
+		switch(event.eventColor) {
+		case "Red" :  color = Color.RED;
+		case "Green": color = Color.GREEN;
+		case "Blue" : color = Color.BLUE;
+		case "Orange" : color = Color.ORANGE; 
+		
+		}
+		
+		return color;
+	}
+	
 
 }
