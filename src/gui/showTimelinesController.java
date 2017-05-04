@@ -113,12 +113,18 @@ public class showTimelinesController {
 		return timeLine;
 	}
 	
-	public Line clickAbleHline(int size) {	//Making a horizontal line that will open eventhandler when you press the line
+	public Line clickAbleHline(int size, int id) {	//Making a horizontal line that will open eventhandler when you press the line
+		
 		
 		Line timeLine = new Line(0, 50, size, 50);
 		timeLine.setStrokeWidth(5);
 		
 		timeLine.setOnMouseClicked(e ->{
+			if(yearCounter(Main.project.getTimeline(id).getStartDate(), Main.project.getTimeline(id).getEndDate())>25){
+			
+			
+		}
+					
 			this.scrollBox.getChildren().add(zoomedTimeline());
 		});
 		
@@ -150,7 +156,7 @@ public class showTimelinesController {
 		hbox.getChildren().add(rectangle);
 		
 		for(int i = 0; i < 5; i++) {
-			hbox.getChildren().addAll(verticalLine(100),clickAbleHline(250));  //generating timeline
+			hbox.getChildren().addAll(verticalLine(100),clickAbleHline(250,id));  //generating timeline
 		}
 		
 		hbox.getChildren().addAll(verticalLine(100));
@@ -241,21 +247,31 @@ public class showTimelinesController {
 		  title.setFont(Font.font ("Verdana", 20));
 		  yearBox.getChildren().addAll(title,rectangle);  
 		  
-		  if(yearCounter(startDate,endDate)>5){
-		  for(int i = 0; i <= (yearCounter(startDate,endDate)-Math.floor(yearCounter(startDate,endDate)/5)); i+=Math.round((yearCounter(startDate,endDate)/5))) {
-		  Rectangle rec = new Rectangle(222, 1);
-		  rec.setFill(Color.TRANSPARENT);
-	      String temp =String.valueOf(startDate.getYear()+i); //- startDate.getYear()));
-		  Text text = new Text();
-		  text.setText(temp);	  
-		  yearBox.getChildren().addAll(text,rec);
-		  }
+		  if(yearCounter(startDate,endDate)>=5){
+			  	if(yearCounter(startDate,endDate)%5 == 0){
+			  		for(int i = 0; i <= (yearCounter(startDate,endDate)); i+=Math.round((yearCounter(startDate,endDate)/5))) {
+			  		Rectangle rec = new Rectangle(222, 1);
+			  		rec.setFill(Color.TRANSPARENT);
+			  		String temp =String.valueOf(startDate.getYear()+i); //- startDate.getYear()));
+			  		Text text = new Text();
+			  		text.setText(temp);	  
+			  		yearBox.getChildren().addAll(text,rec);
+			  		}
+		  
+			  	}
+			  	if(yearCounter(startDate,endDate)%5 > 0){
+			  		int years = (int)((yearCounter(startDate,endDate)-(yearCounter(startDate,endDate)%5)));
+			  		int counter = years%4;
+			  		
+			  		
+			  	}
+		  
 		  }
 		  String temp =String.valueOf(endDate.getYear());
 		  Text text = new Text();
 		  text.setText(temp);
 		  
-		  yearBox.getChildren().add(text);
+		//  yearBox.getChildren().add(text);
 		  
 		  pane.getChildren().add(yearBox);
 		  
