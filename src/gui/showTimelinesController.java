@@ -284,39 +284,103 @@ public class showTimelinesController {
 		  title.setFont(Font.font ("Verdana", 20));
 		  yearBox.getChildren().addAll(title,rectangle);  
 		  
-		  if(yearCounter(startDate,endDate)>=5){
-			  	if(yearCounter(startDate,endDate)%5 == 0){
-			  		for(int i = 0; i <= (yearCounter(startDate,endDate)); i+=Math.round((yearCounter(startDate,endDate)/5))) {
-			  		Rectangle rec = new Rectangle(222, 1);
-			  		rec.setFill(Color.TRANSPARENT);
-			  		String temp =String.valueOf(startDate.getYear()+i); //- startDate.getYear()));
-			  		Text text = new Text();
-			  		text.setText(temp);	  
-			  		yearBox.getChildren().addAll(text,rec);
-			  		}
+		  int yearsTemp = (int)yearCounter(startDate, endDate);
+		  System.out.print(yearsTemp);
 		  
-			  	}
-			  	
-			  	if(yearCounter(startDate,endDate)%5 > 0){
-			  		int years = (int)((yearCounter(startDate,endDate)-(yearCounter(startDate,endDate)%5)));
-			  		int counter = years - years%4;
-			  		if(yearCounter(startDate,endDate)<10){
-			  			for (int i=0; i<=counter; i+=counter/4){
-			  				Rectangle rec = new Rectangle(222, 1);
-			  				rec.setFill(Color.TRANSPARENT);
-			  				String temp =String.valueOf(startDate.getYear()+i); //- startDate.getYear()));
-			  				Text text = new Text();
-			  				text.setText(temp);	  
-			  				yearBox.getChildren().addAll(text,rec);
+		  if(yearsTemp > 5 || yearsTemp == 5) {
+			  if(yearCounter(startDate,endDate)>=5){
+				  	if(yearCounter(startDate,endDate)%5 == 0){
+				  		for(int i = 0; i <= (yearCounter(startDate,endDate)); i+=Math.round((yearCounter(startDate,endDate)/5))) {
+				  		Rectangle rec = new Rectangle(222, 1);
+				  		rec.setFill(Color.TRANSPARENT);
+				  		String temp =String.valueOf(startDate.getYear()+i); //- startDate.getYear()));
+				  		Text text = new Text();
+				  		text.setText(temp);	  
+				  		yearBox.getChildren().addAll(text,rec);
+				  		}
+			  
+				  	}
+				  	
+				  	if(yearCounter(startDate,endDate)%5 > 0){
+				  		int years = (int)((yearCounter(startDate,endDate)-(yearCounter(startDate,endDate)%5)));
+				  		int counter = years - years%4;
+				  		if(yearCounter(startDate,endDate)<10){
+				  			for (int i=0; i<=counter; i+=counter/4){
+				  				Rectangle rec = new Rectangle(222, 1);
+				  				rec.setFill(Color.TRANSPARENT);
+				  				String temp =String.valueOf(startDate.getYear()+i); //- startDate.getYear()));
+				  				Text text = new Text();
+				  				text.setText(temp);	  
+				  				yearBox.getChildren().addAll(text,rec);
+					  			}
+				  			String temp =String.valueOf(endDate.getYear());
+				  			Text text = new Text();
+				  			text.setText(temp);
+			  
+				  			yearBox.getChildren().add(text);
 				  			}
-			  			String temp =String.valueOf(endDate.getYear());
-			  			Text text = new Text();
-			  			text.setText(temp);
-		  
-			  			yearBox.getChildren().add(text);
-			  			}
-			  	}
+				  	}
+			  }
+			  
 		  }
+		  else {
+			  switch(yearsTemp) {
+			  case 1: {
+				  for(int i = 0; i < yearsTemp; i++) {
+					  	Rectangle rec = new Rectangle(1230, 1);
+		  				rec.setFill(Color.TRANSPARENT);
+		  				String temp =String.valueOf(startDate.getYear() + i); //- startDate.getYear()));
+		  				Text text = new Text();
+		  				text.setText(temp);	  
+		  				yearBox.getChildren().addAll(text,rec);
+				  }
+				  Text text = new Text();
+				  text.setText(String.valueOf(endDate.getYear()));
+				  yearBox.getChildren().add(text);
+			  }
+			  case 2: {
+				  for(int i = 0; i < yearsTemp; i++) {
+					  	Rectangle rec = new Rectangle(600, 1);
+		  				rec.setFill(Color.TRANSPARENT);
+		  				String temp =String.valueOf(startDate.getYear() + i); //- startDate.getYear()));
+		  				Text text = new Text();
+		  				text.setText(temp);	  
+		  				yearBox.getChildren().addAll(text,rec);
+				  }
+				  Text text = new Text();
+				  text.setText(String.valueOf(endDate.getYear()));
+				  yearBox.getChildren().add(text);
+			  }
+			  case 3: {
+				  for(int i = 0; i < yearsTemp; i++) {
+					  	Rectangle rec = new Rectangle(400, 1);
+		  				rec.setFill(Color.TRANSPARENT);
+		  				String temp =String.valueOf(startDate.getYear() + i); //- startDate.getYear()));
+		  				Text text = new Text();
+		  				text.setText(temp);	  
+		  				yearBox.getChildren().addAll(text,rec);
+				  }
+				  Text text = new Text();
+				  text.setText(String.valueOf(endDate.getYear()));
+				  yearBox.getChildren().add(text);
+			  }
+			  case 4: {
+				  for(int i = 0; i < yearsTemp; i++) {
+					  	Rectangle rec = new Rectangle(290, 1);
+		  				rec.setFill(Color.TRANSPARENT);
+		  				String temp =String.valueOf(startDate.getYear() + i); //- startDate.getYear()));
+		  				Text text = new Text();
+		  				text.setText(temp);	  
+		  				yearBox.getChildren().addAll(text,rec);
+				  }
+				  Text text = new Text();
+				  text.setText(String.valueOf(endDate.getYear()));
+				  yearBox.getChildren().add(text);
+			  }
+			  }
+		  }
+		  
+		  
 			  		
 			  		pane.getChildren().add(yearBox);
 		  
