@@ -50,6 +50,8 @@ public class showTimelinesController {
 	public int timelineId = 0;
 	
 	public ScrollPane primaryScrollpane;
+	
+	public BorderPane primaryBorderpane; 
 
 	List<CheckBox> timelines = new ArrayList<CheckBox>();
 
@@ -118,36 +120,44 @@ public class showTimelinesController {
 	}
 	
 public Line clickAbleHline(int size, int id, int counter, LocalDate startDate, LocalDate endDate) {	//Making a horizontal line that will open eventhandler when you press the line
-		
-	//	LocalDate startDate = Main.project.getTimeline(id).getStartDate();
-		//LocalDate endDate = Main.project.getTimeline(id).getEndDate();
-		
+				
 		Line timeLine = new Line(0, 50, size, 50);
 		timeLine.setStrokeWidth(5);
 		
-		int years = (int)((yearCounter(startDate,endDate)-(yearCounter(startDate,endDate)%5)));
-  		int Ycounter = Math.round((years - years%4)/5);
+		int years;
+		int Ycounter;
+		
+		if(yearCounter(startDate,endDate)%5 == 0){
+			Ycounter = (int)(yearCounter(startDate,endDate)/5);
+		}
+		else{
+			years = (int)((yearCounter(startDate,endDate)-(yearCounter(startDate,endDate)%5)));
+			Ycounter = years - years%4;
+			Ycounter = Ycounter/4;
+		}
+		
+		int FinalCounter = Ycounter;
 		
   		timeLine.setOnMouseClicked(e ->{
-			if(Ycounter>5){
+			if(FinalCounter>5){
 				if(counter == 0){
-					zoomBox.getChildren().addAll(yearShow(id,startDate,startDate.plusYears(Ycounter)),generateTimeL(id, startDate, startDate.plusYears(Ycounter)));
+					zoomBox.getChildren().addAll(yearShow(id,startDate,startDate.plusYears(FinalCounter)),generateTimeL(id, startDate, startDate.plusYears(FinalCounter)));
 					}
 				else if(counter ==1){
-					zoomBox.getChildren().addAll(yearShow(id,startDate.plusYears(Ycounter),startDate.plusYears(Ycounter*2)),generateTimeL(id, startDate.plusYears(Ycounter), endDate.plusYears((Ycounter*2))));
+					zoomBox.getChildren().addAll(yearShow(id,startDate.plusYears(FinalCounter),startDate.plusYears(FinalCounter*2)),generateTimeL(id, startDate.plusYears(FinalCounter), endDate.plusYears((FinalCounter*2))));
 					}
 				else if(counter ==2){
-					zoomBox.getChildren().addAll(yearShow(id,startDate.plusYears(Ycounter*2),startDate.plusYears(Ycounter*3)),generateTimeL(id, startDate.plusYears(Ycounter*2), endDate.plusYears((Ycounter*3))));
+					zoomBox.getChildren().addAll(yearShow(id,startDate.plusYears(FinalCounter*2),startDate.plusYears(FinalCounter*3)),generateTimeL(id, startDate.plusYears(FinalCounter*2), endDate.plusYears((FinalCounter*3))));
 					}
 				else if(counter ==3){
-					zoomBox.getChildren().addAll(yearShow(id,startDate.plusYears(Ycounter*3),startDate.plusYears(Ycounter*4)),generateTimeL(id, startDate.plusYears(Ycounter*3), endDate.plusYears((Ycounter*4))));
+					zoomBox.getChildren().addAll(yearShow(id,startDate.plusYears(FinalCounter*3),startDate.plusYears(FinalCounter*4)),generateTimeL(id, startDate.plusYears(FinalCounter*3), endDate.plusYears((FinalCounter*4))));
 					}
 				else if(counter ==4){
-					zoomBox.getChildren().addAll(yearShow(id,startDate.plusYears(Ycounter*4),startDate.plusYears(Ycounter*5)),generateTimeL(id, startDate.plusYears(Ycounter*4), endDate.plusYears((Ycounter*5))));
+					zoomBox.getChildren().addAll(yearShow(id,startDate.plusYears(FinalCounter*4),startDate.plusYears(FinalCounter*5)),generateTimeL(id, startDate.plusYears(FinalCounter*4), endDate.plusYears((FinalCounter*5))));
 					}	
 		}
 			else {
-				zoomBox.getChildren().add(zoomedTimeline(id));
+				zoomBox.getChildren().add(zoomedTimeline(id, startDate));
 			} 
 		
 		
@@ -230,10 +240,9 @@ public Line clickAbleHline(int size, int id, int counter, LocalDate startDate, L
 		return pane;
 	}
 	
-	public Line zommedHline(int size, int id){		//Making non clickable horizontal line
+	public Line zommedHline(int size, int id ,LocalDate startDate){		//Making non clickable horizontal line
 		
 		Line timeLine = new Line(0, 50, size, 50);
-		
 		
 			scrollBox.setOnMouseClicked(new EventHandler<MouseEvent>() {
 				public void handle(MouseEvent e) {
@@ -250,13 +259,13 @@ public Line clickAbleHline(int size, int id, int counter, LocalDate startDate, L
 	}
 	
 	
-	public Pane zoomedTimeline(int id) {			//This will be the final timeline that you click on to get to the calendar
+	public Pane zoomedTimeline(int id, LocalDate startDate) {			//This will be the final timeline that you click on to get to the calendar
 		Pane pane = new Pane();
 		HBox hbox = new HBox();
 		for(int j = 0; j<5; j++){
 			hbox.getChildren().addAll(verticalLine(100),Hline(12));
 		for(int i = 0; i < 12; i++) {	
-			hbox.getChildren().addAll(verticalLine(50),zommedHline(12,id));
+			hbox.getChildren().addAll(verticalLine(50),zommedHline(12,id,startDate));
 		}
 		}
 		hbox.getChildren().addAll(Hline(10), verticalLine(12));
@@ -327,7 +336,6 @@ public Line clickAbleHline(int size, int id, int counter, LocalDate startDate, L
 				  	if(yearCounter(startDate,endDate)%5 > 0){
 				  		int years = (int)((yearCounter(startDate,endDate)-(yearCounter(startDate,endDate)%5)));
 				  		int counter = years - years%4;
-				  		if(yearCounter(startDate,endDate)<10){
 				  			for (int i=0; i<=counter; i+=counter/4){
 				  				Rectangle rec = new Rectangle(222, 1);
 				  				rec.setFill(Color.TRANSPARENT);
@@ -341,7 +349,7 @@ public Line clickAbleHline(int size, int id, int counter, LocalDate startDate, L
 				  			text.setText(temp);
 			  
 				  			yearBox.getChildren().add(text);
-				  			}
+				  			
 				  	}
 			  }
 			  
@@ -409,22 +417,12 @@ public Line clickAbleHline(int size, int id, int counter, LocalDate startDate, L
 			  break;
 			  }
 		  }
-		  
-		  
-			  		
+		  		
 			  		pane.getChildren().add(yearBox);
 		  
 			  		return pane;
-			 		
-	 			 		
+			 		 		
 			}
-		  
-		  
-	
-		  
-		  
-		 
-
 	
 	public Pane spaceBetween(){
 	      Pane pane = new Pane();
@@ -582,11 +580,14 @@ public Line clickAbleHline(int size, int id, int counter, LocalDate startDate, L
 		DatePickerSkin datePickerSkin = new DatePickerSkin(startDatePicker);
 		Node popupContent = datePickerSkin.getPopupContent();
 		popupContent.applyCss();
+		
+		//primaryBorderpane.getChildren().add(popupContent);
+		//primaryBorderpane.setAlignment(popupContent, Pos.BOTTOM_LEFT);
 		BorderPane borderPane = new BorderPane();
 		borderPane.setCenter(popupContent);
 
 		Stage stage2 = new Stage();
-		stage2.setScene(new Scene(borderPane, 400, 400)); 
+		stage2.setScene(new Scene(borderPane)); 
 		stage2.setTitle("EventHandler");
 		stage2.show();
 	}

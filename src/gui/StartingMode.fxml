@@ -1,51 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.*?>
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="396.0"
-            prefWidth="712.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="gui.StartingModeController">
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane fx:id="StartBorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="396.0" prefWidth="712.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.StartingModeController">
    <right>
        <VBox prefHeight="332.0" prefWidth="172.0" BorderPane.alignment="CENTER">
          <children>
-             <Button mnemonicParsing="false" onAction="#showTimeline" prefHeight="25.0" prefWidth="160.0"
-                     text="Show Timelines">
+             <Button mnemonicParsing="false" onAction="#showTimeline" prefHeight="25.0" prefWidth="160.0" text="Show Timelines">
                <VBox.margin>
                   <Insets top="5.0" />
                </VBox.margin>
             </Button>
-             <Button mnemonicParsing="false" onAction="#createMode" prefHeight="25.0" prefWidth="160.0"
-                     text="Add timeline">
+             <Button mnemonicParsing="false" onAction="#createMode" prefHeight="25.0" prefWidth="160.0" text="Add timeline">
                <VBox.margin>
                   <Insets top="5.0" />
                </VBox.margin>
             </Button>
-             <Button mnemonicParsing="false" onAction="#showEventHandler" prefHeight="25.0" prefWidth="161.0"
-                     text="Add Event">
+             <Button mnemonicParsing="false" onAction="#showEventHandler" prefHeight="25.0" prefWidth="161.0" text="Add Event">
                <VBox.margin>
                   <Insets top="5.0" />
                </VBox.margin>
             </Button>
-             <Button mnemonicParsing="false" onAction="#loadProject" prefHeight="25.0" prefWidth="161.0"
-                     text="Load Project">
+             <Button mnemonicParsing="false" onAction="#loadProject" prefHeight="25.0" prefWidth="161.0" text="Load Project">
                <VBox.margin>
                   <Insets top="5.0" />
                </VBox.margin>
             </Button>
-             <Button mnemonicParsing="false" onAction="#saveProject" prefHeight="25.0" prefWidth="161.0"
-                     text="Save Project">
+             <Button mnemonicParsing="false" onAction="#saveProject" prefHeight="25.0" prefWidth="161.0" text="Save Project">
                  <VBox.margin>
-                     <Insets top="5.0"/>
+                     <Insets top="5.0" />
                  </VBox.margin>
              </Button>
-             <Button fx:id="delete_btn" mnemonicParsing="false" onAction="#deleteProject" prefHeight="25.0" prefWidth="161.0"
-                     text="Delete Project">
+             <Button fx:id="delete_btn" mnemonicParsing="false" onAction="#deleteProject" prefHeight="25.0" prefWidth="161.0" text="Delete Project">
                  <VBox.margin>
-                     <Insets top="5.0"/>
+                     <Insets top="5.0" />
                  </VBox.margin>
              </Button>
          </children>
