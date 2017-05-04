@@ -159,6 +159,8 @@ public class TimelinesDAO {
                     Date startDate = Date.valueOf(tl.startDate);
                     Date endDate = Date.valueOf(tl.endDate);
 
+                    Event evv = null;
+
                     String timelines = "INSERT INTO Timelines " + "VALUES (" + tl.timelineId + ", " + ev.eventid + ", '" + startDate + "', '" + endDate + "', '" + tl.title + "')";
                     execute(timelines);
 
@@ -192,9 +194,9 @@ public class TimelinesDAO {
         }
 
         if (isConnected()) {
-            query = "UPDATE Events SET EVENT_ID=0 WHERE EVENT_ID=" + event.eventid;
+            query = "DELETE FROM Events WHERE EVENT_ID=" + event.eventid;
             execute(query);
-            query = "UPDATE Timelines SET EVENT_ID=0 WHERE EVENT_ID=" + event.eventid;
+            query = "UPDATE Timelines SET EVENT_ID=NULL WHERE EVENT_ID=" + event.eventid;
             execute(query);
             return true;
         } else return false;
@@ -209,9 +211,9 @@ public class TimelinesDAO {
         }
 
         if (isConnected()) {
-            query = "UPDATE Timelines SET TIMELINE_ID=0 WHERE TIMELINE_ID=" + timeline.timelineId;
+            query = "DELETE FROM Timelines WHERE TIMELINE_ID=" + timeline.timelineId;
             execute(query);
-            query = "UPDATE Projects SET TIMELINE_ID=0 WHERE TIMELINE_ID=" + timeline.timelineId;
+            query = "UPDATE Projects SET TIMELINE_ID=NULL WHERE TIMELINE_ID=" + timeline.timelineId;
             execute(query);
             for (int i = 0; i < timeline.events.size(); i++) {
                 delete(timeline.events.get(i));
@@ -229,7 +231,7 @@ public class TimelinesDAO {
         }
 
         if (isConnected()) {
-            query = "UPDATE Projects SET PROJECT_ID=0 WHERE PROJECT_ID=" + project.ProjectID;
+            query = "DELETE FROM Projects_WHERE PROJECT_ID=" + project.ProjectID;
             execute(query);
             for (int i = 0; i < project.timelines.size(); i++) {
                 delete(project.timelines.get(i));

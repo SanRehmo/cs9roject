@@ -1,18 +1,13 @@
 package gui;
 
 
-import cs_9roject.Event;
 import cs_9roject.Project;
 import cs_9roject.TimelinesDAO;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
+import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.ChoiceDialog;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.FlowPane;
 import javafx.stage.Stage;
 
@@ -125,6 +120,7 @@ public class StartingModeController {
 	 */
 	@FXML
 	private void saveProject() throws IOException {
+		// Main.project.getTimelines().get(Main.project.getTimelines().size()-1).setTimelineId(dao.getHighestTimelineID());
 		dao.save(Main.project);
 		delete_btn.setDisable(false);
 	}
