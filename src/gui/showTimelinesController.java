@@ -204,6 +204,13 @@ public Line clickAbleHline(int size, int id, int counter, LocalDate startDate, L
 		}
 		else {
 			switch(temp) {
+			case 0: {
+				int startMonth = StartDate.getMonthValue();
+				int endMonth = EndDate.getMonthValue();
+				int tempMonth = endMonth - startMonth;
+				
+				System.out.print(tempMonth);
+			}
 		 			case 1: {
 		 				for(int i = 0; i < 1; i++) {
 		 					hbox.getChildren().addAll(verticalLine(100),clickAbleHline(1250,id,i,StartDate,EndDate));  //generating timeline
