@@ -337,7 +337,6 @@ public class eventHandlerController {
         				alertWindow(AlertType.ERROR, "ERROR!", "Cannot add event!", "Event's start-date is before timeline's start-date. Or Event's end-date is after timeline's end-date. ");
         				return;
         			}
-        			System.out.print(e.getStartTime()+"    "+ e.getEndTime());
         			Stage stage = (Stage) btnSave.getScene().getWindow();
     			    stage.close();
         		}

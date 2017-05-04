@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceDialog;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.FlowPane;
@@ -30,6 +31,8 @@ public class StartingModeController {
 	@FXML
     private Button helpButton;
 	
+	@FXML
+    private Button delete_btn;
 	
 	
 	/**
@@ -85,6 +88,7 @@ public class StartingModeController {
 			Optional<Project> result = choiceDialog.showAndWait();
 			if (result.isPresent()){
 			    Main.project=result.get();
+			    delete_btn.setDisable(false);
 			}
 
 		}
@@ -102,9 +106,16 @@ public class StartingModeController {
 	 */
 	@FXML
 	private void deleteProject() throws IOException {
-		dao.delete(Main.project);
-		Main.project = new Project();
+		Alert alert = new Alert(AlertType.CONFIRMATION);
+		alert.setTitle("Please confirm");
+		alert.setHeaderText("You are going to delete the project: "+Main.project.projectName+" ID: "+Main.project.ProjectID);
+		alert.setContentText("Are you sure you like to proceed?");
+		if (alert.showAndWait().get() == ButtonType.OK){
+			dao.delete(Main.project);
+			Main.project = new Project();
+		}
 	}
+
 
 	/**
 	 * Method for saving Project.
@@ -112,6 +123,7 @@ public class StartingModeController {
 	@FXML
 	private void saveProject() throws IOException {
 		dao.save(Main.project);
+		delete_btn.setDisable(false);
 	}
 
 	/**

@@ -14,6 +14,7 @@ import java.io.IOException;
 
 public class Main extends Application {
 	
+	
 	private Stage primaryStage;
 	public BorderPane mainLayout;
 	public static Project project = new Project();
@@ -52,7 +53,8 @@ public class Main extends Application {
 	public static void main(String[] args) {
 		Event.setCount(dao.getHighestEventID() + 1);
 		Timeline.setCount(dao.getHighestTimelineID() + 1);
-		Project.setCount(dao.getHighestProjectID() + 1);
+		project.ProjectID =(dao.getHighestProjectID() + 1);
+		Project.setCount(project.ProjectID + 1);
 		launch(args);
 	}
 }

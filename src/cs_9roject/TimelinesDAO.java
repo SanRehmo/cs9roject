@@ -259,6 +259,7 @@ public class TimelinesDAO {
                 while (rs.next()) {
                     highestID = rs.getInt("PROJECT_ID");
                 }
+                System.out.println("HIGHEST PROJECT ID: " + highestID);
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
@@ -314,6 +315,7 @@ public class TimelinesDAO {
                 while (rs.next()) {
                     highestID = rs.getInt("EVENT_ID");
                 }
+                System.out.println("HIGHEST EVENT ID: " + highestID);
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
