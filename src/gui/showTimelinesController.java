@@ -189,25 +189,25 @@ public class showTimelinesController {
 			switch(temp) {
 		 			case 1: {
 		 				for(int i = 0; i < 1; i++) {
-		 					hbox.getChildren().addAll(verticalLine(100),clickAbleHline(250,id,i));  //generating timeline
+		 					hbox.getChildren().addAll(verticalLine(100),clickAbleHline(1250,id,i));  //generating timeline
 		 				}
 		 				break;
 		 			}
 		 			case 2: {
 		 				for(int i = 0; i < 2; i++) {
-		 					hbox.getChildren().addAll(verticalLine(100),clickAbleHline(250,id,i));  //generating timeline
+		 					hbox.getChildren().addAll(verticalLine(100),clickAbleHline(625,id,i));  //generating timeline
 		 				}
 		 				break;
 		 			}
 		 			case 3: {
 		 				for(int i = 0; i < 3; i++) {
-		 				hbox.getChildren().addAll(verticalLine(100),clickAbleHline(250,id,i));  //generating timeline
+		 				hbox.getChildren().addAll(verticalLine(100),clickAbleHline(417,id,i));  //generating timeline
 						}
 		 				break;
 		 			}
 		 			case 4: {
 		 				for(int i = 0; i < 4; i++) {
-		 					hbox.getChildren().addAll(verticalLine(100),clickAbleHline(250,id,i));  //generating timeline
+		 					hbox.getChildren().addAll(verticalLine(100),clickAbleHline(312,id,i));  //generating timeline
 		 				}
 		 				break;
 		 			}
@@ -300,6 +300,7 @@ public class showTimelinesController {
 		  title.setFont(Font.font ("Verdana", 20));
 		  yearBox.getChildren().addAll(title,rectangle);  
 		  
+<<<<<<< HEAD
 		  if(yearCounter(StartDate,EndDate)>5 || yearCounter(StartDate,EndDate) == 5 ){
 			  	if(yearCounter(StartDate,EndDate)%5 == 0){
 			  		for(int i = 0; i <= (yearCounter(StartDate,EndDate)); i+=Math.round((yearCounter(StartDate,EndDate)/5))) {
@@ -310,7 +311,12 @@ public class showTimelinesController {
 			  		text.setText(temp);	  
 			  		yearBox.getChildren().addAll(text,rec);
 			  		}
+=======
+		  int yearsTemp = (int)yearCounter(startDate, endDate);
+		  System.out.print(yearsTemp);
+>>>>>>> branch 'develop' of https://github.com/SanRehmo/cs9roject.git
 		  
+<<<<<<< HEAD
 			  	}
 			  	
 			  	if(yearCounter(StartDate,EndDate)%5 > 0){
@@ -324,7 +330,41 @@ public class showTimelinesController {
 			  				Text text = new Text();
 			  				text.setText(temp);	  
 			  				yearBox.getChildren().addAll(text,rec);
+=======
+		  if(yearsTemp > 5 || yearsTemp == 5) {
+			  if(yearCounter(startDate,endDate)>=5){
+				  	if(yearCounter(startDate,endDate)%5 == 0){
+				  		for(int i = 0; i <= (yearCounter(startDate,endDate)); i+=Math.round((yearCounter(startDate,endDate)/5))) {
+				  		Rectangle rec = new Rectangle(222, 1);
+				  		rec.setFill(Color.TRANSPARENT);
+				  		String temp =String.valueOf(startDate.getYear()+i); //- startDate.getYear()));
+				  		Text text = new Text();
+				  		text.setText(temp);	  
+				  		yearBox.getChildren().addAll(text,rec);
+				  		}
+			  
+				  	}
+				  	
+				  	if(yearCounter(startDate,endDate)%5 > 0){
+				  		int years = (int)((yearCounter(startDate,endDate)-(yearCounter(startDate,endDate)%5)));
+				  		int counter = years - years%4;
+				  		if(yearCounter(startDate,endDate)<10){
+				  			for (int i=0; i<=counter; i+=counter/4){
+				  				Rectangle rec = new Rectangle(222, 1);
+				  				rec.setFill(Color.TRANSPARENT);
+				  				String temp =String.valueOf(startDate.getYear()+i); //- startDate.getYear()));
+				  				Text text = new Text();
+				  				text.setText(temp);	  
+				  				yearBox.getChildren().addAll(text,rec);
+					  			}
+				  			String temp =String.valueOf(endDate.getYear());
+				  			Text text = new Text();
+				  			text.setText(temp);
+			  
+				  			yearBox.getChildren().add(text);
+>>>>>>> branch 'develop' of https://github.com/SanRehmo/cs9roject.git
 				  			}
+<<<<<<< HEAD
 			  			String temp =String.valueOf(EndDate.getYear());
 			  			Text text = new Text();
 			  			text.setText(temp);
@@ -332,7 +372,70 @@ public class showTimelinesController {
 			  			yearBox.getChildren().add(text);
 			  			}
 			  	}
+=======
+				  	}
+			  }
+			  
+>>>>>>> branch 'develop' of https://github.com/SanRehmo/cs9roject.git
 		  }
+		  else {
+			  switch(yearsTemp) {
+			  case 1: {
+				  for(int i = 0; i < yearsTemp; i++) {
+					  	Rectangle rec = new Rectangle(1230, 1);
+		  				rec.setFill(Color.TRANSPARENT);
+		  				String temp =String.valueOf(startDate.getYear() + i); //- startDate.getYear()));
+		  				Text text = new Text();
+		  				text.setText(temp);	  
+		  				yearBox.getChildren().addAll(text,rec);
+				  }
+				  Text text = new Text();
+				  text.setText(String.valueOf(endDate.getYear()));
+				  yearBox.getChildren().add(text);
+			  }
+			  case 2: {
+				  for(int i = 0; i < yearsTemp; i++) {
+					  	Rectangle rec = new Rectangle(600, 1);
+		  				rec.setFill(Color.TRANSPARENT);
+		  				String temp =String.valueOf(startDate.getYear() + i); //- startDate.getYear()));
+		  				Text text = new Text();
+		  				text.setText(temp);	  
+		  				yearBox.getChildren().addAll(text,rec);
+				  }
+				  Text text = new Text();
+				  text.setText(String.valueOf(endDate.getYear()));
+				  yearBox.getChildren().add(text);
+			  }
+			  case 3: {
+				  for(int i = 0; i < yearsTemp; i++) {
+					  	Rectangle rec = new Rectangle(400, 1);
+		  				rec.setFill(Color.TRANSPARENT);
+		  				String temp =String.valueOf(startDate.getYear() + i); //- startDate.getYear()));
+		  				Text text = new Text();
+		  				text.setText(temp);	  
+		  				yearBox.getChildren().addAll(text,rec);
+				  }
+				  Text text = new Text();
+				  text.setText(String.valueOf(endDate.getYear()));
+				  yearBox.getChildren().add(text);
+			  }
+			  case 4: {
+				  for(int i = 0; i < yearsTemp; i++) {
+					  	Rectangle rec = new Rectangle(290, 1);
+		  				rec.setFill(Color.TRANSPARENT);
+		  				String temp =String.valueOf(startDate.getYear() + i); //- startDate.getYear()));
+		  				Text text = new Text();
+		  				text.setText(temp);	  
+		  				yearBox.getChildren().addAll(text,rec);
+				  }
+				  Text text = new Text();
+				  text.setText(String.valueOf(endDate.getYear()));
+				  yearBox.getChildren().add(text);
+			  }
+			  }
+		  }
+		  
+		  
 			  		
 			  		pane.getChildren().add(yearBox);
 		  
