@@ -285,7 +285,7 @@ public class showTimelinesController {
 		  yearBox.getChildren().addAll(title,rectangle);  
 		  
 		  int yearsTemp = (int)yearCounter(startDate, endDate);
-		  System.out.print(yearsTemp);
+		  
 		  
 		  if(yearsTemp > 5 || yearsTemp == 5) {
 			  if(yearCounter(startDate,endDate)>=5){
@@ -337,6 +337,8 @@ public class showTimelinesController {
 				  Text text = new Text();
 				  text.setText(String.valueOf(endDate.getYear()));
 				  yearBox.getChildren().add(text);
+				  
+				  break;
 			  }
 			  case 2: {
 				  for(int i = 0; i < yearsTemp; i++) {
@@ -350,6 +352,8 @@ public class showTimelinesController {
 				  Text text = new Text();
 				  text.setText(String.valueOf(endDate.getYear()));
 				  yearBox.getChildren().add(text);
+				  
+				  break;
 			  }
 			  case 3: {
 				  for(int i = 0; i < yearsTemp; i++) {
@@ -363,6 +367,8 @@ public class showTimelinesController {
 				  Text text = new Text();
 				  text.setText(String.valueOf(endDate.getYear()));
 				  yearBox.getChildren().add(text);
+				  
+				  break;
 			  }
 			  case 4: {
 				  for(int i = 0; i < yearsTemp; i++) {
@@ -377,6 +383,7 @@ public class showTimelinesController {
 				  text.setText(String.valueOf(endDate.getYear()));
 				  yearBox.getChildren().add(text);
 			  }
+			  break;
 			  }
 		  }
 		  
