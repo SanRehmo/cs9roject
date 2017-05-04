@@ -158,9 +158,43 @@ public class showTimelinesController {
 		HBox hbox = new HBox();
 		hbox.getChildren().add(rectangle);
 		
-		for(int i = 0; i < 5; i++) {
-			hbox.getChildren().addAll(verticalLine(100),clickAbleHline(250,id,i));  //generating timeline
+		int start = Main.project.getTimeline(id).getStartDate().getYear();
+		int end = Main.project.getTimeline(id).getEndDate().getYear();
+		int temp = end - start;
+		
+		if(temp > 5 || temp == 5) {
+			for(int i = 0; i < 5; i++) {
+				hbox.getChildren().addAll(verticalLine(100),clickAbleHline(250,id,i));  //generating timeline
+			}
 		}
+		else {
+			switch(temp) {
+		 			case 1: {
+		 				for(int i = 0; i < 1; i++) {
+		 					hbox.getChildren().addAll(verticalLine(100),clickAbleHline(250,id,i));  //generating timeline
+		 				}
+		 				break;
+		 			}
+		 			case 2: {
+		 				for(int i = 0; i < 2; i++) {
+		 					hbox.getChildren().addAll(verticalLine(100),clickAbleHline(250,id,i));  //generating timeline
+		 				}
+		 				break;
+		 			}
+		 			case 3: {
+		 				for(int i = 0; i < 3; i++) {
+		 				hbox.getChildren().addAll(verticalLine(100),clickAbleHline(250,id,i));  //generating timeline
+						}
+		 				break;
+		 			}
+		 			case 4: {
+		 				for(int i = 0; i < 4; i++) {
+		 					hbox.getChildren().addAll(verticalLine(100),clickAbleHline(250,id,i));  //generating timeline
+		 				}
+		 				break;
+		 			}
+		 			}
+		  		}
 		
 		hbox.getChildren().addAll(verticalLine(100));
 		hbox.setLayoutX(5);
