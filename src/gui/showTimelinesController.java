@@ -146,6 +146,11 @@ public Line clickAbleHline(int size, int id, int counter, LocalDate startDate, L
 					zoomBox.getChildren().addAll(yearShow(id,startDate.plusYears(Ycounter*4),startDate.plusYears(Ycounter*5)),generateTimeL(id, startDate.plusYears(Ycounter*4), endDate.plusYears((Ycounter*5))));
 					}	
 		}
+			else {
+				zoomBox.getChildren().add(zoomedTimeline());
+			} 
+		
+		
 			zoomPane.setContent(zoomBox);
 	  		Stage stage2 = new Stage();
 			stage2.setScene(new Scene(zoomPane));  
