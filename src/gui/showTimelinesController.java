@@ -261,22 +261,42 @@ public class showTimelinesController {
 			  	}
 			  	if(yearCounter(startDate,endDate)%5 > 0){
 			  		int years = (int)((yearCounter(startDate,endDate)-(yearCounter(startDate,endDate)%5)));
-			  		int counter = years%4;
-			  		
-			  		
+			  		int counter = years - years%4;
+			  		if(yearCounter(startDate,endDate)<10){
+			  			for (int i=0; i<=counter; i+=counter/4){
+			  				Rectangle rec = new Rectangle(222, 1);
+			  				rec.setFill(Color.TRANSPARENT);
+			  				String temp =String.valueOf(startDate.getYear()+i); //- startDate.getYear()));
+			  				Text text = new Text();
+			  				text.setText(temp);	  
+			  				yearBox.getChildren().addAll(text,rec);
+				  			}
+			  			String temp =String.valueOf(endDate.getYear());
+			  			Text text = new Text();
+			  			text.setText(temp);
+		  
+			  			yearBox.getChildren().add(text);
+			  		}
+			  	
+			  		else{
+			  			
+			  		}
 			  	}
-		  
 		  }
-		  String temp =String.valueOf(endDate.getYear());
-		  Text text = new Text();
-		  text.setText(temp);
+			  		
+			  		pane.getChildren().add(yearBox);
 		  
-		//  yearBox.getChildren().add(text);
+			  		return pane;
+			 		
+	 			 		
+			}
 		  
-		  pane.getChildren().add(yearBox);
 		  
-		  return pane;
-		 }
+	
+		  
+		  
+		 
+
 	
 	public Pane spaceBetween(){
 	      Pane pane = new Pane();
