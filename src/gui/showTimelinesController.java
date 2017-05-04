@@ -90,14 +90,14 @@ public class showTimelinesController {
 	public void showTimeline(){	//Method that is showing the timelines in the scrollPane
 		if(displayAll.isSelected()){//If DisplayAll is selected the program will show every timeline
 			for(int i=0; i<timelines.size(); i++){
-			scrollBox.getChildren().addAll(yearShow(Main.project.getTimelines().get(i).getTimelineId()),generateTimeL(Main.project.getTimelines().get(i).getTimelineId()),spaceBetween());
+			scrollBox.getChildren().addAll(yearShow(Main.project.getTimelines().get(i).getTimelineId()),generateTimeL(Main.project.getTimelines().get(i).getTimelineId(), Main.project.getTimelines().get(i).getStartDate(), Main.project.getTimelines().get(i).getEndDate()),spaceBetween());
 			}
 			
 		}
 		else{
 			for(int i=0; i<timelines.size(); i++){	//Just displaying the checked timelines
 				if(timelines.get(i).isSelected()){
-				scrollBox.getChildren().addAll(yearShow(Main.project.getTimelines().get(i).getTimelineId()),generateTimeL(Main.project.getTimelines().get(i).getTimelineId()),spaceBetween());
+				scrollBox.getChildren().addAll(yearShow(Main.project.getTimelines().get(i).getTimelineId()),generateTimeL(Main.project.getTimelines().get(i).getTimelineId(), Main.project.getTimelines().get(i).getStartDate(), Main.project.getTimelines().get(i).getEndDate()),spaceBetween());
 				}	
 			}	 
 		}
@@ -113,14 +113,17 @@ public class showTimelinesController {
 		return timeLine;
 	}
 	
-	public Line clickAbleHline(int size, int id) {	//Making a horizontal line that will open eventhandler when you press the line
+	public Line clickAbleHline(int size, int id, int counter) {	//Making a horizontal line that will open eventhandler when you press the line
 		
+		LocalDate startDate = Main.project.getTimeline(id).getStartDate();
+		LocalDate endDate = Main.project.getTimeline(id).getEndDate();
 		
 		Line timeLine = new Line(0, 50, size, 50);
 		timeLine.setStrokeWidth(5);
 		
 		timeLine.setOnMouseClicked(e ->{
 			if(yearCounter(Main.project.getTimeline(id).getStartDate(), Main.project.getTimeline(id).getEndDate())>25){
+				this.scrollBox.getChildren().add(generateTimeL(id, startDate, endDate));
 			
 			
 		}
@@ -140,7 +143,7 @@ public class showTimelinesController {
 		return timeLine;
 	}
 	
-	public Pane generateTimeL(int id){	//Method that is making timelines with horizontal and vertical lines
+	public Pane generateTimeL(int id, LocalDate StartDate, LocalDate EndDate){	//Method that is making timelines with horizontal and vertical lines
 		Text title = new Text();
 		title.setText(Main.project.getTimeline(id).getTitle());
 		title.setFont(Font.font ("Verdana", 20));
@@ -155,46 +158,9 @@ public class showTimelinesController {
 		HBox hbox = new HBox();
 		hbox.getChildren().add(rectangle);
 		
-		int start = Main.project.getTimeline(id).getStartDate().getYear();
-		int end = Main.project.getTimeline(id).getEndDate().getYear();
-		int temp = end - start;
-		
-		System.out.print(temp);
-		
-		if(temp > 5 || temp == 5) {
-			for(int i = 0; i < 5; i++) {
-				hbox.getChildren().addAll(verticalLine(100),clickAbleHline(250,id));  //generating timeline
-			}
+		for(int i = 0; i < 5; i++) {
+			hbox.getChildren().addAll(verticalLine(100),clickAbleHline(250,id,i));  //generating timeline
 		}
-		else {
-			switch(temp) {
-			case 1: {
-				for(int i = 0; i < 1; i++) {
-					hbox.getChildren().addAll(verticalLine(100),clickAbleHline(250,id));  //generating timeline
-				}
-				break;
-			}
-			case 2: {
-				for(int i = 0; i < 2; i++) {
-					hbox.getChildren().addAll(verticalLine(100),clickAbleHline(250,id));  //generating timeline
-				}
-				break;
-			}
-			case 3: {
-				for(int i = 0; i < 3; i++) {
-					hbox.getChildren().addAll(verticalLine(100),clickAbleHline(250,id));  //generating timeline
-				}
-				break;
-			}
-			case 4: {
-				for(int i = 0; i < 4; i++) {
-					hbox.getChildren().addAll(verticalLine(100),clickAbleHline(250,id));  //generating timeline
-				}
-				break;
-			}
-			}
-		}
-		
 		
 		hbox.getChildren().addAll(verticalLine(100));
 		hbox.setLayoutX(5);
@@ -209,7 +175,7 @@ public class showTimelinesController {
 		
 		Line timeLine = new Line(0, 50, size, 50);
 		
-	
+		
 			scrollBox.setOnMouseClicked(new EventHandler<MouseEvent>() {
 				public void handle(MouseEvent e) {
 					showInfoByMonth(0, 2017, 5);
@@ -296,22 +262,41 @@ public class showTimelinesController {
 			  		}
 		  
 			  	}
-			  	else if(yearCounter(startDate,endDate)%5 > 0){
+			  	
+			  	if(yearCounter(startDate,endDate)%5 > 0){
 			  		int years = (int)((yearCounter(startDate,endDate)-(yearCounter(startDate,endDate)%5)));
-			  		int counter = years%4;
+			  		int counter = years - years%4;
+			  		if(yearCounter(startDate,endDate)<10){
+			  			for (int i=0; i<=counter; i+=counter/4){
+			  				Rectangle rec = new Rectangle(222, 1);
+			  				rec.setFill(Color.TRANSPARENT);
+			  				String temp =String.valueOf(startDate.getYear()+i); //- startDate.getYear()));
+			  				Text text = new Text();
+			  				text.setText(temp);	  
+			  				yearBox.getChildren().addAll(text,rec);
+				  			}
+			  			String temp =String.valueOf(endDate.getYear());
+			  			Text text = new Text();
+			  			text.setText(temp);
+		  
+			  			yearBox.getChildren().add(text);
+			  			}
 			  	}
-		  
 		  }
-		  String temp =String.valueOf(endDate.getYear());
-		  Text text = new Text();
-		  text.setText(temp);
+			  		
+			  		pane.getChildren().add(yearBox);
 		  
-		//  yearBox.getChildren().add(text);
+			  		return pane;
+			 		
+	 			 		
+			}
 		  
-		  pane.getChildren().add(yearBox);
 		  
-		  return pane;
-		 }
+	
+		  
+		  
+		 
+
 	
 	public Pane spaceBetween(){
 	      Pane pane = new Pane();
