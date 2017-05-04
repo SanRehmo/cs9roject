@@ -58,6 +58,10 @@ public class showTimelinesController {
 	
 	VBox scrollBox = new VBox();
 	
+	private ScrollPane zoomPane;
+	VBox zoomBox = new VBox();
+	
+	
 	 @FXML
 	 public void initialize() {  //Reading every timeline and print there names in checkboxes
 		 for(int i=0; i<Main.project.getTimelines().size(); i++){
@@ -90,14 +94,14 @@ public class showTimelinesController {
 	public void showTimeline(){	//Method that is showing the timelines in the scrollPane
 		if(displayAll.isSelected()){//If DisplayAll is selected the program will show every timeline
 			for(int i=0; i<timelines.size(); i++){
-			scrollBox.getChildren().addAll(yearShow(Main.project.getTimelines().get(i).getTimelineId()),generateTimeL(Main.project.getTimelines().get(i).getTimelineId(), Main.project.getTimelines().get(i).getStartDate(), Main.project.getTimelines().get(i).getEndDate()),spaceBetween());
+			scrollBox.getChildren().addAll(yearShow(Main.project.getTimelines().get(i).getTimelineId(),Main.project.getTimelines().get(i).getStartDate(),Main.project.getTimelines().get(i).getEndDate()),generateTimeL(Main.project.getTimelines().get(i).getTimelineId(), Main.project.getTimelines().get(i).getStartDate(), Main.project.getTimelines().get(i).getEndDate()),spaceBetween());
 			}
 			
 		}
 		else{
 			for(int i=0; i<timelines.size(); i++){	//Just displaying the checked timelines
 				if(timelines.get(i).isSelected()){
-				scrollBox.getChildren().addAll(yearShow(Main.project.getTimelines().get(i).getTimelineId()),generateTimeL(Main.project.getTimelines().get(i).getTimelineId(), Main.project.getTimelines().get(i).getStartDate(), Main.project.getTimelines().get(i).getEndDate()),spaceBetween());
+				scrollBox.getChildren().addAll(yearShow(Main.project.getTimelines().get(i).getTimelineId(),Main.project.getTimelines().get(i).getStartDate(),Main.project.getTimelines().get(i).getEndDate()),generateTimeL(Main.project.getTimelines().get(i).getTimelineId(), Main.project.getTimelines().get(i).getStartDate(), Main.project.getTimelines().get(i).getEndDate()),spaceBetween());
 				}	
 			}	 
 		}
@@ -113,7 +117,7 @@ public class showTimelinesController {
 		return timeLine;
 	}
 	
-	public Line clickAbleHline(int size, int id, int counter) {	//Making a horizontal line that will open eventhandler when you press the line
+public Line clickAbleHline(int size, int id, int counter) {	//Making a horizontal line that will open eventhandler when you press the line
 		
 		LocalDate startDate = Main.project.getTimeline(id).getStartDate();
 		LocalDate endDate = Main.project.getTimeline(id).getEndDate();
@@ -121,19 +125,29 @@ public class showTimelinesController {
 		Line timeLine = new Line(0, 50, size, 50);
 		timeLine.setStrokeWidth(5);
 		
-		timeLine.setOnMouseClicked(e ->{
-			if(yearCounter(Main.project.getTimeline(id).getStartDate(), Main.project.getTimeline(id).getEndDate())>25){
-				this.scrollBox.getChildren().add(generateTimeL(id, startDate, endDate));
-			
-			
+		int years = (int)((yearCounter(startDate,endDate)-(yearCounter(startDate,endDate)%5)));
+  		int Ycounter = Math.round((years - years%4)/5);
+		
+  		timeLine.setOnMouseClicked(e ->{
+			if(Ycounter>5){
+				if(counter == 0){
+					zoomBox.getChildren().addAll(yearShow(id,startDate,startDate.plusYears(Ycounter)),generateTimeL(id, startDate, startDate.plusYears(Ycounter)));
+					}
+				else if(counter ==1){
+					zoomBox.getChildren().addAll(yearShow(id,startDate.plusYears(Ycounter),startDate.plusYears(Ycounter*2)),generateTimeL(id, startDate.plusYears(Ycounter), endDate.plusYears((Ycounter*2))));
+					}
+				else if(counter ==2){
+					zoomBox.getChildren().addAll(yearShow(id,startDate.plusYears(Ycounter*2),startDate.plusYears(Ycounter*3)),generateTimeL(id, startDate.plusYears(Ycounter*2), endDate.plusYears((Ycounter*3))));
+					}
+				else if(counter ==3){
+					zoomBox.getChildren().addAll(yearShow(id,startDate.plusYears(Ycounter*3),startDate.plusYears(Ycounter*4)),generateTimeL(id, startDate.plusYears(Ycounter*3), endDate.plusYears((Ycounter*4))));
+					}
+				else if(counter ==4){
+					zoomBox.getChildren().addAll(yearShow(id,startDate.plusYears(Ycounter*4),startDate.plusYears(Ycounter*5)),generateTimeL(id, startDate.plusYears(Ycounter*4), endDate.plusYears((Ycounter*5))));
+					}	
 		}
 					
-			this.scrollBox.getChildren().add(zoomedTimeline());
 		});
-		
-		
-		
-		
 		return timeLine;
 	}
 	
@@ -268,9 +282,8 @@ public class showTimelinesController {
 
 	 }
 	
-	public Pane yearShow(int id) {			//Method that is displaying the name and years over the timeline
-		  LocalDate startDate = Main.project.getTimeline(id).getStartDate();
-		  LocalDate endDate = Main.project.getTimeline(id).getEndDate();
+	public Pane yearShow(int id,LocalDate startDate, LocalDate endDate) {			//Method that is displaying the name and years over the timeline
+		 ;
 		  
 		  Pane pane = new Pane();
 		  
