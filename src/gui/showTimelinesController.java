@@ -171,25 +171,25 @@ public class showTimelinesController {
 			switch(temp) {
 		 			case 1: {
 		 				for(int i = 0; i < 1; i++) {
-		 					hbox.getChildren().addAll(verticalLine(100),clickAbleHline(250,id,i));  //generating timeline
+		 					hbox.getChildren().addAll(verticalLine(100),clickAbleHline(1250,id,i));  //generating timeline
 		 				}
 		 				break;
 		 			}
 		 			case 2: {
 		 				for(int i = 0; i < 2; i++) {
-		 					hbox.getChildren().addAll(verticalLine(100),clickAbleHline(250,id,i));  //generating timeline
+		 					hbox.getChildren().addAll(verticalLine(100),clickAbleHline(625,id,i));  //generating timeline
 		 				}
 		 				break;
 		 			}
 		 			case 3: {
 		 				for(int i = 0; i < 3; i++) {
-		 				hbox.getChildren().addAll(verticalLine(100),clickAbleHline(250,id,i));  //generating timeline
+		 				hbox.getChildren().addAll(verticalLine(100),clickAbleHline(417,id,i));  //generating timeline
 						}
 		 				break;
 		 			}
 		 			case 4: {
 		 				for(int i = 0; i < 4; i++) {
-		 					hbox.getChildren().addAll(verticalLine(100),clickAbleHline(250,id,i));  //generating timeline
+		 					hbox.getChildren().addAll(verticalLine(100),clickAbleHline(312,id,i));  //generating timeline
 		 				}
 		 				break;
 		 			}
