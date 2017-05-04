@@ -103,6 +103,7 @@ public class StartingModeController {
 	@FXML
 	private void deleteProject() throws IOException {
 		dao.delete(Main.project);
+		Main.project = new Project();
 	}
 
 	/**
