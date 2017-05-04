@@ -58,7 +58,7 @@ public class showTimelinesController {
 	
 	VBox scrollBox = new VBox();
 	
-	private ScrollPane zoomPane;
+	ScrollPane zoomPane = new ScrollPane();
 	VBox zoomBox = new VBox();
 	
 	
@@ -146,10 +146,9 @@ public Line clickAbleHline(int size, int id, int counter) {	//Making a horizonta
 					zoomBox.getChildren().addAll(yearShow(id,startDate.plusYears(Ycounter*4),startDate.plusYears(Ycounter*5)),generateTimeL(id, startDate.plusYears(Ycounter*4), endDate.plusYears((Ycounter*5))));
 					}	
 		}
-			BorderPane boarder = new BorderPane();
-	  		boarder.getChildren().add(zoomBox);
+			zoomPane.setContent(zoomBox);
 	  		Stage stage2 = new Stage();
-			stage2.setScene(new Scene(boarder,800,200));  
+			stage2.setScene(new Scene(zoomPane));  
 			stage2.setTitle("Zoomed timeline");
 			stage2.show();
 					
