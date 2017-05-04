@@ -58,9 +58,6 @@ public class showTimelinesController {
 	
 	VBox scrollBox = new VBox();
 	
-	private ScrollPane zoomPane;
-	VBox zoomBox = new VBox();
-	
 	 @FXML
 	 public void initialize() {  //Reading every timeline and print there names in checkboxes
 		 for(int i=0; i<Main.project.getTimelines().size(); i++){
@@ -93,14 +90,14 @@ public class showTimelinesController {
 	public void showTimeline(){	//Method that is showing the timelines in the scrollPane
 		if(displayAll.isSelected()){//If DisplayAll is selected the program will show every timeline
 			for(int i=0; i<timelines.size(); i++){
-			scrollBox.getChildren().addAll(yearShow(Main.project.getTimelines().get(i).getTimelineId(),Main.project.getTimelines().get(i).getStartDate(),Main.project.getTimelines().get(i).getEndDate()),generateTimeL(Main.project.getTimelines().get(i).getTimelineId(), Main.project.getTimelines().get(i).getStartDate(), Main.project.getTimelines().get(i).getEndDate()),spaceBetween());
+			scrollBox.getChildren().addAll(yearShow(Main.project.getTimelines().get(i).getTimelineId()),generateTimeL(Main.project.getTimelines().get(i).getTimelineId(), Main.project.getTimelines().get(i).getStartDate(), Main.project.getTimelines().get(i).getEndDate()),spaceBetween());
 			}
 			
 		}
 		else{
 			for(int i=0; i<timelines.size(); i++){	//Just displaying the checked timelines
 				if(timelines.get(i).isSelected()){
-				scrollBox.getChildren().addAll(yearShow(Main.project.getTimelines().get(i).getTimelineId(),Main.project.getTimelines().get(i).getStartDate(),Main.project.getTimelines().get(i).getEndDate()),generateTimeL(Main.project.getTimelines().get(i).getTimelineId(), Main.project.getTimelines().get(i).getStartDate(), Main.project.getTimelines().get(i).getEndDate()),spaceBetween());
+				scrollBox.getChildren().addAll(yearShow(Main.project.getTimelines().get(i).getTimelineId()),generateTimeL(Main.project.getTimelines().get(i).getTimelineId(), Main.project.getTimelines().get(i).getStartDate(), Main.project.getTimelines().get(i).getEndDate()),spaceBetween());
 				}	
 			}	 
 		}
@@ -124,29 +121,14 @@ public class showTimelinesController {
 		Line timeLine = new Line(0, 50, size, 50);
 		timeLine.setStrokeWidth(5);
 		
-		int years = (int)((yearCounter(startDate,endDate)-(yearCounter(startDate,endDate)%5)));
-  		int Ycounter = Math.round((years - years%4)/5);
-  		
 		timeLine.setOnMouseClicked(e ->{
-			if(Ycounter>5){
-				if(counter == 0){
-					zoomBox.getChildren().addAll(yearShow(id,startDate,startDate.plusYears(Ycounter)),generateTimeL(id, startDate, startDate.plusYears(Ycounter)));
-					}
-				else if(counter ==1){
-					zoomBox.getChildren().addAll(yearShow(id,startDate.plusYears(Ycounter),startDate.plusYears(Ycounter*2)),generateTimeL(id, startDate.plusYears(Ycounter), endDate.plusYears((Ycounter*2))));
-					}
-				else if(counter ==2){
-					zoomBox.getChildren().addAll(yearShow(id,startDate.plusYears(Ycounter*2),startDate.plusYears(Ycounter*3)),generateTimeL(id, startDate.plusYears(Ycounter*2), endDate.plusYears((Ycounter*3))));
-					}
-				else if(counter ==3){
-					zoomBox.getChildren().addAll(yearShow(id,startDate.plusYears(Ycounter*3),startDate.plusYears(Ycounter*4)),generateTimeL(id, startDate.plusYears(Ycounter*3), endDate.plusYears((Ycounter*4))));
-					}
-				else if(counter ==4){
-					zoomBox.getChildren().addAll(yearShow(id,startDate.plusYears(Ycounter*4),startDate.plusYears(Ycounter*5)),generateTimeL(id, startDate.plusYears(Ycounter*4), endDate.plusYears((Ycounter*5))));
-					}	
+			if(yearCounter(Main.project.getTimeline(id).getStartDate(), Main.project.getTimeline(id).getEndDate())>25){
+				this.scrollBox.getChildren().add(generateTimeL(id, startDate, endDate));
+			
+			
 		}
 					
-			
+			this.scrollBox.getChildren().add(zoomedTimeline());
 		});
 		
 		
@@ -176,8 +158,8 @@ public class showTimelinesController {
 		HBox hbox = new HBox();
 		hbox.getChildren().add(rectangle);
 		
-		int start = StartDate.getYear();
-		int end = EndDate.getYear();
+		int start = Main.project.getTimeline(id).getStartDate().getYear();
+		int end = Main.project.getTimeline(id).getEndDate().getYear();
 		int temp = end - start;
 		
 		if(temp > 5 || temp == 5) {
@@ -286,7 +268,9 @@ public class showTimelinesController {
 
 	 }
 	
-	public Pane yearShow(int id,LocalDate StartDate, LocalDate EndDate) {			//Method that is displaying the name and years over the timeline
+	public Pane yearShow(int id) {			//Method that is displaying the name and years over the timeline
+		  LocalDate startDate = Main.project.getTimeline(id).getStartDate();
+		  LocalDate endDate = Main.project.getTimeline(id).getEndDate();
 		  
 		  Pane pane = new Pane();
 		  
@@ -300,37 +284,9 @@ public class showTimelinesController {
 		  title.setFont(Font.font ("Verdana", 20));
 		  yearBox.getChildren().addAll(title,rectangle);  
 		  
-<<<<<<< HEAD
-		  if(yearCounter(StartDate,EndDate)>5 || yearCounter(StartDate,EndDate) == 5 ){
-			  	if(yearCounter(StartDate,EndDate)%5 == 0){
-			  		for(int i = 0; i <= (yearCounter(StartDate,EndDate)); i+=Math.round((yearCounter(StartDate,EndDate)/5))) {
-			  		Rectangle rec = new Rectangle(222, 1);
-			  		rec.setFill(Color.TRANSPARENT);
-			  		String temp =String.valueOf(StartDate.getYear()+i); //- startDate.getYear()));
-			  		Text text = new Text();
-			  		text.setText(temp);	  
-			  		yearBox.getChildren().addAll(text,rec);
-			  		}
-=======
 		  int yearsTemp = (int)yearCounter(startDate, endDate);
 		  System.out.print(yearsTemp);
->>>>>>> branch 'develop' of https://github.com/SanRehmo/cs9roject.git
 		  
-<<<<<<< HEAD
-			  	}
-			  	
-			  	if(yearCounter(StartDate,EndDate)%5 > 0){
-			  		int years = (int)((yearCounter(StartDate,EndDate)-(yearCounter(StartDate,EndDate)%5)));
-			  		int counter = years - years%4;
-			  		if(yearCounter(StartDate,EndDate)<10){
-			  			for (int i=0; i<=counter; i+=counter/4){
-			  				Rectangle rec = new Rectangle(222, 1);
-			  				rec.setFill(Color.TRANSPARENT);
-			  				String temp =String.valueOf(StartDate.getYear()+i); //- startDate.getYear()));
-			  				Text text = new Text();
-			  				text.setText(temp);	  
-			  				yearBox.getChildren().addAll(text,rec);
-=======
 		  if(yearsTemp > 5 || yearsTemp == 5) {
 			  if(yearCounter(startDate,endDate)>=5){
 				  	if(yearCounter(startDate,endDate)%5 == 0){
@@ -362,21 +318,10 @@ public class showTimelinesController {
 				  			text.setText(temp);
 			  
 				  			yearBox.getChildren().add(text);
->>>>>>> branch 'develop' of https://github.com/SanRehmo/cs9roject.git
 				  			}
-<<<<<<< HEAD
-			  			String temp =String.valueOf(EndDate.getYear());
-			  			Text text = new Text();
-			  			text.setText(temp);
-		  
-			  			yearBox.getChildren().add(text);
-			  			}
-			  	}
-=======
 				  	}
 			  }
 			  
->>>>>>> branch 'develop' of https://github.com/SanRehmo/cs9roject.git
 		  }
 		  else {
 			  switch(yearsTemp) {
