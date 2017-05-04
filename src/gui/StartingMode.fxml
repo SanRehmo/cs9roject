@@ -42,7 +42,7 @@
                      <Insets top="5.0"/>
                  </VBox.margin>
              </Button>
-             <Button fx:id="delete_btn" mnemonicParsing="false" disable="true" onAction="#deleteProject" prefHeight="25.0" prefWidth="161.0"
+             <Button fx:id="delete_btn" mnemonicParsing="false" onAction="#deleteProject" prefHeight="25.0" prefWidth="161.0"
                      text="Delete Project">
                  <VBox.margin>
                      <Insets top="5.0"/>
