@@ -617,15 +617,20 @@ public Line clickAbleHline(int size, int id, int counter, LocalDate startDate, L
 		DatePickerSkin datePickerSkin = new DatePickerSkin(startDatePicker);
 		Node popupContent = datePickerSkin.getPopupContent();
 		popupContent.applyCss();
+		popupContent.autosize();
+	
+		
+		
 		
 		//primaryBorderpane.getChildren().add(popupContent);
 		//primaryBorderpane.setAlignment(popupContent, Pos.BOTTOM_LEFT);
 		BorderPane borderPane = new BorderPane();
 		borderPane.setCenter(popupContent);
-
+		
 		Stage stage2 = new Stage();
 		stage2.setScene(new Scene(borderPane)); 
 		stage2.setTitle("EventHandler");
+		stage2.sizeToScene();
 		stage2.show();
 	}
 	
