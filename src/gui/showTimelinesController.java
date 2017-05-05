@@ -70,7 +70,7 @@ public class showTimelinesController {
 			 HBox hbox = new HBox();
 			 Pane pane = new Pane();
 			 System.out.println(Main.project.getTimelines().size());
-			 CheckBox cbi = new CheckBox( Main.project.getTimelines().get(i).getTitle() +" ( " + Main.project.getTimelines().get(i).getEvents().size() +" event(s) )" + Main.project.getTimelines().get(i).getTimelineId() );
+			 CheckBox cbi = new CheckBox( Main.project.getTimelines().get(i).getTitle() +" (" + Main.project.getTimelines().get(i).getEvents().size() +" event/s) ID: " + Main.project.getTimelines().get(i).getTimelineId() );
 			 timelines.add(cbi);
 			 hbox.getChildren().addAll(cbi);
 			 hbox.setLayoutX(10);
