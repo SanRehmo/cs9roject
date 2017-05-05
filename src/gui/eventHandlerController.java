@@ -90,6 +90,7 @@ public class eventHandlerController {
     public String eventColor;
     
     int TimelineID = 0;
+    int EventID = 0;
     
 
     /**
@@ -343,6 +344,11 @@ public class eventHandlerController {
     	}
     	
     	
+    }
+    
+
+    public void stop(){
+        System.out.println("Stage is closing");
     }
     
     /**
