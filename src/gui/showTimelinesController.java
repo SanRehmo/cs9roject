@@ -141,32 +141,62 @@ public Line clickAbleHline(int size, int id, int counter, LocalDate startDate, L
   		timeLine.setOnMouseClicked(e ->{
 			if(FinalCounter>5){
 				if(counter == 0){
-					zoomBox.getChildren().addAll(yearShow(id,startDate,startDate.plusYears(FinalCounter)),generateTimeL(id, startDate, startDate.plusYears(FinalCounter)));
+					zoomBox.getChildren().addAll(yearShow(id,startDate,startDate.plusYears(FinalCounter)),generateTimeL(id, startDate, startDate.plusYears(FinalCounter)),spaceBetween());
+					zoomPane.setContent(zoomBox);
+			  		Stage stage2 = new Stage();
+					stage2.setScene(new Scene(zoomPane));  
+					stage2.setTitle("Zoomed timeline");
+					stage2.show();
 					}
 				else if(counter ==1){
-					zoomBox.getChildren().addAll(yearShow(id,startDate.plusYears(FinalCounter),startDate.plusYears(FinalCounter*2)),generateTimeL(id, startDate.plusYears(FinalCounter), endDate.plusYears((FinalCounter*2))));
+					zoomBox.getChildren().addAll(yearShow(id,startDate.plusYears(FinalCounter),startDate.plusYears(FinalCounter*2)),generateTimeL(id, startDate.plusYears(FinalCounter), startDate.plusYears((FinalCounter*2))),spaceBetween());
+					zoomPane.setContent(zoomBox);
+			  		Stage stage2 = new Stage();
+					stage2.setScene(new Scene(zoomPane));  
+					stage2.setTitle("Zoomed timeline");
+					stage2.show();
 					}
 				else if(counter ==2){
-					zoomBox.getChildren().addAll(yearShow(id,startDate.plusYears(FinalCounter*2),startDate.plusYears(FinalCounter*3)),generateTimeL(id, startDate.plusYears(FinalCounter*2), endDate.plusYears((FinalCounter*3))));
+					zoomBox.getChildren().addAll(yearShow(id,startDate.plusYears(FinalCounter*2),startDate.plusYears(FinalCounter*3)),generateTimeL(id, startDate.plusYears(FinalCounter*2), startDate.plusYears((FinalCounter*3))),spaceBetween());
+					zoomPane.setContent(zoomBox);
+			  		Stage stage2 = new Stage();
+					stage2.setScene(new Scene(zoomPane));  
+					stage2.setTitle("Zoomed timeline");
+					stage2.show();
 					}
 				else if(counter ==3){
-					zoomBox.getChildren().addAll(yearShow(id,startDate.plusYears(FinalCounter*3),startDate.plusYears(FinalCounter*4)),generateTimeL(id, startDate.plusYears(FinalCounter*3), endDate.plusYears((FinalCounter*4))));
+					zoomBox.getChildren().addAll(yearShow(id,startDate.plusYears(FinalCounter*3),startDate.plusYears(FinalCounter*4)),generateTimeL(id, startDate.plusYears(FinalCounter*3), startDate.plusYears((FinalCounter*4))),spaceBetween());
+					zoomPane.setContent(zoomBox);
+			  		Stage stage2 = new Stage();
+					stage2.setScene(new Scene(zoomPane));  
+					stage2.setTitle("Zoomed timeline");
+					stage2.show();
 					}
 				else if(counter ==4){
-					zoomBox.getChildren().addAll(yearShow(id,startDate.plusYears(FinalCounter*4),startDate.plusYears(FinalCounter*5)),generateTimeL(id, startDate.plusYears(FinalCounter*4), endDate.plusYears((FinalCounter*5))));
+					zoomBox.getChildren().addAll(yearShow(id,startDate.plusYears(FinalCounter*4),startDate.plusYears(FinalCounter*5)),generateTimeL(id, startDate.plusYears(FinalCounter*4), startDate.plusYears((FinalCounter*5))),spaceBetween());
+					zoomPane.setContent(zoomBox);
+			  		Stage stage2 = new Stage();
+					stage2.setScene(new Scene(zoomPane));  
+					stage2.setTitle("Zoomed timeline");
+					stage2.show();
 					}	
 		}
 			else {
 				zoomBox.getChildren().add(zoomedTimeline(id, startDate));
+				zoomPane.setContent(zoomBox);
+		  		Stage stage2 = new Stage();
+				stage2.setScene(new Scene(zoomPane));  
+				stage2.setTitle("Zoomed timeline");
+				stage2.show();
 			} 
 		
 		
-			zoomPane.setContent(zoomBox);
+			/*zoomPane.setContent(zoomBox);
 	  		Stage stage2 = new Stage();
 			stage2.setScene(new Scene(zoomPane));  
 			stage2.setTitle("Zoomed timeline");
 			stage2.show();
-					
+				*/	
 		});
   		
 		return timeLine;
