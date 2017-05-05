@@ -159,8 +159,6 @@ public class TimelinesDAO {
                     Date startDate = Date.valueOf(tl.startDate);
                     Date endDate = Date.valueOf(tl.endDate);
 
-                    Event evv = null;
-
                     String timelines = "INSERT INTO Timelines " + "VALUES (" + tl.timelineId + ", " + ev.eventid + ", '" + startDate + "', '" + endDate + "', '" + tl.title + "')";
                     execute(timelines);
 
@@ -231,7 +229,7 @@ public class TimelinesDAO {
         }
 
         if (isConnected()) {
-            query = "DELETE FROM Projects_WHERE PROJECT_ID=" + project.ProjectID;
+            query = "DELETE FROM Projects WHERE PROJECT_ID=" + project.ProjectID;
             execute(query);
             for (int i = 0; i < project.timelines.size(); i++) {
                 delete(project.timelines.get(i));
