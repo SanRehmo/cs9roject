@@ -10,6 +10,7 @@ public class TimelinesMain {
 
         // TESTING
 
+        /*
         // Load project from database
         Project project = dao.load(1);
         System.out.println("SIZE: " + project.getTimelines().size());
@@ -43,7 +44,6 @@ public class TimelinesMain {
                     System.out.println("EVENT ID: " + tmp.eventid + ", EVENT TITLE: " + tmp.title);
                 }
 */
-        }
 
         // uncomment for testing
         // DB test for DELETING
@@ -86,7 +86,10 @@ public class TimelinesMain {
         dao.save(testProject);
         */
 
-        System.out.println("LOAD ALL PROJECTS TEST: " + dao.loadAllProjects().get(1).getTimeline(1).getEvent(1).title);
+//        System.out.println("LOAD ALL PROJECTS TEST: " + dao.loadAllProjects().get(1).getTimeline(1).getEvent(1).title);
+
+
+        System.out.println("EXIST TEST: " + dao.exists(3));
 
     }
 
