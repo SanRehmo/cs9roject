@@ -287,11 +287,16 @@ public Line clickAbleHline(int size, int id, int counter, LocalDate startDate, L
 		
 		Line timeLine = new Line(0, 50, size, 50);
 		
-			timeLine.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			/*timeLine.setOnMouseClicked(new EventHandler<MouseEvent>() {
 				public void handle(MouseEvent e) {
 					showInfoByMonth(id, 2017, 5);
 				}
-			});
+			});*/
+		
+		timeLine.setOnMouseClicked(e -> {
+			showInfoByMonth (0, 2017, 4);
+			
+		});
 			primaryScrollpane.setContent(scrollBox);
 			Stage stage = (Stage) doneButton.getScene().getWindow();
 			stage.close();
@@ -317,6 +322,10 @@ public Line clickAbleHline(int size, int id, int counter, LocalDate startDate, L
 		hbox.setLayoutY(30);
 		hbox.setAlignment(Pos.CENTER);
 		pane.getChildren().add(hbox);
+		
+		pane.setOnMouseClicked(e-> {
+			showInfoByMonth (0, 2017, 4);
+		});
 		
 		return pane;	
 	}
