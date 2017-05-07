@@ -287,7 +287,7 @@ public Line clickAbleHline(int size, int id, int counter, LocalDate startDate, L
 		
 		Line timeLine = new Line(0, 50, size, 50);
 		
-			scrollBox.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			timeLine.setOnMouseClicked(new EventHandler<MouseEvent>() {
 				public void handle(MouseEvent e) {
 					showInfoByMonth(id, 2017, 5);
 				}
@@ -305,6 +305,7 @@ public Line clickAbleHline(int size, int id, int counter, LocalDate startDate, L
 	public Pane zoomedTimeline(int id, LocalDate startDate) {			//This will be the final timeline that you click on to get to the calendar
 		Pane pane = new Pane();
 		HBox hbox = new HBox();
+
 		for(int j = 0; j<5; j++){
 			hbox.getChildren().addAll(verticalLine(100),Hline(12));
 		for(int i = 0; i < 12; i++) {	
@@ -653,7 +654,7 @@ public Line clickAbleHline(int size, int id, int counter, LocalDate startDate, L
 		
 		Stage stage2 = new Stage();
 		stage2.setScene(new Scene(borderPane)); 
-		stage2.setTitle("EventHandler");
+		stage2.setTitle("Calendar");
 		stage2.sizeToScene();
 		stage2.show();
 	}
