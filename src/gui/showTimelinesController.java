@@ -44,8 +44,6 @@ import javafx.event.EventHandler;
 import javafx.util.Callback;
 
 
-
-
 public class showTimelinesController {
 	public int timelineId = 0;
 	
@@ -239,7 +237,9 @@ public Line clickAbleHline(int size, int id, int counter, LocalDate startDate, L
 				int endMonth = EndDate.getMonthValue();
 				int tempMonth = endMonth - startMonth;
 				
-				System.out.print("Month" + tempMonth);
+				if(tempMonth == 0) {
+					hbox.getChildren().addAll(verticalLine(100),clickAbleHline(250,id,1,StartDate,EndDate));	
+				}
 				
 				for(int i = 0; i < tempMonth; i++) {
 					hbox.getChildren().addAll(verticalLine(100),clickAbleHline(250,id,i,StartDate,EndDate));		
@@ -480,11 +480,11 @@ public Line clickAbleHline(int size, int id, int counter, LocalDate startDate, L
 			  }
 		  }
 		  		
-			  		pane.getChildren().add(yearBox);
+		pane.getChildren().add(yearBox);
 		  
-			  		return pane;
+		return pane;
 			 		 		
-			}
+	}
 	
 	public Pane spaceBetween(){
 	      Pane pane = new Pane();
@@ -658,22 +658,4 @@ public Line clickAbleHline(int size, int id, int counter, LocalDate startDate, L
 		stage2.sizeToScene();
 		stage2.show();
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }
