@@ -239,7 +239,13 @@ public Line clickAbleHline(int size, int id, int counter, LocalDate startDate, L
 				int endMonth = EndDate.getMonthValue();
 				int tempMonth = endMonth - startMonth;
 				
-				System.out.print(tempMonth);
+				System.out.print("Month" + tempMonth);
+				
+				for(int i = 0; i < tempMonth; i++) {
+					hbox.getChildren().addAll(verticalLine(100),clickAbleHline(250,id,i,StartDate,EndDate));		
+				}
+				break;
+			
 			}
 		 			case 1: {
 		 				for(int i = 0; i < 1; i++) {
@@ -393,6 +399,24 @@ public Line clickAbleHline(int size, int id, int counter, LocalDate startDate, L
 		  }
 		  else {
 			  switch(yearsTemp) {
+			  case 0: {
+				  int startMonth = startDate.getMonthValue();
+				  int endMonth = endDate.getMonthValue();
+				  int tempMonth = endMonth - startMonth;
+				 
+				  for(int i = 0; i <= tempMonth; i++) {
+					  
+					  Rectangle rec = new Rectangle(220, 1);
+					  rec.setFill(Color.TRANSPARENT);
+					  Text text = new Text();
+					  String tempText = startDate.plusMonths(i).getMonth().toString();
+					  text.setText(tempText);
+					  yearBox.getChildren().addAll(text, rec);
+					}
+				  
+				  break;
+			  }
+			  
 			  case 1: {
 				  for(int i = 0; i < yearsTemp; i++) {
 					  	Rectangle rec = new Rectangle(1230, 1);
@@ -633,5 +657,22 @@ public Line clickAbleHline(int size, int id, int counter, LocalDate startDate, L
 		stage2.sizeToScene();
 		stage2.show();
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }
