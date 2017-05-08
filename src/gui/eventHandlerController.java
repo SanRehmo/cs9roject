@@ -22,8 +22,12 @@ import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.Period;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 public class eventHandlerController {
@@ -89,8 +93,8 @@ public class eventHandlerController {
     
     public String eventColor;
     
-    int TimelineID = 0;
-    int EventID = 0;
+    int TimelineID = StartingModeController.timelineIdToModify;
+    int EventID = StartingModeController.eventIdToModify;
     
 
     /**
@@ -99,7 +103,7 @@ public class eventHandlerController {
      * @throws IOException 
      */
     @FXML
-    void delete(ActionEvent event) throws IOException {
+    void delete() throws IOException {
     	
     	Alert alert = new Alert(AlertType.CONFIRMATION);
     	alert.setTitle("Delete");
@@ -109,12 +113,18 @@ public class eventHandlerController {
     	alert.getDialogPane().setContent(checkBox);
     	
     	checkBox.setIndeterminate(false);
+    	if (isEventRec(Main.project.getTimeline(TimelineID).getEvent(EventID))==0)
+    		checkBox.setDisable(true);
     	
-//    	Checks if the user wants to delete all recurring events.
-    	if(checkBox.isSelected())
-    		eventHandlerController.recurringDelete = true;
-    	
-    	alert.showAndWait();
+    	if (alert.showAndWait().get() == ButtonType.OK){
+    		//Checks if the user wants to delete all recurring events.
+        	if(checkBox.isSelected())
+        		Main.project.getTimeline(TimelineID).removeAllEvents(allEventsRec(Main.project.getTimeline(TimelineID).getEvent(EventID)));
+        	else
+        		Main.project.getTimeline(TimelineID).removeEvent(EventID);
+        	Stage stage = (Stage) btnSave.getScene().getWindow();
+		    stage.close();
+    	} 	
 
     }
     	
@@ -236,20 +246,43 @@ public class eventHandlerController {
     @FXML
     private void initialize() {
     	
-    	ChoiceDialog<Timeline> choiceDialog = new ChoiceDialog<Timeline>(Main.project.getTimelines().get(0), Main.project.getTimelines());
-		choiceDialog.setTitle("Choice Dialog");
-		choiceDialog.setHeaderText("Select a Timeline to add the event");
-		choiceDialog.setContentText("Select a timeline:");
-
-		// Traditional way to get the response value.
-		Optional<Timeline> result = choiceDialog.showAndWait();
-		if (result.isPresent()){
-		    TimelineID= result.get().getTimelineId();
-		}
-		else{
-			alertWindow(AlertType.INFORMATION, "INFORMATION", "You did not select a timeline!", "Event will added to "+ Main.project.getTimelines().get(0));
-			TimelineID = Main.project.getTimelines().get(0).getTimelineId();
-		}
+    	if (EventID!=0){
+    		Timeline t=Main.project.getTimeline(TimelineID);
+    		System.out.println(t.getEvents().get(0).getTitle()+"  ID: "+t.getEvents().get(0).getEventId());
+    		Event e = t.getEvent(EventID);
+    		NameEvent_textField.setText(e.getTitle());
+    		duration_checkBox.setSelected(e.isDurationEvent());
+    		startTextField.setValue(e.getStartTime().toLocalDate());
+    		startHH.setValueFactory((SpinnerValueFactory<Integer>)new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 23, e.getStartTime().toLocalTime().getHour()));
+    		startMM.setValueFactory((SpinnerValueFactory<Integer>)new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 59, e.getStartTime().toLocalTime().getMinute()));
+    		description.setText(e.getDescription());
+    		eventImage_imageView.setImage(e.getImage());
+    		if (e.getColor()==Color.RED)
+    			color_ComboBox.setValue("Red");
+    		else if (e.getColor()==Color.BLUE)
+    			color_ComboBox.setValue("Blue");
+    		else if (e.getColor()==Color.GREEN)
+    			color_ComboBox.setValue("Green");
+    		else if (e.getColor()==Color.ORANGE)
+    			color_ComboBox.setValue("Orange");
+    		if (e.isDurationEvent()){
+    			endTextField.setDisable(false);
+    			endTextField.setValue(e.getEndTime().toLocalDate());
+    			endHH.setDisable(false);
+    			endHH.setValueFactory((SpinnerValueFactory<Integer>)new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 23, e.getEndTime().toLocalTime().getHour()));
+    			endMM.setDisable(false);
+    			endMM.setValueFactory((SpinnerValueFactory<Integer>)new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 59, e.getEndTime().toLocalTime().getMinute()));
+    		}
+    		switch (isEventRec(e)){
+    		case 1: Reccuring_ComboBox.setValue("Every day"); break;
+    		case 2: Reccuring_ComboBox.setValue("Every week"); break;
+    		case 3: Reccuring_ComboBox.setValue("Every month"); break;
+    		case 4: Reccuring_ComboBox.setValue("Every year"); break;
+    		}
+    		
+    		delete_btn.setDisable(false);
+    		
+    	}
     	
     	color_ComboBox.setItems(color_Combo);
     	Reccuring_ComboBox.setItems(Reccuring_ComboBox_Value);
@@ -308,12 +341,17 @@ public class eventHandlerController {
         	else{
         		e = new NonDurationEvent(NameEvent_textField.getText(), LocalDateTime.of(startTextField.getValue(), LocalTime.of(startHH.getValue(), startMM.getValue())), description.getText(),image, color );
         	}
+        	if (EventID!=0)
+        		Main.project.getTimeline(TimelineID).removeAllEvents(allEventsRec(Main.project.getTimeline(TimelineID).getEvent(EventID)));
+
         	
         	// Search for time line by its ID to add the event
         	for (Timeline temp : Main.project.getTimelines())
         		if (temp.getTimelineId()==TimelineID){
         			int initialSize = temp.getEvents().size();
         			while (temp.addEvent(e)){
+        				e.setEventId(e.getEventId()+1);
+        				Event.setCount(e.getEventId()+1);
         				if (Reccuring_ComboBox.getValue()==null){
             				break;
             			}
@@ -366,6 +404,34 @@ public class eventHandlerController {
 		alert.setContentText(contentText);
 		alert.showAndWait();
     	
+    }
+    
+    private List <Event> allEventsRec(Event e){
+    	List <Event> allEventsRec = new ArrayList<Event>();
+    	Timeline t = Main.project.getTimeline(TimelineID);
+    	for (Event temp : t.getEvents()){
+    		if (temp.getTitle().equals(temp.getTitle())  && temp.isDurationEvent()==e.isDurationEvent() && temp.getDescription().equals(e.getDescription()))
+    			allEventsRec.add(temp);
+    	}
+    	return allEventsRec;
+    }
+    
+    private int isEventRec(Event e){
+    	List <Event> allEventsRec= new ArrayList <Event>();
+    	allEventsRec = allEventsRec(e);
+    	if (allEventsRec.size()>1){
+       		Period period = Period.between(allEventsRec.get(1).getStartTime().toLocalDate(), allEventsRec.get(0).getStartTime().toLocalDate());
+    		if (period == Period.ofDays(1))
+    			return 1;
+    		else if (period == Period.ofWeeks(1))
+    			return 2;
+    		else if (period == Period.ofMonths(1))
+    			return 3;
+    		else if (period == Period.ofYears(1))
+    			return 4;
+    		
+    	}
+		return 0;
     }
 }
 

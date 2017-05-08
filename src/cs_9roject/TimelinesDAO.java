@@ -7,6 +7,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.scene.paint.Color;
+
 public class TimelinesDAO {
 
     private Connection connection = null;
@@ -52,9 +54,19 @@ public class TimelinesDAO {
                     int eventImageID = rss.getInt("IMAGE_ID");
                     String eventDescription = rss.getString("DESCRIPTION");
                     int timelineID = rss.getInt("TIMELINE_ID");
-
-                    Event event = new Event(timelineID, eventID, eventTitle, eventStart_time, eventEnd_time, eventDescription, eventImageID);
-                    eventList.add(event);
+                    
+                    boolean isDurationEvent=true;
+                    Color color= Color.valueOf("Green");
+                    
+                    if (isDurationEvent){
+                    	Event event = new DurationEvent(timelineID, eventID, eventTitle, eventStart_time, eventEnd_time, eventDescription, eventImageID, color);
+                        eventList.add(event);
+                    }
+                    else{
+                    	Event event = new NonDurationEvent(timelineID, eventID, eventTitle, eventStart_time, eventEnd_time, eventDescription, eventImageID, color);
+                        eventList.add(event);
+                    }
+                    
                 }
 
 
@@ -178,8 +190,9 @@ public class TimelinesDAO {
                     Time endTime = Time.valueOf("12:00:00");
 
                     if (ev.isDurationEvent()) {
-                        endDate = Date.valueOf(ev.endTime.toLocalDate());
-                        endTime = Time.valueOf(ev.endTime.toLocalTime());
+                    	System.out.print("ok");
+                        endDate = Date.valueOf(ev.getEndTime().toLocalDate());
+                        endTime = Time.valueOf(ev.getEndTime().toLocalTime());
                     }
 
                         boolToInt = (ev.isDurationEvent) ? 1 : 0;

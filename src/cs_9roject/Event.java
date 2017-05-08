@@ -30,7 +30,7 @@ public class Event {
 
     // mine
     // Create new event with specific ID. Almost used when importing events from database
-	public Event(int timelineID, int eventID, String eventTitle, LocalDateTime eventStart_time, LocalDateTime eventEnd_time, String Description, int imageID) {
+	public Event(int timelineID, int eventID, String eventTitle, LocalDateTime eventStart_time, LocalDateTime eventEnd_time, String Description, int imageID, Color color) {
 
 		timelineid = timelineID;
 		eventid = eventID;
@@ -41,11 +41,13 @@ public class Event {
         imageid = imageID;
         startDate = Date.valueOf(eventStart_time.toLocalDate());
         endDate = Date.valueOf(eventEnd_time.toLocalDate());
+        eventColor=color;
     }
 	
 	// Create new event with new ID.
 	public Event(String eventTitle, LocalDateTime eventStart_time, String Description, Image EventImage, Color EventColor) {
 		eventid = count++;
+		imageid=eventid;
 		title = eventTitle;
 		startTime = eventStart_time;
 		description=Description;

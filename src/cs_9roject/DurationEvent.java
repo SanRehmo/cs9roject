@@ -15,15 +15,15 @@ public class DurationEvent extends Event {
 	
 	// mine
     // Create new event with specific ID. Almost used when importing events from database
-	public DurationEvent(int timelineID, int eventID, String eventTitle, LocalDateTime eventStart_time, LocalDateTime eventEnd_time, String description, int imageID) {
-		super(timelineID, eventID, eventTitle, eventStart_time, eventEnd_time, description, imageID);
+	public DurationEvent(int timelineID, int eventID, String eventTitle, LocalDateTime eventStart_time, LocalDateTime eventEnd_time, String description, int imageID, Color color) {
+		super(timelineID, eventID, eventTitle, eventStart_time, eventEnd_time, description, imageID, color);
+		endTime=eventEnd_time;
 	}
 	
 	// Create new event with new ID.
 		public DurationEvent(String eventTitle, LocalDateTime eventStart_time, LocalDateTime eventEnd_time, String description, Image EventImage, Color EventColor) {
 			super(eventTitle, eventStart_time, description, EventImage, EventColor);
 			endTime = eventEnd_time;
-			imageid=eventid;
 		}
 
 	public void setStartTime(LocalDateTime StartTime) {
