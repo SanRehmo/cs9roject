@@ -1,13 +1,13 @@
 package cs_9roject;
 
 
+import javafx.scene.paint.Color;
+
 import java.sql.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-
-import javafx.scene.paint.Color;
 
 public class TimelinesDAO {
 
@@ -54,10 +54,10 @@ public class TimelinesDAO {
                     int eventImageID = rss.getInt("IMAGE_ID");
                     String eventDescription = rss.getString("DESCRIPTION");
                     int timelineID = rss.getInt("TIMELINE_ID");
-                    
-                    boolean isDurationEvent=true;
-                    Color color= Color.valueOf("Green");
-                    
+                    boolean isDurationEvent = rss.getBoolean("DURATIONEVENT");
+                    Color color = Color.valueOf(rss.getString("COLOR"));
+
+
                     if (isDurationEvent){
                     	Event event = new DurationEvent(timelineID, eventID, eventTitle, eventStart_time, eventEnd_time, eventDescription, eventImageID, color);
                         eventList.add(event);
