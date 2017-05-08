@@ -2,6 +2,7 @@ package gui;
 
 
 import cs_9roject.Project;
+import cs_9roject.Timeline;
 import cs_9roject.TimelinesDAO;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -32,6 +33,9 @@ public class StartingModeController {
 	
 	@FXML
     private Button delete_btn;
+	
+	public static int timelineIdToModify=0;
+	public static int eventIdToModify=22;
 	
 	
 	/**
@@ -143,7 +147,19 @@ public class StartingModeController {
 			alert.showAndWait();
 			return;
 		}
-		Main.showEventHandler();
+		else {
+			ChoiceDialog<Timeline> choiceDialog = new ChoiceDialog<Timeline>(Main.project.getTimelines().get(0), Main.project.getTimelines());
+			choiceDialog.setTitle("Choice Dialog");
+			choiceDialog.setHeaderText("Select a Timeline to add the event");
+			choiceDialog.setContentText("Select a timeline:");
+
+			// Traditional way to get the response value.
+			Optional<Timeline> result = choiceDialog.showAndWait();
+			if (result.isPresent()){
+			    timelineIdToModify= result.get().getTimelineId();
+			    Main.showEventHandler();
+			}
+		}
 	}
 	
 }

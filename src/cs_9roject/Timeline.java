@@ -55,7 +55,7 @@ public class Timeline {
 	
 	// Add new event to timeline
 	public boolean addEvent(Event event){
-		if ((event.isDurationEvent() && !event.getStartTime().toLocalDate().isBefore(startDate) && !event.getEndTime().toLocalDate().isAfter(endDate)) || (!event.isDurationEvent() && !event.getStartTime().toLocalDate().isBefore(startDate))){
+		if ((event.isDurationEvent() && !event.getStartTime().toLocalDate().isBefore(startDate) && !event.getEndTime().toLocalDate().isAfter(endDate)) || (!event.isDurationEvent() && !event.getStartTime().toLocalDate().isBefore(startDate)&& !event.getStartTime().toLocalDate().isAfter(endDate))){
 			events.add(event);
 			return true;
 		}
@@ -84,9 +84,9 @@ public class Timeline {
 				events.set(i, event);
 	}
 	
-	// Remove all events from timeline
-	public void removeAllEvents(){
-		events.removeAll(events);
+	// Remove list of events from timeline
+	public void removeAllEvents(List <Event> Events){
+		events.removeAll(Events);
 	}
 	
 	// Check if 2 timelines are equals
