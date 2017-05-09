@@ -137,22 +137,6 @@ public class Event {
 		count = Count;
 	}
 	
-	public Color colorFromEventHandler() {
-		
-		eventHandlerController event = new eventHandlerController();
-		Color color = null;
-		
-		switch(event.eventColor) {
-		case "Red" :  color = Color.RED;
-		case "Green": color = Color.GREEN;
-		case "Blue" : color = Color.BLUE;
-		case "Orange" : color = Color.ORANGE; 
-		
-		}
-		
-		return color;
-	}
-	
 	@Override
 	public String toString(){
 		return title + " ID: " + eventid;
