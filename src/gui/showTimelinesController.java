@@ -9,6 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tooltip;
 import javafx.scene.input.MouseEvent;
@@ -30,14 +31,10 @@ import java.util.List;
 
 import com.sun.javafx.scene.control.skin.DatePickerSkin;
 
+import cs_9roject.Event;
 import cs_9roject.Timeline;
 import javafx.scene.paint.Color;
-
-
-
-
-
-
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 
@@ -137,6 +134,7 @@ public Line clickAbleHline(int size, int id, int counter, LocalDate startDate, L
 		int FinalCounter = Ycounter;
 		
   		timeLine.setOnMouseClicked(e ->{
+  			StartingModeController.timelineIdToModify=id;
 			if(FinalCounter>5){
 				if(counter == 0){
 					zoomBox.getChildren().addAll(yearShow(id,startDate,startDate.plusYears(FinalCounter)),generateTimeL(id, startDate, startDate.plusYears(FinalCounter)),spaceBetween());
@@ -531,124 +529,75 @@ public Line clickAbleHline(int size, int id, int counter, LocalDate startDate, L
 				return new DateCell() {
 					@Override
 					public void updateItem(LocalDate item, boolean empty) {
+						int eventCount=0;
 						super.updateItem(item, empty);
-						List<Timeline> timelines = Main.project.getTimelines();
-
-						for (Timeline t : timelines) {	
-							if (t.getTimelineId() == timelineId) {		//get the infomation of the Timeline you clicked
-								List<cs_9roject.Event> events = t.getEvents();
-								for (cs_9roject.Event e : events) {		//get all the events of the the timeline
-									LocalDateTime startTime = e.getStartTime();	
-									LocalDateTime endTime = e.getEndTime();
-									
-									String startMonth = startTime.getMonthValue() / 10 > 0 ? "" + startTime.getMonthValue() : "0" + startTime.getMonthValue();
-									String startDay = startTime.getDayOfMonth() / 10 > 0 ? "" + startTime.getDayOfMonth() : "0" + startTime.getDayOfMonth();
-									
-									String startTimeStr = startTime.getYear() + "-" + startMonth + "-" + startDay;
-									String endTimeStr = "";
-									
-									if (endTime == null) {		// if the end time is not duration
-										endTimeStr = startTimeStr;
-									} else {
-										String endMonth = endTime.getMonthValue() / 10 > 0 ? "" + endTime.getMonthValue() : "0" + endTime.getMonthValue();
-										String endDay = endTime.getDayOfMonth() / 10 > 0 ? "" + endTime.getDayOfMonth() : "0" + endTime.getDayOfMonth();
-										endTimeStr = endTime.getYear() + "-" + endMonth + "-" + endDay;
-									}
-									
-									String itemMonth = item.getMonthValue() / 10 > 0 ? "" + item.getMonthValue() : "0" + item.getMonthValue();
-									String itemDay = item.getDayOfMonth() / 10 > 0 ? "" + item.getDayOfMonth() : "0" + item.getDayOfMonth();
-									String itemStr = item.getYear() + "-" + itemMonth +"-" + itemDay;
-
-									if (itemStr.compareTo(startTimeStr) >= 0 && itemStr.compareTo(endTimeStr) <= 0) {
-										Color c = e.getColor();
-										String colorStr = c.toString().substring(4);
-										setStyle("-fx-background-color: #" + colorStr);			//set the color of the cell
-										setTooltip(new Tooltip(e.getTitle()));
-									}
-								}
-
-								break;
-							}
+						List<Event> events = Main.project.getTimeline(StartingModeController.timelineIdToModify).getEvents();
+						for (Event e : events) {	
+							if(e.getStartTime().toLocalDate().equals(item))
+								eventCount++;
 						}
+						if (eventCount>0){
+							this.setText(this.getText()+" "+ eventCount);
+							Color c = Color.BLUE;
+							String colorStr = c.toString().substring(4);
+							setStyle("-fx-background-color: #" + colorStr);			//set the color of the cell
+							setTooltip(new Tooltip(eventCount+" Event/s"));
+						}
+	
 					}	
 				};
 			}
 		};
 		
 		startDatePicker.setOnAction(new EventHandler<ActionEvent>() {		//add a action event to the DaterPicker.
-			public void handle(ActionEvent e) {			
-				String handlerTime = startDatePicker.getValue().toString();
-				
-				boolean isExist = false;
-				
-				for (Timeline t : Main.project.getTimelines()) {
-					if (t.getTimelineId() == timelineId) {				
-						List<cs_9roject.Event> events = t.getEvents();
-						for (cs_9roject.Event event : events) {
-							LocalDateTime startTime = event.getStartTime();
-							LocalDateTime endTime = event.getEndTime();
-							
-							String startMonth = startTime.getMonthValue() / 10 > 0 ? "" + startTime.getMonthValue() : "0" + startTime.getMonthValue();
-							String startDay = startTime.getDayOfMonth() / 10 > 0 ? "" + startTime.getDayOfMonth() : "0" + startTime.getDayOfMonth();
-							
-							String startTimeStr = startTime.getYear() + "-" + startMonth + "-" + startDay;
-							String endTimeStr = "";
-							
-							if (endTime == null) {
-								endTimeStr = startTimeStr;
-							} else {
-								String endMonth = endTime.getMonthValue() / 10 > 0 ? "" + endTime.getMonthValue() : "0" + endTime.getMonthValue();
-								String endDay = endTime.getDayOfMonth() / 10 > 0 ? "" + endTime.getDayOfMonth() : "0" + endTime.getDayOfMonth();
-								endTimeStr = endTime.getYear() + "-" + endMonth + "-" + endDay;
-							}
-							
-							if (handlerTime.compareTo(startTimeStr) >=0 && handlerTime.compareTo(endTimeStr) <= 0) {
-								isExist = true;
-								try {
-									FXMLLoader loader = new FXMLLoader();
-									loader.setLocation(Main.class.getResource("eventHandler.fxml"));		//show the eventHandler GUI by the infomation of the time you clicked
-									Pane showEventHandler = loader.load();
-									eventHandlerController handler = loader.getController();
-									//handler.getStartTextField().setValue(startTime.toLocalDate());
-									if (endTime != null)
-										handler.getEndValue().setValue(endTime.toLocalDate());
-									//handler.getDescription().setText(event.getDescription());
-								//	handler.getNameEvent_textField().setText(event.getTitle());
-									
-									Stage stage2 = new Stage();
-									stage2.setScene(new Scene(showEventHandler));  
-									stage2.setTitle("EventHandler");
-									stage2.show();
-								} catch (IOException e1) {
-									e1.printStackTrace();
-								}		
-								break;
-							} 
-						}
-						break;
-					}
+			public void handle(ActionEvent e) {
+				List<Event> events = new ArrayList(Main.project.getTimeline(StartingModeController.timelineIdToModify).getEvents());
+				System.out.println("alaa "+events.size());
+				for (int i=0; i<events.size(); i++) {	
+					if(!events.get(i).getStartTime().toLocalDate().equals(startDatePicker.getValue()))
+						events.remove(i--);
 				}
+				System.out.println("alaa "+events.size());
 				
-				if (!isExist) {
-					try {
+				try {
+					if (events.isEmpty()){
+						StartingModeController.eventIdToModify=0;
+						Main.showEventHandler();
+					}
+					else{
+						StartingModeController.eventIdToModify=events.get(0).getEventId();
 						FXMLLoader loader = new FXMLLoader();
 						loader.setLocation(Main.class.getResource("eventHandler.fxml"));
 						Pane showEventHandler = loader.load();
 						eventHandlerController handler = loader.getController();
 						
+						ListView<Event> eventListView = new ListView<>();
+						eventListView.setPrefWidth(150);
+						eventListView.setItems(FXCollections.observableArrayList(events));
+						eventListView.getSelectionModel().selectedItemProperty().addListener( ov -> {
+							StartingModeController.eventIdToModify=eventListView.getSelectionModel().getSelectedItem().getEventId();
+							handler.initialize();
+							});
+						
+
+						HBox layout = new HBox();
+						layout.getChildren().addAll(eventListView,showEventHandler);
 						Stage stage2 = new Stage();
-						stage2.setScene(new Scene(showEventHandler));  
+						stage2.setScene(new Scene(layout));  
 						stage2.setTitle("EventHandler");
 						stage2.show();
-					} catch (IOException e1) {
-						e1.printStackTrace();
-					}		
+					}
+					
+				} catch (IOException e1) {
+					e1.printStackTrace();
 				}
 			}
 		});
 
 		startDatePicker.setDayCellFactory(dayCellFactory);
+		@SuppressWarnings("restriction")
 		DatePickerSkin datePickerSkin = new DatePickerSkin(startDatePicker);
+		@SuppressWarnings("restriction")
 		Node popupContent = datePickerSkin.getPopupContent();
 		popupContent.applyCss();
 		popupContent.autosize();

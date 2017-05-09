@@ -14,7 +14,7 @@ public class Timeline {
 	protected Period duration;
 	protected String title;
 	protected Boolean isOnlyYears=false;	// Boolean variable to define timeline's type
-	List<Event> events = new ArrayList<Event>();
+	public List<Event> events = new ArrayList<Event>();
 	
 	
 	// Create new timeline with specific ID and event-list. Almost used when importing timelines from database

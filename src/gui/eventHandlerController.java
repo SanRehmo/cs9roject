@@ -8,6 +8,7 @@ import cs_9roject.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
@@ -104,7 +105,6 @@ public class eventHandlerController {
      */
     @FXML
     void delete() throws IOException {
-    	
     	Alert alert = new Alert(AlertType.CONFIRMATION);
     	alert.setTitle("Delete");
     	alert.setHeaderText("Delete event");
@@ -244,26 +244,26 @@ public class eventHandlerController {
      * Gives options in the comboBox
      */
     @FXML
-    private void initialize() {
-    	
+    public void initialize() {
+    	EventID=StartingModeController.eventIdToModify;
     	if (EventID!=0){
     		Timeline t=Main.project.getTimeline(TimelineID);
-    		System.out.println(t.getEvents().get(0).getTitle()+"  ID: "+t.getEvents().get(0).getEventId());
     		Event e = t.getEvent(EventID);
     		NameEvent_textField.setText(e.getTitle());
     		duration_checkBox.setSelected(e.isDurationEvent());
     		startTextField.setValue(e.getStartTime().toLocalDate());
     		startHH.setValueFactory((SpinnerValueFactory<Integer>)new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 23, e.getStartTime().toLocalTime().getHour()));
     		startMM.setValueFactory((SpinnerValueFactory<Integer>)new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 59, e.getStartTime().toLocalTime().getMinute()));
+    		endTextField.setValue(startTextField.getValue());
     		description.setText(e.getDescription());
     		eventImage_imageView.setImage(e.getImage());
-    		if (e.getColor()==Color.RED)
+    		if (e.getColor().toString().equals(Color.RED.toString()))
     			color_ComboBox.setValue("Red");
-    		else if (e.getColor()==Color.BLUE)
+    		else if (e.getColor().toString().equals(Color.BLUE.toString()))
     			color_ComboBox.setValue("Blue");
-    		else if (e.getColor()==Color.GREEN)
+    		else if (e.getColor().toString().equals(Color.GREEN.toString()))
     			color_ComboBox.setValue("Green");
-    		else if (e.getColor()==Color.ORANGE)
+    		else if (e.getColor().toString().equals(Color.ORANGE.toString()))
     			color_ComboBox.setValue("Orange");
     		if (e.isDurationEvent()){
     			endTextField.setDisable(false);
@@ -341,8 +341,10 @@ public class eventHandlerController {
         	else{
         		e = new NonDurationEvent(NameEvent_textField.getText(), LocalDateTime.of(startTextField.getValue(), LocalTime.of(startHH.getValue(), startMM.getValue())), description.getText(),image, color );
         	}
-        	if (EventID!=0)
+        	if (EventID!=0){
         		Main.project.getTimeline(TimelineID).removeAllEvents(allEventsRec(Main.project.getTimeline(TimelineID).getEvent(EventID)));
+        		e.setEventId(EventID);
+        	}
 
         	
         	// Search for time line by its ID to add the event
@@ -350,8 +352,11 @@ public class eventHandlerController {
         		if (temp.getTimelineId()==TimelineID){
         			int initialSize = temp.getEvents().size();
         			while (temp.addEvent(e)){
-        				e.setEventId(e.getEventId()+1);
-        				Event.setCount(e.getEventId()+1);
+        				if (e.isDurationEvent())
+        					e=new DurationEvent((DurationEvent)e);
+        				else
+        					e=new NonDurationEvent((NonDurationEvent)e);
+
         				if (Reccuring_ComboBox.getValue()==null){
             				break;
             			}
@@ -410,28 +415,34 @@ public class eventHandlerController {
     	List <Event> allEventsRec = new ArrayList<Event>();
     	Timeline t = Main.project.getTimeline(TimelineID);
     	for (Event temp : t.getEvents()){
-    		if (temp.getTitle().equals(temp.getTitle())  && temp.isDurationEvent()==e.isDurationEvent() && temp.getDescription().equals(e.getDescription()))
+    		System.out.println(temp.getTitle());
+    		System.out.println(e.getTitle());
+    		if (temp.getTitle().equals(e.getTitle()))
     			allEventsRec.add(temp);
     	}
+    	System.out.println(allEventsRec.size());
     	return allEventsRec;
     }
     
     private int isEventRec(Event e){
-    	List <Event> allEventsRec= new ArrayList <Event>();
-    	allEventsRec = allEventsRec(e);
+    	List <Event> allEventsRec= allEventsRec(e);
     	if (allEventsRec.size()>1){
        		Period period = Period.between(allEventsRec.get(1).getStartTime().toLocalDate(), allEventsRec.get(0).getStartTime().toLocalDate());
-    		if (period == Period.ofDays(1))
+    		if (period.equals(Period.ofDays(1)) )
     			return 1;
     		else if (period == Period.ofWeeks(1))
     			return 2;
-    		else if (period == Period.ofMonths(1))
+    		else if (period.equals(Period.ofMonths(1)) )
     			return 3;
     		else if (period == Period.ofYears(1))
     			return 4;
+    		else
+    			return 0;
     		
     	}
-		return 0;
+    	else
+    		return 0;
+		
     }
 }
 

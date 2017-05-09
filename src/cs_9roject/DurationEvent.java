@@ -25,6 +25,11 @@ public class DurationEvent extends Event {
 			super(eventTitle, eventStart_time, description, EventImage, EventColor);
 			endTime = eventEnd_time;
 		}
+		
+		public DurationEvent(DurationEvent e) {
+			super(e);
+			endTime = e.endTime;
+		}
 
 	public void setStartTime(LocalDateTime StartTime) {
 		startTime = StartTime;
