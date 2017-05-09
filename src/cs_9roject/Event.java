@@ -141,5 +141,16 @@ public class Event {
 	public String toString(){
 		return title + " ID: " + eventid;
 	}
+	
+	public String getColorName(){
+		if (eventColor.toString().equals(Color.RED.toString()))
+			return("Red");
+		else if (eventColor.toString().equals(Color.BLUE.toString()))
+			return("Blue");
+		else if (eventColor.toString().equals(Color.GREEN.toString()))
+			return("Green");
+		return("Orange");
+		
+	}
 
 }

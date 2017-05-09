@@ -23,6 +23,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import javafx.scene.paint.Color;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -34,7 +35,7 @@ import com.sun.javafx.scene.control.skin.DatePickerSkin;
 import cs_9roject.Event;
 import cs_9roject.NonDurationEvent;
 import cs_9roject.Timeline;
-import javafx.scene.paint.Color;
+
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -531,19 +532,21 @@ public Line clickAbleHline(int size, int id, int counter, LocalDate startDate, L
 					@Override
 					public void updateItem(LocalDate item, boolean empty) {
 						int eventCount=0;
+						String c= Color.WHITE.toString();
 						super.updateItem(item, empty);
 						List<Event> events = Main.project.getTimeline(StartingModeController.timelineIdToModify).getEvents();
 						for (Event e : events) {	
-							if(e.getStartTime().toLocalDate().equals(item))
+							if(e.getStartTime().toLocalDate().equals(item)){
 								eventCount++;
+								c = e.getColorName();
+							}
+								
 						}
 						if (eventCount>0){
-							
-							this.setText(this.getText()+" "+ eventCount);
-							String color = events.get(eventCount).getColor().toString().substring(4);
-							
-							
-							setStyle("-fx-background-color: #" + color);			//set the color of the cell
+							if (eventCount>1) c="fuchsia";
+							this.setText(this.getText()+" ("+ eventCount+")");
+													
+							setStyle("-fx-background-color: " + c);			//set the color of the cell
 							setTooltip(new Tooltip(eventCount+" Event/s"));
 						}
 	
@@ -598,14 +601,17 @@ public Line clickAbleHline(int size, int id, int counter, LocalDate startDate, L
 				}
 			}
 		});
-
+		
+		startDatePicker.autosize();;
 		startDatePicker.setDayCellFactory(dayCellFactory);
 		@SuppressWarnings("restriction")
 		DatePickerSkin datePickerSkin = new DatePickerSkin(startDatePicker);
 		@SuppressWarnings("restriction")
 		Node popupContent = datePickerSkin.getPopupContent();
+		
 		popupContent.applyCss();
 		popupContent.autosize();
+
 	
 		
 		
@@ -613,6 +619,8 @@ public Line clickAbleHline(int size, int id, int counter, LocalDate startDate, L
 		//primaryBorderpane.getChildren().add(popupContent);
 		//primaryBorderpane.setAlignment(popupContent, Pos.BOTTOM_LEFT);
 		BorderPane borderPane = new BorderPane();
+		borderPane.autosize();
+		borderPane.setPrefSize(325, 250);
 		borderPane.setCenter(popupContent);
 		
 		Stage stage2 = new Stage();
