@@ -539,9 +539,12 @@ public Line clickAbleHline(int size, int id, int counter, LocalDate startDate, L
 						}
 						if (eventCount>0){
 							this.setText(this.getText()+" "+ eventCount);
+							String b = events.iterator().next().getColor().toString().substring(4);
+							System.out.print(b);
+							
 							Color c = Color.BLUE;
 							String colorStr = c.toString().substring(4);
-							setStyle("-fx-background-color: #" + colorStr);			//set the color of the cell
+							setStyle("-fx-background-color: #" + b);			//set the color of the cell
 							setTooltip(new Tooltip(eventCount+" Event/s"));
 						}
 	
