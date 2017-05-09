@@ -43,7 +43,7 @@ public class eventHandlerController {
 			"Red", "Green", "Blue", "Orange");
 	
 	ObservableList<String> Reccuring_ComboBox_Value = FXCollections.observableArrayList(
-			"Every day", "Every week", "Every month", "Every year");
+			"Every day", "Every week", "Every month", "Every year", "Non");
 
     @FXML
     private ImageView eventImage_imageView;
@@ -246,14 +246,22 @@ public class eventHandlerController {
     @FXML
     public void initialize() {
     	EventID=StartingModeController.eventIdToModify;
+    	
     	if (EventID!=0){
     		Timeline t=Main.project.getTimeline(TimelineID);
     		Event e = t.getEvent(EventID);
+    		if (isEventRec(e)!=0){
+    			e=allEventsRec(e).get(0);
+    			EventID=e.getEventId();
+    		}
     		NameEvent_textField.setText(e.getTitle());
     		duration_checkBox.setSelected(e.isDurationEvent());
     		startTextField.setValue(e.getStartTime().toLocalDate());
     		startHH.setValueFactory((SpinnerValueFactory<Integer>)new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 23, e.getStartTime().toLocalTime().getHour()));
     		startMM.setValueFactory((SpinnerValueFactory<Integer>)new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 59, e.getStartTime().toLocalTime().getMinute()));
+    		endTextField.setDisable(!e.isDurationEvent());
+			endHH.setDisable(!e.isDurationEvent());
+			endMM.setDisable(!e.isDurationEvent());
     		endTextField.setValue(startTextField.getValue());
     		description.setText(e.getDescription());
     		eventImage_imageView.setImage(e.getImage());
@@ -266,14 +274,12 @@ public class eventHandlerController {
     		else if (e.getColor().toString().equals(Color.ORANGE.toString()))
     			color_ComboBox.setValue("Orange");
     		if (e.isDurationEvent()){
-    			endTextField.setDisable(false);
     			endTextField.setValue(e.getEndTime().toLocalDate());
-    			endHH.setDisable(false);
     			endHH.setValueFactory((SpinnerValueFactory<Integer>)new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 23, e.getEndTime().toLocalTime().getHour()));
-    			endMM.setDisable(false);
     			endMM.setValueFactory((SpinnerValueFactory<Integer>)new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 59, e.getEndTime().toLocalTime().getMinute()));
     		}
     		switch (isEventRec(e)){
+    		case 0: Reccuring_ComboBox.setValue("Non"); break;
     		case 1: Reccuring_ComboBox.setValue("Every day"); break;
     		case 2: Reccuring_ComboBox.setValue("Every week"); break;
     		case 3: Reccuring_ComboBox.setValue("Every month"); break;
@@ -282,6 +288,23 @@ public class eventHandlerController {
     		
     		delete_btn.setDisable(false);
     		
+    	}
+    	else{
+    		NameEvent_textField.setText("");
+    		duration_checkBox.setSelected(false);
+    		startTextField.setValue(null);
+    		startHH.setValueFactory((SpinnerValueFactory<Integer>)new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 23, 0));
+    		startMM.setValueFactory((SpinnerValueFactory<Integer>)new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 59, 0));
+    		endTextField.setDisable(true);
+			endTextField.setValue(null);
+			endHH.setDisable(true);
+			endHH.setValueFactory((SpinnerValueFactory<Integer>)new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 23, 0));
+			endMM.setDisable(true);
+			endMM.setValueFactory((SpinnerValueFactory<Integer>)new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 59, 0));
+    		description.setText(null);
+    		eventImage_imageView.setImage(null);
+    		color_ComboBox.setValue("Red");
+    		Reccuring_ComboBox.setValue("Non");
     	}
     	
     	color_ComboBox.setItems(color_Combo);
@@ -357,7 +380,7 @@ public class eventHandlerController {
         				else
         					e=new NonDurationEvent((NonDurationEvent)e);
 
-        				if (Reccuring_ComboBox.getValue()==null){
+        				if (Reccuring_ComboBox.getValue()==null || Reccuring_ComboBox.getValue().equals("Non")){
             				break;
             			}
         				else if (Reccuring_ComboBox.getValue().equals("Every day")){
@@ -427,14 +450,18 @@ public class eventHandlerController {
     private int isEventRec(Event e){
     	List <Event> allEventsRec= allEventsRec(e);
     	if (allEventsRec.size()>1){
-       		Period period = Period.between(allEventsRec.get(1).getStartTime().toLocalDate(), allEventsRec.get(0).getStartTime().toLocalDate());
-    		if (period.equals(Period.ofDays(1)) )
+       		Period period = Period.between(allEventsRec.get(0).getStartTime().toLocalDate(), allEventsRec.get(1).getStartTime().toLocalDate());
+    		System.out.println(period.getDays());
+    		System.out.println(period.getMonths());
+    		System.out.println(period.getYears());
+    		System.out.println(period.getDays());
+    		if (period.getDays()==Period.ofDays(1).getDays())
     			return 1;
-    		else if (period == Period.ofWeeks(1))
+    		else if (period.getDays() == Period.ofDays(7).getDays())
     			return 2;
-    		else if (period.equals(Period.ofMonths(1)) )
+    		else if (period.getMonths()==Period.ofMonths(1).getMonths() )
     			return 3;
-    		else if (period == Period.ofYears(1))
+    		else if (period.getYears() == Period.ofYears(1).getYears())
     			return 4;
     		else
     			return 0;

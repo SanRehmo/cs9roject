@@ -32,6 +32,7 @@ import java.util.List;
 import com.sun.javafx.scene.control.skin.DatePickerSkin;
 
 import cs_9roject.Event;
+import cs_9roject.NonDurationEvent;
 import cs_9roject.Timeline;
 import javafx.scene.paint.Color;
 import javafx.collections.FXCollections;
@@ -551,7 +552,7 @@ public Line clickAbleHline(int size, int id, int counter, LocalDate startDate, L
 		
 		startDatePicker.setOnAction(new EventHandler<ActionEvent>() {		//add a action event to the DaterPicker.
 			public void handle(ActionEvent e) {
-				List<Event> events = new ArrayList(Main.project.getTimeline(StartingModeController.timelineIdToModify).getEvents());
+				List<Event> events = new ArrayList<>(Main.project.getTimeline(StartingModeController.timelineIdToModify).getEvents());
 				System.out.println("alaa "+events.size());
 				for (int i=0; i<events.size(); i++) {	
 					if(!events.get(i).getStartTime().toLocalDate().equals(startDatePicker.getValue()))
@@ -565,6 +566,8 @@ public Line clickAbleHline(int size, int id, int counter, LocalDate startDate, L
 						Main.showEventHandler();
 					}
 					else{
+						events.add(new NonDurationEvent("New event",null,"",null,Color.RED));
+						events.get(events.size()-1).setEventId(0);
 						StartingModeController.eventIdToModify=events.get(0).getEventId();
 						FXMLLoader loader = new FXMLLoader();
 						loader.setLocation(Main.class.getResource("eventHandler.fxml"));
