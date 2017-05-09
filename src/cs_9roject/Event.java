@@ -54,6 +54,18 @@ public class Event {
 		eventImage=EventImage;
 		eventColor=EventColor;
 	}
+	
+	public Event(Event e) {
+		eventid = count++;
+		imageid=e.imageid;
+		title = e.title;
+		startTime = e.startTime;
+		description=e.description;
+		eventImage=e.eventImage;
+		eventColor=e.eventColor;
+		eventImage=e.eventImage;
+		imagepath= e.imagepath;
+	}
 
     // all next methods are (getters and setters)
 	public void setEventId(int ID){
@@ -141,5 +153,9 @@ public class Event {
 		return color;
 	}
 	
+	@Override
+	public String toString(){
+		return title + " ID: " + eventid;
+	}
 
 }

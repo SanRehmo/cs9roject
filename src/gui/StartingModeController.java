@@ -35,7 +35,7 @@ public class StartingModeController {
     private Button delete_btn;
 	
 	public static int timelineIdToModify=0;
-	public static int eventIdToModify=22;
+	public static int eventIdToModify=0;
 	
 	
 	/**

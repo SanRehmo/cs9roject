@@ -21,5 +21,10 @@ public class NonDurationEvent extends Event {
 		super(eventTitle, eventStart_time, description, EventImage, EventColor);
 		isDurationEvent=false;
 	}
+	
+	public NonDurationEvent(NonDurationEvent e) {
+		super(e);
+		isDurationEvent=false;
+	}
 
 }
