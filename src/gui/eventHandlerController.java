@@ -265,14 +265,7 @@ public class eventHandlerController {
     		endTextField.setValue(startTextField.getValue());
     		description.setText(e.getDescription());
     		eventImage_imageView.setImage(e.getImage());
-    		if (e.getColor().toString().equals(Color.RED.toString()))
-    			color_ComboBox.setValue("Red");
-    		else if (e.getColor().toString().equals(Color.BLUE.toString()))
-    			color_ComboBox.setValue("Blue");
-    		else if (e.getColor().toString().equals(Color.GREEN.toString()))
-    			color_ComboBox.setValue("Green");
-    		else if (e.getColor().toString().equals(Color.ORANGE.toString()))
-    			color_ComboBox.setValue("Orange");
+    		color_ComboBox.setValue(e.getColorName());
     		if (e.isDurationEvent()){
     			endTextField.setValue(e.getEndTime().toLocalDate());
     			endHH.setValueFactory((SpinnerValueFactory<Integer>)new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 23, e.getEndTime().toLocalTime().getHour()));
