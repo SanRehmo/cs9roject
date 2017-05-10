@@ -152,5 +152,9 @@ public class Event {
 		return("Orange");
 		
 	}
+	
+	public boolean equals(Event event){
+		return (event.getTitle().equals(title) && event.getStartTime().isEqual(startTime) && event.getDescription().equals(description) && event.getColorName().equals(this.getColorName())&& event.imagepath.equals(imagepath)&& event.isDurationEvent()==this.isDurationEvent());
+	}
 
 }
