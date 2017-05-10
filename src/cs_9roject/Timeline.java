@@ -89,10 +89,7 @@ public class Timeline {
 		events.removeAll(Events);
 	}
 	
-	// Check if 2 timelines are equals
-	public boolean equals(Timeline timeline){
-		return startDate.equals(timeline.getStartDate()) && endDate.equals(timeline.getEndDate()) && title.equals(timeline.getTitle());
-	}
+	
 	
 	// All next methods are (getters and setters)
 	public List <Event> getEvents(){
@@ -163,5 +160,8 @@ public class Timeline {
 		count = Count;
 	}
 	
-	
+	// Check if 2 timelines are equals
+	public boolean equals(Timeline timeline){
+		return startDate.equals(timeline.getStartDate()) && endDate.equals(timeline.getEndDate()) && title.equals(timeline.getTitle()) && timeline.getEvents().size()== this.getEvents().size();
+	}
 }
