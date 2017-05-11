@@ -57,8 +57,9 @@ public class showTimelinesController {
 	
 	VBox scrollBox = new VBox();
 	
-	ScrollPane zoomPane = new ScrollPane();
-	VBox zoomBox = new VBox();
+	
+	
+
 	
 	
 	 @FXML
@@ -131,7 +132,6 @@ public class showTimelinesController {
 	}
 	
 public Line clickAbleHline(int size, int id, int counter, LocalDate startDate, LocalDate endDate) {	//Making a horizontal line that will open eventhandler when you press the line
-	
 		Line timeLine = new Line(0, 50, size, 50);
 		timeLine.setStrokeWidth(5);
 		
@@ -148,11 +148,12 @@ public Line clickAbleHline(int size, int id, int counter, LocalDate startDate, L
 		}
 		
 		int FinalCounter = Ycounter;
-		
-		
+
   		timeLine.setOnMouseClicked(e ->{
-  			StartingModeController.timelineIdToModify=id;
   			Stage stage2 = new Stage();
+  			ScrollPane zoomPane = new ScrollPane();
+  			VBox zoomBox = new VBox();
+  			StartingModeController.timelineIdToModify=id;
 			if(FinalCounter>5){
 				if(counter == 0){
 					zoomBox.getChildren().addAll(yearShow(id,startDate,startDate.plusYears(FinalCounter)),generateTimeL(id, startDate, startDate.plusYears(FinalCounter)),spaceBetween());
