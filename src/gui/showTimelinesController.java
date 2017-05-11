@@ -116,8 +116,22 @@ public class showTimelinesController {
 		return timeLine;
 	}
 	
+	public Line KlickverticalLine(int size, LocalDate startDate) {		//Making every vertical lines in a timeline
+		Line timeLine = new Line(50,0,50,size);
+		timeLine.setStrokeWidth(3);
+		
+		timeLine.setOnMouseClicked(e -> {
+			showInfoByMonth (0, startDate.getYear(), startDate.getMonthValue());
+			
+		});
+			primaryScrollpane.setContent(scrollBox);
+			Stage stage = (Stage) doneButton.getScene().getWindow();
+			stage.close();
+		return timeLine;
+	}
+	
 public Line clickAbleHline(int size, int id, int counter, LocalDate startDate, LocalDate endDate) {	//Making a horizontal line that will open eventhandler when you press the line
-				
+	
 		Line timeLine = new Line(0, 50, size, 50);
 		timeLine.setStrokeWidth(5);
 		
@@ -135,67 +149,93 @@ public Line clickAbleHline(int size, int id, int counter, LocalDate startDate, L
 		
 		int FinalCounter = Ycounter;
 		
+		
   		timeLine.setOnMouseClicked(e ->{
   			StartingModeController.timelineIdToModify=id;
+  			Stage stage2 = new Stage();
 			if(FinalCounter>5){
 				if(counter == 0){
 					zoomBox.getChildren().addAll(yearShow(id,startDate,startDate.plusYears(FinalCounter)),generateTimeL(id, startDate, startDate.plusYears(FinalCounter)),spaceBetween());
 					zoomPane.setContent(zoomBox);
-			  		Stage stage2 = new Stage();
-					stage2.setScene(new Scene(zoomPane));  
+					//Stage stage2 = new Stage();
+				//	stage2.setScene(new Scene(zoomPane));  
 					stage2.setTitle("Zoomed timeline");
 					stage2.show();
+					
+					stage2.setOnCloseRequest(event -> {
+						   stage2.setScene(null);
+						   });
 					}
 				else if(counter ==1){
 					zoomBox.getChildren().addAll(yearShow(id,startDate.plusYears(FinalCounter),startDate.plusYears(FinalCounter*2)),generateTimeL(id, startDate.plusYears(FinalCounter), startDate.plusYears((FinalCounter*2))),spaceBetween());
 					zoomPane.setContent(zoomBox);
-			  		Stage stage2 = new Stage();
-					stage2.setScene(new Scene(zoomPane));  
+					//Stage stage2 = new Stage();
+				//	stage2.setScene(new Scene(zoomPane));  
 					stage2.setTitle("Zoomed timeline");
 					stage2.show();
+					
+					stage2.setOnCloseRequest(event -> {
+						   stage2.setScene(null);
+						   });
 					}
 				else if(counter ==2){
 					zoomBox.getChildren().addAll(yearShow(id,startDate.plusYears(FinalCounter*2),startDate.plusYears(FinalCounter*3)),generateTimeL(id, startDate.plusYears(FinalCounter*2), startDate.plusYears((FinalCounter*3))),spaceBetween());
 					zoomPane.setContent(zoomBox);
-			  		Stage stage2 = new Stage();
-					stage2.setScene(new Scene(zoomPane));  
+				//	Stage stage2 = new Stage();
+					//stage2.setScene(new Scene(zoomPane));  
 					stage2.setTitle("Zoomed timeline");
 					stage2.show();
+					
+					stage2.setOnCloseRequest(event -> {
+						   stage2.setScene(null);
+						   });
 					}
 				else if(counter ==3){
 					zoomBox.getChildren().addAll(yearShow(id,startDate.plusYears(FinalCounter*3),startDate.plusYears(FinalCounter*4)),generateTimeL(id, startDate.plusYears(FinalCounter*3), startDate.plusYears((FinalCounter*4))),spaceBetween());
 					zoomPane.setContent(zoomBox);
-			  		Stage stage2 = new Stage();
-					stage2.setScene(new Scene(zoomPane));  
+					//Stage stage2 = new Stage();
+					//stage2.setScene(new Scene(zoomPane));  
 					stage2.setTitle("Zoomed timeline");
 					stage2.show();
+					
+					stage2.setOnCloseRequest(event -> {
+						   stage2.setScene(null);
+						   });
 					}
 				else if(counter ==4){
 					zoomBox.getChildren().addAll(yearShow(id,startDate.plusYears(FinalCounter*4),startDate.plusYears(FinalCounter*5)),generateTimeL(id, startDate.plusYears(FinalCounter*4), startDate.plusYears((FinalCounter*5))),spaceBetween());
 					zoomPane.setContent(zoomBox);
-			  		Stage stage2 = new Stage();
-					stage2.setScene(new Scene(zoomPane));  
+					//Stage stage2 = new Stage();
+					//stage2.setScene(new Scene(zoomPane));  
 					stage2.setTitle("Zoomed timeline");
 					stage2.show();
+					
+					stage2.setOnCloseRequest(event -> {
+						   stage2.setScene(null);
+						   });
 					}	
 		}
 			else {
-				zoomBox.getChildren().add(zoomedTimeline(id, startDate));
+								
+				zoomBox.getChildren().add(zoomedTimeline(id, startDate.plusYears(FinalCounter*counter), endDate,startDate,counter));
+				System.out.println(startDate);
+				System.out.println(endDate);
 				zoomPane.setContent(zoomBox);
-		  		Stage stage2 = new Stage();
-				stage2.setScene(new Scene(zoomPane));  
+		  		//Stage stage2 = new Stage();
+				//stage2.setScene(new Scene(zoomPane)); 
 				stage2.setTitle("Zoomed timeline");
 				stage2.show();
+				
+				stage2.setOnCloseRequest(event -> {
+				   stage2.setScene(null);
+				});
 			} 
 		
+		stage2.setScene(new Scene(zoomPane));
 		
-			/*zoomPane.setContent(zoomBox);
-	  		Stage stage2 = new Stage();
-			stage2.setScene(new Scene(zoomPane));  
-			stage2.setTitle("Zoomed timeline");
-			stage2.show();
-				*/	
+		
 		});
+  		
   		
 		return timeLine;
 	}
@@ -287,14 +327,8 @@ public Line clickAbleHline(int size, int id, int counter, LocalDate startDate, L
 		
 		Line timeLine = new Line(0, 50, size, 50);
 		
-			/*timeLine.setOnMouseClicked(new EventHandler<MouseEvent>() {
-				public void handle(MouseEvent e) {
-					showInfoByMonth(id, 2017, 5);
-				}
-			});*/
-		
 		timeLine.setOnMouseClicked(e -> {
-			showInfoByMonth (0, 2017, 4);
+			showInfoByMonth (0, startDate.getYear(), startDate.getMonthValue());
 			
 		});
 			primaryScrollpane.setContent(scrollBox);
@@ -307,25 +341,96 @@ public Line clickAbleHline(int size, int id, int counter, LocalDate startDate, L
 	}
 	
 	
-	public Pane zoomedTimeline(int id, LocalDate startDate) {			//This will be the final timeline that you click on to get to the calendar
+	public Pane zoomedTimeline(int id, LocalDate startyear, LocalDate EndDate, LocalDate startDate, int counter) {			//This will be the final timeline that you click on to get to the calendar
+		
 		Pane pane = new Pane();
 		HBox hbox = new HBox();
+		
+		int Ycounter;
+		int years;
+		int temp;
+		
+		if(counter==4){
+			if(yearCounter(startDate,EndDate)%5 == 0){
+				Ycounter = (int)(yearCounter(startDate,EndDate)/5);
+			}
+			else{
+				years = (int)((yearCounter(startDate,EndDate)-(yearCounter(startDate,EndDate)%5)));
+				Ycounter = years - years%4;
+				Ycounter = Ycounter/4;
+			}
+			temp = EndDate.getYear()-startDate.plusYears(Ycounter*4).getYear();
+	
+		}else{
+		if(yearCounter(startDate,EndDate)%5 == 0){
+			Ycounter = (int)(yearCounter(startDate,EndDate)/5);
+		}
+		else{
+			years = (int)((yearCounter(startDate,EndDate)-(yearCounter(startDate,EndDate)%5)));
+			Ycounter = years - years%4;
+			Ycounter = Ycounter/4;
+		}
+		temp = Ycounter;
+		}
+		
+		if(temp < 5) {
+			switch(temp) {
+			case 1: {
+				hbox.getChildren().addAll(verticalLine(100),Hline(76));
+				for(int j = 0; j < 12; j++) {	
+					hbox.getChildren().addAll(KlickverticalLine(50,startyear.plusMonths(-startDate.getMonthValue()+1+j)),Hline(36));
+				}
+				
+				break;
+			}
+			case 2: {
+				for(int i = 0; i < 2; i++) {
+					hbox.getChildren().addAll(verticalLine(100),Hline(36));
+					for(int j = 0; j < 12; j++) {	
+						hbox.getChildren().addAll(KlickverticalLine(50,startyear.plusMonths(-startDate.getMonthValue()+1+j).plusYears(i)) ,Hline(36));
+					}
+				}
+				break;
+			}
+			case 3: {
+				for(int i = 0; i < 3; i++) {
+					hbox.getChildren().addAll(verticalLine(100),Hline(22));
+					for(int j = 0; j < 12; j++) {	
+						hbox.getChildren().addAll(KlickverticalLine(50,startyear.plusMonths(-startDate.getMonthValue()+1+j).plusYears(i)),Hline(23));
+					}
+				}
+				break;
+			}
+			case 4: {
+				for(int i = 0; i < 4; i++) {
+					hbox.getChildren().addAll(verticalLine(100),Hline(16));
+					for(int j = 0; j < 12; j++) {	
+						hbox.getChildren().addAll(KlickverticalLine(50,startyear.plusMonths(-startDate.getMonthValue()+1+j).plusYears(i)),Hline(16));
+					}
+				}
+				break;
+			}
+			}
+		}
+		else {
+			for(int j = 0; j<5; j++){
+				hbox.getChildren().addAll(verticalLine(100),Hline(12));
+			for(int i = 0; i < 12; i++) {	
+				hbox.getChildren().addAll(KlickverticalLine(50,startyear.plusMonths(-startDate.getMonthValue()+1+j).plusYears(j)),Hline(12));
+			}
+			}
+		}
 
-		for(int j = 0; j<5; j++){
-			hbox.getChildren().addAll(verticalLine(100),Hline(12));
-		for(int i = 0; i < 12; i++) {	
-			hbox.getChildren().addAll(verticalLine(50),zommedHline(12,id,startDate));
-		}
-		}
+		
 		hbox.getChildren().addAll(Hline(8), verticalLine(100));
 		hbox.setLayoutX(5);
 		hbox.setLayoutY(30);
 		hbox.setAlignment(Pos.CENTER);
 		pane.getChildren().add(hbox);
 		
-		pane.setOnMouseClicked(e-> {
-			showInfoByMonth (0, 2017, 4);
-		});
+		//hbox.setOnMouseClicked(e-> {
+			//showInfoByMonth (0, 2017, 4);
+		//}); 
 		
 		return pane;	
 	}
