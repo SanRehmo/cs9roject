@@ -117,7 +117,7 @@ public class showTimelinesController {
 	}
 	
 public Line clickAbleHline(int size, int id, int counter, LocalDate startDate, LocalDate endDate) {	//Making a horizontal line that will open eventhandler when you press the line
-				
+	
 		Line timeLine = new Line(0, 50, size, 50);
 		timeLine.setStrokeWidth(5);
 		
@@ -202,7 +202,10 @@ public Line clickAbleHline(int size, int id, int counter, LocalDate startDate, L
 					}	
 		}
 			else {
-				zoomBox.getChildren().add(zoomedTimeline(id, startDate, endDate));
+								
+				zoomBox.getChildren().add(zoomedTimeline(id, startDate, endDate,counter));
+				System.out.println(startDate);
+				System.out.println(endDate);
 				zoomPane.setContent(zoomBox);
 		  		//Stage stage2 = new Stage();
 				//stage2.setScene(new Scene(zoomPane)); 
@@ -324,15 +327,37 @@ public Line clickAbleHline(int size, int id, int counter, LocalDate startDate, L
 	}
 	
 	
-	public Pane zoomedTimeline(int id, LocalDate startDate, LocalDate EndDate) {			//This will be the final timeline that you click on to get to the calendar
+	public Pane zoomedTimeline(int id, LocalDate startDate, LocalDate EndDate, int counter) {			//This will be the final timeline that you click on to get to the calendar
 		
 		Pane pane = new Pane();
 		HBox hbox = new HBox();
 		
-		int start = startDate.getYear();
-		int end = EndDate.getYear();
-		int temp = end - start;
-		System.out.print("Detta är temp " + temp);
+		int Ycounter;
+		int years;
+		int temp;
+		
+		if(counter==4){
+			if(yearCounter(startDate,EndDate)%5 == 0){
+				Ycounter = (int)(yearCounter(startDate,EndDate)/5);
+			}
+			else{
+				years = (int)((yearCounter(startDate,EndDate)-(yearCounter(startDate,EndDate)%5)));
+				Ycounter = years - years%4;
+				Ycounter = Ycounter/4;
+			}
+			temp = EndDate.getYear()-startDate.plusYears(Ycounter*4).getYear();
+	
+		}else{
+		if(yearCounter(startDate,EndDate)%5 == 0){
+			Ycounter = (int)(yearCounter(startDate,EndDate)/5);
+		}
+		else{
+			years = (int)((yearCounter(startDate,EndDate)-(yearCounter(startDate,EndDate)%5)));
+			Ycounter = years - years%4;
+			Ycounter = Ycounter/4;
+		}
+		temp = Ycounter;
+		}
 		
 		if(temp < 5) {
 			switch(temp) {
