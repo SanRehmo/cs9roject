@@ -135,67 +135,90 @@ public Line clickAbleHline(int size, int id, int counter, LocalDate startDate, L
 		
 		int FinalCounter = Ycounter;
 		
+		
   		timeLine.setOnMouseClicked(e ->{
   			StartingModeController.timelineIdToModify=id;
+  			Stage stage2 = new Stage();
 			if(FinalCounter>5){
 				if(counter == 0){
 					zoomBox.getChildren().addAll(yearShow(id,startDate,startDate.plusYears(FinalCounter)),generateTimeL(id, startDate, startDate.plusYears(FinalCounter)),spaceBetween());
 					zoomPane.setContent(zoomBox);
-			  		Stage stage2 = new Stage();
-					stage2.setScene(new Scene(zoomPane));  
+					//Stage stage2 = new Stage();
+				//	stage2.setScene(new Scene(zoomPane));  
 					stage2.setTitle("Zoomed timeline");
 					stage2.show();
+					
+					stage2.setOnCloseRequest(event -> {
+						   stage2.setScene(null);
+						   });
 					}
 				else if(counter ==1){
 					zoomBox.getChildren().addAll(yearShow(id,startDate.plusYears(FinalCounter),startDate.plusYears(FinalCounter*2)),generateTimeL(id, startDate.plusYears(FinalCounter), startDate.plusYears((FinalCounter*2))),spaceBetween());
 					zoomPane.setContent(zoomBox);
-			  		Stage stage2 = new Stage();
-					stage2.setScene(new Scene(zoomPane));  
+					//Stage stage2 = new Stage();
+				//	stage2.setScene(new Scene(zoomPane));  
 					stage2.setTitle("Zoomed timeline");
 					stage2.show();
+					
+					stage2.setOnCloseRequest(event -> {
+						   stage2.setScene(null);
+						   });
 					}
 				else if(counter ==2){
 					zoomBox.getChildren().addAll(yearShow(id,startDate.plusYears(FinalCounter*2),startDate.plusYears(FinalCounter*3)),generateTimeL(id, startDate.plusYears(FinalCounter*2), startDate.plusYears((FinalCounter*3))),spaceBetween());
 					zoomPane.setContent(zoomBox);
-			  		Stage stage2 = new Stage();
-					stage2.setScene(new Scene(zoomPane));  
+				//	Stage stage2 = new Stage();
+					//stage2.setScene(new Scene(zoomPane));  
 					stage2.setTitle("Zoomed timeline");
 					stage2.show();
+					
+					stage2.setOnCloseRequest(event -> {
+						   stage2.setScene(null);
+						   });
 					}
 				else if(counter ==3){
 					zoomBox.getChildren().addAll(yearShow(id,startDate.plusYears(FinalCounter*3),startDate.plusYears(FinalCounter*4)),generateTimeL(id, startDate.plusYears(FinalCounter*3), startDate.plusYears((FinalCounter*4))),spaceBetween());
 					zoomPane.setContent(zoomBox);
-			  		Stage stage2 = new Stage();
-					stage2.setScene(new Scene(zoomPane));  
+					//Stage stage2 = new Stage();
+					//stage2.setScene(new Scene(zoomPane));  
 					stage2.setTitle("Zoomed timeline");
 					stage2.show();
+					
+					stage2.setOnCloseRequest(event -> {
+						   stage2.setScene(null);
+						   });
 					}
 				else if(counter ==4){
 					zoomBox.getChildren().addAll(yearShow(id,startDate.plusYears(FinalCounter*4),startDate.plusYears(FinalCounter*5)),generateTimeL(id, startDate.plusYears(FinalCounter*4), startDate.plusYears((FinalCounter*5))),spaceBetween());
 					zoomPane.setContent(zoomBox);
-			  		Stage stage2 = new Stage();
-					stage2.setScene(new Scene(zoomPane));  
+					//Stage stage2 = new Stage();
+					//stage2.setScene(new Scene(zoomPane));  
 					stage2.setTitle("Zoomed timeline");
 					stage2.show();
+					
+					stage2.setOnCloseRequest(event -> {
+						   stage2.setScene(null);
+						   });
 					}	
 		}
 			else {
 				zoomBox.getChildren().add(zoomedTimeline(id, startDate));
 				zoomPane.setContent(zoomBox);
-		  		Stage stage2 = new Stage();
-				stage2.setScene(new Scene(zoomPane));  
+		  		//Stage stage2 = new Stage();
+				//stage2.setScene(new Scene(zoomPane)); 
 				stage2.setTitle("Zoomed timeline");
 				stage2.show();
+				
+				stage2.setOnCloseRequest(event -> {
+				   stage2.setScene(null);
+				});
 			} 
 		
+		stage2.setScene(new Scene(zoomPane));
 		
-			/*zoomPane.setContent(zoomBox);
-	  		Stage stage2 = new Stage();
-			stage2.setScene(new Scene(zoomPane));  
-			stage2.setTitle("Zoomed timeline");
-			stage2.show();
-				*/	
+		
 		});
+  		
   		
 		return timeLine;
 	}
@@ -325,7 +348,7 @@ public Line clickAbleHline(int size, int id, int counter, LocalDate startDate, L
 		
 		hbox.setOnMouseClicked(e-> {
 			showInfoByMonth (0, 2017, 4);
-		});
+		}); 
 		
 		return pane;	
 	}
