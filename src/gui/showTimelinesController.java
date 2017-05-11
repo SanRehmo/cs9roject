@@ -116,6 +116,20 @@ public class showTimelinesController {
 		return timeLine;
 	}
 	
+	public Line KlickverticalLine(int size, LocalDate startDate) {		//Making every vertical lines in a timeline
+		Line timeLine = new Line(50,0,50,size);
+		timeLine.setStrokeWidth(3);
+		
+		timeLine.setOnMouseClicked(e -> {
+			showInfoByMonth (0, startDate.getYear(), startDate.getMonthValue());
+			
+		});
+			primaryScrollpane.setContent(scrollBox);
+			Stage stage = (Stage) doneButton.getScene().getWindow();
+			stage.close();
+		return timeLine;
+	}
+	
 public Line clickAbleHline(int size, int id, int counter, LocalDate startDate, LocalDate endDate) {	//Making a horizontal line that will open eventhandler when you press the line
 	
 		Line timeLine = new Line(0, 50, size, 50);
@@ -364,7 +378,7 @@ public Line clickAbleHline(int size, int id, int counter, LocalDate startDate, L
 			case 1: {
 				hbox.getChildren().addAll(verticalLine(100),Hline(76));
 				for(int j = 0; j < 12; j++) {	
-					hbox.getChildren().addAll(verticalLine(50),zommedHline(76,id,startDate.plusMonths(j)));
+					hbox.getChildren().addAll(KlickverticalLine(50,startDate.plusMonths(j) ),Hline(36));
 				}
 				
 				break;
@@ -373,7 +387,7 @@ public Line clickAbleHline(int size, int id, int counter, LocalDate startDate, L
 				for(int i = 0; i < 2; i++) {
 					hbox.getChildren().addAll(verticalLine(100),Hline(36));
 					for(int j = 0; j < 12; j++) {	
-						hbox.getChildren().addAll(verticalLine(50),zommedHline(36,id,startDate.plusMonths(j)));
+						hbox.getChildren().addAll(KlickverticalLine(50,startDate.plusMonths(j)) ,Hline(36));
 					}
 				}
 				break;
@@ -382,7 +396,7 @@ public Line clickAbleHline(int size, int id, int counter, LocalDate startDate, L
 				for(int i = 0; i < 3; i++) {
 					hbox.getChildren().addAll(verticalLine(100),Hline(22));
 					for(int j = 0; j < 12; j++) {	
-						hbox.getChildren().addAll(verticalLine(50),zommedHline(23,id,startDate.plusMonths(j)));
+						hbox.getChildren().addAll(KlickverticalLine(50,startDate.plusMonths(j)),Hline(23));
 					}
 				}
 				break;
@@ -391,7 +405,7 @@ public Line clickAbleHline(int size, int id, int counter, LocalDate startDate, L
 				for(int i = 0; i < 4; i++) {
 					hbox.getChildren().addAll(verticalLine(100),Hline(16));
 					for(int j = 0; j < 12; j++) {	
-						hbox.getChildren().addAll(verticalLine(50),zommedHline(16,id,startDate.plusMonths(j)));
+						hbox.getChildren().addAll(KlickverticalLine(50,startDate.plusMonths(j)),Hline(16));
 					}
 				}
 				break;
@@ -402,7 +416,7 @@ public Line clickAbleHline(int size, int id, int counter, LocalDate startDate, L
 			for(int j = 0; j<5; j++){
 				hbox.getChildren().addAll(verticalLine(100),Hline(12));
 			for(int i = 0; i < 12; i++) {	
-				hbox.getChildren().addAll(verticalLine(50),zommedHline(12,id,startDate.plusMonths(j)));
+				hbox.getChildren().addAll(KlickverticalLine(50,startDate.plusMonths(j)),Hline(12));
 			}
 			}
 		}
