@@ -323,7 +323,7 @@ public Line clickAbleHline(int size, int id, int counter, LocalDate startDate, L
 		hbox.setAlignment(Pos.CENTER);
 		pane.getChildren().add(hbox);
 		
-		pane.setOnMouseClicked(e-> {
+		hbox.setOnMouseClicked(e-> {
 			showInfoByMonth (0, 2017, 4);
 		});
 		
