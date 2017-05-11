@@ -378,7 +378,7 @@ public Line clickAbleHline(int size, int id, int counter, LocalDate startDate, L
 			case 1: {
 				hbox.getChildren().addAll(verticalLine(100),Hline(76));
 				for(int j = 0; j < 12; j++) {	
-					hbox.getChildren().addAll(KlickverticalLine(50,startDate.plusMonths(j) ),Hline(36));
+					hbox.getChildren().addAll(KlickverticalLine(50,startDate.plusMonths(-startDate.getMonthValue()+1+j)),Hline(36));
 				}
 				
 				break;
@@ -387,7 +387,7 @@ public Line clickAbleHline(int size, int id, int counter, LocalDate startDate, L
 				for(int i = 0; i < 2; i++) {
 					hbox.getChildren().addAll(verticalLine(100),Hline(36));
 					for(int j = 0; j < 12; j++) {	
-						hbox.getChildren().addAll(KlickverticalLine(50,startDate.plusMonths(j)) ,Hline(36));
+						hbox.getChildren().addAll(KlickverticalLine(50,startDate.plusMonths(-startDate.getMonthValue()+1+j)) ,Hline(36));
 					}
 				}
 				break;
@@ -396,7 +396,7 @@ public Line clickAbleHline(int size, int id, int counter, LocalDate startDate, L
 				for(int i = 0; i < 3; i++) {
 					hbox.getChildren().addAll(verticalLine(100),Hline(22));
 					for(int j = 0; j < 12; j++) {	
-						hbox.getChildren().addAll(KlickverticalLine(50,startDate.plusMonths(j)),Hline(23));
+						hbox.getChildren().addAll(KlickverticalLine(50,startDate.plusMonths(-startDate.getMonthValue()+1+j)),Hline(23));
 					}
 				}
 				break;
@@ -405,7 +405,7 @@ public Line clickAbleHline(int size, int id, int counter, LocalDate startDate, L
 				for(int i = 0; i < 4; i++) {
 					hbox.getChildren().addAll(verticalLine(100),Hline(16));
 					for(int j = 0; j < 12; j++) {	
-						hbox.getChildren().addAll(KlickverticalLine(50,startDate.plusMonths(j)),Hline(16));
+						hbox.getChildren().addAll(KlickverticalLine(50,startDate.plusMonths(-startDate.getMonthValue()+1+j)),Hline(16));
 					}
 				}
 				break;
@@ -416,7 +416,7 @@ public Line clickAbleHline(int size, int id, int counter, LocalDate startDate, L
 			for(int j = 0; j<5; j++){
 				hbox.getChildren().addAll(verticalLine(100),Hline(12));
 			for(int i = 0; i < 12; i++) {	
-				hbox.getChildren().addAll(KlickverticalLine(50,startDate.plusMonths(j)),Hline(12));
+				hbox.getChildren().addAll(KlickverticalLine(50,startDate.plusMonths(-startDate.getMonthValue()+1+j)),Hline(12));
 			}
 			}
 		}
