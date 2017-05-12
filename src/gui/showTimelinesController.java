@@ -123,20 +123,16 @@ public class showTimelinesController {
 		Line timeLine = new Line(50,0,50,size);
 		timeLine.setStrokeWidth(3);
 		
-//		Test part 
-		
-//		int test3 = startDate.getYear() + startDate.getMonthValue();
-//		int test4 = startDate.getYear() + startDate.getMonthValue() + 1;
-		
-//		System.out.println("First montha " + test3 + " second montha " + test4);
-		
+	
 		for(int i = 0; i < Main.project.getTimeline(id).getEvents().size(); i++) {
-			System.out.print(Main.project.getTimeline(id).getEvent(i).getDescription());
-			System.out.print(startDate.getMonth().toString());
+			if(Main.project.getTimeline(id).getEvents().get(i).getStartTime().getMonth().toString().equals(startDate.getMonth().toString())) {
+				System.out.println(Main.project.getTimeline(id).getEvents().get(i).getStartTime().getMonth().toString());
+				timeLine.setFill(Color.web(Main.project.getTimeline(id).getEvents().get(i).getColor().toString()));
+				timeLine.setStrokeWidth(10);
+				System.out.print(Main.project.getTimeline(id).getEvents().get(i).getColorName().hashCode());
+			}
 			
-				 /*if(Main.project.getTimeline(id).getEvent(i).getStartTime().getMonth().toString().equals(startDate.getMonth().toString())) {
-					 timeLine.setFill(Main.project.getTimeline(id).getEvent(i).getColor());
-				 }*/
+			
 		}
 		
 		timeLine.setOnMouseClicked(e -> {
