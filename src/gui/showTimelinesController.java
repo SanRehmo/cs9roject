@@ -374,11 +374,24 @@ public Line clickAbleHline(int size, int id, int counter, LocalDate startDate, L
 		temp = Ycounter;
 		}
 		
+	
+		
 		if(temp < 5) {
 			switch(temp) {
+			case 0: {
+				hbox.getChildren().addAll(verticalLine(100),Hline(76));
+				for(int j = 0; j < 12; j++) {	
+					System.out.print("This is activated");
+					hbox.getChildren().addAll(KlickverticalLine(50,startyear.plusMonths(-startDate.getMonthValue()+1+j)),Hline(36));
+				}
+				
+				break;
+			}
+			
 			case 1: {
 				hbox.getChildren().addAll(verticalLine(100),Hline(76));
 				for(int j = 0; j < 12; j++) {	
+					System.out.print("This is activated");
 					hbox.getChildren().addAll(KlickverticalLine(50,startyear.plusMonths(-startDate.getMonthValue()+1+j)),Hline(36));
 				}
 				
