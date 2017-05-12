@@ -123,6 +123,12 @@ public class showTimelinesController {
 		Line timeLine = new Line(50,0,50,size);
 		timeLine.setStrokeWidth(3);
 		
+		for(int i = 0; i < Main.project.getTimeline(id).getEvents().size(); i++) {
+			if(Main.project.getTimeline(id).getEvents().get(i).getStartTime().getMonth().toString().equals(startDate.getMonth().toString())) {
+				Color c = Main.project.getTimeline(id).getEvents().get(i).getColor();
+				timeLine.setStroke(Color.web(c.toString().substring(4)));
+			}
+		}
 		
 		timeLine.setOnMouseClicked(e -> {
 			showInfoByMonth (0, startDate.getYear(), startDate.getMonthValue());
@@ -138,6 +144,12 @@ public Line clickAbleHline(int size, int id, int counter, LocalDate startDate, L
 		Line timeLine = new Line(0, 50, size, 50);
 		timeLine.setStrokeWidth(5);
 		
+		/*for(int i = 0; i < Main.project.getTimeline(id).getEvents().size(); i++) {
+			if(Main.project.getTimeline(id).getEvents().get(i).getStartTime().getMonth().toString().equals(startDate.getMonth().toString())) {
+				Color c = Main.project.getTimeline(id).getEvents().get(i).getColor();
+				timeLine.setStroke(Color.web(c.toString().substring(4)));
+			}
+		}*/
 		
 		int years;
 		int Ycounter;
