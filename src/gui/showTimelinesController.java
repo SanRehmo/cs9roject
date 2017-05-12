@@ -126,10 +126,14 @@ public class showTimelinesController {
 	
 		for(int i = 0; i < Main.project.getTimeline(id).getEvents().size(); i++) {
 			if(Main.project.getTimeline(id).getEvents().get(i).getStartTime().getMonth().toString().equals(startDate.getMonth().toString())) {
-				System.out.println(Main.project.getTimeline(id).getEvents().get(i).getStartTime().getMonth().toString());
-				timeLine.setFill(Color.web(Main.project.getTimeline(id).getEvents().get(i).getColor().toString()));
-				timeLine.setStrokeWidth(10);
-				System.out.print(Main.project.getTimeline(id).getEvents().get(i).getColorName().hashCode());
+				Color c = Main.project.getTimeline(id).getEvents().get(i).getColor();
+				System.out.println(c.toString().substring(3));
+		
+				
+				timeLine.setStroke(Color.web(c.toString().substring(4)));
+		
+				
+
 			}
 			
 			
