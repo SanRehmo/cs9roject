@@ -18,12 +18,14 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.Duration;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.Period;
@@ -67,7 +69,7 @@ public class eventHandlerController {
     private Button btnSave;
 
     @FXML
-    private DatePicker startTextField;
+    public DatePicker startTextField;
     
     @FXML
     private Spinner<Integer> startHH;
@@ -161,12 +163,16 @@ public class eventHandlerController {
 		URL url = null;
 		
 		try {
-			url = file.toURI().toURL();
+			if (file!=null){
+				url = file.toURI().toURL();
+				eventImage_imageView.setImage(new Image(url.toExternalForm()));
+			}
+				
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		}
 			
-		eventImage_imageView.setImage(new Image(url.toExternalForm()));
+		
 		
     }
 
@@ -240,13 +246,30 @@ public class eventHandlerController {
     	return this.endTextField;
     }
     
+    final Callback<DatePicker, DateCell> dayCellFactory = new Callback<DatePicker, DateCell>() {
+		public DateCell call(final DatePicker datePicker) {
+			return new DateCell() {
+				@Override
+				public void updateItem(LocalDate item, boolean empty) {
+					super.updateItem(item, empty);
+					if(item.isBefore(Main.project.getTimeline(StartingModeController.timelineIdToModify).getStartDate()) || item.isAfter(Main.project.getTimeline(StartingModeController.timelineIdToModify).getEndDate())){
+						this.setDisable(true);
+					}
+
+
+				}	
+			};
+		}
+	};
+    
     /**
      * Gives options in the comboBox
      */
     @FXML
     public void initialize() {
     	EventID=StartingModeController.eventIdToModify;
-    	
+    	startTextField.setDayCellFactory(dayCellFactory);
+    	endTextField.setDayCellFactory(dayCellFactory);
     	if (EventID!=0){
     		Timeline t=Main.project.getTimeline(TimelineID);
     		Event e = t.getEvent(EventID);
@@ -285,7 +308,7 @@ public class eventHandlerController {
     	else{
     		NameEvent_textField.setText("");
     		duration_checkBox.setSelected(false);
-    		startTextField.setValue(null);
+    		//startTextField.setValue(null);
     		startHH.setValueFactory((SpinnerValueFactory<Integer>)new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 23, 0));
     		startMM.setValueFactory((SpinnerValueFactory<Integer>)new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 59, 0));
     		endTextField.setDisable(true);
@@ -431,12 +454,9 @@ public class eventHandlerController {
     	List <Event> allEventsRec = new ArrayList<Event>();
     	Timeline t = Main.project.getTimeline(TimelineID);
     	for (Event temp : t.getEvents()){
-    		System.out.println(temp.getTitle());
-    		System.out.println(e.getTitle());
     		if (temp.getTitle().equals(e.getTitle()))
     			allEventsRec.add(temp);
     	}
-    	System.out.println(allEventsRec.size());
     	return allEventsRec;
     }
     
@@ -444,10 +464,6 @@ public class eventHandlerController {
     	List <Event> allEventsRec= allEventsRec(e);
     	if (allEventsRec.size()>1){
        		Period period = Period.between(allEventsRec.get(0).getStartTime().toLocalDate(), allEventsRec.get(1).getStartTime().toLocalDate());
-    		System.out.println(period.getDays());
-    		System.out.println(period.getMonths());
-    		System.out.println(period.getYears());
-    		System.out.println(period.getDays());
     		if (period.getDays()==Period.ofDays(1).getDays())
     			return 1;
     		else if (period.getDays() == Period.ofDays(7).getDays())
