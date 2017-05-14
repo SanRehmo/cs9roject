@@ -1,6 +1,7 @@
 package gui;
 
 
+import cs_9roject.Event;
 import cs_9roject.Project;
 import cs_9roject.Timeline;
 import cs_9roject.TimelinesDAO;
@@ -11,6 +12,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -80,8 +82,6 @@ public class StartingModeController {
      */
 	@FXML
 	private void loadProject(){
-		// List <Project> projects = new ArrayList <Project>();
-		// projects.add(Main.dao.load(3));
 		List <Project> projects = Main.dao.loadAllProjects();
 		if (projects.size()>0){
 			ChoiceDialog<Project> choiceDialog = new ChoiceDialog<Project>(projects.get(0), projects);
@@ -94,6 +94,7 @@ public class StartingModeController {
 			if (result.isPresent()){
 			    Main.project=result.get();
 			    delete_btn.setDisable(false);
+			    start_scrollpane.setContent(new VBox());
 			}
 
 		}
@@ -117,8 +118,10 @@ public class StartingModeController {
 		alert.setHeaderText("You are going to delete the project: "+Main.project.projectName+" ID: "+Main.project.ProjectID);
 		alert.setContentText("Are you sure you like to proceed?");
 		if (alert.showAndWait().get() == ButtonType.OK){
+			delete_btn.setDisable(false);
 			dao.delete(Main.project);
 			Main.project = new Project();
+			start_scrollpane.setContent(new VBox());
 		}
 		System.out.println("Current project: "+ Main.project.projectName+" ID: "+ Main.project.ProjectID);
 	}
@@ -129,9 +132,54 @@ public class StartingModeController {
 	 */
 	@FXML
 	private void saveProject() throws IOException {
-		// Main.project.getTimelines().get(Main.project.getTimelines().size()-1).setTimelineId(dao.getHighestTimelineID());
-		dao.save(Main.project);
-		delete_btn.setDisable(false);
+		
+		if (Main.project.getTimelines().size()>0){
+			if (dao.exists(Main.project.ProjectID)){
+				Alert alert = new Alert(AlertType.CONFIRMATION);
+				alert.setTitle("Confirmation Dialog");
+				alert.setHeaderText("Please select an action");
+				alert.setContentText("Choose your option.");
+
+				ButtonType buttonTypeOverwrite = new ButtonType("Overwrite");
+				ButtonType buttonTypeSaveCopy = new ButtonType("Save Copy");
+				ButtonType buttonTypeCancel = new ButtonType("Cancel");
+
+				alert.getButtonTypes().setAll(buttonTypeOverwrite, buttonTypeSaveCopy, buttonTypeCancel);
+				
+				Optional<ButtonType> result = alert.showAndWait();
+				if (result.get() == buttonTypeOverwrite){
+					dao.save(Main.project);
+					delete_btn.setDisable(false);
+				}
+				else if (result.get() == buttonTypeSaveCopy){
+					Project p = new Project();
+					Main.project.ProjectID=p.ProjectID;
+					Main.project.projectName=Main.project.projectName+ "-Copy";
+					for (Timeline t : Main.project.getTimelines()){
+						t.setTimelineId(new Timeline().getTimelineId());
+						for (Event e : t.getEvents())
+							e.setEventId(new Event(e).getEventId());
+					}
+					dao.save(Main.project);
+					delete_btn.setDisable(false);
+					start_scrollpane.setContent(new VBox());
+				}
+			}
+			else{
+				dao.save(Main.project);
+				delete_btn.setDisable(false);
+			}
+			
+		}
+		else{
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("ERROR!");
+			alert.setHeaderText("Nothing to save!");
+			alert.setContentText("To save project, it shold have at lest 1 timeline.");
+			alert.showAndWait();
+		}
+		
+		System.out.println("Current project: "+ Main.project.projectName+" ID: "+ Main.project.ProjectID);
 	}
 
 	/**
