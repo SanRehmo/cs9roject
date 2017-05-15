@@ -124,9 +124,8 @@ public class showTimelinesController {
 		timeLine.setStrokeWidth(3);
 		
 		for(int i = 0; i < Main.project.getTimeline(id).getEvents().size(); i++) {
-			if(Main.project.getTimeline(id).getEvents().get(i).getStartTime().getMonth().toString().equals(startDate.getMonth().toString())) {
-				Color c = Main.project.getTimeline(id).getEvents().get(i).getColor();
-//				timeLine.setStroke(Color.web(c.toString().substring(4)));
+			if(Main.project.getTimeline(id).getEvents().get(i).getStartTime().getMonth().toString().equals(startDate.getMonth().toString())
+					&& Main.project.getTimeline(id).getEvents().get(i).getStartTime().getYear() == startDate.getYear()) {
 				timeLine.setStyle("-fx-stroke: "+Main.project.getTimeline(id).getEvents().get(i).getColorName()+";");
 			}
 		}
@@ -141,7 +140,7 @@ public class showTimelinesController {
 		return timeLine;
 	}
 	
-public Line clickAbleHline(int size, int id, int counter, LocalDate startDate, LocalDate endDate) {	//Making a horizontal line that will open zoomedTimeline when you press the line
+	public Line clickAbleHline(int size, int id, int counter, LocalDate startDate, LocalDate endDate) {	//Making a horizontal line that will open zoomedTimeline when you press the line
 		Line timeLine = new Line(0, 50, size, 50);
 		timeLine.setStrokeWidth(5);
 		
@@ -176,20 +175,16 @@ public Line clickAbleHline(int size, int id, int counter, LocalDate startDate, L
 				if(counter == 0){
 					zoomBox.getChildren().addAll(yearShow(id,startDate,startDate.plusYears(FinalCounter)),generateTimeL(id, startDate, startDate.plusYears(FinalCounter)),spaceBetween());
 					zoomPane.setContent(zoomBox);
-					//Stage stage2 = new Stage();
-				//	stage2.setScene(new Scene(zoomPane));  
+
 					stage2.setTitle("Zoomed timeline");
 					stage2.show();
-					
 					stage2.setOnCloseRequest(event -> {
 						   stage2.setScene(null);
 						   });
 					}
 				else if(counter ==1){
 					zoomBox.getChildren().addAll(yearShow(id,startDate.plusYears(FinalCounter),startDate.plusYears(FinalCounter*2)),generateTimeL(id, startDate.plusYears(FinalCounter), startDate.plusYears((FinalCounter*2))),spaceBetween());
-					zoomPane.setContent(zoomBox);
-					//Stage stage2 = new Stage();
-				//	stage2.setScene(new Scene(zoomPane));  
+					zoomPane.setContent(zoomBox); 
 					stage2.setTitle("Zoomed timeline");
 					stage2.show();
 					
@@ -200,8 +195,6 @@ public Line clickAbleHline(int size, int id, int counter, LocalDate startDate, L
 				else if(counter ==2){
 					zoomBox.getChildren().addAll(yearShow(id,startDate.plusYears(FinalCounter*2),startDate.plusYears(FinalCounter*3)),generateTimeL(id, startDate.plusYears(FinalCounter*2), startDate.plusYears((FinalCounter*3))),spaceBetween());
 					zoomPane.setContent(zoomBox);
-				//	Stage stage2 = new Stage();
-					//stage2.setScene(new Scene(zoomPane));  
 					stage2.setTitle("Zoomed timeline");
 					stage2.show();
 					
@@ -212,8 +205,6 @@ public Line clickAbleHline(int size, int id, int counter, LocalDate startDate, L
 				else if(counter ==3){
 					zoomBox.getChildren().addAll(yearShow(id,startDate.plusYears(FinalCounter*3),startDate.plusYears(FinalCounter*4)),generateTimeL(id, startDate.plusYears(FinalCounter*3), startDate.plusYears((FinalCounter*4))),spaceBetween());
 					zoomPane.setContent(zoomBox);
-					//Stage stage2 = new Stage();
-					//stage2.setScene(new Scene(zoomPane));  
 					stage2.setTitle("Zoomed timeline");
 					stage2.show();
 					
@@ -251,7 +242,6 @@ public Line clickAbleHline(int size, int id, int counter, LocalDate startDate, L
 			} 
 		
 		stage2.setScene(new Scene(zoomPane));
-		
 		
 		});
   		
