@@ -14,6 +14,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tooltip;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -515,6 +516,7 @@ public class showTimelinesController {
 		  Text title = new Text();
 		  title.setText(Main.project.getTimeline(id).getTitle());
 		  title.setFont(Font.font ("Verdana", 20));
+		  title.setOnMouseClicked(event -> { modifyTimeline(id);});
 		  yearBox.getChildren().addAll(title,rectangle);  
 		  
 		  int yearsTemp = (int)yearCounter(startDate, endDate);
@@ -657,6 +659,34 @@ public class showTimelinesController {
 		  
 		  return pane;		
 	}
+	
+	public void modifyTimeline(int id){
+		  StartingModeController.timelineIdToModify=id;
+		  FXMLLoader loader = new FXMLLoader();
+		  loader.setLocation(Main.class.getResource("CreateMode.fxml"));
+		  FlowPane createMode= new FlowPane();
+		  try {
+			  createMode = loader.load();
+		  } catch (Exception e) {
+			  // TODO Auto-generated catch block
+			  e.printStackTrace();
+		  }
+		  CreateModeController c = (CreateModeController) loader.getController();
+		  Timeline temp = Main.project.getTimeline(id);
+		  c.TimelineName.setText(temp.getTitle()); 
+		  c.StartDate.setValue(temp.getStartDate());
+		  c.EndDate.setValue(temp.getEndDate());
+		  c.OnlyYears.setSelected(temp.getIsOnlyYears());
+		  c.CreateButton.setText("save");
+		  c.CreateButton.setTranslateX(170);
+		  c.deleteButton.setVisible(true);
+		  c.TimelineID=id;
+		  Stage stage = new Stage();
+		  stage.setScene(new Scene(createMode));  
+		  stage.setTitle("CreateMode");
+		  stage.show();
+	}
+	
 	
 	/**
 	 * 

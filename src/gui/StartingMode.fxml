@@ -2,15 +2,18 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="StartBorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="396.0" prefWidth="712.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.StartingModeController">
+<BorderPane fx:id="StartBorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="396.0" prefWidth="712.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.StartingModeController">
    <right>
        <VBox prefHeight="332.0" prefWidth="172.0" BorderPane.alignment="CENTER">
          <children>
@@ -34,12 +37,17 @@
                   <Insets top="5.0" />
                </VBox.margin>
             </Button>
-             <Button mnemonicParsing="false" onAction="#saveProject" prefHeight="25.0" prefWidth="161.0" text="Save Project">
+             <Button fx:id="save_btn" mnemonicParsing="false" onAction="#saveProject" prefHeight="25.0" prefWidth="161.0" text="Save Project">
                  <VBox.margin>
                      <Insets top="5.0" />
                  </VBox.margin>
              </Button>
-             <Button fx:id="delete_btn" mnemonicParsing="false" disable="true" onAction="#deleteProject" prefHeight="25.0" prefWidth="161.0" text="Delete Project">
+             <Button fx:id="delete_btn" disable="true" mnemonicParsing="false" onAction="#deleteProject" prefHeight="25.0" prefWidth="161.0" text="Delete Project">
+                 <VBox.margin>
+                     <Insets top="5.0" />
+                 </VBox.margin>
+             </Button>
+             <Button fx:id="new_btn" mnemonicParsing="false" onAction="#newProject" prefHeight="25.0" prefWidth="161.0" text="New Project">
                  <VBox.margin>
                      <Insets top="5.0" />
                  </VBox.margin>
@@ -47,16 +55,6 @@
          </children>
       </VBox>
    </right>
-   <bottom>
-      <ImageView fitHeight="64.0" fitWidth="66.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="BOTTOM_RIGHT">
-         <image>
-            <Image url="@question-mark.png" />
-         </image>
-         <effect>
-            <DropShadow height="64.0" radius="31.870000000000005" width="65.48" />
-         </effect>
-      </ImageView>
-   </bottom>
    <center>
        <ScrollPane fx:id="start_scrollpane" prefHeight="239.0" prefWidth="496.0" BorderPane.alignment="CENTER">
         <content>
@@ -67,4 +65,23 @@
          </BorderPane.margin>
       </ScrollPane>
    </center>
+   <bottom>
+      <Pane prefHeight="88.0" prefWidth="712.0" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="64.0" fitWidth="66.0" layoutX="621.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@question-mark.png" />
+               </image>
+               <effect>
+                  <DropShadow height="64.0" radius="31.870000000000005" width="65.48" />
+               </effect>
+            </ImageView>
+            <Label fx:id="name_label" contentDisplay="CENTER" layoutX="270.0" layoutY="27.0" text="Label">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+   </bottom>
 </BorderPane>
