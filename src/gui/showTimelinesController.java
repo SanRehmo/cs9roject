@@ -123,6 +123,7 @@ public class showTimelinesController {
 		Line timeLine = new Line(50,0,50,size);
 		timeLine.setStrokeWidth(3);
 		
+//		Checks if there is an event in that month and year for the timeline coloring.
 		for(int i = 0; i < Main.project.getTimeline(id).getEvents().size(); i++) {
 			if(Main.project.getTimeline(id).getEvents().get(i).getStartTime().getMonth().toString().equals(startDate.getMonth().toString())
 					&& Main.project.getTimeline(id).getEvents().get(i).getStartTime().getYear() == startDate.getYear()) {
@@ -143,15 +144,13 @@ public class showTimelinesController {
 	public Line clickAbleHline(int size, int id, int counter, LocalDate startDate, LocalDate endDate) {	//Making a horizontal line that will open zoomedTimeline when you press the line
 		Line timeLine = new Line(0, 50, size, 50);
 		timeLine.setStrokeWidth(5);
-		
+			
 		for(int i = 0; i < Main.project.getTimeline(id).getEvents().size(); i++) {
 			if(Main.project.getTimeline(id).getEvents().get(i).getStartTime().getYear() == startDate.getYear()) {
 				timeLine.setStyle("-fx-stroke: "+Main.project.getTimeline(id).getEvents().get(0).getColorName()+";");
 			}
 		}
-		
-		
-		
+				
 		int years;
 		int Ycounter;
 		
@@ -354,10 +353,31 @@ public class showTimelinesController {
 		
 		Pane pane = new Pane();
 		HBox hbox = new HBox();
+		HBox yearShowHBox = new HBox();
+		
 		
 		int Ycounter;
 		int years;
 		int temp;
+		
+		
+		
+		Text text = new Text();
+		text.setText(Main.project.getTimeline(id).getTitle());
+		text.setFont(Font.font ("Verdana", 20));
+		int sixe = (int)text.getBoundsInLocal().getWidth();
+		
+		Rectangle rectangle = new Rectangle(sixe, 20);
+		rectangle.setFill(Color.TRANSPARENT);
+		yearShowHBox.getChildren().add(rectangle);
+	
+		
+		rectangle = new Rectangle(45, 20);
+		rectangle.setFill(Color.TRANSPARENT);
+		hbox.getChildren().add(rectangle);
+		
+		
+		
 		
 		if(counter==4){
 			if(yearCounter(startDate,EndDate)%5 == 0){
@@ -382,39 +402,52 @@ public class showTimelinesController {
 		temp = Ycounter;
 		}
 		
+		
+		
 	
 		
 		if(temp < 5) {
 			switch(temp) {
 			case 0: {
-				hbox.getChildren().addAll(verticalLine(100),Hline(76));
+				hbox.getChildren().addAll(verticalLine(100),Hline(92));
+//				Test
+				yearShowHBox.getChildren().add(yearShow(id, startyear.plusMonths(-startDate.getMonthValue()+1),EndDate));
 				for(int j = 0; j < 12; j++) {	
-					
-					hbox.getChildren().addAll(KlickverticalLine(50,startyear.plusMonths(-startDate.getMonthValue()+1+j), id),Hline(36));
+					hbox.getChildren().addAll(KlickverticalLine(50,startyear.plusMonths(-startDate.getMonthValue()+1+j), id),Hline(92));
 				}
 				
 				break;
 			}
 			
 			case 1: {
-				hbox.getChildren().addAll(verticalLine(100),Hline(76));
+				hbox.getChildren().addAll(verticalLine(100),Hline(92));
+//				Test
+				yearShowHBox.getChildren().add(yearShow(id, startyear.plusMonths(-startDate.getMonthValue()+1),EndDate));
 				for(int j = 0; j < 12; j++) {	
-					System.out.print("This is activated");
-					hbox.getChildren().addAll(KlickverticalLine(50,startyear.plusMonths(-startDate.getMonthValue()+1+j), id),Hline(36));
+					hbox.getChildren().addAll(KlickverticalLine(50,startyear.plusMonths(-startDate.getMonthValue()+1+j), id),Hline(92));
 				}
 				
 				break;
 			}
 			case 2: {
+				
+				yearShowHBox.getChildren().add(yearShow(id, startDate, startDate.plusYears(2)));
+				
 				for(int i = 0; i < 2; i++) {
-					hbox.getChildren().addAll(verticalLine(100),Hline(36));
+					
+				
+					hbox.getChildren().addAll(verticalLine(100),Hline(45));
 					for(int j = 0; j < 12; j++) {	
-						hbox.getChildren().addAll(KlickverticalLine(50,startyear.plusMonths(-startDate.getMonthValue()+1+j).plusYears(i), id) ,Hline(36));
+						hbox.getChildren().addAll(KlickverticalLine(50,startyear.plusMonths(-startDate.getMonthValue()+1+j).plusYears(i), id) ,Hline(45));
 					}
 				}
+				
+				
 				break;
 			}
 			case 3: {
+				
+				yearShowHBox.getChildren().add(yearShow(id, startDate, startDate.plusYears(3)));
 				for(int i = 0; i < 3; i++) {
 					hbox.getChildren().addAll(verticalLine(100),Hline(22));
 					for(int j = 0; j < 12; j++) {	
@@ -424,6 +457,8 @@ public class showTimelinesController {
 				break;
 			}
 			case 4: {
+				
+				yearShowHBox.getChildren().add(yearShow(id, startDate, startDate.plusYears(4)));
 				for(int i = 0; i < 4; i++) {
 					hbox.getChildren().addAll(verticalLine(100),Hline(16));
 					for(int j = 0; j < 12; j++) {	
@@ -435,6 +470,7 @@ public class showTimelinesController {
 			}
 		}
 		else {
+			yearShowHBox.getChildren().add(yearShow(id, startDate, startDate.plusYears(5)));
 			for(int j = 0; j<5; j++){
 				hbox.getChildren().addAll(verticalLine(100),Hline(12));
 			for(int i = 0; i < 12; i++) {	
@@ -442,17 +478,15 @@ public class showTimelinesController {
 			}
 			}
 		}
-
+		
 		
 		hbox.getChildren().addAll(Hline(8), verticalLine(100));
 		hbox.setLayoutX(5);
 		hbox.setLayoutY(30);
 		hbox.setAlignment(Pos.CENTER);
-		pane.getChildren().add(hbox);
+		pane.getChildren().addAll(yearShowHBox, hbox);
 		
-		//hbox.setOnMouseClicked(e-> {
-			//showInfoByMonth (0, 2017, 4);
-		//}); 
+
 		
 		return pane;	
 	}
