@@ -275,7 +275,7 @@ public class showTimelinesController {
 		
 		if(temp > 5 || temp == 5) {
 			for(int i = 0; i < 5; i++) {
-				hbox.getChildren().addAll(verticalLine(100),clickAbleHline(250,id,i,StartDate,EndDate));  //generating timeline
+				hbox.getChildren().addAll(verticalLine(100),clickAbleHline(242,id,i,StartDate,EndDate));  //generating timeline
 			}
 		}
 		else {
@@ -315,7 +315,7 @@ public class showTimelinesController {
 		 			}
 		 			case 4: {
 		 				for(int i = 0; i < 4; i++) {
-		 					hbox.getChildren().addAll(verticalLine(100),clickAbleHline(312,id,i,StartDate,EndDate));  //generating timeline
+		 					hbox.getChildren().addAll(verticalLine(100),clickAbleHline(310,id,i,StartDate,EndDate));  //generating timeline
 		 				}
 		 				break;
 		 			}
