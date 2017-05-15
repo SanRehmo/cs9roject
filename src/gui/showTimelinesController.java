@@ -361,22 +361,14 @@ public class showTimelinesController {
 		int temp;
 		
 		
-		
 		Text text = new Text();
 		text.setText(Main.project.getTimeline(id).getTitle());
 		text.setFont(Font.font ("Verdana", 20));
 		int sixe = (int)text.getBoundsInLocal().getWidth();
 		
-		Rectangle rectangle = new Rectangle(sixe, 20);
-		rectangle.setFill(Color.TRANSPARENT);
-		yearShowHBox.getChildren().add(rectangle);
-	
-		
-		rectangle = new Rectangle(45, 20);
+		Rectangle rectangle = new Rectangle(sixe + 10, 20);
 		rectangle.setFill(Color.TRANSPARENT);
 		hbox.getChildren().add(rectangle);
-		
-		
 		
 		
 		if(counter==4){
@@ -402,10 +394,6 @@ public class showTimelinesController {
 		temp = Ycounter;
 		}
 		
-		
-		
-	
-		
 		if(temp < 5) {
 			switch(temp) {
 			case 0: {
@@ -430,15 +418,14 @@ public class showTimelinesController {
 				break;
 			}
 			case 2: {
-				
 				yearShowHBox.getChildren().add(yearShow(id, startDate, startDate.plusYears(2)));
 				
 				for(int i = 0; i < 2; i++) {
 					
 				
-					hbox.getChildren().addAll(verticalLine(100),Hline(45));
+					hbox.getChildren().addAll(verticalLine(100),Hline(44));
 					for(int j = 0; j < 12; j++) {	
-						hbox.getChildren().addAll(KlickverticalLine(50,startyear.plusMonths(-startDate.getMonthValue()+1+j).plusYears(i), id) ,Hline(45));
+						hbox.getChildren().addAll(KlickverticalLine(50,startyear.plusMonths(-startDate.getMonthValue()+1+j).plusYears(i), id) ,Hline(44));
 					}
 				}
 				
@@ -449,9 +436,9 @@ public class showTimelinesController {
 				
 				yearShowHBox.getChildren().add(yearShow(id, startDate, startDate.plusYears(3)));
 				for(int i = 0; i < 3; i++) {
-					hbox.getChildren().addAll(verticalLine(100),Hline(22));
+					hbox.getChildren().addAll(verticalLine(100),Hline(27));
 					for(int j = 0; j < 12; j++) {	
-						hbox.getChildren().addAll(KlickverticalLine(50,startyear.plusMonths(-startDate.getMonthValue()+1+j).plusYears(i), id),Hline(23));
+						hbox.getChildren().addAll(KlickverticalLine(50,startyear.plusMonths(-startDate.getMonthValue()+1+j).plusYears(i), id),Hline(29));
 					}
 				}
 				break;
@@ -460,9 +447,9 @@ public class showTimelinesController {
 				
 				yearShowHBox.getChildren().add(yearShow(id, startDate, startDate.plusYears(4)));
 				for(int i = 0; i < 4; i++) {
-					hbox.getChildren().addAll(verticalLine(100),Hline(16));
+					hbox.getChildren().addAll(verticalLine(100),Hline(22));
 					for(int j = 0; j < 12; j++) {	
-						hbox.getChildren().addAll(KlickverticalLine(50,startyear.plusMonths(-startDate.getMonthValue()+1+j).plusYears(i), id),Hline(16));
+						hbox.getChildren().addAll(KlickverticalLine(50,startyear.plusMonths(-startDate.getMonthValue()+1+j).plusYears(i), id),Hline(20));
 					}
 				}
 				break;
@@ -472,16 +459,16 @@ public class showTimelinesController {
 		else {
 			yearShowHBox.getChildren().add(yearShow(id, startDate, startDate.plusYears(5)));
 			for(int j = 0; j<5; j++){
-				hbox.getChildren().addAll(verticalLine(100),Hline(12));
+				hbox.getChildren().addAll(verticalLine(100),Hline(15));
 			for(int i = 0; i < 12; i++) {	
-				hbox.getChildren().addAll(KlickverticalLine(50,startyear.plusMonths(-startDate.getMonthValue()+1+j).plusYears(j), id),Hline(12));
+				hbox.getChildren().addAll(KlickverticalLine(50,startyear.plusMonths(-startDate.getMonthValue()+1+j).plusYears(j), id),Hline(15));
 			}
 			}
 		}
 		
 		
 		hbox.getChildren().addAll(Hline(8), verticalLine(100));
-		hbox.setLayoutX(5);
+		hbox.setLayoutX(50);
 		hbox.setLayoutY(30);
 		hbox.setAlignment(Pos.CENTER);
 		pane.getChildren().addAll(yearShowHBox, hbox);
