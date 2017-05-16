@@ -35,6 +35,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.sun.javafx.scene.control.skin.DatePickerSkin;
+import com.sun.javafx.scene.control.skin.TooltipSkin;
 
 import cs_9roject.Event;
 import cs_9roject.NonDurationEvent;
@@ -123,15 +124,22 @@ public class showTimelinesController {
 	public Line KlickverticalLine(int size, LocalDate startDate , int id) {		//Making every vertical lines in a timeline
 		Line timeLine = new Line(50,0,50,size);
 		timeLine.setStrokeWidth(3);
-		
+		int j = 0;
 //		Checks if there is an event in that month and year for the timeline coloring.
 		for(int i = 0; i < Main.project.getTimeline(id).getEvents().size(); i++) {
 			if(Main.project.getTimeline(id).getEvents().get(i).getStartTime().getMonth().toString().equals(startDate.getMonth().toString())
 					&& Main.project.getTimeline(id).getEvents().get(i).getStartTime().getYear() == startDate.getYear()) {
 				timeLine.setStyle("-fx-stroke: "+Main.project.getTimeline(id).getEvents().get(i).getColorName()+";");
+				
+
+				j++;
+				Tooltip.install(timeLine, new Tooltip(j + " events"));
+				
 			}
+			
 		}
-		
+		j = 0; 
+
 		timeLine.setOnMouseClicked(e -> {
 			showInfoByMonth (0, startDate.getYear(), startDate.getMonthValue());
 			
@@ -139,8 +147,15 @@ public class showTimelinesController {
 			primaryScrollpane.setContent(scrollBox);
 			Stage stage = (Stage) doneButton.getScene().getWindow();
 			stage.close();
+			
+			
+			
+			
+			
 		return timeLine;
 	}
+	
+	
 	
 	public Line clickAbleHline(int size, int id, int counter, LocalDate startDate, LocalDate endDate) {	//Making a horizontal line that will open zoomedTimeline when you press the line
 		Line timeLine = new Line(0, 50, size, 50);
