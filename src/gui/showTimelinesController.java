@@ -46,6 +46,9 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 
 import javafx.util.Callback;
+import gui.CreateModeController;
+import gui.Main;
+import gui.StartingModeController;
 
 
 public class showTimelinesController {
@@ -55,7 +58,7 @@ public class showTimelinesController {
 	
 	public BorderPane primaryBorderpane; 
 
-	List<CheckBox> timelines = new ArrayList<CheckBox>();
+	public static List<CheckBox> timelines = new ArrayList<CheckBox>();
 
 
 	VBox vbox = new VBox();
@@ -64,23 +67,40 @@ public class showTimelinesController {
 	
 	
 	
-
+	public static boolean isRefresh = false;
 	
 	
 	 @FXML
 	 public void initialize() {  //Reading every timeline and print there names in checkboxes
-		 for(int i=0; i<Main.project.getTimelines().size(); i++){
-			 HBox hbox = new HBox();
-			 Pane pane = new Pane();
-			 CheckBox cbi = new CheckBox( Main.project.getTimelines().get(i).getTitle() +" (" + Main.project.getTimelines().get(i).getEvents().size() +" event/s) ID: " + Main.project.getTimelines().get(i).getTimelineId() );
-			 timelines.add(cbi);
-			 hbox.getChildren().addAll(cbi);
-			 hbox.setLayoutX(10);
-			 hbox.setLayoutY(5);
-			 hbox.setAlignment(Pos.CENTER);	
-			 pane.getChildren().add(hbox);	 
-		  	 vbox.getChildren().add(pane);
+		 System.out.println(isRefresh);
+		 if (isRefresh){
+			 for(int i=0; i<Main.project.getTimelines().size(); i++){
+				 HBox hbox = new HBox();
+				 Pane pane = new Pane();
+				 hbox.getChildren().addAll(timelines.get(i));
+				 hbox.setLayoutX(10);
+				 hbox.setLayoutY(5);
+				 hbox.setAlignment(Pos.CENTER);	
+				 pane.getChildren().add(hbox);	 
+			  	 vbox.getChildren().add(pane);
+			 }
 		 }
+		 else {
+			 timelines = new ArrayList<CheckBox>();
+			 for(int i=0; i<Main.project.getTimelines().size(); i++){
+				 HBox hbox = new HBox();
+				 Pane pane = new Pane();
+				 CheckBox cbi = new CheckBox( Main.project.getTimelines().get(i).getTitle() +" (" + Main.project.getTimelines().get(i).getEvents().size() +" event/s) ID: " + Main.project.getTimelines().get(i).getTimelineId() );
+				 timelines.add(cbi);
+				 hbox.getChildren().addAll(cbi);
+				 hbox.setLayoutX(10);
+				 hbox.setLayoutY(5);
+				 hbox.setAlignment(Pos.CENTER);	
+				 pane.getChildren().add(hbox);	 
+			  	 vbox.getChildren().add(pane);
+			 }
+		 }
+		 
 		 show_scrollpane.setContent(vbox);
 	    }
 	
@@ -95,26 +115,45 @@ public class showTimelinesController {
 	private CheckBox displayAll;
 	
 	@FXML
-	public void showTimeline(){	//Method that is showing the timelines in the scrollPane
+	public void showTimeline(){		//Method that is showing the timelines in the scrollPane
 		if(displayAll.isSelected()){//If DisplayAll is selected the program will show every timeline
-			for(int i=0; i<timelines.size(); i++){
-			scrollBox.getChildren().addAll(yearShow(Main.project.getTimelines().get(i).getTimelineId(),Main.project.getTimelines().get(i).getStartDate(),Main.project.getTimelines().get(i).getEndDate()),generateTimeL(Main.project.getTimelines().get(i).getTimelineId(), Main.project.getTimelines().get(i).getStartDate(), Main.project.getTimelines().get(i).getEndDate()),spaceBetween());
-			}
+			for (CheckBox c : timelines)
+				c.setSelected(true);;
+			//for(int i=0; i<timelines.size(); i++){
+			//scrollBox.getChildren().addAll(yearShow(Main.project.getTimelines().get(i).getTimelineId(),Main.project.getTimelines().get(i).getStartDate(),Main.project.getTimelines().get(i).getEndDate()),generateTimeL(Main.project.getTimelines().get(i).getTimelineId(), Main.project.getTimelines().get(i).getStartDate(), Main.project.getTimelines().get(i).getEndDate()),spaceBetween());
+			//}
 			
 		}
-		else{
-			for(int i=0; i<timelines.size(); i++){	//Just displaying the checked timelines
-				if(timelines.get(i).isSelected()){
-				scrollBox.getChildren().addAll(yearShow(Main.project.getTimelines().get(i).getTimelineId(),Main.project.getTimelines().get(i).getStartDate(),Main.project.getTimelines().get(i).getEndDate()),generateTimeL(Main.project.getTimelines().get(i).getTimelineId(), Main.project.getTimelines().get(i).getStartDate(), Main.project.getTimelines().get(i).getEndDate()),spaceBetween());
-				}	
-			}	 
+		for(int i=0; i<timelines.size(); i++){	//Just displaying the checked timelines
+			if(timelines.get(i).isSelected()){
+			scrollBox.getChildren().addAll(yearShow(Main.project.getTimelines().get(i).getTimelineId(),Main.project.getTimelines().get(i).getStartDate(),Main.project.getTimelines().get(i).getEndDate()),generateTimeL(Main.project.getTimelines().get(i).getTimelineId(), Main.project.getTimelines().get(i).getStartDate(), Main.project.getTimelines().get(i).getEndDate()),spaceBetween());
+			}	
 		}
-	 primaryScrollpane.setContent(scrollBox);
-	 Stage stage = (Stage) doneButton.getScene().getWindow();
-	 
-	 stage.close();	
+		primaryScrollpane.setContent(scrollBox);
+		Stage stage = (Stage) doneButton.getScene().getWindow();
+		stage.close();		
 	}
 	
+public void refreshTimeline(){	//Method that is showing the timelines in the scrollPane
+		
+		scrollBox.getChildren().removeAll(scrollBox.getChildren());
+		
+		if(displayAll.isSelected()){//If DisplayAll is selected the program will show every timeline
+			for (CheckBox c : timelines)
+				c.setSelected(true);;
+			//for(int i=0; i<timelines.size(); i++){
+			//scrollBox.getChildren().addAll(yearShow(Main.project.getTimelines().get(i).getTimelineId(),Main.project.getTimelines().get(i).getStartDate(),Main.project.getTimelines().get(i).getEndDate()),generateTimeL(Main.project.getTimelines().get(i).getTimelineId(), Main.project.getTimelines().get(i).getStartDate(), Main.project.getTimelines().get(i).getEndDate()),spaceBetween());
+			//}
+			
+		}
+		for(int i=0; i<timelines.size(); i++){	//Just displaying the checked timelines
+			if(timelines.get(i).isSelected()){
+			scrollBox.getChildren().addAll(yearShow(Main.project.getTimelines().get(i).getTimelineId(),Main.project.getTimelines().get(i).getStartDate(),Main.project.getTimelines().get(i).getEndDate()),generateTimeL(Main.project.getTimelines().get(i).getTimelineId(), Main.project.getTimelines().get(i).getStartDate(), Main.project.getTimelines().get(i).getEndDate()),spaceBetween());
+			}	
+		}
+		primaryScrollpane.setContent(scrollBox);
+	}
+
 	public Line verticalLine(int size) {		//Making every vertical lines in a timeline
 		Line timeLine = new Line(50,0,50,size);
 		timeLine.setStrokeWidth(3);
@@ -713,7 +752,8 @@ public class showTimelinesController {
 		  Stage stage = new Stage();
 		  stage.setScene(new Scene(createMode));  
 		  stage.setTitle("CreateMode");
-		  stage.show();
+		  stage.showAndWait();
+		  refreshTimeline();
 	}
 	
 	

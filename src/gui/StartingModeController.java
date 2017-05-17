@@ -49,7 +49,7 @@ public class StartingModeController {
 	public static int timelineIdToModify=0;
 	public static int eventIdToModify=0;
 	
-	
+	//test
 	public void initialize() {
 		/* Alert alert = new Alert(AlertType.CONFIRMATION);
 		alert.setTitle("Confirmation Dialog");
@@ -114,6 +114,24 @@ public class StartingModeController {
 	    stage2.setScene(new Scene(showTimeline));  
 	    stage2.setTitle("Timelines");
 	    stage2.show();	
+	}
+	
+	/**
+     * Method for refresh Timelines to show window.
+     */
+	public void refreshTimeline() throws IOException{
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(Main.class.getResource("showTimelines.fxml"));
+		showTimelinesController.isRefresh=true;
+		loader.load();
+		showTimelinesController c = (showTimelinesController) loader.getController();
+		c.primaryScrollpane = start_scrollpane;
+		c.primaryBorderpane = StartBorderPane;
+		//c.timelines.get(Main.project.getTimelines().indexOf(Main.project.getTimeline(timelineIdToModify))).setSelected(false);
+		//c.timelines.remove(Main.project.getTimelines().indexOf(Main.project.getTimeline(timelineIdToModify)));
+		c.isRefresh=true;
+		c.refreshTimeline();
+		c.isRefresh=false;
 	}
 	
 	/**
@@ -281,6 +299,7 @@ public class StartingModeController {
      */
 	@FXML
 	private void showEventHandler() throws IOException{
+		refreshTimeline();
 		if (Main.project.getTimelines().size()==0){
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("ERROR!");
