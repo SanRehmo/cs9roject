@@ -51,6 +51,7 @@ import gui.Main;
 import gui.StartingModeController;
 
 
+@SuppressWarnings("ALL")
 public class showTimelinesController {
 	public int timelineId = 0;
 	
@@ -200,17 +201,13 @@ public void refreshTimeline(){	//Method that is showing the timelines in the scr
 		Line timeLine = new Line(0, 50, size, 50);
 		timeLine.setStrokeWidth(5);
 			
-		for(int i = 0; i < Main.project.getTimeline(id).getEvents().size(); i++) {
-			if(Main.project.getTimeline(id).getEvents().get(i).getStartTime().getYear() == startDate.getYear()) {
-				timeLine.setStyle("-fx-stroke: "+Main.project.getTimeline(id).getEvents().get(0).getColorName()+";");
-			}
-		}
+			
+	
 		
 				
 		int years;
 		int Ycounter;
 		
-		System.out.print("antal år: "+(int)yearCounter(startDate,endDate));
 		
 		if(yearCounter(startDate,endDate)%5 == 0){
 			Ycounter = (int)(yearCounter(startDate,endDate)/5);
@@ -223,6 +220,17 @@ public void refreshTimeline(){	//Method that is showing the timelines in the scr
 		
 		int FinalCounter = Ycounter;
 		
+		for(int i = 0; i < Main.project.getTimeline(id).getEvents().size(); i++) {
+			for(int j = 0; j<FinalCounter; j++){
+				if(Main.project.getTimeline(id).getEvents().get(i).getStartTime().getYear() == (startDate.getYear()+FinalCounter*counter+j)) {
+					timeLine.setStyle("-fx-stroke: "+Main.project.getTimeline(id).getEvents().get(i).getColorName()+";");
+					System.out.println("Fï¿½rg: "+Main.project.getTimeline(id).getEvents().get(i).getColorName());
+				}	
+			}
+				
+		
+		}
+		
 
   		timeLine.setOnMouseClicked(e ->{
   			Stage stage2 = new Stage();
@@ -233,7 +241,7 @@ public void refreshTimeline(){	//Method that is showing the timelines in the scr
 				if(counter == 0){
 					zoomBox.getChildren().addAll(yearShow(id,startDate,startDate.plusYears(FinalCounter)),generateTimeL(id, startDate, startDate.plusYears(FinalCounter)),spaceBetween());
 					zoomPane.setContent(zoomBox);
-
+				
 					stage2.setTitle("Zoomed timeline");
 					stage2.show();
 					stage2.setOnCloseRequest(event -> {

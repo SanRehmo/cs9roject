@@ -78,7 +78,7 @@ public class CreateModeController {
 					}
 				}
 				// if all inputs was correct then add timeline
-				Timeline temp = new Timeline(StartDate.getValue(),EndDate.getValue(),TimelineName.getText(), OnlyYears.isSelected() );
+				Timeline temp = new Timeline(StartDate.getValue(),EndDate.getValue().plusYears(1),TimelineName.getText(), OnlyYears.isSelected() );
 				if (TimelineID == 0){
 				    Main.project.addTimeline(temp);
 				}

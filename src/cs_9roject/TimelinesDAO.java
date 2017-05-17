@@ -23,6 +23,8 @@ public class TimelinesDAO {
         Timeline timeline = null;
         ArrayList<Event> eventList = new ArrayList<Event>();
 
+        String projectName = "";
+
         // attempt to establish a connection to the DB
         try {
             connection = Database.establishConnection();
@@ -38,7 +40,7 @@ public class TimelinesDAO {
 
                 // load all events in the project
                 stmt = connection.createStatement();
-                ResultSet rss = stmt.executeQuery("SELECT Timelines.TIMELINE_ID, Events.EVENT_ID, Events.Title, Events.START_DATE, Events.END_DATE, Events.START_TIME, Events.END_TIME, Events.DESCRIPTION, Events.IMAGE_PATH, Events.DURATIONEVENT, Events.COLOR"
+                ResultSet rss = stmt.executeQuery("SELECT Projects.PROJECT_NAME, Timelines.TIMELINE_ID, Events.EVENT_ID, Events.Title, Events.START_DATE, Events.END_DATE, Events.START_TIME, Events.END_TIME, Events.DESCRIPTION, Events.IMAGE_PATH, Events.DURATIONEVENT, Events.COLOR"
                         + " FROM Projects JOIN (Timelines, Events) ON Projects.TIMELINE_ID=Timelines.TIMELINE_ID WHERE Timelines.EVENT_ID=Events.EVENT_ID AND PROJECT_ID=" + ID);
 
                 // empty
@@ -56,6 +58,7 @@ public class TimelinesDAO {
                     int timelineID = rss.getInt("TIMELINE_ID");
                     boolean isDurationEvent = rss.getBoolean("DURATIONEVENT");
                     Color color = Color.valueOf(rss.getString("COLOR"));
+                    projectName = rss.getString("PROJECT_NAME");
 
 
                     if (isDurationEvent){
@@ -91,14 +94,20 @@ public class TimelinesDAO {
                     }
                 }
 
+                // retrieving ProjectName seperately
+                // doesn't work in the general query for Projects without Events
+                stmt = connection.createStatement();
+                ResultSet rsss = stmt.executeQuery("SELECT Projects.PROJECT_NAME FROM Projects JOIN Timelines ON Projects.TIMELINE_ID=Timelines.TIMELINE_ID WHERE PROJECT_ID=" + ID);
+                rsss.next();
+                projectName = rsss.getString("PROJECT_NAME");
+                result.projectName = projectName;
+
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
         } else {
             System.out.println("Failed to make connection");
         }
-        String projectName = result.projectName;
-        result.projectName = projectName;
         return result;
     }
 
