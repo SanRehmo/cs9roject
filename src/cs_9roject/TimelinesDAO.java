@@ -97,6 +97,8 @@ public class TimelinesDAO {
         } else {
             System.out.println("Failed to make connection");
         }
+        String projectName = result.projectName;
+        result.projectName = projectName;
         return result;
     }
 
@@ -160,7 +162,7 @@ public class TimelinesDAO {
             for (int i = 0; i < project.timelines.size(); i++) {
 
                 Timeline tl = project.timelines.get(i);
-                String projects = "INSERT INTO Projects " + "VALUES (" + project.ProjectID + ", " + project.timelines.get(i).timelineId + ", '" + project.toString() + "', '" + project.userID + "')";
+                String projects = "INSERT INTO Projects " + "VALUES (" + project.ProjectID + ", " + project.timelines.get(i).timelineId + ", '" + project.projectName + "', '" + project.userID + "')";
                 execute(projects);
 
 
