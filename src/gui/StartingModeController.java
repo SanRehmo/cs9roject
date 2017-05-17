@@ -49,7 +49,7 @@ public class StartingModeController {
 	public static int timelineIdToModify=0;
 	public static int eventIdToModify=0;
 	
-	
+	//test
 	public void initialize() {
 		/* Alert alert = new Alert(AlertType.CONFIRMATION);
 		alert.setTitle("Confirmation Dialog");
