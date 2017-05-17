@@ -106,7 +106,8 @@ public class CreateModeController {
 		alert.setHeaderText("You are going to delete the timeline: "+Main.project.getTimeline(TimelineID).getTitle()+" ID: "+Main.project.getTimeline(TimelineID).getTimelineId());
 		alert.setContentText("Are you sure you like to proceed?");
 		if (alert.showAndWait().get() == ButtonType.OK){
-			Main.project.removeTimeline(TimelineID);
+			showTimelinesController.timelines.remove(Main.project.getTimelines().indexOf(Main.project.getTimeline(TimelineID)));
+			Main.project.removeTimeline(TimelineID);			
 			Stage stage = (Stage) CreateButton.getScene().getWindow();
 		    stage.close();
 		}	
