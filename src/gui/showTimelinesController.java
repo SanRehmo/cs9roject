@@ -434,11 +434,9 @@ public class showTimelinesController {
 				break;
 			}
 			case 2: {
-				yearShowHBox.getChildren().add(yearShow(id, startDate, startDate.plusYears(2)));
+				yearShowHBox.getChildren().add(yearShow(id, startyear, startyear.plusYears(2)));
 				
 				for(int i = 0; i < 2; i++) {
-					
-				
 					hbox.getChildren().addAll(verticalLine(100),Hline(44));
 					for(int j = 0; j < 12; j++) {	
 						hbox.getChildren().addAll(KlickverticalLine(50,startyear.plusMonths(-startDate.getMonthValue()+1+j).plusYears(i), id) ,Hline(44));
@@ -450,7 +448,7 @@ public class showTimelinesController {
 			}
 			case 3: {
 				
-				yearShowHBox.getChildren().add(yearShow(id, startDate, startDate.plusYears(3)));
+				yearShowHBox.getChildren().add(yearShow(id, startyear, startyear.plusYears(3)));
 				for(int i = 0; i < 3; i++) {
 					hbox.getChildren().addAll(verticalLine(100),Hline(27));
 					for(int j = 0; j < 12; j++) {	
@@ -461,7 +459,7 @@ public class showTimelinesController {
 			}
 			case 4: {
 				
-				yearShowHBox.getChildren().add(yearShow(id, startDate, startDate.plusYears(4)));
+				yearShowHBox.getChildren().add(yearShow(id, startyear, startyear.plusYears(4)));
 				for(int i = 0; i < 4; i++) {
 					hbox.getChildren().addAll(verticalLine(100),Hline(22));
 					for(int j = 0; j < 12; j++) {	
@@ -473,7 +471,7 @@ public class showTimelinesController {
 			}
 		}
 		else {
-			yearShowHBox.getChildren().add(yearShow(id, startDate, startDate.plusYears(5)));
+			yearShowHBox.getChildren().add(yearShow(id, startyear, startyear.plusYears(5)));
 			for(int j = 0; j<5; j++){
 				hbox.getChildren().addAll(verticalLine(100),Hline(15));
 			for(int i = 0; i < 12; i++) {	
