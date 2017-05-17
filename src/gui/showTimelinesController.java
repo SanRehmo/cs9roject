@@ -176,7 +176,7 @@ public class showTimelinesController {
 		else{
 			years = (int)((yearCounter(startDate,endDate)-(yearCounter(startDate,endDate)%5)));
 			Ycounter = years - years%4;
-			Ycounter = Ycounter/4;
+			Ycounter = Ycounter/4;	
 		}
 		
 		int FinalCounter = Ycounter;
@@ -241,7 +241,20 @@ public class showTimelinesController {
 					}	
 		}
 			else {
-								
+				if(FinalCounter==0){
+					zoomBox.getChildren().add(zoomedTimeline(id, startDate.plusYears(counter), endDate,startDate,counter));
+					System.out.println(startDate);
+					System.out.println(endDate);
+					zoomPane.setContent(zoomBox);
+			  		//Stage stage2 = new Stage();
+					//stage2.setScene(new Scene(zoomPane)); 
+					stage2.setTitle("Zoomed timeline");
+					stage2.show();
+					
+					stage2.setOnCloseRequest(event -> {
+					   stage2.setScene(null);
+					});
+				} else{
 				zoomBox.getChildren().add(zoomedTimeline(id, startDate.plusYears(FinalCounter*counter), endDate,startDate,counter));
 				System.out.println(startDate);
 				System.out.println(endDate);
@@ -254,7 +267,8 @@ public class showTimelinesController {
 				stage2.setOnCloseRequest(event -> {
 				   stage2.setScene(null);
 				});
-			} 
+			}
+			}
 		
 		stage2.setScene(new Scene(zoomPane));
 		
@@ -409,13 +423,15 @@ public class showTimelinesController {
 		}
 		temp = Ycounter;
 		}
+		System.out.println("Temp: "+temp);
+		System.out.println("StartYear: "+startyear.toString());
 		
 		if(temp < 5) {
 			switch(temp) {
 			case 0: {
 				hbox.getChildren().addAll(verticalLine(100),Hline(92));
 //				Test
-				yearShowHBox.getChildren().add(yearShow(id, startyear.plusMonths(-startDate.getMonthValue()+1),EndDate));
+				yearShowHBox.getChildren().add(yearShow(id, startyear, startyear.plusYears(1)));
 				for(int j = 0; j < 12; j++) {	
 					hbox.getChildren().addAll(KlickverticalLine(50,startyear.plusMonths(-startDate.getMonthValue()+1+j), id),Hline(92));
 				}
@@ -426,7 +442,7 @@ public class showTimelinesController {
 			case 1: {
 				hbox.getChildren().addAll(verticalLine(100),Hline(92));
 //				Test
-				yearShowHBox.getChildren().add(yearShow(id, startyear.plusMonths(-startDate.getMonthValue()+1),EndDate));
+				yearShowHBox.getChildren().add(yearShow(id, startyear, startyear.plusYears(1)));
 				for(int j = 0; j < 12; j++) {	
 					hbox.getChildren().addAll(KlickverticalLine(50,startyear.plusMonths(-startDate.getMonthValue()+1+j), id),Hline(92));
 				}
