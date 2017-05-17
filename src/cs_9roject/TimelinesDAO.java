@@ -94,13 +94,20 @@ public class TimelinesDAO {
                     }
                 }
 
+                // retrieving ProjectName seperately
+                // doesn't work in the general query for Projects without Events
+                stmt = connection.createStatement();
+                ResultSet rsss = stmt.executeQuery("SELECT Projects.PROJECT_NAME FROM Projects JOIN Timelines ON Projects.TIMELINE_ID=Timelines.TIMELINE_ID WHERE PROJECT_ID=" + ID);
+                rsss.next();
+                projectName = rsss.getString("PROJECT_NAME");
+                result.projectName = projectName;
+
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
         } else {
             System.out.println("Failed to make connection");
         }
-        result.projectName = projectName;
         return result;
     }
 
