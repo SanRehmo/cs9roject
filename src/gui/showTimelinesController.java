@@ -205,9 +205,12 @@ public void refreshTimeline(){	//Method that is showing the timelines in the scr
 				timeLine.setStyle("-fx-stroke: "+Main.project.getTimeline(id).getEvents().get(0).getColorName()+";");
 			}
 		}
+		
 				
 		int years;
 		int Ycounter;
+		
+		System.out.print("antal år: "+(int)yearCounter(startDate,endDate));
 		
 		if(yearCounter(startDate,endDate)%5 == 0){
 			Ycounter = (int)(yearCounter(startDate,endDate)/5);
@@ -219,6 +222,7 @@ public void refreshTimeline(){	//Method that is showing the timelines in the scr
 		}
 		
 		int FinalCounter = Ycounter;
+		
 
   		timeLine.setOnMouseClicked(e ->{
   			Stage stage2 = new Stage();
@@ -280,7 +284,10 @@ public void refreshTimeline(){	//Method that is showing the timelines in the scr
 					}	
 		}
 			else {
-				if(FinalCounter==0){
+				if((int)yearCounter(startDate,endDate)<1){
+					showInfoByMonth (0, startDate.getYear(), startDate.getMonthValue());
+				}
+				else if(FinalCounter==0){
 					zoomBox.getChildren().add(zoomedTimeline(id, startDate.plusYears(counter), endDate,startDate,counter));
 					System.out.println(startDate);
 					System.out.println(endDate);
@@ -293,7 +300,8 @@ public void refreshTimeline(){	//Method that is showing the timelines in the scr
 					stage2.setOnCloseRequest(event -> {
 					   stage2.setScene(null);
 					});
-				} else{
+				}
+				else{
 				zoomBox.getChildren().add(zoomedTimeline(id, startDate.plusYears(FinalCounter*counter), endDate,startDate,counter));
 				System.out.println(startDate);
 				System.out.println(endDate);
