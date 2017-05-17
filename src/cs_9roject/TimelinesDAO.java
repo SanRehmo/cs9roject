@@ -198,8 +198,9 @@ public class TimelinesDAO {
                     }
 
                         boolToInt = (ev.isDurationEvent) ? 1 : 0;
+                        String imagePath= ev.imagepath.replace("\\", "\\\\");
                         String events = "INSERT INTO Events " + "VALUES (" + ev.eventid + ", '" + ev.title + "', '" + startTime + "', '" + endTime + "', '"
-                                + startDate + "', '" + endDate + "', '" + ev.description + "', " + boolToInt + ", '" + ev.eventColor.toString() + "', '" + ev.imagepath + "')";
+                                + startDate + "', '" + endDate + "', '" + ev.description + "', " + boolToInt + ", '" + ev.eventColor.toString() + "', '" + imagePath + "')";
                     execute(events);
 
                 }
