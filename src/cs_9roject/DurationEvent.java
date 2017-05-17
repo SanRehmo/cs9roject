@@ -16,8 +16,8 @@ public class DurationEvent extends Event {
 	
 	// mine
     // Create new event with specific ID. Almost used when importing events from database
-	public DurationEvent(int timelineID, int eventID, String eventTitle, LocalDateTime eventStart_time, LocalDateTime eventEnd_time, String description, int imageID, Color color, String imagepath) throws MalformedURLException {
-		super(timelineID, eventID, eventTitle, eventStart_time, eventEnd_time, description, imageID, color, imagepath);
+	public DurationEvent(int timelineID, int eventID, String eventTitle, LocalDateTime eventStart_time, LocalDateTime eventEnd_time, String description, Color color, String imagepath) throws MalformedURLException {
+		super(timelineID, eventID, eventTitle, eventStart_time, eventEnd_time, description, color, imagepath);
 		endTime=eventEnd_time;
 	}
 	

@@ -30,14 +30,13 @@ public class Event {
 
     // mine
     // Create new event with specific ID. Almost used when importing events from database
-	public Event(int timelineID, int eventID, String eventTitle, LocalDateTime eventStart_time, LocalDateTime eventEnd_time, String Description, int imageID, Color color, String Imagepath) throws MalformedURLException {
+	public Event(int timelineID, int eventID, String eventTitle, LocalDateTime eventStart_time, LocalDateTime eventEnd_time, String Description, Color color, String Imagepath) throws MalformedURLException {
 		timelineid = timelineID;
 		eventid = eventID;
 		title = eventTitle;
 		startTime = eventStart_time;
 		endTime = eventEnd_time;
         description = Description;
-        imageid = imageID;
         imagepath = Imagepath;
         if (imagepath==null) imagepath="";
         this.setImage(imagepath);
