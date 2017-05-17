@@ -538,7 +538,7 @@ public void refreshTimeline(){	//Method that is showing the timelines in the scr
 			for(int j = 0; j<5; j++){
 				hbox.getChildren().addAll(verticalLine(100),Hline(15));
 			for(int i = 0; i < 12; i++) {	
-				hbox.getChildren().addAll(KlickverticalLine(50,startyear.plusMonths(-startDate.getMonthValue()+1+j).plusYears(j), id),Hline(15));
+				hbox.getChildren().addAll(KlickverticalLine(50,startyear.plusMonths(-startDate.getMonthValue()+1+i).plusYears(j), id),Hline(15));
 			}
 			}
 		}
