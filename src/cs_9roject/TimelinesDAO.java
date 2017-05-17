@@ -38,7 +38,7 @@ public class TimelinesDAO {
 
                 // load all events in the project
                 stmt = connection.createStatement();
-                ResultSet rss = stmt.executeQuery("SELECT Timelines.TIMELINE_ID, Events.EVENT_ID, Events.Title, Events.START_DATE, Events.END_DATE, Events.START_TIME, Events.END_TIME, Events.DESCRIPTION, Events.IMAGE_ID, Events.DURATIONEVENT, Events.COLOR"
+                ResultSet rss = stmt.executeQuery("SELECT Timelines.TIMELINE_ID, Events.EVENT_ID, Events.Title, Events.START_DATE, Events.END_DATE, Events.START_TIME, Events.END_TIME, Events.DESCRIPTION, Events.IMAGE_PATH, Events.DURATIONEVENT, Events.COLOR"
                         + " FROM Projects JOIN (Timelines, Events) ON Projects.TIMELINE_ID=Timelines.TIMELINE_ID WHERE Timelines.EVENT_ID=Events.EVENT_ID AND PROJECT_ID=" + ID);
 
                 // empty
@@ -51,8 +51,7 @@ public class TimelinesDAO {
                     String eventTitle = rss.getString("TITLE");
                     LocalDateTime eventStart_time = LocalDateTime.of(rss.getDate("START_DATE").toLocalDate(), rss.getTime("START_TIME").toLocalTime());
                     LocalDateTime eventEnd_time = LocalDateTime.of(rss.getDate("END_DATE").toLocalDate(), rss.getTime("END_TIME").toLocalTime());
-                    int eventImageID = rss.getInt("IMAGE_ID");
-                    String imagePath="";
+                    String imagePath = rss.getString("IMAGE_PATH");
                     String eventDescription = rss.getString("DESCRIPTION");
                     int timelineID = rss.getInt("TIMELINE_ID");
                     boolean isDurationEvent = rss.getBoolean("DURATIONEVENT");
@@ -60,11 +59,11 @@ public class TimelinesDAO {
 
 
                     if (isDurationEvent){
-                    	Event event = new DurationEvent(timelineID, eventID, eventTitle, eventStart_time, eventEnd_time, eventDescription, eventImageID, color, imagePath);
+                        Event event = new DurationEvent(timelineID, eventID, eventTitle, eventStart_time, eventEnd_time, eventDescription, color, imagePath);
                         eventList.add(event);
                     }
                     else{
-                    	Event event = new NonDurationEvent(timelineID, eventID, eventTitle, eventStart_time, eventEnd_time, eventDescription, eventImageID, color, imagePath);
+                    	Event event = new NonDurationEvent(timelineID, eventID, eventTitle, eventStart_time, eventEnd_time, eventDescription, color, imagePath);
                         eventList.add(event);
                     }
                     
@@ -161,7 +160,7 @@ public class TimelinesDAO {
             for (int i = 0; i < project.timelines.size(); i++) {
 
                 Timeline tl = project.timelines.get(i);
-                String projects = "INSERT INTO Projects " + "VALUES (" + project.ProjectID + ", " + project.timelines.get(i).timelineId + ", '" + project.toString() + "')";
+                String projects = "INSERT INTO Projects " + "VALUES (" + project.ProjectID + ", " + project.timelines.get(i).timelineId + ", '" + project.toString() + "', '" + project.userID + "')";
                 execute(projects);
 
 
@@ -198,7 +197,7 @@ public class TimelinesDAO {
 
                         boolToInt = (ev.isDurationEvent) ? 1 : 0;
                         String events = "INSERT INTO Events " + "VALUES (" + ev.eventid + ", '" + ev.title + "', '" + startTime + "', '" + endTime + "', '"
-                                + startDate + "', '" + endDate + "', '" + ev.description + "', " + ev.imageid + ", " + boolToInt + ", '" + ev.eventColor.toString() + "')";
+                                + startDate + "', '" + endDate + "', '" + ev.description + "', " + boolToInt + ", '" + ev.eventColor.toString() + "', '" + ev.imagepath + "')";
                     execute(events);
 
                 }
