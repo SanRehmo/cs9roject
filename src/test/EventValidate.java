@@ -27,7 +27,7 @@ public class EventValidate {
 	
 	@Test
 	public void eventTitleLength() throws MalformedURLException {
-		Event event1 = new Event(0, 0, null, null, null, null, 0, null,"");
+		Event event1 = new Event(0, 0, null, null, null, null, null,"");
 		event1.setTitle("This is a way too long title for this timeline");
 		assertTrue(testLength(event1.getTitle()) > 25);
 	}
@@ -43,7 +43,7 @@ public class EventValidate {
 
 	@Test
 	public void testSpecialCharacters() throws MalformedURLException {
-		Event event2 = new Event(0, 0, null, null, null, null, 0,null, "");
+		Event event2 = new Event(0, 0, null, null, null, null,null, "");
 		event2.setTitle("12-Växjö_Småland");
 		assertTrue("12-Växjö_Småland" == event2.getTitle());
 	}
