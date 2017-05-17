@@ -7,6 +7,8 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+import java.net.MalformedURLException;
+
 public class EventValidate {
 	
 	private static int count = 0;
@@ -24,8 +26,8 @@ public class EventValidate {
 	
 	
 	@Test
-	public void eventTitleLength() {
-		Event event1 = new Event(0, 0, null, null, null, null, 0, null);
+	public void eventTitleLength() throws MalformedURLException {
+		Event event1 = new Event(0, 0, null, null, null, null, 0, null,"");
 		event1.setTitle("This is a way too long title for this timeline");
 		assertTrue(testLength(event1.getTitle()) > 25);
 	}
@@ -40,8 +42,8 @@ public class EventValidate {
 	
 
 	@Test
-	public void testSpecialCharacters() {
-		Event event2 = new Event(0, 0, null, null, null, null, 0,null);
+	public void testSpecialCharacters() throws MalformedURLException {
+		Event event2 = new Event(0, 0, null, null, null, null, 0,null, "");
 		event2.setTitle("12-Växjö_Småland");
 		assertTrue("12-Växjö_Småland" == event2.getTitle());
 	}

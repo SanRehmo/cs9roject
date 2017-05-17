@@ -23,6 +23,7 @@ import javafx.util.Callback;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.time.Duration;
 import java.time.LocalDate;
@@ -165,7 +166,8 @@ public class eventHandlerController {
 		try {
 			if (file!=null){
 				url = file.toURI().toURL();
-				eventImage_imageView.setImage(new Image(url.toExternalForm()));
+				Image image = new Image(url.toExternalForm());
+				eventImage_imageView.setImage(image);
 			}
 				
 		} catch (MalformedURLException e) {
@@ -339,8 +341,14 @@ public class eventHandlerController {
     	return text;
     }
     @FXML
-    public void saveEvent() throws IOException {	// Add event
+    public void saveEvent() throws IOException, URISyntaxException {	// Add event
 		Image image = eventImage_imageView.getImage();
+		String imagePath="";
+		if (image!=null){
+			URL url = new URL(image.impl_getUrl());
+			imagePath = new File(url.toURI()).getPath();
+		}
+		
     	
     	// Check if start and end date are selected
     	if (startTextField.getValue()==null || (endTextField.getValue()==null && duration_checkBox.isSelected() )){
@@ -370,15 +378,15 @@ public class eventHandlerController {
     	
     	// If all inputs are correct then add event
     	else {
-    		Event e = new Event(null, null, null, null, null);
+    		Event e = new Event(null, null, null, null, null, null);
         	Color color = Color.valueOf(color_ComboBox.getValue());
         	
         	// Check if it is duration or non-duration event
         	if (duration_checkBox.isSelected()){
-        		e = new DurationEvent(NameEvent_textField.getText(), LocalDateTime.of(startTextField.getValue(), LocalTime.of(startHH.getValue(), startMM.getValue())), LocalDateTime.of(endTextField.getValue(), LocalTime.of(endHH.getValue(), endMM.getValue())), description.getText(),image, color );
+        		e = new DurationEvent(NameEvent_textField.getText(), LocalDateTime.of(startTextField.getValue(), LocalTime.of(startHH.getValue(), startMM.getValue())), LocalDateTime.of(endTextField.getValue(), LocalTime.of(endHH.getValue(), endMM.getValue())), description.getText(),image, color, imagePath );
         	}
         	else{
-        		e = new NonDurationEvent(NameEvent_textField.getText(), LocalDateTime.of(startTextField.getValue(), LocalTime.of(startHH.getValue(), startMM.getValue())), description.getText(),image, color );
+        		e = new NonDurationEvent(NameEvent_textField.getText(), LocalDateTime.of(startTextField.getValue(), LocalTime.of(startHH.getValue(), startMM.getValue())), description.getText(),image, color, imagePath );
         	}
         	if (EventID!=0){
         		Main.project.getTimeline(TimelineID).removeAllEvents(allEventsRec(Main.project.getTimeline(TimelineID).getEvent(EventID)));

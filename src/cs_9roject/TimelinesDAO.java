@@ -52,6 +52,7 @@ public class TimelinesDAO {
                     LocalDateTime eventStart_time = LocalDateTime.of(rss.getDate("START_DATE").toLocalDate(), rss.getTime("START_TIME").toLocalTime());
                     LocalDateTime eventEnd_time = LocalDateTime.of(rss.getDate("END_DATE").toLocalDate(), rss.getTime("END_TIME").toLocalTime());
                     int eventImageID = rss.getInt("IMAGE_ID");
+                    String imagePath="";
                     String eventDescription = rss.getString("DESCRIPTION");
                     int timelineID = rss.getInt("TIMELINE_ID");
                     boolean isDurationEvent = rss.getBoolean("DURATIONEVENT");
@@ -59,11 +60,11 @@ public class TimelinesDAO {
 
 
                     if (isDurationEvent){
-                    	Event event = new DurationEvent(timelineID, eventID, eventTitle, eventStart_time, eventEnd_time, eventDescription, eventImageID, color);
+                    	Event event = new DurationEvent(timelineID, eventID, eventTitle, eventStart_time, eventEnd_time, eventDescription, eventImageID, color, imagePath);
                         eventList.add(event);
                     }
                     else{
-                    	Event event = new NonDurationEvent(timelineID, eventID, eventTitle, eventStart_time, eventEnd_time, eventDescription, eventImageID, color);
+                    	Event event = new NonDurationEvent(timelineID, eventID, eventTitle, eventStart_time, eventEnd_time, eventDescription, eventImageID, color, imagePath);
                         eventList.add(event);
                     }
                     

@@ -773,7 +773,7 @@ public class showTimelinesController {
 						stage2.show();
 					}
 					else{
-						events.add(new NonDurationEvent("New event",LocalDateTime.of(startDatePicker.getValue(), LocalTime.of(0, 0)),"",null,Color.RED));
+						events.add(new NonDurationEvent("New event",LocalDateTime.of(startDatePicker.getValue(), LocalTime.of(0, 0)),"",null,Color.RED, null));
 						events.get(events.size()-1).setEventId(0);
 						StartingModeController.eventIdToModify=events.get(0).getEventId();
 						FXMLLoader loader = new FXMLLoader();
