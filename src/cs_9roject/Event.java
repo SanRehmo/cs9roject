@@ -1,13 +1,13 @@
 package cs_9roject;
 
-import javafx.event.ActionEvent;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 
+import java.io.File;
+import java.io.IOException;
+import java.net.MalformedURLException;
 import java.sql.Date;
 import java.time.LocalDateTime;
-
-import gui.eventHandlerController;
 
 
 
@@ -30,8 +30,7 @@ public class Event {
 
     // mine
     // Create new event with specific ID. Almost used when importing events from database
-	public Event(int timelineID, int eventID, String eventTitle, LocalDateTime eventStart_time, LocalDateTime eventEnd_time, String Description, int imageID, Color color) {
-
+	public Event(int timelineID, int eventID, String eventTitle, LocalDateTime eventStart_time, LocalDateTime eventEnd_time, String Description, int imageID, Color color, String Imagepath) throws MalformedURLException {
 		timelineid = timelineID;
 		eventid = eventID;
 		title = eventTitle;
@@ -39,19 +38,23 @@ public class Event {
 		endTime = eventEnd_time;
         description = Description;
         imageid = imageID;
+        imagepath = Imagepath;
+        if (imagepath==null) imagepath="";
+        this.setImage(imagepath);
         startDate = Date.valueOf(eventStart_time.toLocalDate());
         endDate = Date.valueOf(eventEnd_time.toLocalDate());
         eventColor=color;
     }
 	
 	// Create new event with new ID.
-	public Event(String eventTitle, LocalDateTime eventStart_time, String Description, Image EventImage, Color EventColor) {
+	public Event(String eventTitle, LocalDateTime eventStart_time, String Description, Image EventImage, Color EventColor, String Imagepath) {
 		eventid = count++;
 		imageid=eventid;
 		title = eventTitle;
 		startTime = eventStart_time;
 		description=Description;
 		eventImage=EventImage;
+		imagepath=Imagepath;
 		eventColor=EventColor;
 	}
 	
@@ -118,6 +121,15 @@ public class Event {
 	
 	public void setImage(Image EventImage){
 		eventImage = EventImage;
+	}
+	
+	private void setImage(String imagePath) throws MalformedURLException  {
+		if (!imagePath.isEmpty()){
+			File file = new File(imagePath);
+			eventImage = new Image(file.toURI().toURL().toExternalForm());
+		}
+		else
+			eventImage = null;
 	}
 	
 	public Image getImage (){
