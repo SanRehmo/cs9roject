@@ -8,8 +8,9 @@ public class Project {
 
     protected List<Timeline> timelines = new ArrayList<Timeline>();
     protected static int count=1;
-    int ProjectID;
+    public int ProjectID;
     public String projectName;
+	public int userID;
     ArrayList<Timeline> timelineList = new ArrayList<Timeline>();
 
 

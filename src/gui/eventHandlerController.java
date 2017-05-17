@@ -8,6 +8,7 @@ import cs_9roject.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
@@ -17,13 +18,21 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.net.URISyntaxException;
 import java.net.URL;
+import java.time.Duration;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.Period;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 public class eventHandlerController {
 	
@@ -33,11 +42,11 @@ public class eventHandlerController {
 	boolean duration  = false;
 	boolean recurring = false;
 	
-	ObservableList<String> color_Combo = FXCollections.observableArrayList(
+	public ObservableList<String> color_Combo = FXCollections.observableArrayList(
 			"Red", "Green", "Blue", "Orange");
 	
 	ObservableList<String> Reccuring_ComboBox_Value = FXCollections.observableArrayList(
-			"Every day", "Every week", "Every month", "Every year");
+			"Every day", "Every week", "Every month", "Every year", "Non");
 
     @FXML
     private ImageView eventImage_imageView;
@@ -61,7 +70,7 @@ public class eventHandlerController {
     private Button btnSave;
 
     @FXML
-    private DatePicker startTextField;
+    public DatePicker startTextField;
     
     @FXML
     private Spinner<Integer> startHH;
@@ -85,6 +94,12 @@ public class eventHandlerController {
     private ComboBox<String> Reccuring_ComboBox;
     
     public static boolean recurringDelete = false;
+    
+    public String eventColor;
+    
+    int TimelineID = StartingModeController.timelineIdToModify;
+    int EventID = StartingModeController.eventIdToModify;
+    
 
     /**
      * Show alert message when user want to delete event. 
@@ -92,8 +107,7 @@ public class eventHandlerController {
      * @throws IOException 
      */
     @FXML
-    void delete(ActionEvent event) throws IOException {
-    	
+    void delete() throws IOException {
     	Alert alert = new Alert(AlertType.CONFIRMATION);
     	alert.setTitle("Delete");
     	alert.setHeaderText("Delete event");
@@ -102,12 +116,18 @@ public class eventHandlerController {
     	alert.getDialogPane().setContent(checkBox);
     	
     	checkBox.setIndeterminate(false);
+    	if (isEventRec(Main.project.getTimeline(TimelineID).getEvent(EventID))==0)
+    		checkBox.setDisable(true);
     	
-//    	Checks if the user wants to delete all recurring events.
-    	if(checkBox.isSelected())
-    		eventHandlerController.recurringDelete = true;
-    	
-    	alert.showAndWait();
+    	if (alert.showAndWait().get() == ButtonType.OK){
+    		//Checks if the user wants to delete all recurring events.
+        	if(checkBox.isSelected())
+        		Main.project.getTimeline(TimelineID).removeAllEvents(allEventsRec(Main.project.getTimeline(TimelineID).getEvent(EventID)));
+        	else
+        		Main.project.getTimeline(TimelineID).removeEvent(EventID);
+        	Stage stage = (Stage) btnSave.getScene().getWindow();
+		    stage.close();
+    	} 	
 
     }
     	
@@ -144,12 +164,17 @@ public class eventHandlerController {
 		URL url = null;
 		
 		try {
-			url = file.toURI().toURL();
+			if (file!=null){
+				url = file.toURI().toURL();
+				Image image = new Image(url.toExternalForm());
+				eventImage_imageView.setImage(image);
+			}
+				
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		}
 			
-		eventImage_imageView.setImage(new Image(url.toExternalForm()));
+		
 		
     }
 
@@ -162,8 +187,7 @@ public class eventHandlerController {
     String nameEvent(ActionEvent event) {
     	String eventName;
     	eventName = NameEvent_textField.getText();
-
-    	System.out.print(eventName);
+    	
     	return eventName;
     }
 
@@ -184,9 +208,8 @@ public class eventHandlerController {
      * @return returns the color of the event. 
      */
     @FXML
-    String selectEventColor(ActionEvent event) {
-    	
-    	return this.color_ComboBox.getValue();
+    void selectEventColor(ActionEvent event) {
+    	eventColor = this.color_ComboBox.getValue();
     }
 
     /**
@@ -225,11 +248,83 @@ public class eventHandlerController {
     	return this.endTextField;
     }
     
+    final Callback<DatePicker, DateCell> dayCellFactory = new Callback<DatePicker, DateCell>() {
+		public DateCell call(final DatePicker datePicker) {
+			return new DateCell() {
+				@Override
+				public void updateItem(LocalDate item, boolean empty) {
+					super.updateItem(item, empty);
+					if(item.isBefore(Main.project.getTimeline(StartingModeController.timelineIdToModify).getStartDate()) || item.isAfter(Main.project.getTimeline(StartingModeController.timelineIdToModify).getEndDate())){
+						this.setDisable(true);
+					}
+
+
+				}	
+			};
+		}
+	};
+    
     /**
      * Gives options in the comboBox
      */
     @FXML
-    private void initialize() {
+    public void initialize() {
+    	EventID=StartingModeController.eventIdToModify;
+    	startTextField.setDayCellFactory(dayCellFactory);
+    	endTextField.setDayCellFactory(dayCellFactory);
+    	if (EventID!=0){
+    		Timeline t=Main.project.getTimeline(TimelineID);
+    		Event e = t.getEvent(EventID);
+    		if (isEventRec(e)!=0){
+    			e=allEventsRec(e).get(0);
+    			EventID=e.getEventId();
+    		}
+    		NameEvent_textField.setText(e.getTitle());
+    		duration_checkBox.setSelected(e.isDurationEvent());
+    		startTextField.setValue(e.getStartTime().toLocalDate());
+    		startHH.setValueFactory((SpinnerValueFactory<Integer>)new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 23, e.getStartTime().toLocalTime().getHour()));
+    		startMM.setValueFactory((SpinnerValueFactory<Integer>)new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 59, e.getStartTime().toLocalTime().getMinute()));
+    		endTextField.setDisable(!e.isDurationEvent());
+			endHH.setDisable(!e.isDurationEvent());
+			endMM.setDisable(!e.isDurationEvent());
+    		endTextField.setValue(startTextField.getValue());
+    		description.setText(e.getDescription());
+    		eventImage_imageView.setImage(e.getImage());
+    		color_ComboBox.setValue(e.getColorName());
+    		if (e.isDurationEvent()){
+    			endTextField.setValue(e.getEndTime().toLocalDate());
+    			endHH.setValueFactory((SpinnerValueFactory<Integer>)new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 23, e.getEndTime().toLocalTime().getHour()));
+    			endMM.setValueFactory((SpinnerValueFactory<Integer>)new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 59, e.getEndTime().toLocalTime().getMinute()));
+    		}
+    		switch (isEventRec(e)){
+    		case 0: Reccuring_ComboBox.setValue("Non"); break;
+    		case 1: Reccuring_ComboBox.setValue("Every day"); break;
+    		case 2: Reccuring_ComboBox.setValue("Every week"); break;
+    		case 3: Reccuring_ComboBox.setValue("Every month"); break;
+    		case 4: Reccuring_ComboBox.setValue("Every year"); break;
+    		}
+    		
+    		delete_btn.setDisable(false);
+    		
+    	}
+    	else{
+    		NameEvent_textField.setText("");
+    		duration_checkBox.setSelected(false);
+    		//startTextField.setValue(null);
+    		startHH.setValueFactory((SpinnerValueFactory<Integer>)new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 23, 0));
+    		startMM.setValueFactory((SpinnerValueFactory<Integer>)new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 59, 0));
+    		endTextField.setDisable(true);
+			endTextField.setValue(null);
+			endHH.setDisable(true);
+			endHH.setValueFactory((SpinnerValueFactory<Integer>)new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 23, 0));
+			endMM.setDisable(true);
+			endMM.setValueFactory((SpinnerValueFactory<Integer>)new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 59, 0));
+    		description.setText(null);
+    		eventImage_imageView.setImage(null);
+    		color_ComboBox.setValue("Red");
+    		Reccuring_ComboBox.setValue("Non");
+    	}
+    	
     	color_ComboBox.setItems(color_Combo);
     	Reccuring_ComboBox.setItems(Reccuring_ComboBox_Value);
     }
@@ -246,9 +341,14 @@ public class eventHandlerController {
     	return text;
     }
     @FXML
-    public void saveEvent() throws IOException {	// Add event
-		int TimelineID = 1;
+    public void saveEvent() throws IOException, URISyntaxException {	// Add event
 		Image image = eventImage_imageView.getImage();
+		String imagePath="";
+		if (image!=null){
+			URL url = new URL(image.impl_getUrl());
+			imagePath = new File(url.toURI()).getPath();
+		}
+		
     	
     	// Check if start and end date are selected
     	if (startTextField.getValue()==null || (endTextField.getValue()==null && duration_checkBox.isSelected() )){
@@ -278,23 +378,33 @@ public class eventHandlerController {
     	
     	// If all inputs are correct then add event
     	else {
-    		Event e = new Event(null, null, null, null, null);
+    		Event e = new Event(null, null, null, null, null, null);
         	Color color = Color.valueOf(color_ComboBox.getValue());
         	
         	// Check if it is duration or non-duration event
         	if (duration_checkBox.isSelected()){
-        		e = new DurationEvent(NameEvent_textField.getText(), LocalDateTime.of(startTextField.getValue(), LocalTime.of(startHH.getValue(), startMM.getValue())), LocalDateTime.of(endTextField.getValue(), LocalTime.of(endHH.getValue(), endMM.getValue())), description.getText(),image, color );
+        		e = new DurationEvent(NameEvent_textField.getText(), LocalDateTime.of(startTextField.getValue(), LocalTime.of(startHH.getValue(), startMM.getValue())), LocalDateTime.of(endTextField.getValue(), LocalTime.of(endHH.getValue(), endMM.getValue())), description.getText(),image, color, imagePath );
         	}
         	else{
-        		e = new NonDurationEvent(NameEvent_textField.getText(), LocalDateTime.of(startTextField.getValue(), LocalTime.of(startHH.getValue(), startMM.getValue())), description.getText(),image, color );
+        		e = new NonDurationEvent(NameEvent_textField.getText(), LocalDateTime.of(startTextField.getValue(), LocalTime.of(startHH.getValue(), startMM.getValue())), description.getText(),image, color, imagePath );
         	}
+        	if (EventID!=0){
+        		Main.project.getTimeline(TimelineID).removeAllEvents(allEventsRec(Main.project.getTimeline(TimelineID).getEvent(EventID)));
+        		e.setEventId(EventID);
+        	}
+
         	
         	// Search for time line by its ID to add the event
         	for (Timeline temp : Main.project.getTimelines())
         		if (temp.getTimelineId()==TimelineID){
         			int initialSize = temp.getEvents().size();
         			while (temp.addEvent(e)){
-        				if (Reccuring_ComboBox.getValue()==null){
+        				if (e.isDurationEvent())
+        					e=new DurationEvent((DurationEvent)e);
+        				else
+        					e=new NonDurationEvent((NonDurationEvent)e);
+
+        				if (Reccuring_ComboBox.getValue()==null || Reccuring_ComboBox.getValue().equals("Non")){
             				break;
             			}
         				else if (Reccuring_ComboBox.getValue().equals("Every day")){
@@ -318,13 +428,17 @@ public class eventHandlerController {
         				alertWindow(AlertType.ERROR, "ERROR!", "Cannot add event!", "Event's start-date is before timeline's start-date. Or Event's end-date is after timeline's end-date. ");
         				return;
         			}
-        			System.out.print(e.getStartTime()+"    "+ e.getEndTime());
         			Stage stage = (Stage) btnSave.getScene().getWindow();
     			    stage.close();
         		}
     	}
     	
     	
+    }
+    
+
+    public void stop(){
+        System.out.println("Stage is closing");
     }
     
     /**
@@ -342,6 +456,37 @@ public class eventHandlerController {
 		alert.setContentText(contentText);
 		alert.showAndWait();
     	
+    }
+    
+    private List <Event> allEventsRec(Event e){
+    	List <Event> allEventsRec = new ArrayList<Event>();
+    	Timeline t = Main.project.getTimeline(TimelineID);
+    	for (Event temp : t.getEvents()){
+    		if (temp.getTitle().equals(e.getTitle()))
+    			allEventsRec.add(temp);
+    	}
+    	return allEventsRec;
+    }
+    
+    private int isEventRec(Event e){
+    	List <Event> allEventsRec= allEventsRec(e);
+    	if (allEventsRec.size()>1){
+       		Period period = Period.between(allEventsRec.get(0).getStartTime().toLocalDate(), allEventsRec.get(1).getStartTime().toLocalDate());
+    		if (period.getDays()==Period.ofDays(1).getDays())
+    			return 1;
+    		else if (period.getDays() == Period.ofDays(7).getDays())
+    			return 2;
+    		else if (period.getMonths()==Period.ofMonths(1).getMonths() )
+    			return 3;
+    		else if (period.getYears() == Period.ofYears(1).getYears())
+    			return 4;
+    		else
+    			return 0;
+    		
+    	}
+    	else
+    		return 0;
+		
     }
 }
 

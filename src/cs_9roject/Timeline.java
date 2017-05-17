@@ -14,7 +14,7 @@ public class Timeline {
 	protected Period duration;
 	protected String title;
 	protected Boolean isOnlyYears=false;	// Boolean variable to define timeline's type
-	List<Event> events = new ArrayList<Event>();
+	public List<Event> events = new ArrayList<Event>();
 	
 	
 	// Create new timeline with specific ID and event-list. Almost used when importing timelines from database
@@ -55,7 +55,7 @@ public class Timeline {
 	
 	// Add new event to timeline
 	public boolean addEvent(Event event){
-		if ((event.isDurationEvent() && !event.getStartTime().toLocalDate().isBefore(startDate) && !event.getEndTime().toLocalDate().isAfter(endDate)) || (!event.isDurationEvent() && !event.getStartTime().toLocalDate().isBefore(startDate))){
+		if ((event.isDurationEvent() && !event.getStartTime().toLocalDate().isBefore(startDate) && !event.getEndTime().toLocalDate().isAfter(endDate)) || (!event.isDurationEvent() && !event.getStartTime().toLocalDate().isBefore(startDate)&& !event.getStartTime().toLocalDate().isAfter(endDate))){
 			events.add(event);
 			return true;
 		}
@@ -84,15 +84,12 @@ public class Timeline {
 				events.set(i, event);
 	}
 	
-	// Remove all events from timeline
-	public void removeAllEvents(){
-		events.removeAll(events);
+	// Remove list of events from timeline
+	public void removeAllEvents(List <Event> Events){
+		events.removeAll(Events);
 	}
 	
-	// Check if 2 timelines are equals
-	public boolean equals(Timeline timeline){
-		return startDate.equals(timeline.getStartDate()) && endDate.equals(timeline.getEndDate()) && title.equals(timeline.getTitle());
-	}
+	
 	
 	// All next methods are (getters and setters)
 	public List <Event> getEvents(){
@@ -154,9 +151,17 @@ public class Timeline {
 		return isOnlyYears;
 	}
 	
+	@Override
+	public String toString(){
+		return title + " (" + events.size() + " event/s)" + timelineId;
+	}
+	
 	public static void setCount(int Count){
 		count = Count;
 	}
 	
-	
+	// Check if 2 timelines are equals
+	public boolean equals(Timeline timeline){
+		return startDate.equals(timeline.getStartDate()) && endDate.equals(timeline.getEndDate()) && title.equals(timeline.getTitle()) && timeline.getEvents().size()== this.getEvents().size();
+	}
 }

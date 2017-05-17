@@ -1,6 +1,9 @@
 package gui;
 
-import cs_9roject.*;
+import cs_9roject.Event;
+import cs_9roject.Project;
+import cs_9roject.Timeline;
+import cs_9roject.TimelinesDAO;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -14,10 +17,10 @@ import java.io.IOException;
 
 public class Main extends Application {
 	
+	
 	private Stage primaryStage;
 	public BorderPane mainLayout;
 	public static Project project = new Project();
-	public static TimelinesDAOtemp dao2 = new TimelinesDAOtemp();
 	public static TimelinesDAO dao = new TimelinesDAO();
 	
 	
@@ -51,7 +54,10 @@ public class Main extends Application {
 	public static void main(String[] args) {
 		Event.setCount(dao.getHighestEventID() + 1);
 		Timeline.setCount(dao.getHighestTimelineID() + 1);
-		Project.setCount(dao.getHighestProjectID() + 1);
+		project.ProjectID =(dao.getHighestProjectID() + 1);
+		project.projectName="Project " + project.ProjectID;
+		Project.setCount(project.ProjectID + 1);
+		System.out.println("Current project: "+ Main.project.projectName+" ID: "+ Main.project.ProjectID);
 		launch(args);
 	}
 }

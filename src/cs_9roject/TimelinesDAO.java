@@ -1,6 +1,8 @@
 package cs_9roject;
 
 
+import javafx.scene.paint.Color;
+
 import java.sql.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -36,11 +38,11 @@ public class TimelinesDAO {
 
                 // load all events in the project
                 stmt = connection.createStatement();
-                ResultSet rss = stmt.executeQuery("SELECT Timelines.TIMELINE_ID, Events.EVENT_ID, Events.Title, Events.START_DATE, Events.END_DATE, Events.START_TIME, Events.END_TIME, Events.DESCRIPTION, Events.IMAGE_ID"
+                ResultSet rss = stmt.executeQuery("SELECT Timelines.TIMELINE_ID, Events.EVENT_ID, Events.Title, Events.START_DATE, Events.END_DATE, Events.START_TIME, Events.END_TIME, Events.DESCRIPTION, Events.IMAGE_PATH, Events.DURATIONEVENT, Events.COLOR"
                         + " FROM Projects JOIN (Timelines, Events) ON Projects.TIMELINE_ID=Timelines.TIMELINE_ID WHERE Timelines.EVENT_ID=Events.EVENT_ID AND PROJECT_ID=" + ID);
 
-                if (!rss.next())
-                    result = null;
+                // empty
+
 
                 while (rss.next()) {
 
@@ -49,26 +51,35 @@ public class TimelinesDAO {
                     String eventTitle = rss.getString("TITLE");
                     LocalDateTime eventStart_time = LocalDateTime.of(rss.getDate("START_DATE").toLocalDate(), rss.getTime("START_TIME").toLocalTime());
                     LocalDateTime eventEnd_time = LocalDateTime.of(rss.getDate("END_DATE").toLocalDate(), rss.getTime("END_TIME").toLocalTime());
-                    int eventImageID = rss.getInt("IMAGE_ID");
+                    String imagePath = rss.getString("IMAGE_PATH");
                     String eventDescription = rss.getString("DESCRIPTION");
                     int timelineID = rss.getInt("TIMELINE_ID");
+                    boolean isDurationEvent = rss.getBoolean("DURATIONEVENT");
+                    Color color = Color.valueOf(rss.getString("COLOR"));
 
-                    Event event = new Event(timelineID, eventID, eventTitle, eventStart_time, eventEnd_time, eventDescription, eventImageID);
-                    eventList.add(event);
+
+                    if (isDurationEvent){
+                        Event event = new DurationEvent(timelineID, eventID, eventTitle, eventStart_time, eventEnd_time, eventDescription, color, imagePath);
+                        eventList.add(event);
+                    }
+                    else{
+                    	Event event = new NonDurationEvent(timelineID, eventID, eventTitle, eventStart_time, eventEnd_time, eventDescription, color, imagePath);
+                        eventList.add(event);
+                    }
+                    
                 }
 
 
                 // load all timelines in the project
                 stmt = connection.createStatement();
                 ResultSet rs = stmt.executeQuery("SELECT Timelines.TIMELINE_ID, Timelines.EVENT_ID, Timelines.START_DATE, Timelines.END_DATE, Timelines.TITLE"
-                        + " FROM Projects JOIN (Timelines, Events) ON Projects.TIMELINE_ID=Timelines.TIMELINE_ID WHERE Timelines.EVENT_ID=Events.EVENT_ID AND PROJECT_ID=" + ID);
+                        + " FROM Timelines JOIN Projects ON Projects.TIMELINE_ID=Timelines.TIMELINE_ID WHERE PROJECT_ID=" + ID);
 
-                int tmp = 0;
+                int lastTimelineID = 0;
 
                 while (rs.next()) {
 
-
-                    if (rs.getInt("TIMELINE_ID") != tmp) {
+                    if (timeline == null || rs.getInt("TIMELINE_ID") != timeline.getTimelineId()) {
                         int timelineID = rs.getInt("TIMELINE_ID");
                         LocalDate timelineStart = rs.getDate("START_DATE").toLocalDate();
                         LocalDate timelineEnd = rs.getDate("END_DATE").toLocalDate();
@@ -86,6 +97,8 @@ public class TimelinesDAO {
         } else {
             System.out.println("Failed to make connection");
         }
+        String projectName = result.projectName;
+        result.projectName = projectName;
         return result;
     }
 
@@ -141,25 +154,34 @@ public class TimelinesDAO {
 
         if (isConnected()) {
 
+            // delte existing project (overwrite)
+            if (exists(project.ProjectID))
+                delete(project);
+
             // Projects loop
             for (int i = 0; i < project.timelines.size(); i++) {
 
                 Timeline tl = project.timelines.get(i);
-                String projects = "INSERT INTO Projects " + "VALUES (" + project.ProjectID + ", " + project.timelines.get(i).timelineId + ")";
+                String projects = "INSERT INTO Projects " + "VALUES (" + project.ProjectID + ", " + project.timelines.get(i).timelineId + ", '" + project.projectName + "', '" + project.userID + "')";
                 execute(projects);
 
 
-                // Timelines & Events loop
-                for (int j = 0; j < tl.events.size(); j++) {
+                // extracting Date and Time from LocalDateTime
+                Date startDate = Date.valueOf(tl.startDate);
+                Date endDate = Date.valueOf(tl.endDate);
+
+                if (tl.events.size() < 1) {
+                    String timelines = "INSERT INTO Timelines " + "VALUES (" + tl.timelineId + ", " + null + ", '" + startDate + "', '" + endDate + "', '" + tl.title + "', " + tl.isOnlyYears + ")";
+                    execute(timelines);
+                } else {
+                    // Timelines & Events loop
+                    for (int j = 0; j < tl.events.size(); j++) {
 
 
-                    Event ev = tl.events.get(j);
+                        Event ev = tl.events.get(j);
 
-                    // extracting Date and Time from LocalDateTime
-                    Date startDate = Date.valueOf(tl.startDate);
-                    Date endDate = Date.valueOf(tl.endDate);
-
-                    String timelines = "INSERT INTO Timelines " + "VALUES (" + tl.timelineId + ", " + ev.eventid + ", '" + startDate + "', '" + endDate + "', '" + tl.title + "')";
+                        int boolToInt = (tl.isOnlyYears) ? 1 : 0;
+                        String timelines = "INSERT INTO Timelines " + "VALUES (" + tl.timelineId + ", " + ev.eventid + ", '" + startDate + "', '" + endDate + "', '" + tl.title + "', " + boolToInt + ")";
                     execute(timelines);
 
                     // extracting Date and Time from LocalDateTime
@@ -170,17 +192,48 @@ public class TimelinesDAO {
                     Time endTime = Time.valueOf("12:00:00");
 
                     if (ev.isDurationEvent()) {
-                        endDate = Date.valueOf(ev.endTime.toLocalDate());
-                        endTime = Time.valueOf(ev.endTime.toLocalTime());
+                    	System.out.print("ok");
+                        endDate = Date.valueOf(ev.getEndTime().toLocalDate());
+                        endTime = Time.valueOf(ev.getEndTime().toLocalTime());
                     }
 
-                    String events = "INSERT INTO Events " + "VALUES (" + ev.eventid + ", '" + ev.title + "', '" + startTime + "', '" + endTime + "', '" + startDate + "', '" + endDate + "', '" + ev.description + "', " + ev.imageid + ")";
+                        boolToInt = (ev.isDurationEvent) ? 1 : 0;
+                        String imagePath= ev.imagepath.replace("\\", "\\\\");
+                        String events = "INSERT INTO Events " + "VALUES (" + ev.eventid + ", '" + ev.title + "', '" + startTime + "', '" + endTime + "', '"
+                                + startDate + "', '" + endDate + "', '" + ev.description + "', " + boolToInt + ", '" + ev.eventColor.toString() + "', '" + imagePath + "')";
                     execute(events);
 
-
+                }
                 }
             }
         }
+    }
+
+    public boolean exists(int ID) {
+
+        try {
+            connection = Database.establishConnection();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        boolean result = false;
+
+        try {
+            String query = "SELECT PROJECT_ID FROM Projects";
+            Statement stmt = connection.createStatement();
+            stmt.execute(query);
+
+            ResultSet rs = stmt.executeQuery(query);
+
+            while (rs.next()) {
+                if (rs.getInt("PROJECT_ID") == ID)
+                    result = true;
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return result;
     }
 
     public boolean delete(Event event) {
@@ -192,9 +245,9 @@ public class TimelinesDAO {
         }
 
         if (isConnected()) {
-            query = "UPDATE Events SET EVENT_ID=0 WHERE EVENT_ID=" + event.eventid;
+            query = "DELETE FROM Events WHERE EVENT_ID=" + event.eventid;
             execute(query);
-            query = "UPDATE Timelines SET EVENT_ID=0 WHERE EVENT_ID=" + event.eventid;
+            query = "UPDATE Timelines SET EVENT_ID=NULL WHERE EVENT_ID=" + event.eventid;
             execute(query);
             return true;
         } else return false;
@@ -209,9 +262,9 @@ public class TimelinesDAO {
         }
 
         if (isConnected()) {
-            query = "UPDATE Timelines SET TIMELINE_ID=0 WHERE TIMELINE_ID=" + timeline.timelineId;
+            query = "DELETE FROM Timelines WHERE TIMELINE_ID=" + timeline.timelineId;
             execute(query);
-            query = "UPDATE Projects SET TIMELINE_ID=0 WHERE TIMELINE_ID=" + timeline.timelineId;
+            query = "UPDATE Projects SET TIMELINE_ID=NULL WHERE TIMELINE_ID=" + timeline.timelineId;
             execute(query);
             for (int i = 0; i < timeline.events.size(); i++) {
                 delete(timeline.events.get(i));
@@ -229,7 +282,7 @@ public class TimelinesDAO {
         }
 
         if (isConnected()) {
-            query = "UPDATE Projects SET PROJECT_ID=0 WHERE PROJECT_ID=" + project.ProjectID;
+            query = "DELETE FROM Projects WHERE PROJECT_ID=" + project.ProjectID;
             execute(query);
             for (int i = 0; i < project.timelines.size(); i++) {
                 delete(project.timelines.get(i));
@@ -259,6 +312,7 @@ public class TimelinesDAO {
                 while (rs.next()) {
                     highestID = rs.getInt("PROJECT_ID");
                 }
+                System.out.println("HIGHEST PROJECT ID: " + highestID);
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
@@ -314,6 +368,7 @@ public class TimelinesDAO {
                 while (rs.next()) {
                     highestID = rs.getInt("EVENT_ID");
                 }
+                System.out.println("HIGHEST EVENT ID: " + highestID);
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
