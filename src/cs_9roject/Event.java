@@ -16,7 +16,7 @@ public class Event {
 	private static int count=1;	// Variable to give unique ID for each Event
 	protected int eventid;
 	protected String title= new String ();
-	protected String description= new String ();
+	protected String description= "";
 	protected LocalDateTime startTime;
 	protected LocalDateTime endTime;
     protected Date startDate;
@@ -37,8 +37,9 @@ public class Event {
 		startTime = eventStart_time;
 		endTime = eventEnd_time;
         description = Description;
+        if (description.equals("null")) description="";
         imagepath = Imagepath;
-        if (imagepath==null) imagepath="";
+        if (imagepath.equals("null")) imagepath="";
         this.setImage(imagepath);
         startDate = Date.valueOf(eventStart_time.toLocalDate());
         endDate = Date.valueOf(eventEnd_time.toLocalDate());
