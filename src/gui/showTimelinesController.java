@@ -197,19 +197,23 @@ public void refreshTimeline(){	//Method that is showing the timelines in the scr
 
 		timeLine.setOnMouseClicked(e -> {
 			showInfoByMonth (0, startDate.getYear(), startDate.getMonthValue());
-			
 		});
 			primaryScrollpane.setContent(scrollBox);
 			//Stage stage = (Stage) doneButton.getScene().getWindow();
 			//stage.close();
-			
-			
-			
-			
-			
+
+		disableIfOutTimeline (timeLine, startDate, id );
+	
 		return timeLine;
 	}
 	
+	private void disableIfOutTimeline (Line line, LocalDate startDate, int id ){
+		Timeline t = Main.project.getTimeline(id);
+			if(startDate.isBefore(t.getStartDate()) || startDate.isAfter(t.getEndDate())) {
+				line.setStyle("-fx-stroke: " + " LightGray;");
+				line.setOnMouseClicked(e -> {});
+			}
+	}
 	
 	
 	public Line clickAbleHline(int size, int id, int counter, LocalDate startDate, LocalDate endDate) {	//Making a horizontal line that will open zoomedTimeline when you press the line
@@ -872,7 +876,6 @@ public void refreshTimeline(){	//Method that is showing the timelines in the scr
 										startDatePicker.setValue(handler.getStartValue().getValue());
 										refreshTimeline();
 									}
-									
 								} catch (IOException e1) {
 									e1.printStackTrace();
 								}
@@ -891,6 +894,7 @@ public void refreshTimeline(){	//Method that is showing the timelines in the scr
 		};
 		
 		startDatePicker.autosize();
+		startDatePicker.setMinWidth(400);
 		startDatePicker.setDayCellFactory(dayCellFactory);
 		@SuppressWarnings("restriction")
 		DatePickerSkin datePickerSkin = new DatePickerSkin(startDatePicker);
@@ -900,7 +904,7 @@ public void refreshTimeline(){	//Method that is showing the timelines in the scr
 		popupContent.applyCss();
 
 		BorderPane borderPane = new BorderPane();
-		borderPane.setMinWidth(startDatePicker.getWidth());
+		borderPane.setMinWidth(startDatePicker.getMinWidth());
 		borderPane.setCenter(popupContent);
 		
 		Stage stage2 = new Stage();
