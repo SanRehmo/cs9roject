@@ -137,7 +137,7 @@ public class TimelinesDAO {
                     highestID = rs.getInt("PROJECT_ID");
                 }
                 for (int i = 1; i <= highestID; i++) {
-                    if (load(i) != null) {
+                    if (exists(i)) {
                         System.out.println(load(i).ProjectID);
                         result.add(load(i));
                     }
