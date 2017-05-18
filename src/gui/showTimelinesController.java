@@ -239,13 +239,11 @@ public void refreshTimeline(){	//Method that is showing the timelines in the scr
 			Ycounter ++;
 		int FinalCounter = Ycounter;
 		
-		System.out.println("Detta är events i tidslinjen" + Main.project.getTimeline(id).getEvents().size());
 		for(int i = 0; i < Main.project.getTimeline(id).getEvents().size(); i++) {
 			System.out.println("Detta är inne i första for-loopen");
 			System.out.println("Detta är finalcounter" + FinalCounter);
 			
 			for(int j = 0; j<FinalCounter; j++){
-				System.out.println("Detta är inne i andra for-loopen");
 				if(Main.project.getTimeline(id).getEvents().get(i).getStartTime().getYear() == (startDate.getYear()+FinalCounter*counter+j)) {
 					timeLine.setStyle("-fx-stroke: "+Main.project.getTimeline(id).getEvents().get(i).getColorName()+";");
 					System.out.println("Fï¿½rg: "+Main.project.getTimeline(id).getEvents().get(i).getColorName());
