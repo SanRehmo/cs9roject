@@ -140,6 +140,7 @@ public class eventHandlerController {
     void eventDuration(ActionEvent event) {
     	
     	this.duration = !this.duration;
+    	endTextField.setValue(startTextField.getValue());
     	endTextField.disableProperty().set(!endTextField.disableProperty().get());
     	endHH.setDisable(!endHH.isDisabled());
     	endMM.setDisable(!endMM.isDisabled());
@@ -313,6 +314,7 @@ public class eventHandlerController {
     		//startTextField.setValue(null);
     		startHH.setValueFactory((SpinnerValueFactory<Integer>)new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 23, 0));
     		startMM.setValueFactory((SpinnerValueFactory<Integer>)new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 59, 0));
+    		startTextField.setValue(Main.project.getTimeline(TimelineID).getStartDate());
     		endTextField.setDisable(true);
 			endTextField.setValue(null);
 			endHH.setDisable(true);
