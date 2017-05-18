@@ -72,6 +72,22 @@ public class showTimelinesController {
 	
 	 @FXML
 	 public void initialize() {  //Reading every timeline and print there names in checkboxes
+		 isRefresh=true;
+		 displayAll.setSelected(true);
+		 for (CheckBox c : timelines){
+			 displayAll.setSelected(displayAll.isSelected() && c.isSelected());
+			 c.setOnMouseClicked(event ->{
+				 boolean selected = true;
+				 for (CheckBox ch : timelines){
+					 selected = selected && ch.isSelected();
+				 }
+				 displayAll.setSelected(selected);
+			 });			 
+		 }
+		 displayAll.setOnMouseClicked(event ->{
+			 for (CheckBox c : timelines)
+				 c.setSelected(displayAll.isSelected());
+		 });
 		 System.out.println(isRefresh);
 		 if (isRefresh){
 			 for(int i=0; i<Main.project.getTimelines().size(); i++){
@@ -184,8 +200,8 @@ public void refreshTimeline(){	//Method that is showing the timelines in the scr
 			
 		});
 			primaryScrollpane.setContent(scrollBox);
-			Stage stage = (Stage) doneButton.getScene().getWindow();
-			stage.close();
+			//Stage stage = (Stage) doneButton.getScene().getWindow();
+			//stage.close();
 			
 			
 			
@@ -807,69 +823,74 @@ public void refreshTimeline(){	//Method that is showing the timelines in the scr
 						if(item.isBefore(Main.project.getTimeline(StartingModeController.timelineIdToModify).getStartDate()) || item.isAfter(Main.project.getTimeline(StartingModeController.timelineIdToModify).getEndDate())){
 							this.setDisable(true);
 						}
-							
+						
+						this.setOnMouseClicked(new EventHandler<MouseEvent>() {		//add a action event to the DaterPicker.
+							@Override
+							public void handle(MouseEvent event) {
+
+								List<Event> events = new ArrayList<>(Main.project.getTimeline(StartingModeController.timelineIdToModify).getEvents());
+								for (int i=0; i<events.size(); i++) {	
+									if(!events.get(i).getStartTime().toLocalDate().equals(startDatePicker.getValue()))
+										events.remove(i--);
+								}
+								
+								try {
+									if (events.isEmpty()){
+										StartingModeController.eventIdToModify=0;
+										FXMLLoader loader = new FXMLLoader();
+										loader.setLocation(Main.class.getResource("eventHandler.fxml"));
+										Pane showEventHandler = loader.load();
+										eventHandlerController handler = loader.getController();
+										handler.startTextField.setValue(startDatePicker.getValue());
+										Stage stage2 = new Stage();
+										stage2.setScene(new Scene(showEventHandler));  
+										stage2.setTitle("EventHandler");
+										stage2.showAndWait();
+										startDatePicker.setValue(handler.getStartValue().getValue().plusDays(1));
+										startDatePicker.setValue(handler.getStartValue().getValue());
+									}
+									else{
+										events.add(new NonDurationEvent("New event",LocalDateTime.of(startDatePicker.getValue(), LocalTime.of(0, 0)),"",null,Color.RED, null));
+										events.get(events.size()-1).setEventId(0);
+										StartingModeController.eventIdToModify=events.get(0).getEventId();
+										FXMLLoader loader = new FXMLLoader();
+										loader.setLocation(Main.class.getResource("eventHandler.fxml"));
+										Pane showEventHandler = loader.load();
+										eventHandlerController handler = loader.getController();
+										ListView<Event> eventListView = new ListView<>();
+										eventListView.setPrefWidth(150);
+										eventListView.setItems(FXCollections.observableArrayList(events));
+										eventListView.getSelectionModel().selectedItemProperty().addListener( ov -> {
+											StartingModeController.eventIdToModify=eventListView.getSelectionModel().getSelectedItem().getEventId();
+											handler.initialize();
+											});
+										
+										HBox layout = new HBox();
+										layout.getChildren().addAll(eventListView,showEventHandler);
+										Stage stage2 = new Stage();
+										stage2.setScene(new Scene(layout));  
+										stage2.setTitle("EventHandler");
+										stage2.showAndWait();
+										startDatePicker.setValue(handler.getStartValue().getValue().plusDays(1));
+										startDatePicker.setValue(handler.getStartValue().getValue());
+									}
+									
+								} catch (IOException e1) {
+									e1.printStackTrace();
+								}
+							}
+						});
+						
 						if (eventCount>0){
 							// if (eventCount>1) c="fuchsia";
 							this.setText(this.getText()+" ("+ eventCount+")");			
 							setStyle("-fx-background-color: " + c);			//set the color of the cell
 							setTooltip(new Tooltip(eventCount+" Event/s"));
 						}
-	
 					}	
 				};
 			}
 		};
-		
-		startDatePicker.setOnAction(new EventHandler<ActionEvent>() {		//add a action event to the DaterPicker.
-			public void handle(ActionEvent e) {
-				List<Event> events = new ArrayList<>(Main.project.getTimeline(StartingModeController.timelineIdToModify).getEvents());
-				for (int i=0; i<events.size(); i++) {	
-					if(!events.get(i).getStartTime().toLocalDate().equals(startDatePicker.getValue()))
-						events.remove(i--);
-				}
-				
-				try {
-					if (events.isEmpty()){
-						StartingModeController.eventIdToModify=0;
-						FXMLLoader loader = new FXMLLoader();
-						loader.setLocation(Main.class.getResource("eventHandler.fxml"));
-						Pane showEventHandler = loader.load();
-						eventHandlerController handler = loader.getController();
-						handler.startTextField.setValue(startDatePicker.getValue());
-						Stage stage2 = new Stage();
-						stage2.setScene(new Scene(showEventHandler));  
-						stage2.setTitle("EventHandler");
-						stage2.show();
-					}
-					else{
-						events.add(new NonDurationEvent("New event",LocalDateTime.of(startDatePicker.getValue(), LocalTime.of(0, 0)),"",null,Color.RED, null));
-						events.get(events.size()-1).setEventId(0);
-						StartingModeController.eventIdToModify=events.get(0).getEventId();
-						FXMLLoader loader = new FXMLLoader();
-						loader.setLocation(Main.class.getResource("eventHandler.fxml"));
-						Pane showEventHandler = loader.load();
-						eventHandlerController handler = loader.getController();
-						ListView<Event> eventListView = new ListView<>();
-						eventListView.setPrefWidth(150);
-						eventListView.setItems(FXCollections.observableArrayList(events));
-						eventListView.getSelectionModel().selectedItemProperty().addListener( ov -> {
-							StartingModeController.eventIdToModify=eventListView.getSelectionModel().getSelectedItem().getEventId();
-							handler.initialize();
-							});
-						
-						HBox layout = new HBox();
-						layout.getChildren().addAll(eventListView,showEventHandler);
-						Stage stage2 = new Stage();
-						stage2.setScene(new Scene(layout));  
-						stage2.setTitle("EventHandler");
-						stage2.show();
-					}
-					
-				} catch (IOException e1) {
-					e1.printStackTrace();
-				}
-			}
-		});
 		
 		startDatePicker.autosize();
 		startDatePicker.setDayCellFactory(dayCellFactory);
