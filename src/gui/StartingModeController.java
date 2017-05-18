@@ -93,7 +93,8 @@ public class StartingModeController {
 		Stage stage = new Stage();
 	    stage.setScene(new Scene(createMode));  
 	    stage.setTitle("CreateMode");
-	    stage.show();
+	    stage.showAndWait();
+	    refreshTimeline();
 		
 	}
 	
@@ -162,9 +163,10 @@ public class StartingModeController {
 	
 	/**
      * Method for displaying all projects in database to load one of them.
+	 * @throws IOException 
      */
 	@FXML
-	private void loadProject(){
+	private void loadProject() throws IOException{
 		if (Main.project.getTimelines().size()>0){
 			Alert alert = new Alert(AlertType.CONFIRMATION);
 			alert.setTitle("Please confirm");
@@ -188,6 +190,13 @@ public class StartingModeController {
 			    name_label.setText(Main.project.projectName);
 			    delete_btn.setDisable(false);
 			    start_scrollpane.setContent(new VBox());
+			    showTimelinesController.timelines.removeAll(showTimelinesController.timelines);
+			    for(int i=0; i<Main.project.getTimelines().size(); i++){
+			    	CheckBox cbi = new CheckBox( Main.project.getTimelines().get(i).getTitle() +" (" + Main.project.getTimelines().get(i).getEvents().size() +" event/s) ID: " + Main.project.getTimelines().get(i).getTimelineId() );
+			    	cbi.setSelected(true);			    	
+			    	showTimelinesController.timelines.add(cbi);
+			    }
+			    refreshTimeline();
 			}
 
 		}

@@ -81,6 +81,9 @@ public class CreateModeController {
 				Timeline temp = new Timeline(StartDate.getValue(),EndDate.getValue().plusYears(1),TimelineName.getText(), OnlyYears.isSelected() );
 				if (TimelineID == 0){
 				    Main.project.addTimeline(temp);
+				    CheckBox cbi = new CheckBox( temp.getTitle() +" (" + temp.getEvents().size() +" event/s) ID: " + temp.getTimelineId() );
+			    	cbi.setSelected(true);			    	
+			    	showTimelinesController.timelines.add(cbi);
 				}
 				else {
 					temp.setTimelineId(Main.project.getTimeline(TimelineID).getTimelineId());
