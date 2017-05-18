@@ -234,6 +234,7 @@ public void refreshTimeline(){	//Method that is showing the timelines in the scr
 			Ycounter = Ycounter/4;	
 			
 		}
+//		Fixt problem for 1 year timlines.
 		if(Ycounter == 0)
 			Ycounter ++;
 		int FinalCounter = Ycounter;
