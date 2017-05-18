@@ -239,13 +239,9 @@ public void refreshTimeline(){	//Method that is showing the timelines in the scr
 		int FinalCounter = Ycounter;
 		
 		for(int i = 0; i < Main.project.getTimeline(id).getEvents().size(); i++) {
-			System.out.println("Detta är inne i första for-loopen");
-			System.out.println("Detta är finalcounter" + FinalCounter);
-			
 			for(int j = 0; j<FinalCounter; j++){
 				if(Main.project.getTimeline(id).getEvents().get(i).getStartTime().getYear() == (startDate.getYear()+FinalCounter*counter+j)) {
 					timeLine.setStyle("-fx-stroke: "+Main.project.getTimeline(id).getEvents().get(i).getColorName()+";");
-					System.out.println("Färg: "+Main.project.getTimeline(id).getEvents().get(i).getColorName());
 				}	
 			}
 				
@@ -318,8 +314,6 @@ public void refreshTimeline(){	//Method that is showing the timelines in the scr
 				}
 				else if(FinalCounter==0){
 					zoomBox.getChildren().add(zoomedTimeline(id, startDate.plusYears(counter), endDate,startDate,counter));
-					System.out.println(startDate);
-					System.out.println(endDate);
 					zoomPane.setContent(zoomBox);
 			  		//Stage stage2 = new Stage();
 					//stage2.setScene(new Scene(zoomPane)); 
@@ -332,8 +326,6 @@ public void refreshTimeline(){	//Method that is showing the timelines in the scr
 				}
 				else{
 				zoomBox.getChildren().add(zoomedTimeline(id, startDate.plusYears(FinalCounter*counter), endDate,startDate,counter));
-				System.out.println(startDate);
-				System.out.println(endDate);
 				zoomPane.setContent(zoomBox);
 		  		//Stage stage2 = new Stage();
 				//stage2.setScene(new Scene(zoomPane)); 
@@ -499,8 +491,6 @@ public void refreshTimeline(){	//Method that is showing the timelines in the scr
 		}
 		temp = Ycounter;
 		}
-		System.out.println("Temp: "+temp);
-		System.out.println("StartYear: "+startyear.toString());
 		
 		if(temp < 5) {
 			switch(temp) {
