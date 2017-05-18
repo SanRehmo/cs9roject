@@ -149,6 +149,7 @@ public class StartingModeController {
 				return;
 		}
 		Main.project=new Project();
+		showTimelinesController.timelines.removeAll(showTimelinesController.timelines);
 		Event.setCount(dao.getHighestEventID() + 1);
 		Timeline.setCount(dao.getHighestTimelineID() + 1);
 		Main.project.ProjectID =(dao.getHighestProjectID() + 1);
@@ -308,8 +309,7 @@ public class StartingModeController {
      */
 	@FXML
 	private void showEventHandler() throws IOException{
-		refreshTimeline();
-		if (Main.project.getTimelines().size()==0){
+			if (Main.project.getTimelines().size()==0){
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("ERROR!");
 			alert.setHeaderText("Cannot add event!");
@@ -329,6 +329,7 @@ public class StartingModeController {
 			    timelineIdToModify= result.get().getTimelineId();
 			    eventIdToModify=0;
 			    Main.showEventHandler();
+			    refreshTimeline();
 			}
 		}
 	}
