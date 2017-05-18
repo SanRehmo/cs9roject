@@ -844,6 +844,7 @@ public void refreshTimeline(){	//Method that is showing the timelines in the scr
 										stage2.showAndWait();
 										startDatePicker.setValue(handler.getStartValue().getValue().plusDays(1));
 										startDatePicker.setValue(handler.getStartValue().getValue());
+										refreshTimeline();
 									}
 									else{
 										events.add(new NonDurationEvent("New event",LocalDateTime.of(startDatePicker.getValue(), LocalTime.of(0, 0)),"",null,Color.RED, null));
@@ -869,6 +870,7 @@ public void refreshTimeline(){	//Method that is showing the timelines in the scr
 										stage2.showAndWait();
 										startDatePicker.setValue(handler.getStartValue().getValue().plusDays(1));
 										startDatePicker.setValue(handler.getStartValue().getValue());
+										refreshTimeline();
 									}
 									
 								} catch (IOException e1) {
