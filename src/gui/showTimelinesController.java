@@ -142,7 +142,7 @@ public class showTimelinesController {
 		}
 		for(int i=0; i<timelines.size(); i++){	//Just displaying the checked timelines
 			if(timelines.get(i).isSelected()){
-			scrollBox.getChildren().addAll(yearShow(Main.project.getTimelines().get(i).getTimelineId(),Main.project.getTimelines().get(i).getStartDate(),Main.project.getTimelines().get(i).getEndDate()),generateTimeL(Main.project.getTimelines().get(i).getTimelineId(), Main.project.getTimelines().get(i).getStartDate(), Main.project.getTimelines().get(i).getEndDate()),spaceBetween());
+			scrollBox.getChildren().addAll(yearShow(Main.project.getTimelines().get(i).getTimelineId(),Main.project.getTimelines().get(i).getStartDate(),Main.project.getTimelines().get(i).getEndDate().plusYears(1)),generateTimeL(Main.project.getTimelines().get(i).getTimelineId(), Main.project.getTimelines().get(i).getStartDate(), Main.project.getTimelines().get(i).getEndDate().plusYears(1)),spaceBetween());
 			}	
 		}
 		primaryScrollpane.setContent(scrollBox);
@@ -164,7 +164,7 @@ public void refreshTimeline(){	//Method that is showing the timelines in the scr
 		}
 		for(int i=0; i<timelines.size(); i++){	//Just displaying the checked timelines
 			if(timelines.get(i).isSelected()){
-			scrollBox.getChildren().addAll(yearShow(Main.project.getTimelines().get(i).getTimelineId(),Main.project.getTimelines().get(i).getStartDate(),Main.project.getTimelines().get(i).getEndDate()),generateTimeL(Main.project.getTimelines().get(i).getTimelineId(), Main.project.getTimelines().get(i).getStartDate(), Main.project.getTimelines().get(i).getEndDate()),spaceBetween());
+			scrollBox.getChildren().addAll(yearShow(Main.project.getTimelines().get(i).getTimelineId(),Main.project.getTimelines().get(i).getStartDate(),Main.project.getTimelines().get(i).getEndDate().plusYears(1)),generateTimeL(Main.project.getTimelines().get(i).getTimelineId(), Main.project.getTimelines().get(i).getStartDate(), Main.project.getTimelines().get(i).getEndDate().plusYears(1)),spaceBetween());
 			}	
 		}
 		primaryScrollpane.setContent(scrollBox);
@@ -358,8 +358,8 @@ public void refreshTimeline(){	//Method that is showing the timelines in the scr
 	
 	public Pane generateTimeL(int id, LocalDate StartDate, LocalDate EndDate){	//Method that is making timelines with horizontal and vertical lines
 		Text title = new Text();
-		title.setText(Main.project.getTimeline(id).getTitle());
-		title.setFont(Font.font ("Verdana", 20));
+		title.setText(Main.project.getTimeline(id).getTitle() + "\n" + Main.project.getTimeline(id).getStartDate() + "\n" + Main.project.getTimeline(id).getEndDate());
+		title.setFont(Font.font ("Verdana", 15));
 		
 		int size = (int) title.getBoundsInLocal().getWidth();	//Making a gap before every timeline so the name will show right
 		
@@ -464,8 +464,8 @@ public void refreshTimeline(){	//Method that is showing the timelines in the scr
 		
 		
 		Text text = new Text();
-		text.setText(Main.project.getTimeline(id).getTitle());
-		text.setFont(Font.font ("Verdana", 20));
+		text.setText(Main.project.getTimeline(id).getTitle()+ "\n" + Main.project.getTimeline(id).getStartDate() + "\n" + Main.project.getTimeline(id).getEndDate());
+		text.setFont(Font.font ("Verdana", 15));
 		int sixe = (int)text.getBoundsInLocal().getWidth();
 		
 		Rectangle rectangle = new Rectangle(sixe + 10, 20);
@@ -613,8 +613,8 @@ public void refreshTimeline(){	//Method that is showing the timelines in the scr
 		  rectangle.setFill(Color.TRANSPARENT);
 		  
 		  Text title = new Text();
-		  title.setText(Main.project.getTimeline(id).getTitle());
-		  title.setFont(Font.font ("Verdana", 20));
+		  title.setText(Main.project.getTimeline(id).getTitle() + "\n" + Main.project.getTimeline(id).getStartDate() + "\n" + Main.project.getTimeline(id).getEndDate());
+		  title.setFont(Font.font ("Verdana", 15));
 		  title.setOnMouseClicked(event -> { modifyTimeline(id);});
 		  yearBox.getChildren().addAll(title,rectangle);  
 		  
@@ -775,7 +775,6 @@ public void refreshTimeline(){	//Method that is showing the timelines in the scr
 		  c.TimelineName.setText(temp.getTitle()); 
 		  c.StartDate.setValue(temp.getStartDate());
 		  c.EndDate.setValue(temp.getEndDate());
-		  c.OnlyYears.setSelected(temp.getIsOnlyYears());
 		  c.CreateButton.setText("save");
 		  c.CreateButton.setTranslateX(170);
 		  c.deleteButton.setVisible(true);

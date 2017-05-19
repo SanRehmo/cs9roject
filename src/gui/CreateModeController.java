@@ -39,9 +39,6 @@ public class CreateModeController {
     public DatePicker EndDate;
 
     @FXML
-    public CheckBox OnlyYears;
-
-    @FXML
     public Button CreateButton;
     
     @FXML
@@ -78,7 +75,7 @@ public class CreateModeController {
 					}
 				}
 				// if all inputs was correct then add timeline
-				Timeline temp = new Timeline(StartDate.getValue(),EndDate.getValue().plusYears(1),TimelineName.getText(), OnlyYears.isSelected() );
+				Timeline temp = new Timeline(StartDate.getValue(),EndDate.getValue(),TimelineName.getText(), false );
 				if (TimelineID == 0){
 				    Main.project.addTimeline(temp);
 				    CheckBox cbi = new CheckBox( temp.getTitle() +" (" + temp.getEvents().size() +" event/s) ID: " + temp.getTimelineId() );
