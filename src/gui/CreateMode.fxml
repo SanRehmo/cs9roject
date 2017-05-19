@@ -12,7 +12,6 @@
                    translateY="5.0"/>
        <DatePicker fx:id="EndDate" prefHeight="25.0" prefWidth="104.0" promptText="End date" translateX="15.0"
                    translateY="5.0"/>
-      <CheckBox fx:id="OnlyYears" layoutX="367.0" layoutY="14.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" text="Only years" translateX="28.0" translateY="5.0" />
       <Line endX="428.0" layoutX="11.0" layoutY="36.0" translateY="8.0" />
       <Button fx:id="CreateButton" mnemonicParsing="false" onAction="#addTimeline" text="Create" translateX="190.0" translateY="10.0" />
       <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#removeTimeline" text="Delete" translateX="200.0" translateY="10.0" visible="false" />
