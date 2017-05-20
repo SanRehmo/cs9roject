@@ -55,7 +55,7 @@ public class eventHandlerController {
     private TextField NameEvent_textField;
 
     @FXML
-    private ComboBox<String> color_ComboBox;
+    public ComboBox<String> color_ComboBox;
 
     @FXML
     private Button delete_btn;
@@ -70,7 +70,7 @@ public class eventHandlerController {
     private Button btnSave;
 
     @FXML
-    public DatePicker startTextField;
+    public DatePicker startTextField=new DatePicker();
     
     @FXML
     private Spinner<Integer> startHH;

@@ -123,16 +123,11 @@ public class StartingModeController {
 	public void refreshTimeline() throws IOException{
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(Main.class.getResource("showTimelines.fxml"));
-		showTimelinesController.isRefresh=true;
 		loader.load();
 		showTimelinesController c = (showTimelinesController) loader.getController();
 		c.primaryScrollpane = start_scrollpane;
 		c.primaryBorderpane = StartBorderPane;
-		//c.timelines.get(Main.project.getTimelines().indexOf(Main.project.getTimeline(timelineIdToModify))).setSelected(false);
-		//c.timelines.remove(Main.project.getTimelines().indexOf(Main.project.getTimeline(timelineIdToModify)));
-		c.isRefresh=true;
 		c.refreshTimeline();
-		c.isRefresh=false;
 	}
 	
 	/**
