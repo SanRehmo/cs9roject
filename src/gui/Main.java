@@ -48,7 +48,7 @@ public class Main extends Application {
 		Stage stage2 = new Stage();
         stage2.setScene(new Scene(showEventHandler));  
         stage2.setTitle("EventHandler");
-        stage2.show();		
+        stage2.showAndWait();		
 	}
 
 	public static void main(String[] args) {
