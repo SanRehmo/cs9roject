@@ -59,20 +59,14 @@ public class showTimelinesController {
 	public BorderPane primaryBorderpane; 
 
 	public static List<CheckBox> timelines = new ArrayList<CheckBox>();
-
-
+	
 	VBox vbox = new VBox();
 	
 	VBox scrollBox = new VBox();
-	
-	
-	
-	public static boolean isRefresh = false;
-	
-	
+		
 	 @FXML
 	 public void initialize() {  //Reading every timeline and print there names in checkboxes
-		 isRefresh=true;
+		 
 		 displayAll.setSelected(true);
 		 for (CheckBox c : timelines){
 			 displayAll.setSelected(displayAll.isSelected() && c.isSelected());
@@ -88,35 +82,18 @@ public class showTimelinesController {
 			 for (CheckBox c : timelines)
 				 c.setSelected(displayAll.isSelected());
 		 });
-		 System.out.println(isRefresh);
-		 if (isRefresh){
-			 for(int i=0; i<Main.project.getTimelines().size(); i++){
-				 HBox hbox = new HBox();
-				 Pane pane = new Pane();
-				 hbox.getChildren().addAll(timelines.get(i));
-				 hbox.setLayoutX(10);
-				 hbox.setLayoutY(5);
-				 hbox.setAlignment(Pos.CENTER);	
-				 pane.getChildren().add(hbox);	 
-			  	 vbox.getChildren().add(pane);
-			 }
-		 }
-		 else {
-			 timelines = new ArrayList<CheckBox>();
-			 for(int i=0; i<Main.project.getTimelines().size(); i++){
-				 HBox hbox = new HBox();
-				 Pane pane = new Pane();
-				 CheckBox cbi = new CheckBox( Main.project.getTimelines().get(i).getTitle() +" (" + Main.project.getTimelines().get(i).getEvents().size() +" event/s) ID: " + Main.project.getTimelines().get(i).getTimelineId() );
-				 timelines.add(cbi);
-				 hbox.getChildren().addAll(cbi);
-				 hbox.setLayoutX(10);
-				 hbox.setLayoutY(5);
-				 hbox.setAlignment(Pos.CENTER);	
-				 pane.getChildren().add(hbox);	 
-			  	 vbox.getChildren().add(pane);
-			 }
-		 }
 		 
+		 for(int i=0; i<Main.project.getTimelines().size(); i++){
+			 HBox hbox = new HBox();
+			 Pane pane = new Pane();
+			 hbox.getChildren().addAll(timelines.get(i));
+			 hbox.setLayoutX(10);
+			 hbox.setLayoutY(5);
+			 hbox.setAlignment(Pos.CENTER);	
+			 pane.getChildren().add(hbox);	 
+		  	 vbox.getChildren().add(pane);
+		 }
+
 		 show_scrollpane.setContent(vbox);
 	    }
 	
@@ -194,9 +171,28 @@ public void refreshTimeline(){	//Method that is showing the timelines in the scr
 			
 		}
 		j = 0; 
+		
+		dp.valueProperty().addListener((ov, oldValue, newValue) -> {
+			if (dp.getValue()!=null){
+				int j2=0;
+				for(int i = 0; i < Main.project.getTimeline(id).getEvents().size(); i++) {
+					if(Main.project.getTimeline(id).getEvents().get(i).getStartTime().getMonth().toString().equals(startDate.getMonth().toString())
+							&& Main.project.getTimeline(id).getEvents().get(i).getStartTime().getYear() == startDate.getYear()) {
+						timeLine.setStyle("-fx-stroke: "+Main.project.getTimeline(id).getEvents().get(i).getColorName()+";");
+						
+
+						j2++;
+						Tooltip.install(timeLine, new Tooltip(j2 + " events"));
+						
+					}
+					
+				}
+				j2=0;
+			}
+        });
 
 		timeLine.setOnMouseClicked(e -> {
-			showInfoByMonth (0, startDate.getYear(), startDate.getMonthValue());
+			showInfoByMonth (0, startDate.getYear(), startDate.getMonthValue(), timeLine);
 		});
 			primaryScrollpane.setContent(scrollBox);
 			//Stage stage = (Stage) doneButton.getScene().getWindow();
@@ -215,13 +211,12 @@ public void refreshTimeline(){	//Method that is showing the timelines in the scr
 			}
 	}
 	
+	static DatePicker dp = new DatePicker() ;
 	
 	public Line clickAbleHline(int size, int id, int counter, LocalDate startDate, LocalDate endDate) {	//Making a horizontal line that will open zoomedTimeline when you press the line
 		Line timeLine = new Line(0, 50, size, 50);
 		timeLine.setStrokeWidth(5);
-			
-			
-	
+		
 		
 				
 		int years;
@@ -248,13 +243,27 @@ public void refreshTimeline(){	//Method that is showing the timelines in the scr
 					timeLine.setStyle("-fx-stroke: "+Main.project.getTimeline(id).getEvents().get(i).getColorName()+";");
 				}	
 			}
-				
-		
 		}
+		
+		dp.valueProperty().addListener((ov, oldValue, newValue) -> {
+			if (dp.getValue()!=null){
+				for(int i = 0; i < Main.project.getTimeline(id).getEvents().size(); i++) {
+					for(int j = 0; j<FinalCounter; j++){
+						if(Main.project.getTimeline(id).getEvents().get(i).getStartTime().getYear() == (startDate.getYear()+FinalCounter*counter+j)) {
+							timeLine.setStyle("-fx-stroke: "+Main.project.getTimeline(id).getEvents().get(i).getColorName()+";");
+						}	
+					}
+				}
+			}
+        });
 		
 
   		timeLine.setOnMouseClicked(e ->{
   			Stage stage2 = new Stage();
+  			stage2.setOnCloseRequest(event -> {
+				   stage2.setScene(null);
+				});
+  			
   			ScrollPane zoomPane = new ScrollPane();
   			VBox zoomBox = new VBox();
   			StartingModeController.timelineIdToModify=id;
@@ -265,39 +274,24 @@ public void refreshTimeline(){	//Method that is showing the timelines in the scr
 				
 					stage2.setTitle("Zoomed timeline");
 					stage2.show();
-					stage2.setOnCloseRequest(event -> {
-						   stage2.setScene(null);
-						   });
 					}
 				else if(counter ==1){
 					zoomBox.getChildren().addAll(yearShow(id,startDate.plusYears(FinalCounter),startDate.plusYears(FinalCounter*2)),generateTimeL(id, startDate.plusYears(FinalCounter), startDate.plusYears((FinalCounter*2))),spaceBetween());
 					zoomPane.setContent(zoomBox); 
 					stage2.setTitle("Zoomed timeline");
 					stage2.show();
-					
-					stage2.setOnCloseRequest(event -> {
-						   stage2.setScene(null);
-						   });
 					}
 				else if(counter ==2){
 					zoomBox.getChildren().addAll(yearShow(id,startDate.plusYears(FinalCounter*2),startDate.plusYears(FinalCounter*3)),generateTimeL(id, startDate.plusYears(FinalCounter*2), startDate.plusYears((FinalCounter*3))),spaceBetween());
 					zoomPane.setContent(zoomBox);
 					stage2.setTitle("Zoomed timeline");
 					stage2.show();
-					
-					stage2.setOnCloseRequest(event -> {
-						   stage2.setScene(null);
-						   });
 					}
 				else if(counter ==3){
 					zoomBox.getChildren().addAll(yearShow(id,startDate.plusYears(FinalCounter*3),startDate.plusYears(FinalCounter*4)),generateTimeL(id, startDate.plusYears(FinalCounter*3), startDate.plusYears((FinalCounter*4))),spaceBetween());
 					zoomPane.setContent(zoomBox);
 					stage2.setTitle("Zoomed timeline");
 					stage2.show();
-					
-					stage2.setOnCloseRequest(event -> {
-						   stage2.setScene(null);
-						   });
 					}
 				else if(counter ==4){
 					zoomBox.getChildren().addAll(yearShow(id,startDate.plusYears(FinalCounter*4),startDate.plusYears(FinalCounter*5)),generateTimeL(id, startDate.plusYears(FinalCounter*4), startDate.plusYears((FinalCounter*5))),spaceBetween());
@@ -306,15 +300,11 @@ public void refreshTimeline(){	//Method that is showing the timelines in the scr
 					//stage2.setScene(new Scene(zoomPane));  
 					stage2.setTitle("Zoomed timeline");
 					stage2.show();
-					
-					stage2.setOnCloseRequest(event -> {
-						   stage2.setScene(null);
-						   });
 					}	
 		}
 			else {
-				if((int)yearCounter(startDate,endDate)<1){
-					showInfoByMonth (0, startDate.getYear(), startDate.getMonthValue());
+				if((int)yearCounter(startDate,endDate)<2){
+					showInfoByMonth (0, startDate.getYear(), startDate.getMonthValue(), timeLine);
 				}
 				else if(FinalCounter==0){
 					zoomBox.getChildren().add(zoomedTimeline(id, startDate.plusYears(counter), endDate,startDate,counter));
@@ -323,10 +313,6 @@ public void refreshTimeline(){	//Method that is showing the timelines in the scr
 					//stage2.setScene(new Scene(zoomPane)); 
 					stage2.setTitle("Zoomed timeline");
 					stage2.show();
-					
-					stage2.setOnCloseRequest(event -> {
-					   stage2.setScene(null);
-					});
 				}
 				else{
 				zoomBox.getChildren().add(zoomedTimeline(id, startDate.plusYears(FinalCounter*counter), endDate,startDate,counter));
@@ -335,10 +321,6 @@ public void refreshTimeline(){	//Method that is showing the timelines in the scr
 				//stage2.setScene(new Scene(zoomPane)); 
 				stage2.setTitle("Zoomed timeline");
 				stage2.show();
-				
-				stage2.setOnCloseRequest(event -> {
-				   stage2.setScene(null);
-				});
 			}
 			}
 		
@@ -438,7 +420,7 @@ public void refreshTimeline(){	//Method that is showing the timelines in the scr
 		Line timeLine = new Line(0, 50, size, 50);
 		
 		timeLine.setOnMouseClicked(e -> {
-			showInfoByMonth (0, startDate.getYear(), startDate.getMonthValue());
+			showInfoByMonth (0, startDate.getYear(), startDate.getMonthValue(), timeLine);
 			
 		});
 			primaryScrollpane.setContent(scrollBox);
@@ -791,10 +773,10 @@ public void refreshTimeline(){	//Method that is showing the timelines in the scr
 	 * 
 	 * @param timelineId     the id of which TimeLine you clicked.
 	 * @param year           which year you clicked 
-	 * @param month			which month you cliced.
+	 * @param month			which month you clicked.
 	 */
-	public void showInfoByMonth (final int timelineId, int year, int month) {
-		FXMLLoader loader = new FXMLLoader();
+	public void showInfoByMonth (final int timelineId, int year, int month, Line timeLine) {
+
 		final DatePicker startDatePicker = new DatePicker();
 		startDatePicker.setValue(LocalDate.of(year, month, 1));
 		
@@ -847,7 +829,9 @@ public void refreshTimeline(){	//Method that is showing the timelines in the scr
 										stage2.showAndWait();
 										startDatePicker.setValue(handler.getStartValue().getValue().plusDays(1));
 										startDatePicker.setValue(handler.getStartValue().getValue());
-										refreshTimeline();
+										dp.setValue(null);
+										dp.setValue(handler.startTextField.getValue());
+										
 									}
 									else{
 										events.add(new NonDurationEvent("New event",LocalDateTime.of(startDatePicker.getValue(), LocalTime.of(0, 0)),"",null,Color.RED, null));
@@ -873,7 +857,9 @@ public void refreshTimeline(){	//Method that is showing the timelines in the scr
 										stage2.showAndWait();
 										startDatePicker.setValue(handler.getStartValue().getValue().plusDays(1));
 										startDatePicker.setValue(handler.getStartValue().getValue());
-										refreshTimeline();
+										dp.setValue(null);
+										dp.setValue(handler.startTextField.getValue());
+										
 									}
 								} catch (IOException e1) {
 									e1.printStackTrace();
