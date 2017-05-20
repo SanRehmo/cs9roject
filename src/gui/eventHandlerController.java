@@ -125,6 +125,8 @@ public class eventHandlerController {
         		Main.project.getTimeline(TimelineID).removeAllEvents(allEventsRec(Main.project.getTimeline(TimelineID).getEvent(EventID)));
         	else
         		Main.project.getTimeline(TimelineID).removeEvent(EventID);
+        	showTimelinesController.dp.setValue(null);
+        	showTimelinesController.dp.setValue(LocalDate.now());
         	Stage stage = (Stage) btnSave.getScene().getWindow();
 		    stage.close();
     	} 	
@@ -325,6 +327,7 @@ public class eventHandlerController {
     		eventImage_imageView.setImage(null);
     		color_ComboBox.setValue("Red");
     		Reccuring_ComboBox.setValue("Non");
+    		delete_btn.setDisable(true);
     	}
     	
     	color_ComboBox.setItems(color_Combo);

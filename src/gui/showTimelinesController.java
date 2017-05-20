@@ -128,7 +128,6 @@ public class showTimelinesController {
 	}
 	
 public void refreshTimeline(){	//Method that is showing the timelines in the scrollPane
-		
 		scrollBox.getChildren().removeAll(scrollBox.getChildren());
 		
 		if(displayAll.isSelected()){//If DisplayAll is selected the program will show every timeline
@@ -174,6 +173,7 @@ public void refreshTimeline(){	//Method that is showing the timelines in the scr
 		
 		dp.valueProperty().addListener((ov, oldValue, newValue) -> {
 			if (dp.getValue()!=null){
+				
 				int j2=0;
 				for(int i = 0; i < Main.project.getTimeline(id).getEvents().size(); i++) {
 					if(Main.project.getTimeline(id).getEvents().get(i).getStartTime().getMonth().toString().equals(startDate.getMonth().toString())
@@ -185,8 +185,8 @@ public void refreshTimeline(){	//Method that is showing the timelines in the scr
 						Tooltip.install(timeLine, new Tooltip(j2 + " events"));
 						
 					}
-					
 				}
+				if (j2==0) timeLine.setStyle("-fx-stroke: BLACK;");
 				j2=0;
 			}
         });
@@ -246,7 +246,8 @@ public void refreshTimeline(){	//Method that is showing the timelines in the scr
 		}
 		
 		dp.valueProperty().addListener((ov, oldValue, newValue) -> {
-			if (dp.getValue()!=null){
+				if (dp.getValue()!=null){
+				timeLine.setStyle("-fx-stroke: BLACK;");
 				for(int i = 0; i < Main.project.getTimeline(id).getEvents().size(); i++) {
 					for(int j = 0; j<FinalCounter; j++){
 						if(Main.project.getTimeline(id).getEvents().get(i).getStartTime().getYear() == (startDate.getYear()+FinalCounter*counter+j)) {
