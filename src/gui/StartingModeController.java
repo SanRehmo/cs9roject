@@ -138,7 +138,7 @@ public class StartingModeController {
 		if (Main.project.getTimelines().size()>0){
 			Alert alert = new Alert(AlertType.CONFIRMATION);
 			alert.setTitle("Please confirm");
-			alert.setHeaderText("All your changes will remove. Please save any change before continue!");
+			alert.setHeaderText("All changes are deleted. Please save each change before proceeding!");
 			alert.setContentText("Are you sure you like to proceed?");
 			if (alert.showAndWait().get() == ButtonType.CANCEL)
 				return;
@@ -166,7 +166,7 @@ public class StartingModeController {
 		if (Main.project.getTimelines().size()>0){
 			Alert alert = new Alert(AlertType.CONFIRMATION);
 			alert.setTitle("Please confirm");
-			alert.setHeaderText("All your changes will remove. Please save any change before continue!");
+			alert.setHeaderText("All changes are deleted. Please save each change before proceeding!");
 			alert.setContentText("Are you sure you like to proceed?");
 			if (alert.showAndWait().get() == ButtonType.CANCEL)
 				return;
@@ -200,7 +200,7 @@ public class StartingModeController {
 			Alert alert = new Alert(AlertType.INFORMATION);
 			alert.setTitle("INFORMATION!");
 			alert.setHeaderText("Cannot load project!");
-			alert.setContentText("Database are empty!");
+			alert.setContentText("Database is empty!");
 			alert.showAndWait();
 		}
 		System.out.println("Current project: "+ Main.project.projectName+" ID: "+ Main.project.ProjectID);
@@ -237,7 +237,7 @@ public class StartingModeController {
 			if (dao.exists(Main.project.ProjectID)){
 				Alert alert = new Alert(AlertType.CONFIRMATION);
 				alert.setTitle("Save project");
-				alert.setHeaderText("What you want the program to do?");
+				alert.setHeaderText("What do you want the program to do?");
 				alert.setContentText("Please select:");
 
 				ButtonType buttonTypeOverwrite = new ButtonType("Overwrite");
@@ -249,9 +249,9 @@ public class StartingModeController {
 				Optional<ButtonType> result = alert.showAndWait();
 				if (result.get() == buttonTypeOverwrite){
 					if (dao.save(Main.project))
-						alertWindow(AlertType.INFORMATION, "Saving", "saved successfully", null);
+						alertWindow(AlertType.INFORMATION, "Saving", "Successfully saved", null);
 					else
-						alertWindow(AlertType.INFORMATION, "Saving", "saved failed", null);
+						alertWindow(AlertType.INFORMATION, "Saving", "Saving failed", null);
 					delete_btn.setDisable(false);
 				}
 				else if (result.get() == buttonTypeSaveCopy){
@@ -264,17 +264,17 @@ public class StartingModeController {
 							e.setEventId(new Event(e).getEventId());
 					}
 					if (dao.save(Main.project))
-						alertWindow(AlertType.INFORMATION, "Saving", "saved successfully", null);
+						alertWindow(AlertType.INFORMATION, "Saving", "Successfully saved", null);
 					else
-						alertWindow(AlertType.INFORMATION, "Saving", "saved failed", null);
+						alertWindow(AlertType.INFORMATION, "Saving", "Saving failed", null);
 					delete_btn.setDisable(false);
 				}
 			}
 			else{
 				if (dao.save(Main.project))
-					alertWindow(AlertType.INFORMATION, "Saving", "saved successfully", null);
+					alertWindow(AlertType.INFORMATION, "Saving", "Successfully saved", null);
 				else
-					alertWindow(AlertType.INFORMATION, "Saving", "saved failed", null);
+					alertWindow(AlertType.INFORMATION, "Saving", "Saving failed", null);
 				delete_btn.setDisable(false);
 			}
 			
@@ -283,7 +283,7 @@ public class StartingModeController {
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("ERROR!");
 			alert.setHeaderText("Nothing to save!");
-			alert.setContentText("To save project, it shold have at lest 1 timeline.");
+			alert.setContentText("To save a project, it should have at least 1 timeline.");
 			alert.showAndWait();
 		}
 		
@@ -298,7 +298,7 @@ public class StartingModeController {
 		TextInputDialog dialog = new TextInputDialog(Main.project.projectName);
 		dialog.setTitle("Change project's name");
 		dialog.setHeaderText("Change project's name");
-		dialog.setContentText("Please enter new name:");
+		dialog.setContentText("Please enter a new name:");
 
 		// Traditional way to get the response value.
 		Optional<String> result = dialog.showAndWait();
@@ -318,7 +318,7 @@ public class StartingModeController {
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("ERROR!");
 			alert.setHeaderText("Cannot add event!");
-			alert.setContentText("You should have att least 1 timeline to add events");
+			alert.setContentText("You should have at least 1 timeline to add events");
 			alert.showAndWait();
 			return;
 		}

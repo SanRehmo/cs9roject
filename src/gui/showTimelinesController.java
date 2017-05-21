@@ -856,7 +856,7 @@ public void refreshTimeline(){	//Method that is showing the timelines in the scr
 										layout.getChildren().addAll(eventListView,showEventHandler);
 										Stage stage2 = new Stage();
 										stage2.setScene(new Scene(layout));  
-										stage2.setTitle("Event management");
+										stage2.setTitle("Manage and edit events");
 										stage2.showAndWait();
 										startDatePicker.setValue(handler.getStartValue().getValue().plusDays(1));
 										startDatePicker.setValue(handler.getStartValue().getValue());
