@@ -46,7 +46,7 @@ public class eventHandlerController {
 			"Red", "Green", "Blue", "Orange");
 	
 	ObservableList<String> Reccuring_ComboBox_Value = FXCollections.observableArrayList(
-			"Every day", "Every week", "Every month", "Every year", "Non");
+			"Every day", "Every week", "Every month", "Every year", "None");
 
     @FXML
     private ImageView eventImage_imageView;
@@ -300,7 +300,7 @@ public class eventHandlerController {
     			endMM.setValueFactory((SpinnerValueFactory<Integer>)new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 59, e.getEndTime().toLocalTime().getMinute()));
     		}
     		switch (isEventRec(e)){
-    		case 0: Reccuring_ComboBox.setValue("Non"); break;
+    		case 0: Reccuring_ComboBox.setValue("None"); break;
     		case 1: Reccuring_ComboBox.setValue("Every day"); break;
     		case 2: Reccuring_ComboBox.setValue("Every week"); break;
     		case 3: Reccuring_ComboBox.setValue("Every month"); break;
@@ -326,7 +326,7 @@ public class eventHandlerController {
     		description.setText(null);
     		eventImage_imageView.setImage(null);
     		color_ComboBox.setValue("Red");
-    		Reccuring_ComboBox.setValue("Non");
+    		Reccuring_ComboBox.setValue("None");
     		delete_btn.setDisable(true);
     	}
     	
@@ -364,13 +364,13 @@ public class eventHandlerController {
     	// Check if end date is after or equals start date
     	else if (duration_checkBox.isSelected() && startTextField.getValue().isAfter(endTextField.getValue())){
     		
-			alertWindow(AlertType.ERROR, "ERROR!", "Cannot add event!", "End date should be after or equals start date");
+			alertWindow(AlertType.ERROR, "ERROR!", "Cannot add event!", "End date should be after or equal to start date");
     	}
     	
     	// Check if the user enters an event's name
     	else if (NameEvent_textField.getText().replaceAll("\\s+","").isEmpty()){
     		
-			alertWindow(AlertType.ERROR, "ERROR!", "Cannot add event!", "Event should have name");
+			alertWindow(AlertType.ERROR, "ERROR!", "Cannot add event!", "Event should have a name");
     	}
     	
     	// Check if the user selects an event's color
@@ -409,7 +409,7 @@ public class eventHandlerController {
         				else
         					e=new NonDurationEvent((NonDurationEvent)e);
 
-        				if (Reccuring_ComboBox.getValue()==null || Reccuring_ComboBox.getValue().equals("Non")){
+        				if (Reccuring_ComboBox.getValue()==null || Reccuring_ComboBox.getValue().equals("None")){
             				break;
             			}
         				else if (Reccuring_ComboBox.getValue().equals("Every day")){
