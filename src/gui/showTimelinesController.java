@@ -760,7 +760,7 @@ public void refreshTimeline(){	//Method that is showing the timelines in the scr
 		  c.TimelineName.setText(temp.getTitle()); 
 		  c.StartDate.setValue(temp.getStartDate());
 		  c.EndDate.setValue(temp.getEndDate());
-		  c.CreateButton.setText("save");
+		  c.CreateButton.setText("Save");
 		  c.CreateButton.setTranslateX(170);
 		  c.deleteButton.setVisible(true);
 		  c.TimelineID=id;

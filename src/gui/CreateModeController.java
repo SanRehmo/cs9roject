@@ -68,7 +68,7 @@ public class CreateModeController {
 				if (TimelineName.getText().replaceAll("\\s+","").isEmpty()){
 					Alert alert = new Alert(AlertType.CONFIRMATION);
 					alert.setTitle("Please confirm");
-					alert.setHeaderText("You are going to create new timeline without name!");
+					alert.setHeaderText("You are going to create a new timeline without a name!");
 					alert.setContentText("Are you sure you like to proceed?");
 					if (alert.showAndWait().get() == ButtonType.CANCEL){
 						return;
@@ -91,7 +91,7 @@ public class CreateModeController {
 			    stage.close();
 			}
 			else {
-				alert.alertWindow(AlertType.ERROR, "ERROR!", "Cannot add timeline!", "End date should be after or equals start date");
+				alert.alertWindow(AlertType.ERROR, "ERROR!", "Cannot add timeline!", "End date should be after or equal to start date");
 			}	
 		}
 		else{
