@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="bedrock@localhost" uuid="3e677ab5-0bdc-44bc-bfec-c61d67b45c46">
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" />
+      <introspection-schemas>*:bedrock</introspection-schemas>
+    </data-source>
+    <data-source name="@remote" uuid="b0202c0a-96a1-47ab-9079-3d8c2281075e">
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" />
+      <introspection-schemas>*:bedrock</introspection-schemas>
+    </data-source>
+  </component>
+</project>

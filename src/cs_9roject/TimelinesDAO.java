@@ -216,7 +216,9 @@ public class TimelinesDAO {
                 }
             }
         }
-        return true;
+        return load(project.ProjectID) != null;
+                // && !(load(project.ProjectID).timelines.isEmpty())
+                // && !(load(project.ProjectID).timelines.get(load(project.ProjectID).timelines.size()-1).events.isEmpty()));
     }
 
     public boolean exists(int ID) {
