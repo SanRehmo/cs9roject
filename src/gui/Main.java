@@ -27,7 +27,7 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) throws IOException {
 		this.primaryStage = primaryStage;
-		this.primaryStage.setTitle("Show timeline");	
+		this.primaryStage.setTitle("Timelines");	
 		this.primaryStage.setResizable(true);
 	showMainView();
 	}
@@ -47,7 +47,7 @@ public class Main extends Application {
 		Pane showEventHandler = loader.load();
 		Stage stage2 = new Stage();
         stage2.setScene(new Scene(showEventHandler));  
-        stage2.setTitle("EventHandler");
+        stage2.setTitle("Add new event");
         stage2.showAndWait();		
 	}
 

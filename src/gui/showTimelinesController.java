@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.DateCell;
@@ -12,6 +13,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tooltip;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
@@ -764,7 +766,7 @@ public void refreshTimeline(){	//Method that is showing the timelines in the scr
 		  c.TimelineID=id;
 		  Stage stage = new Stage();
 		  stage.setScene(new Scene(createMode));  
-		  stage.setTitle("CreateMode");
+		  stage.setTitle("Edit Timeline");
 		  stage.showAndWait();
 		  refreshTimeline();
 	}
@@ -826,7 +828,7 @@ public void refreshTimeline(){	//Method that is showing the timelines in the scr
 										handler.startTextField.setValue(startDatePicker.getValue());
 										Stage stage2 = new Stage();
 										stage2.setScene(new Scene(showEventHandler));  
-										stage2.setTitle("EventHandler");
+										stage2.setTitle("Add new event");
 										stage2.showAndWait();
 										startDatePicker.setValue(handler.getStartValue().getValue().plusDays(1));
 										startDatePicker.setValue(handler.getStartValue().getValue());
@@ -854,7 +856,7 @@ public void refreshTimeline(){	//Method that is showing the timelines in the scr
 										layout.getChildren().addAll(eventListView,showEventHandler);
 										Stage stage2 = new Stage();
 										stage2.setScene(new Scene(layout));  
-										stage2.setTitle("EventHandler");
+										stage2.setTitle("Event management");
 										stage2.showAndWait();
 										startDatePicker.setValue(handler.getStartValue().getValue().plusDays(1));
 										startDatePicker.setValue(handler.getStartValue().getValue());
@@ -899,4 +901,14 @@ public void refreshTimeline(){	//Method that is showing the timelines in the scr
 		stage2.sizeToScene();
 		stage2.show();
 	}
+	
+	public void alertWindow(AlertType type, String Title, String headText, String contentText) {
+    	
+    	Alert alert = new Alert(type);
+		alert.setTitle(Title);
+		alert.setHeaderText(headText);
+		alert.setContentText(contentText);
+		alert.showAndWait();
+    	
+    }
 }

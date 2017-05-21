@@ -153,7 +153,7 @@ public class TimelinesDAO {
 
 
     // save a Project
-    public void save(Project project) {
+    public boolean save(Project project) {
 
         try {
             connection = Database.establishConnection();
@@ -216,6 +216,7 @@ public class TimelinesDAO {
                 }
             }
         }
+        return true;
     }
 
     public boolean exists(int ID) {

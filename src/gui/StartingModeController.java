@@ -14,7 +14,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import javafx.scene.control.Label;
+
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
@@ -92,7 +92,7 @@ public class StartingModeController {
 		c.primaryScrollpane = start_scrollpane;
 		Stage stage = new Stage();
 	    stage.setScene(new Scene(createMode));  
-	    stage.setTitle("CreateMode");
+	    stage.setTitle("Create new timeline");
 	    stage.showAndWait();
 	    refreshTimeline();
 		
@@ -219,7 +219,9 @@ public class StartingModeController {
 			delete_btn.setDisable(false);
 			dao.delete(Main.project);
 			Main.project = new Project();
+			showTimelinesController.timelines.removeAll(showTimelinesController.timelines);
 			start_scrollpane.setContent(new VBox());
+			delete_btn.setDisable(true);
 		}
 		System.out.println("Current project: "+ Main.project.projectName+" ID: "+ Main.project.ProjectID);
 	}
@@ -234,9 +236,9 @@ public class StartingModeController {
 		if (Main.project.getTimelines().size()>0){
 			if (dao.exists(Main.project.ProjectID)){
 				Alert alert = new Alert(AlertType.CONFIRMATION);
-				alert.setTitle("Confirmation Dialog");
-				alert.setHeaderText("Please select an action");
-				alert.setContentText("Choose your option.");
+				alert.setTitle("Save project");
+				alert.setHeaderText("What you want the program to do?");
+				alert.setContentText("Please select:");
 
 				ButtonType buttonTypeOverwrite = new ButtonType("Overwrite");
 				ButtonType buttonTypeSaveCopy = new ButtonType("Save Copy");
@@ -246,7 +248,10 @@ public class StartingModeController {
 				
 				Optional<ButtonType> result = alert.showAndWait();
 				if (result.get() == buttonTypeOverwrite){
-					dao.save(Main.project);
+					if (dao.save(Main.project))
+						alertWindow(AlertType.INFORMATION, "Saving", "saved successfully", null);
+					else
+						alertWindow(AlertType.INFORMATION, "Saving", "saved failed", null);
 					delete_btn.setDisable(false);
 				}
 				else if (result.get() == buttonTypeSaveCopy){
@@ -258,13 +263,18 @@ public class StartingModeController {
 						for (Event e : t.getEvents())
 							e.setEventId(new Event(e).getEventId());
 					}
-					dao.save(Main.project);
+					if (dao.save(Main.project))
+						alertWindow(AlertType.INFORMATION, "Saving", "saved successfully", null);
+					else
+						alertWindow(AlertType.INFORMATION, "Saving", "saved failed", null);
 					delete_btn.setDisable(false);
-					start_scrollpane.setContent(new VBox());
 				}
 			}
 			else{
-				dao.save(Main.project);
+				if (dao.save(Main.project))
+					alertWindow(AlertType.INFORMATION, "Saving", "saved successfully", null);
+				else
+					alertWindow(AlertType.INFORMATION, "Saving", "saved failed", null);
 				delete_btn.setDisable(false);
 			}
 			
@@ -329,4 +339,13 @@ public class StartingModeController {
 		}
 	}
 	
+	public void alertWindow(AlertType type, String Title, String headText, String contentText) {
+    	
+    	Alert alert = new Alert(type);
+		alert.setTitle(Title);
+		alert.setHeaderText(headText);
+		alert.setContentText(contentText);
+		alert.showAndWait();
+    	
+    }
 }
