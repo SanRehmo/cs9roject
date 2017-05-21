@@ -28,15 +28,6 @@ public class TimelineTest {
 	}
 	
 	@Test
-	public void timelineIdTest() {
-		List <Timeline> timelines = new ArrayList <Timeline>();
-		for (int i=0; i<20; i++)
-			timelines.add(new Timeline());
-		for (int i=0; i<timelines.size(); i++)
-			assertEquals(i, timelines.get(i).getTimelineId());
-		}
-	
-	@Test
 	public void timelineTest() {
 		LocalDate date= LocalDate.of(2017, 01, 01);
 		Timeline timeline1 = new Timeline();
