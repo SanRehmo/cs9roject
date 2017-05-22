@@ -173,7 +173,14 @@ public class StartingModeController {
 				return;
 		}
 		
-		List <Project> projects = Main.dao.loadAllProjects();
+		if (Main.userID==0){
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setTitle("Log in");
+			alert.setHeaderText("Please log in first!");
+			return;
+		}
+		
+		List <Project> projects = Main.dao.loadAllProjects(Main.userID);
 		if (projects.size()>0){
 			ChoiceDialog<Project> choiceDialog = new ChoiceDialog<Project>(projects.get(0), projects);
 			choiceDialog.setTitle("Choice Dialog");
