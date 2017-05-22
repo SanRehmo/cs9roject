@@ -101,6 +101,7 @@ public class TimelinesDAO {
                 rsss.next();
                 projectName = rsss.getString("PROJECT_NAME");
                 result.projectName = projectName;
+                result.userID=0;
 
             } catch (Exception ex) {
                 ex.printStackTrace();
@@ -137,10 +138,13 @@ public class TimelinesDAO {
                     highestID = rs.getInt("PROJECT_ID");
                 }
                 for (int i = 1; i <= highestID; i++) {
-                    Project temp = load(i);
-                    if (exists(i) && temp.userID == userID) {
-                        System.out.println(temp.ProjectID);
-                        result.add(temp);
+                    if (exists(i) ) {
+                    	Project temp = load(i);
+                    	if (temp.userID == userID){
+                    		System.out.println(temp.ProjectID);
+                            result.add(temp);
+                    	}
+                        
                     }
                 }
             } catch (Exception ex) {
