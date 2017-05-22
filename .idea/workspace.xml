@@ -3,8 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="26f1f1d1-31ab-4a57-aef1-212eec71d102" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/gui/Main.java" afterPath="$PROJECT_DIR$/src/gui/Main.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/gui/StartingModeController.java" afterPath="$PROJECT_DIR$/src/gui/StartingModeController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cs_9roject/TimelinesDAO.java" afterPath="$PROJECT_DIR$/src/cs_9roject/TimelinesDAO.java" />
     </list>
     <ignored path="cs9roject.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -44,23 +43,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="TimelinesDAO.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="TimelinesDAO.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/cs_9roject/TimelinesDAO.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3604">
-              <caret line="218" column="46" lean-forward="false" selection-start-line="218" selection-start-column="46" selection-end-line="218" selection-end-column="46" />
+            <state relative-caret-position="463">
+              <caret line="142" column="41" lean-forward="true" selection-start-line="142" selection-start-column="41" selection-end-line="142" selection-end-column="41" />
               <folding>
-                <element signature="imports" expanded="false" />
-                <element signature="e#17109#17110#0" expanded="false" />
-                <element signature="e#17152#17153#0" expanded="false" />
-                <marker date="1495400678538" expanded="true" signature="1086:1486" ph="SELECT Proje... Projects" />
-                <marker date="1495400678538" expanded="true" signature="3126:3355" ph="SELECT Timel... Timelines" />
-                <marker date="1495400678538" expanded="true" signature="4307:4428" ph="SELECT Proje... Projects" />
-                <marker date="1495400678538" expanded="true" signature="5266:5330" ph="SELECT PROJE... Projects" />
-                <marker date="1495400678538" expanded="true" signature="9444:9475" ph="SELECT PROJE... Projects" />
-                <marker date="1495400678538" expanded="true" signature="11992:12056" ph="SELECT PROJE... Projects" />
-                <marker date="1495400678538" expanded="true" signature="12870:12937" ph="SELECT TIMEL... Timelines" />
-                <marker date="1495400678538" expanded="true" signature="13750:13808" ph="SELECT EVENT... Events" />
+                <marker date="1495458873835" expanded="true" signature="1086:1486" ph="SELECT Proje... Projects" />
+                <marker date="1495458873835" expanded="true" signature="1086:1492" ph="SELECT Proje... Projects" />
+                <marker date="1495458873835" expanded="true" signature="3126:3355" ph="SELECT Timel... Timelines" />
+                <marker date="1495458873835" expanded="true" signature="4307:4428" ph="SELECT Proje... Projects" />
+                <marker date="1495458873835" expanded="true" signature="5276:5340" ph="SELECT PROJE... Projects" />
+                <marker date="1495458873835" expanded="true" signature="9517:9548" ph="SELECT PROJE... Projects" />
+                <marker date="1495458873835" expanded="true" signature="12065:12129" ph="SELECT PROJE... Projects" />
+                <marker date="1495458873835" expanded="true" signature="12943:13010" ph="SELECT TIMEL... Timelines" />
+                <marker date="1495458873835" expanded="true" signature="13823:13881" ph="SELECT EVENT... Events" />
               </folding>
             </state>
           </provider>
@@ -68,10 +65,10 @@
       </file>
       <file leaf-file-name="LoginHandler.fxml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/gui/LoginHandler.fxml">
-          <provider editor-type-id="JavaFX-Scene-Builder">
+          <provider selected="true" editor-type-id="JavaFX-Scene-Builder">
             <state />
           </provider>
-          <provider selected="true" editor-type-id="text-editor">
+          <provider editor-type-id="text-editor">
             <state relative-caret-position="255">
               <caret line="15" column="125" lean-forward="false" selection-start-line="15" selection-start-column="125" selection-end-line="15" selection-end-column="125" />
               <folding />
@@ -86,16 +83,17 @@
               <caret line="100" column="0" lean-forward="false" selection-start-line="100" selection-start-column="0" selection-end-line="100" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="false" />
+                <marker date="1495457886237" expanded="true" signature="11648:11821" ph="{...}" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/gui/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="629">
-              <caret line="49" column="35" lean-forward="true" selection-start-line="49" selection-start-column="35" selection-end-line="49" selection-end-column="35" />
+            <state relative-caret-position="935">
+              <caret line="67" column="0" lean-forward="true" selection-start-line="67" selection-start-column="0" selection-end-line="67" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -108,8 +106,12 @@
           </provider>
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="306">
-              <caret line="18" column="65" lean-forward="false" selection-start-line="18" selection-start-column="45" selection-end-line="18" selection-end-column="69" />
-              <folding />
+              <caret line="18" column="65" lean-forward="false" selection-start-line="18" selection-start-column="65" selection-end-line="18" selection-end-column="65" />
+              <folding>
+                <marker date="1495457886228" expanded="true" signature="3653:3916" ph="..." />
+                <marker date="1495457886228" expanded="true" signature="3676:3753" ph="..." />
+                <marker date="1495457886228" expanded="true" signature="3777:3891" ph="..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -188,6 +190,7 @@
     <findStrings>
       <find>return</find>
       <find>showEventHandler</find>
+      <find>exists</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -217,10 +220,10 @@
         <option value="$PROJECT_DIR$/src/test/EventValidate.java" />
         <option value="$PROJECT_DIR$/src/cs_9roject/Project.java" />
         <option value="$APPLICATION_CONFIG_DIR$/consoles/db/15528d06-e735-47b2-a1ac-9f005a8ae7ed/console.sql" />
-        <option value="$PROJECT_DIR$/src/cs_9roject/TimelinesDAO.java" />
         <option value="$PROJECT_DIR$/src/gui/StartingModeController.java" />
         <option value="$PROJECT_DIR$/src/gui/Main.java" />
         <option value="$PROJECT_DIR$/src/gui/LoginHandler.fxml" />
+        <option value="$PROJECT_DIR$/src/cs_9roject/TimelinesDAO.java" />
       </list>
     </option>
   </component>
@@ -808,7 +811,7 @@
       <workItem from="1495059245848" duration="206000" />
       <workItem from="1495398156779" duration="1471000" />
       <workItem from="1495439107701" duration="953000" />
-      <workItem from="1495457825310" duration="29000" />
+      <workItem from="1495457825310" duration="1050000" />
     </task>
     <task id="LOCAL-00001" summary="DB saving and loading Event Image, also backend preparation for access control">
       <created>1495017646470</created>
@@ -824,11 +827,18 @@
       <option name="project" value="LOCAL" />
       <updated>1495400786759</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="...">
+      <created>1495457876605</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1495457876605</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="10267000" />
+    <option name="totallyTimeSpent" value="11288000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="3456" height="1416" extended-state="6" />
@@ -883,7 +893,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="DB saving and loading Event Image, also backend preparation for access control" />
     <MESSAGE value="primitive check if DB saving worked, for confirmation dialogue" />
-    <option name="LAST_COMMIT_MESSAGE" value="primitive check if DB saving worked, for confirmation dialogue" />
+    <MESSAGE value="..." />
+    <option name="LAST_COMMIT_MESSAGE" value="..." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -927,6 +938,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
           <caret line="15" column="91" lean-forward="false" selection-start-line="15" selection-start-column="91" selection-end-line="15" selection-end-column="91" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -934,6 +948,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="221">
           <caret line="18" column="153" lean-forward="false" selection-start-line="18" selection-start-column="153" selection-end-line="18" selection-end-column="153" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#1508#1509#0" expanded="false" />
+            <element signature="e#1529#1530#0" expanded="false" />
+            <element signature="e#1680#1681#0" expanded="false" />
+            <element signature="e#1702#1703#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1011,17 +1032,15 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#17109#17110#0" expanded="false" />
-            <element signature="e#17152#17153#0" expanded="false" />
-            <marker date="1495400678538" expanded="true" signature="1086:1486" ph="SELECT Proje... Projects" />
-            <marker date="1495400678538" expanded="true" signature="3126:3355" ph="SELECT Timel... Timelines" />
-            <marker date="1495400678538" expanded="true" signature="4307:4428" ph="SELECT Proje... Projects" />
-            <marker date="1495400678538" expanded="true" signature="5266:5330" ph="SELECT PROJE... Projects" />
-            <marker date="1495400678538" expanded="true" signature="9444:9475" ph="SELECT PROJE... Projects" />
-            <marker date="1495400678538" expanded="true" signature="11992:12056" ph="SELECT PROJE... Projects" />
-            <marker date="1495400678538" expanded="true" signature="12870:12937" ph="SELECT TIMEL... Timelines" />
-            <marker date="1495400678538" expanded="true" signature="13750:13808" ph="SELECT EVENT... Events" />
+            <marker date="1495458873835" expanded="true" signature="1086:1486" ph="SELECT Proje... Projects" />
+            <marker date="1495458873835" expanded="true" signature="1086:1492" ph="SELECT Proje... Projects" />
+            <marker date="1495458873835" expanded="true" signature="3126:3355" ph="SELECT Timel... Timelines" />
+            <marker date="1495458873835" expanded="true" signature="4307:4428" ph="SELECT Proje... Projects" />
+            <marker date="1495458873835" expanded="true" signature="5276:5340" ph="SELECT PROJE... Projects" />
+            <marker date="1495458873835" expanded="true" signature="9517:9548" ph="SELECT PROJE... Projects" />
+            <marker date="1495458873835" expanded="true" signature="12065:12129" ph="SELECT PROJE... Projects" />
+            <marker date="1495458873835" expanded="true" signature="12943:13010" ph="SELECT TIMEL... Timelines" />
+            <marker date="1495458873835" expanded="true" signature="13823:13881" ph="SELECT EVENT... Events" />
           </folding>
         </state>
       </provider>
@@ -1051,6 +1070,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
           <caret line="15" column="91" lean-forward="false" selection-start-line="15" selection-start-column="91" selection-end-line="15" selection-end-column="91" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1058,6 +1080,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="221">
           <caret line="18" column="153" lean-forward="false" selection-start-line="18" selection-start-column="153" selection-end-line="18" selection-end-column="153" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#1508#1509#0" expanded="false" />
+            <element signature="e#1529#1530#0" expanded="false" />
+            <element signature="e#1680#1681#0" expanded="false" />
+            <element signature="e#1702#1703#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1140,17 +1169,15 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#17109#17110#0" expanded="false" />
-            <element signature="e#17152#17153#0" expanded="false" />
-            <marker date="1495400678538" expanded="true" signature="1086:1486" ph="SELECT Proje... Projects" />
-            <marker date="1495400678538" expanded="true" signature="3126:3355" ph="SELECT Timel... Timelines" />
-            <marker date="1495400678538" expanded="true" signature="4307:4428" ph="SELECT Proje... Projects" />
-            <marker date="1495400678538" expanded="true" signature="5266:5330" ph="SELECT PROJE... Projects" />
-            <marker date="1495400678538" expanded="true" signature="9444:9475" ph="SELECT PROJE... Projects" />
-            <marker date="1495400678538" expanded="true" signature="11992:12056" ph="SELECT PROJE... Projects" />
-            <marker date="1495400678538" expanded="true" signature="12870:12937" ph="SELECT TIMEL... Timelines" />
-            <marker date="1495400678538" expanded="true" signature="13750:13808" ph="SELECT EVENT... Events" />
+            <marker date="1495458873835" expanded="true" signature="1086:1486" ph="SELECT Proje... Projects" />
+            <marker date="1495458873835" expanded="true" signature="1086:1492" ph="SELECT Proje... Projects" />
+            <marker date="1495458873835" expanded="true" signature="3126:3355" ph="SELECT Timel... Timelines" />
+            <marker date="1495458873835" expanded="true" signature="4307:4428" ph="SELECT Proje... Projects" />
+            <marker date="1495458873835" expanded="true" signature="5276:5340" ph="SELECT PROJE... Projects" />
+            <marker date="1495458873835" expanded="true" signature="9517:9548" ph="SELECT PROJE... Projects" />
+            <marker date="1495458873835" expanded="true" signature="12065:12129" ph="SELECT PROJE... Projects" />
+            <marker date="1495458873835" expanded="true" signature="12943:13010" ph="SELECT TIMEL... Timelines" />
+            <marker date="1495458873835" expanded="true" signature="13823:13881" ph="SELECT EVENT... Events" />
           </folding>
         </state>
       </provider>
@@ -1180,6 +1207,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
           <caret line="15" column="91" lean-forward="false" selection-start-line="15" selection-start-column="91" selection-end-line="15" selection-end-column="91" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1187,6 +1217,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="221">
           <caret line="18" column="153" lean-forward="false" selection-start-line="18" selection-start-column="153" selection-end-line="18" selection-end-column="153" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#1508#1509#0" expanded="false" />
+            <element signature="e#1529#1530#0" expanded="false" />
+            <element signature="e#1680#1681#0" expanded="false" />
+            <element signature="e#1702#1703#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1260,6 +1297,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="442">
           <caret line="29" column="64" lean-forward="false" selection-start-line="29" selection-start-column="49" selection-end-line="29" selection-end-column="66" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1276,17 +1316,15 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#17109#17110#0" expanded="false" />
-            <element signature="e#17152#17153#0" expanded="false" />
-            <marker date="1495400678538" expanded="true" signature="1086:1486" ph="SELECT Proje... Projects" />
-            <marker date="1495400678538" expanded="true" signature="3126:3355" ph="SELECT Timel... Timelines" />
-            <marker date="1495400678538" expanded="true" signature="4307:4428" ph="SELECT Proje... Projects" />
-            <marker date="1495400678538" expanded="true" signature="5266:5330" ph="SELECT PROJE... Projects" />
-            <marker date="1495400678538" expanded="true" signature="9444:9475" ph="SELECT PROJE... Projects" />
-            <marker date="1495400678538" expanded="true" signature="11992:12056" ph="SELECT PROJE... Projects" />
-            <marker date="1495400678538" expanded="true" signature="12870:12937" ph="SELECT TIMEL... Timelines" />
-            <marker date="1495400678538" expanded="true" signature="13750:13808" ph="SELECT EVENT... Events" />
+            <marker date="1495458873835" expanded="true" signature="1086:1486" ph="SELECT Proje... Projects" />
+            <marker date="1495458873835" expanded="true" signature="1086:1492" ph="SELECT Proje... Projects" />
+            <marker date="1495458873835" expanded="true" signature="3126:3355" ph="SELECT Timel... Timelines" />
+            <marker date="1495458873835" expanded="true" signature="4307:4428" ph="SELECT Proje... Projects" />
+            <marker date="1495458873835" expanded="true" signature="5276:5340" ph="SELECT PROJE... Projects" />
+            <marker date="1495458873835" expanded="true" signature="9517:9548" ph="SELECT PROJE... Projects" />
+            <marker date="1495458873835" expanded="true" signature="12065:12129" ph="SELECT PROJE... Projects" />
+            <marker date="1495458873835" expanded="true" signature="12943:13010" ph="SELECT TIMEL... Timelines" />
+            <marker date="1495458873835" expanded="true" signature="13823:13881" ph="SELECT EVENT... Events" />
           </folding>
         </state>
       </provider>
@@ -1295,6 +1333,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="442">
           <caret line="29" column="64" lean-forward="false" selection-start-line="29" selection-start-column="49" selection-end-line="29" selection-end-column="66" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1353,6 +1394,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="221">
           <caret line="18" column="153" lean-forward="false" selection-start-line="18" selection-start-column="153" selection-end-line="18" selection-end-column="153" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#1508#1509#0" expanded="false" />
+            <element signature="e#1529#1530#0" expanded="false" />
+            <element signature="e#1680#1681#0" expanded="false" />
+            <element signature="e#1702#1703#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1360,6 +1408,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
           <caret line="15" column="91" lean-forward="false" selection-start-line="15" selection-start-column="91" selection-end-line="15" selection-end-column="91" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1408,26 +1459,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/cs_9roject/TimelinesDAO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3604">
-          <caret line="218" column="46" lean-forward="false" selection-start-line="218" selection-start-column="46" selection-end-line="218" selection-end-column="46" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#17109#17110#0" expanded="false" />
-            <element signature="e#17152#17153#0" expanded="false" />
-            <marker date="1495400678538" expanded="true" signature="1086:1486" ph="SELECT Proje... Projects" />
-            <marker date="1495400678538" expanded="true" signature="3126:3355" ph="SELECT Timel... Timelines" />
-            <marker date="1495400678538" expanded="true" signature="4307:4428" ph="SELECT Proje... Projects" />
-            <marker date="1495400678538" expanded="true" signature="5266:5330" ph="SELECT PROJE... Projects" />
-            <marker date="1495400678538" expanded="true" signature="9444:9475" ph="SELECT PROJE... Projects" />
-            <marker date="1495400678538" expanded="true" signature="11992:12056" ph="SELECT PROJE... Projects" />
-            <marker date="1495400678538" expanded="true" signature="12870:12937" ph="SELECT TIMEL... Timelines" />
-            <marker date="1495400678538" expanded="true" signature="13750:13808" ph="SELECT EVENT... Events" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/gui/CreateMode.fxml">
       <provider selected="true" editor-type-id="JavaFX-Scene-Builder">
         <state />
@@ -1455,6 +1486,7 @@
           <caret line="100" column="0" lean-forward="false" selection-start-line="100" selection-start-column="0" selection-end-line="100" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="false" />
+            <marker date="1495457886237" expanded="true" signature="11648:11821" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -1487,16 +1519,20 @@
       </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
-          <caret line="18" column="65" lean-forward="false" selection-start-line="18" selection-start-column="45" selection-end-line="18" selection-end-column="69" />
-          <folding />
+          <caret line="18" column="65" lean-forward="false" selection-start-line="18" selection-start-column="65" selection-end-line="18" selection-end-column="65" />
+          <folding>
+            <marker date="1495457886228" expanded="true" signature="3653:3916" ph="..." />
+            <marker date="1495457886228" expanded="true" signature="3676:3753" ph="..." />
+            <marker date="1495457886228" expanded="true" signature="3777:3891" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/gui/LoginHandler.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder">
+      <provider selected="true" editor-type-id="JavaFX-Scene-Builder">
         <state />
       </provider>
-      <provider selected="true" editor-type-id="text-editor">
+      <provider editor-type-id="text-editor">
         <state relative-caret-position="255">
           <caret line="15" column="125" lean-forward="false" selection-start-line="15" selection-start-column="125" selection-end-line="15" selection-end-column="125" />
           <folding />
@@ -1505,9 +1541,27 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/gui/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="629">
-          <caret line="49" column="35" lean-forward="true" selection-start-line="49" selection-start-column="35" selection-end-line="49" selection-end-column="35" />
+        <state relative-caret-position="935">
+          <caret line="67" column="0" lean-forward="true" selection-start-line="67" selection-start-column="0" selection-end-line="67" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cs_9roject/TimelinesDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="463">
+          <caret line="142" column="41" lean-forward="true" selection-start-line="142" selection-start-column="41" selection-end-line="142" selection-end-column="41" />
+          <folding>
+            <marker date="1495458873835" expanded="true" signature="1086:1486" ph="SELECT Proje... Projects" />
+            <marker date="1495458873835" expanded="true" signature="1086:1492" ph="SELECT Proje... Projects" />
+            <marker date="1495458873835" expanded="true" signature="3126:3355" ph="SELECT Timel... Timelines" />
+            <marker date="1495458873835" expanded="true" signature="4307:4428" ph="SELECT Proje... Projects" />
+            <marker date="1495458873835" expanded="true" signature="5276:5340" ph="SELECT PROJE... Projects" />
+            <marker date="1495458873835" expanded="true" signature="9517:9548" ph="SELECT PROJE... Projects" />
+            <marker date="1495458873835" expanded="true" signature="12065:12129" ph="SELECT PROJE... Projects" />
+            <marker date="1495458873835" expanded="true" signature="12943:13010" ph="SELECT TIMEL... Timelines" />
+            <marker date="1495458873835" expanded="true" signature="13823:13881" ph="SELECT EVENT... Events" />
+          </folding>
         </state>
       </provider>
     </entry>
