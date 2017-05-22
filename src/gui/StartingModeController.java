@@ -339,6 +339,15 @@ public class StartingModeController {
 		}
 	}
 	
+	public void displayInformation() {
+		Alert alert = new Alert(AlertType.INFORMATION);
+		alert.setTitle("Information Dialog");
+		alert.setHeaderText(null);
+		alert.setContentText("Here are the information on the program, to display");
+
+		alert.showAndWait();
+	}
+	
 	public void alertWindow(AlertType type, String Title, String headText, String contentText) {
     	
     	Alert alert = new Alert(type);
