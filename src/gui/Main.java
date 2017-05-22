@@ -23,6 +23,7 @@ public class Main extends Application {
 	public BorderPane mainLayout;
 	public static Project project = new Project();
 	public static TimelinesDAO dao = new TimelinesDAO();
+	public static int userID=0;
 	
 	
 	@Override
@@ -64,6 +65,7 @@ public class Main extends Application {
 		stage.setScene(new Scene(login));
 		stage.setTitle("Log In Window");
 		stage.showAndWait();
+		userID=0;
 	}
 
 	public static void main(String[] args) {

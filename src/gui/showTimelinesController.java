@@ -187,7 +187,10 @@ public void refreshTimeline(){	//Method that is showing the timelines in the scr
 						
 					}
 				}
-				if (j2==0) timeLine.setStyle("-fx-stroke: BLACK;");
+				if (j2==0) {
+					timeLine.setStyle("-fx-stroke: BLACK;");
+					disableIfOutTimeline (timeLine, startDate, id );
+				}
 				j2=0;
 			}
         });
