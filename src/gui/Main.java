@@ -8,6 +8,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
@@ -30,6 +31,7 @@ public class Main extends Application {
 		this.primaryStage.setTitle("Timelines");	
 		this.primaryStage.setResizable(true);
 	showMainView();
+	loginWindow();
 	}
 	
 	private void showMainView() throws IOException{
@@ -49,6 +51,19 @@ public class Main extends Application {
         stage2.setScene(new Scene(showEventHandler));  
         stage2.setTitle("Add new event");
         stage2.showAndWait();		
+	}
+
+	/**
+	 * Method for displaying the login window.
+	 */
+	public void loginWindow() throws IOException{
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(Main.class.getResource("LoginHandler.fxml"));
+		FlowPane login = loader.load();
+		Stage stage = new Stage();
+		stage.setScene(new Scene(login));
+		stage.setTitle("Log In Window");
+		stage.showAndWait();
 	}
 
 	public static void main(String[] args) {
