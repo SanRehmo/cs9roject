@@ -174,8 +174,7 @@ public void refreshTimeline(){	//Method that is showing the timelines in the scr
 		j = 0; 
 		
 		dp.valueProperty().addListener((ov, oldValue, newValue) -> {
-			if (dp.getValue()!=null){
-				
+			if (dp.getValue()!=null && Main.project.getTimeline(id)!=null){
 				int j2=0;
 				for(int i = 0; i < Main.project.getTimeline(id).getEvents().size(); i++) {
 					if(Main.project.getTimeline(id).getEvents().get(i).getStartTime().getMonth().toString().equals(startDate.getMonth().toString())
@@ -248,7 +247,7 @@ public void refreshTimeline(){	//Method that is showing the timelines in the scr
 		}
 		
 		dp.valueProperty().addListener((ov, oldValue, newValue) -> {
-				if (dp.getValue()!=null){
+				if (dp.getValue()!=null && Main.project.getTimeline(id)!=null){
 				timeLine.setStyle("-fx-stroke: BLACK;");
 				for(int i = 0; i < Main.project.getTimeline(id).getEvents().size(); i++) {
 					for(int j = 0; j<FinalCounter; j++){
