@@ -113,7 +113,7 @@ public class TimelinesDAO {
 
 
     // load all Projects at once
-    public List<Project> loadAllProjects() {
+    public List<Project> loadAllProjects(int userID) {
 
         List<Project> result = new ArrayList<Project>();
         Connection connection = null;
@@ -137,9 +137,10 @@ public class TimelinesDAO {
                     highestID = rs.getInt("PROJECT_ID");
                 }
                 for (int i = 1; i <= highestID; i++) {
-                    if (exists(i)) {
-                        System.out.println(load(i).ProjectID);
-                        result.add(load(i));
+                    Project temp = load(i);
+                    if (exists(i) && temp.userID == userID) {
+                        System.out.println(temp.ProjectID);
+                        result.add(temp);
                     }
                 }
             } catch (Exception ex) {
