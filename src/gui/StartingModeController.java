@@ -177,6 +177,7 @@ public class StartingModeController {
 			Alert alert = new Alert(AlertType.INFORMATION);
 			alert.setTitle("Log in");
 			alert.setHeaderText("Please log in first!");
+			alert.show();
 			return;
 		}
 		
