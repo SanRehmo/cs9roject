@@ -97,7 +97,8 @@ public class StartingModeController {
 	    refreshTimeline();
 		
 	}
-	
+
+
 	
 	/**
      * Method for displaying Timelines to show window.
