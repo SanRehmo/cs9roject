@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="StartBorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="396.0" prefWidth="712.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.StartingModeController">
+<BorderPane fx:id="StartBorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="396.0" prefWidth="712.0" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.StartingModeController">
    <right>
        <VBox prefHeight="332.0" prefWidth="172.0" BorderPane.alignment="CENTER">
          <children>
@@ -74,7 +74,7 @@
             </Label>
          </center>
          <bottom>
-            <ImageView fitHeight="64.0" fitWidth="66.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="BOTTOM_RIGHT">
+            <ImageView fitHeight="64.0" fitWidth="66.0" onMouseClicked="#displayInformation" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="BOTTOM_RIGHT">
                <image>
                   <Image url="@question-mark.png" />
                </image>
