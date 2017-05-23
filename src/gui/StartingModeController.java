@@ -250,6 +250,7 @@ public class StartingModeController {
 			Main.loginWindow();
 			return;
 		}
+		Main.project.userID=Main.userID;
 		
 		if (Main.project.getTimelines().size()>0){
 			if (dao.exists(Main.project.ProjectID)){

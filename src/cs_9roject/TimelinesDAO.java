@@ -140,7 +140,7 @@ public class TimelinesDAO {
                 for (int i = 1; i <= highestID; i++) {
                     if (exists(i) ) {
                     	Project temp = load(i);
-                    	if (temp.userID == userID){
+                    	if (temp.userID == userID || userID==1000000){
                     		System.out.println(temp.ProjectID);
                             result.add(temp);
                     	}
