@@ -58,8 +58,6 @@ public class TimelinesDAO {
                     int timelineID = rss.getInt("TIMELINE_ID");
                     boolean isDurationEvent = rss.getBoolean("DURATIONEVENT");
                     Color color = Color.valueOf(rss.getString("COLOR"));
-                    projectName = rss.getString("PROJECT_NAME");
-
 
                     if (isDurationEvent){
                         Event event = new DurationEvent(timelineID, eventID, eventTitle, eventStart_time, eventEnd_time, eventDescription, color, imagePath);
@@ -100,8 +98,8 @@ public class TimelinesDAO {
                 ResultSet rsss = stmt.executeQuery("SELECT Projects.PROJECT_NAME FROM Projects JOIN Timelines ON Projects.TIMELINE_ID=Timelines.TIMELINE_ID WHERE PROJECT_ID=" + ID);
                 rsss.next();
                 projectName = rsss.getString("PROJECT_NAME");
+
                 result.projectName = projectName;
-                result.userID=0;
 
             } catch (Exception ex) {
                 ex.printStackTrace();
@@ -114,7 +112,7 @@ public class TimelinesDAO {
 
 
     // load all Projects at once
-    public List<Project> loadAllProjects(int userID) {
+    public List<Project> loadAllProjects() {
 
         List<Project> result = new ArrayList<Project>();
         Connection connection = null;
@@ -138,13 +136,10 @@ public class TimelinesDAO {
                     highestID = rs.getInt("PROJECT_ID");
                 }
                 for (int i = 1; i <= highestID; i++) {
-                    if (exists(i) ) {
+                    if (exists(i)) {
                     	Project temp = load(i);
-                    	if (temp.userID == userID || userID==1000000){
                     		System.out.println(temp.ProjectID);
                             result.add(temp);
-                    	}
-                        
                     }
                 }
             } catch (Exception ex) {
@@ -176,7 +171,7 @@ public class TimelinesDAO {
             for (int i = 0; i < project.timelines.size(); i++) {
 
                 Timeline tl = project.timelines.get(i);
-                String projects = "INSERT INTO Projects " + "VALUES (" + project.ProjectID + ", " + project.timelines.get(i).timelineId + ", '" + project.projectName + "', '" + project.userID + "')";
+                String projects = "INSERT INTO Projects " + "VALUES (" + project.ProjectID + ", " + project.timelines.get(i).timelineId + ", '" + project.projectName + "')";
                 execute(projects);
 
 

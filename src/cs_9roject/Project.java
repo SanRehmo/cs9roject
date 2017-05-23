@@ -10,7 +10,6 @@ public class Project {
     protected static int count=1;
     public int ProjectID;
     public String projectName;
-	public int userID;
     ArrayList<Timeline> timelineList = new ArrayList<Timeline>();
 
 
