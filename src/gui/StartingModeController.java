@@ -177,7 +177,8 @@ public class StartingModeController {
 			Alert alert = new Alert(AlertType.INFORMATION);
 			alert.setTitle("Log in");
 			alert.setHeaderText("Please log in first!");
-			alert.show();
+			alert.showAndWait();
+			Main.loginWindow();
 			return;
 		}
 		
@@ -241,6 +242,14 @@ public class StartingModeController {
 	 */
 	@FXML
 	private void saveProject() throws IOException {
+		if (Main.userID==0){
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setTitle("Log in");
+			alert.setHeaderText("Please log in first!");
+			alert.showAndWait();
+			Main.loginWindow();
+			return;
+		}
 		
 		if (Main.project.getTimelines().size()>0){
 			if (dao.exists(Main.project.ProjectID)){
