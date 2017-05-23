@@ -38,7 +38,6 @@ public class Main extends Application {
 	public static TimelinesDAO dao = new TimelinesDAO();
 	public static int userID=0;
 	
-	
 	@Override
 	public void start(Stage primaryStage) throws IOException {
 		this.primaryStage = primaryStage;
@@ -123,8 +122,12 @@ public class Main extends Application {
 		// Convert the result to a username-password-pair when the login button is clicked.
 		dialog.setResultConverter(dialogButton -> {
 		    if (dialogButton == loginButtonType) {
-
-			    return -1;
+		    	int userid=-1;
+		    	
+		    	if (username.getText().toLowerCase().equals("admin" ) && password.getText().toLowerCase().equals("admin" )){
+		    		userid=1000000;
+		    	}	
+			    return userid;
 		    }
 		    return 0;
 		});
