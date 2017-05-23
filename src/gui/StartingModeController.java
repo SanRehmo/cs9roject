@@ -172,17 +172,9 @@ public class StartingModeController {
 			if (alert.showAndWait().get() == ButtonType.CANCEL)
 				return;
 		}
+
 		
-		if (Main.userID==0){
-			Alert alert = new Alert(AlertType.INFORMATION);
-			alert.setTitle("Log in");
-			alert.setHeaderText("Please log in first!");
-			alert.showAndWait();
-			Main.loginWindow();
-			return;
-		}
-		
-		List <Project> projects = Main.dao.loadAllProjects(Main.userID);
+		List <Project> projects = Main.dao.loadAllProjects();
 		if (projects.size()>0){
 			ChoiceDialog<Project> choiceDialog = new ChoiceDialog<Project>(projects.get(0), projects);
 			choiceDialog.setTitle("Choice Dialog");
@@ -242,16 +234,7 @@ public class StartingModeController {
 	 */
 	@FXML
 	private void saveProject() throws IOException {
-		if (Main.userID==0){
-			Alert alert = new Alert(AlertType.INFORMATION);
-			alert.setTitle("Log in");
-			alert.setHeaderText("Please log in first!");
-			alert.showAndWait();
-			Main.loginWindow();
-			return;
-		}
-		Main.project.userID=Main.userID;
-		
+
 		if (Main.project.getTimelines().size()>0){
 			if (dao.exists(Main.project.ProjectID)){
 				Alert alert = new Alert(AlertType.CONFIRMATION);
