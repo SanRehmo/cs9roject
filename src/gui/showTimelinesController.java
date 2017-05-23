@@ -148,12 +148,24 @@ public void refreshTimeline(){	//Method that is showing the timelines in the scr
 		primaryScrollpane.setContent(scrollBox);
 	}
 
+	/**
+	 * Vertical line for the regular timeLine, not clickable. 
+	 * @param size of the line.
+	 * @return vertical line
+	 */
 	public Line verticalLine(int size) {		//Making every vertical lines in a timeline
 		Line timeLine = new Line(50,0,50,size);
 		timeLine.setStrokeWidth(3);
 		return timeLine;
 	}
 	
+	/**
+	 * Vertical line for the zoomed timeline.
+	 * @param size of the line
+	 * @param startDate of the vertical line, when zoomed.
+	 * @param id of timeline
+	 * @return a clickable vertical line.
+	 */
 	public Line KlickverticalLine(int size, LocalDate startDate , int id) {		//Making every vertical lines in a timeline
 		Line timeLine = new Line(50,0,50,size);
 		timeLine.setStrokeWidth(3);
@@ -207,6 +219,7 @@ public void refreshTimeline(){	//Method that is showing the timelines in the scr
 		return timeLine;
 	}
 	
+	
 	private void disableIfOutTimeline (Line line, LocalDate startDate, int id ){
 		Timeline t = Main.project.getTimeline(id);
 			if(startDate.isBefore(t.getStartDate()) || startDate.isAfter(t.getEndDate())) {
@@ -217,6 +230,15 @@ public void refreshTimeline(){	//Method that is showing the timelines in the scr
 	
 	static DatePicker dp = new DatePicker() ;
 	
+	/**
+	 * Clickable horizontal lines for zoomed timeline.
+	 * @param size of the line.
+	 * @param id of the timeline.
+	 * @param counter 
+	 * @param startDate of the zoomed in year.
+	 * @param endDate of the zoomed in year.
+	 * @return horizontal line.
+	 */
 	public Line clickAbleHline(int size, int id, int counter, LocalDate startDate, LocalDate endDate) {	//Making a horizontal line that will open zoomedTimeline when you press the line
 		Line timeLine = new Line(0, 50, size, 50);
 		timeLine.setStrokeWidth(5);
@@ -236,11 +258,12 @@ public void refreshTimeline(){	//Method that is showing the timelines in the scr
 			Ycounter = Ycounter/4;	
 			
 		}
-//		Fixt problem for 1 year timlines.
+
 		if(Ycounter == 0)
 			Ycounter ++;
 		int FinalCounter = Ycounter;
 		
+		//Adds color to the line depending of the color of the last event in that calender month.
 		for(int i = 0; i < Main.project.getTimeline(id).getEvents().size(); i++) {
 			for(int j = 0; j<FinalCounter; j++){
 				if(Main.project.getTimeline(id).getEvents().get(i).getStartTime().getYear() == (startDate.getYear()+FinalCounter*counter+j)) {
@@ -263,6 +286,7 @@ public void refreshTimeline(){	//Method that is showing the timelines in the scr
         });
 		
 
+		//On mouse click the timeline zooms in.
   		timeLine.setOnMouseClicked(e ->{
   			Stage stage2 = new Stage();
   			stage2.setOnCloseRequest(event -> {
@@ -272,6 +296,7 @@ public void refreshTimeline(){	//Method that is showing the timelines in the scr
   			ScrollPane zoomPane = new ScrollPane();
   			VBox zoomBox = new VBox();
   			StartingModeController.timelineIdToModify=id;
+  			//If years is smaller than five years.
 			if(FinalCounter>5){
 				if(counter == 0){
 					zoomBox.getChildren().addAll(yearShow(id,startDate,startDate.plusYears(FinalCounter)),generateTimeL(id, startDate, startDate.plusYears(FinalCounter)),spaceBetween());
@@ -301,8 +326,6 @@ public void refreshTimeline(){	//Method that is showing the timelines in the scr
 				else if(counter ==4){
 					zoomBox.getChildren().addAll(yearShow(id,startDate.plusYears(FinalCounter*4),startDate.plusYears(FinalCounter*5)),generateTimeL(id, startDate.plusYears(FinalCounter*4), startDate.plusYears((FinalCounter*5))),spaceBetween());
 					zoomPane.setContent(zoomBox);
-					//Stage stage2 = new Stage();
-					//stage2.setScene(new Scene(zoomPane));  
 					stage2.setTitle("Zoomed timeline");
 					stage2.show();
 					}	
@@ -314,16 +337,12 @@ public void refreshTimeline(){	//Method that is showing the timelines in the scr
 				else if(FinalCounter==0){
 					zoomBox.getChildren().add(zoomedTimeline(id, startDate.plusYears(counter), endDate,startDate,counter));
 					zoomPane.setContent(zoomBox);
-			  		//Stage stage2 = new Stage();
-					//stage2.setScene(new Scene(zoomPane)); 
 					stage2.setTitle("Zoomed timeline");
 					stage2.show();
 				}
 				else{
 				zoomBox.getChildren().add(zoomedTimeline(id, startDate.plusYears(FinalCounter*counter), endDate,startDate,counter));
-				zoomPane.setContent(zoomBox);
-		  		//Stage stage2 = new Stage();
-				//stage2.setScene(new Scene(zoomPane)); 
+				zoomPane.setContent(zoomBox); 
 				stage2.setTitle("Zoomed timeline");
 				stage2.show();
 			}
@@ -420,6 +439,13 @@ public void refreshTimeline(){	//Method that is showing the timelines in the scr
 		return pane;
 	}
 	
+	/**
+	 * Horizontal line for the zoomed in timeline.
+	 * @param size of the line.
+	 * @param id of timeline.
+	 * @param startDate of timeline.
+	 * @return horizontal line.
+	 */
 	public Line zommedHline(int size, int id ,LocalDate startDate){		//Making non clickable horizontal line
 		
 		Line timeLine = new Line(0, 50, size, 50);
@@ -437,7 +463,15 @@ public void refreshTimeline(){	//Method that is showing the timelines in the scr
 		return timeLine;
 	}
 	
-	
+	/**
+	 * Generates a zoomed in timeline.
+	 * @param id of timeline.
+	 * @param startyear 
+	 * @param EndDate of time span.
+	 * @param startDate of time span.
+	 * @param counter
+	 * @return a timeline.
+	 */
 	public Pane zoomedTimeline(int id, LocalDate startyear, LocalDate EndDate, LocalDate startDate, int counter) {			//This will be the final timeline that you click on to get to the calendar
 		
 		Pane pane = new Pane();
@@ -487,7 +521,6 @@ public void refreshTimeline(){	//Method that is showing the timelines in the scr
 			switch(temp) {
 			case 0: {
 				hbox.getChildren().addAll(verticalLine(100),Hline(92));
-//				Test
 				yearShowHBox.getChildren().add(yearShow(id, startyear, startyear.plusYears(1)));
 				for(int j = 0; j < 12; j++) {	
 					hbox.getChildren().addAll(KlickverticalLine(50,startyear.plusMonths(-startDate.getMonthValue()+1+j), id),Hline(92));
@@ -498,7 +531,6 @@ public void refreshTimeline(){	//Method that is showing the timelines in the scr
 			
 			case 1: {
 				hbox.getChildren().addAll(verticalLine(100),Hline(92));
-//				Test
 				yearShowHBox.getChildren().add(yearShow(id, startyear, startyear.plusYears(1)));
 				for(int j = 0; j < 12; j++) {	
 					hbox.getChildren().addAll(KlickverticalLine(50,startyear.plusMonths(-startDate.getMonthValue()+1+j), id),Hline(92));
@@ -904,6 +936,13 @@ public void refreshTimeline(){	//Method that is showing the timelines in the scr
 		stage2.show();
 	}
 	
+	/**
+	 * Pop up window.
+	 * @param type of pop up window
+	 * @param Title of pop up window
+	 * @param headText of pop up window
+	 * @param contentText of pop up window
+	 */
 	public void alertWindow(AlertType type, String Title, String headText, String contentText) {
     	
     	Alert alert = new Alert(type);
