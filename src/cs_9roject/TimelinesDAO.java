@@ -33,19 +33,13 @@ public class TimelinesDAO {
         }
 
         if (connection != null) {
-
             try {
-
-                int count = 0;
-
                 // load all events in the project
                 stmt = connection.createStatement();
                 ResultSet rss = stmt.executeQuery("SELECT Projects.PROJECT_NAME, Timelines.TIMELINE_ID, Events.EVENT_ID, Events.Title, Events.START_DATE, Events.END_DATE, Events.START_TIME, Events.END_TIME, Events.DESCRIPTION, Events.IMAGE_PATH, Events.DURATIONEVENT, Events.COLOR"
                         + " FROM Projects JOIN (Timelines, Events) ON Projects.TIMELINE_ID=Timelines.TIMELINE_ID WHERE Timelines.EVENT_ID=Events.EVENT_ID AND PROJECT_ID=" + ID);
 
                 while (rss.next()) {
-
-
                     int eventID = rss.getInt("EVENT_ID");
                     String eventTitle = rss.getString("TITLE");
                     LocalDateTime eventStart_time = LocalDateTime.of(rss.getDate("START_DATE").toLocalDate(), rss.getTime("START_TIME").toLocalTime());
@@ -61,7 +55,7 @@ public class TimelinesDAO {
                         eventList.add(event);
                     }
                     else{
-                    	Event event = new NonDurationEvent(timelineID, eventID, eventTitle, eventStart_time, eventEnd_time, eventDescription, color, imagePath);
+                    	Event event = new NonDurationEvent(timelineID, eventID, eventTitle, eventStart_time, eventDescription, color, imagePath);
                         eventList.add(event);
                     }
                     
@@ -72,8 +66,6 @@ public class TimelinesDAO {
                 stmt = connection.createStatement();
                 ResultSet rs = stmt.executeQuery("SELECT Timelines.TIMELINE_ID, Timelines.EVENT_ID, Timelines.START_DATE, Timelines.END_DATE, Timelines.TITLE"
                         + " FROM Timelines JOIN Projects ON Projects.TIMELINE_ID=Timelines.TIMELINE_ID WHERE PROJECT_ID=" + ID);
-
-                int lastTimelineID = 0;
 
                 while (rs.next()) {
 
@@ -114,8 +106,6 @@ public class TimelinesDAO {
         List<Project> result = new ArrayList<Project>();
         Connection connection = null;
         Statement stmt = null;
-        Timeline timeline = null;
-
         try {
             connection = Database.establishConnection();
         } catch (Exception ex) {
@@ -198,9 +188,8 @@ public class TimelinesDAO {
                     Time endTime = Time.valueOf("12:00:00");
 
                     if (ev.isDurationEvent()) {
-                    	System.out.print("ok");
-                        endDate = Date.valueOf(ev.getEndTime().toLocalDate());
-                        endTime = Time.valueOf(ev.getEndTime().toLocalTime());
+                        endDate = Date.valueOf(((DurationEvent)ev).getEndTime().toLocalDate());
+                        endTime = Time.valueOf(((DurationEvent)ev).getEndTime().toLocalTime());
                     }
 
                         boolToInt = (ev.isDurationEvent) ? 1 : 0;
@@ -493,9 +482,12 @@ public class TimelinesDAO {
     }
 
     public String eventProperties(Event event) {
-
-        return event.eventid + ", " + event.title + ", " + event.startTime + ", " + event.endTime + ", "
-                + event.startDate + ", " + event.endDate + ", " + event.description + ", " + event.imageid;
+    	if (event.isDurationEvent)
+    		return event.eventid + ", " + event.title + ", " + event.startTime + ", " + ((DurationEvent)event).getEventId() + ", "
+                    + event.getStartTime().toLocalDate() + ", " + ((DurationEvent)event).getEndTime().toLocalDate() + ", " + event.description + ", " + event.imageid;
+    	else
+    		return event.eventid + ", " + event.title + ", " + event.startTime + ", " + LocalDate.now() + ", "
+                + event.getStartTime().toLocalDate() + ", " + LocalDate.now() + ", " + event.description + ", " + event.imageid;
     }
 
     public String timelineProperties(Timeline timeline) {

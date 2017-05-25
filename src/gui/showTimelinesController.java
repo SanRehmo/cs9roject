@@ -5,7 +5,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.DateCell;
@@ -13,7 +12,6 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tooltip;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
@@ -25,26 +23,20 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-
 import javafx.scene.paint.Color;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.time.chrono.ChronoLocalDateTime;
-import java.time.chrono.IsoChronology;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.sun.javafx.scene.control.skin.DatePickerSkin;
-import com.sun.javafx.scene.control.skin.TooltipSkin;
 
 import cs_9roject.Event;
 import cs_9roject.NonDurationEvent;
 import cs_9roject.Timeline;
-
 import javafx.collections.FXCollections;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 
 import javafx.util.Callback;
@@ -52,7 +44,7 @@ import gui.CreateModeController;
 import gui.Main;
 import gui.StartingModeController;
 
-
+@SuppressWarnings("restriction")
 public class showTimelinesController {
 	public int timelineId = 0;
 	
@@ -777,7 +769,6 @@ public void refreshTimeline(){	//Method that is showing the timelines in the scr
 		  try {
 			  createMode = loader.load();
 		  } catch (Exception e) {
-			  // TODO Auto-generated catch block
 			  e.printStackTrace();
 		  }
 		  CreateModeController c = (CreateModeController) loader.getController();
@@ -909,9 +900,7 @@ public void refreshTimeline(){	//Method that is showing the timelines in the scr
 		startDatePicker.autosize();
 		startDatePicker.setMinWidth(400);
 		startDatePicker.setDayCellFactory(dayCellFactory);
-		@SuppressWarnings("restriction")
 		DatePickerSkin datePickerSkin = new DatePickerSkin(startDatePicker);
-		@SuppressWarnings("restriction")
 		Node popupContent = datePickerSkin.getPopupContent();
 		
 		popupContent.applyCss();
@@ -926,21 +915,5 @@ public void refreshTimeline(){	//Method that is showing the timelines in the scr
 		stage2.sizeToScene();
 		stage2.show();
 	}
-	
-	/**
-	 * Pop up window.
-	 * @param type of pop up window
-	 * @param Title of pop up window
-	 * @param headText of pop up window
-	 * @param contentText of pop up window
-	 */
-	public void alertWindow(AlertType type, String Title, String headText, String contentText) {
-    	
-    	Alert alert = new Alert(type);
-		alert.setTitle(Title);
-		alert.setHeaderText(headText);
-		alert.setContentText(contentText);
-		alert.showAndWait();
-    	
-    }
+
 }
