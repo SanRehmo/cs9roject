@@ -10,14 +10,15 @@ public class Project {
     protected static int count=1;
     public int ProjectID;
     public String projectName;
-    ArrayList<Timeline> timelineList = new ArrayList<Timeline>();
 
-
+    // New project with new ID
 	public Project() {
 		ProjectID = count++;
 		projectName = "Project " + ProjectID;
 	}
 	
+	// to import project from database
+    // Create new project with specific ID. Almost used when importing project from database
 	public Project(int ID) {
 		ProjectID = ID;
 		projectName = "Project " + ProjectID;

@@ -16,7 +16,7 @@ public class Timeline {
 	protected Boolean isOnlyYears=false;	// Boolean variable to define timeline's type
 	public List<Event> events = new ArrayList<Event>();
 	
-	
+	// to import timeline from database
 	// Create new timeline with specific ID and event-list. Almost used when importing timelines from database
 	public Timeline(int timelineID, LocalDate StartDate, LocalDate EndDate, String Title, List<Event> Events) {
 		timelineId = timelineID;

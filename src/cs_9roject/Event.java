@@ -16,13 +16,12 @@ public class Event {
 	protected String description= "";
 	protected LocalDateTime startTime;
     protected boolean isDurationEvent = true;
-    protected int imageid = 0;
     protected Image eventImage = null;
     protected String imagepath = "";
     protected Color eventColor=Color.RED;
 	protected int timelineid;
 
-    // mine
+    // to import events from database
     // Create new event with specific ID. Almost used when importing events from database
 	public Event(int timelineID, int eventID, String eventTitle, LocalDateTime eventStart_time, String Description, Color color, String Imagepath) throws MalformedURLException {
 		timelineid = timelineID;
@@ -40,7 +39,6 @@ public class Event {
 	// Create new event with new ID.
 	public Event(String eventTitle, LocalDateTime eventStart_time, String Description, Image EventImage, Color EventColor, String Imagepath) {
 		eventid = count++;
-		imageid=eventid;
 		title = eventTitle;
 		startTime = eventStart_time;
 		description=Description;
@@ -49,9 +47,9 @@ public class Event {
 		eventColor=EventColor;
 	}
 	
+	// Create new event with new ID. copy all parameters from another event
 	public Event(Event e) {
 		eventid = count++;
-		imageid=e.imageid;
 		title = e.title;
 		startTime = e.startTime;
 		description=e.description;
@@ -59,6 +57,11 @@ public class Event {
 		eventColor=e.eventColor;
 		eventImage=e.eventImage;
 		imagepath= e.imagepath;
+	}
+	
+	// Compare 2 events if they equal each other
+	public boolean equals(Event event){
+		return (event.getTitle().equals(title) && event.getStartTime().isEqual(startTime) && event.getDescription().equals(description) && event.getColorName().equals(this.getColorName())&& event.imagepath.equals(imagepath)&& event.isDurationEvent()==this.isDurationEvent());
 	}
 
     // all next methods are (getters and setters)
@@ -137,6 +140,7 @@ public class Event {
 		return title + " ID: " + eventid;
 	}
 	
+	// Convert the color from hex to name
 	public String getColorName(){
 		if (eventColor.toString().equals(Color.RED.toString()))
 			return("Red");
@@ -146,10 +150,6 @@ public class Event {
 			return("Green");
 		return("Orange");
 		
-	}
-	
-	public boolean equals(Event event){
-		return (event.getTitle().equals(title) && event.getStartTime().isEqual(startTime) && event.getDescription().equals(description) && event.getColorName().equals(this.getColorName())&& event.imagepath.equals(imagepath)&& event.isDurationEvent()==this.isDurationEvent());
 	}
 
 }

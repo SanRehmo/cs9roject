@@ -520,10 +520,10 @@ public class TimelinesDAO {
     public String eventProperties(Event event) {
     	if (event.isDurationEvent)
     		return event.eventid + ", " + event.title + ", " + event.startTime + ", " + ((DurationEvent)event).getEventId() + ", "
-                    + event.getStartTime().toLocalDate() + ", " + ((DurationEvent)event).getEndTime().toLocalDate() + ", " + event.description + ", " + event.imageid;
+                    + event.getStartTime().toLocalDate() + ", " + ((DurationEvent)event).getEndTime().toLocalDate() + ", " + event.description + ", " + event.imagepath;
     	else
     		return event.eventid + ", " + event.title + ", " + event.startTime + ", " + LocalDate.now() + ", "
-                + event.getStartTime().toLocalDate() + ", " + LocalDate.now() + ", " + event.description + ", " + event.imageid;
+                + event.getStartTime().toLocalDate() + ", " + LocalDate.now() + ", " + event.description + ", " + event.imagepath;
     }
 
     public String timelineProperties(Timeline timeline) {
