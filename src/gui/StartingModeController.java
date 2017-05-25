@@ -304,7 +304,7 @@ public class StartingModeController {
 		Alert alert = new Alert(AlertType.INFORMATION);
 		alert.setTitle("Information Dialog");
 		alert.setHeaderText(null);
-		alert.setContentText("Hej, we are happy that you use the timeline manager. Just start creating a new project by clicking the appropriate button in the menu. In the next step you need to add a timeline(s) and belonging events to your project - do not forget your appointments any longer!!If you need more help, have a look to our manual: https://www.dropbox.com/s/slfxjrs88b5dudp/Timeline-Manual_Group9.pdf?dl=0");
+		alert.setContentText("Hej, we are happy that you use the timeline manager. \nJust start creating a new project by clicking the appropriate button in the menu. In the next step you need to add a timeline(s) and belonging events to your project - do not forget your appointments any longer!!\nIf you need more help, have a look to our manual: https://goo.gl/i80Qdm");
 		alert.showAndWait();
 	}
 	
