@@ -294,7 +294,7 @@ public class eventHandlerController {
 			endMM.setDisable(!e.isDurationEvent());
     		endTextField.setValue(startTextField.getValue());
     		description.setText(e.getDescription());
-    		eventImage_imageView.setImage(e.getImage());
+    		if (e.getImage()!=null) eventImage_imageView.setImage(e.getImage());
     		color_ComboBox.setValue(e.getColorName());
     		if (e.isDurationEvent()){
     			endTextField.setValue(((DurationEvent)e).getEndTime().toLocalDate());
@@ -349,8 +349,9 @@ public class eventHandlerController {
     @FXML
     public void saveEvent() throws IOException, URISyntaxException {	// Add event
 		Image image = eventImage_imageView.getImage();
+		if (image==eventImage) image=null;
 		String imagePath="";
-		if (image!=null){
+		if (image!=null && image!=eventImage){
 			@SuppressWarnings("deprecation")
 			URL url = new URL(image.impl_getUrl());
 			imagePath = new File(url.toURI()).getPath();
