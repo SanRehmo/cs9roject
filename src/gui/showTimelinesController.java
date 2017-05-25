@@ -898,7 +898,7 @@ public void refreshTimeline(){	//Method that is showing the timelines in the scr
 		};
 		
 		startDatePicker.autosize();
-		startDatePicker.setMinWidth(400);
+		startDatePicker.setMinWidth(450);
 		startDatePicker.setDayCellFactory(dayCellFactory);
 		DatePickerSkin datePickerSkin = new DatePickerSkin(startDatePicker);
 		Node popupContent = datePickerSkin.getPopupContent();
