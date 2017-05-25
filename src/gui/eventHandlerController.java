@@ -50,6 +50,9 @@ public class eventHandlerController {
 
     @FXML
     private ImageView eventImage_imageView;
+    
+    private Image eventImage= null;
+
 
     @FXML
     private TextField NameEvent_textField;
@@ -266,12 +269,14 @@ public class eventHandlerController {
 			};
 		}
 	};
+
     
     /**
      * Gives options in the comboBox
      */
     @FXML
     public void initialize() {
+    	if (eventImage==null) eventImage= eventImage_imageView.getImage();
     	EventID=StartingModeController.eventIdToModify;
     	startTextField.setDayCellFactory(dayCellFactory);
     	endTextField.setDayCellFactory(dayCellFactory);
@@ -308,7 +313,6 @@ public class eventHandlerController {
     		}
     		
     		delete_btn.setDisable(false);
-    		
     	}
     	else{
     		NameEvent_textField.setText("");
@@ -324,7 +328,7 @@ public class eventHandlerController {
 			endMM.setDisable(true);
 			endMM.setValueFactory((SpinnerValueFactory<Integer>)new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 59, 0));
     		description.setText(null);
-    		eventImage_imageView.setImage(null);
+    		eventImage_imageView.setImage(eventImage);
     		color_ComboBox.setValue("Red");
     		Reccuring_ComboBox.setValue("None");
     		delete_btn.setDisable(true);

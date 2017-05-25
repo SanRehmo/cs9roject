@@ -46,12 +46,6 @@ public class DurationEvent extends Event {
 		return endTime;
 	}
 
-	/*
-	public void setDuration(Duration interval){
-		duration = interval;
-		endTime = startTime.plus(duration);
-	}
-	*/
 
 	public Duration getDuration(){
 		return duration;
