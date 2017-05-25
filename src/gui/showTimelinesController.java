@@ -61,17 +61,18 @@ public class showTimelinesController {
 	 @FXML
 	 public void initialize() {  //Reading every timeline and print there names in checkboxes
 		 
-		 displayAll.setSelected(true);
+		 // If one of timelines not selected, disable displayAll
 		 for (CheckBox c : timelines){
 			 displayAll.setSelected(displayAll.isSelected() && c.isSelected());
+			 // check again every the user click on CheckBox
 			 c.setOnMouseClicked(event ->{
-				 boolean selected = true;
+				 displayAll.setSelected(true);
 				 for (CheckBox ch : timelines){
-					 selected = selected && ch.isSelected();
+					 displayAll.setSelected(displayAll.isSelected() && ch.isSelected());
 				 }
-				 displayAll.setSelected(selected);
 			 });			 
 		 }
+		 
 		 displayAll.setOnMouseClicked(event ->{
 			 for (CheckBox c : timelines)
 				 c.setSelected(displayAll.isSelected());
@@ -101,12 +102,13 @@ public class showTimelinesController {
 	@FXML
 	private CheckBox displayAll;
 	
+	
+	/**
+     * Showing the selected timelines in the scrollPane.
+     */
 	@FXML
 	public void showTimeline(){		//Method that is showing the timelines in the scrollPane
-		if(displayAll.isSelected()){//If DisplayAll is selected the program will show every timeline
-			for (CheckBox c : timelines)
-				c.setSelected(true);
-		}
+		
 		for(int i=0; i<timelines.size(); i++){	//Just displaying the checked timelines
 			if(timelines.get(i).isSelected()){
 			scrollBox.getChildren().addAll(yearShow(Main.project.getTimelines().get(i).getTimelineId(),Main.project.getTimelines().get(i).getStartDate(),Main.project.getTimelines().get(i).getEndDate().plusYears(1)),generateTimeL(Main.project.getTimelines().get(i).getTimelineId(), Main.project.getTimelines().get(i).getStartDate(), Main.project.getTimelines().get(i).getEndDate().plusYears(1)),spaceBetween());
@@ -117,7 +119,10 @@ public class showTimelinesController {
 		stage.close();		
 	}
 	
-public void refreshTimeline(){	//Method that is showing the timelines in the scrollPane
+	/**
+     * Refresh the timelines that is already in the scrollPane.
+     */
+	public void refreshTimeline(){	//Method that is showing the timelines in the scrollPane
 		scrollBox.getChildren().removeAll(scrollBox.getChildren());
 		
 		if(displayAll.isSelected()){//If DisplayAll is selected the program will show every timeline

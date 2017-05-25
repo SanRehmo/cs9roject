@@ -107,7 +107,7 @@ public class eventHandlerController {
      * @throws IOException 
      */
     @FXML
-    void delete() throws IOException {
+    void delete()  {
     	Alert alert = new Alert(AlertType.CONFIRMATION);
     	alert.setTitle("Delete");
     	alert.setHeaderText("Delete event");
@@ -125,6 +125,7 @@ public class eventHandlerController {
         		Main.project.getTimeline(TimelineID).removeAllEvents(allEventsRec(Main.project.getTimeline(TimelineID).getEvent(EventID)));
         	else
         		Main.project.getTimeline(TimelineID).removeEvent(EventID);
+        	
         	showTimelinesController.dp.setValue(null);
         	showTimelinesController.dp.setValue(LocalDate.now());
         	Stage stage = (Stage) btnSave.getScene().getWindow();
@@ -135,12 +136,11 @@ public class eventHandlerController {
     	
     	
     /**
-     * Enables to set end time for duration.
+     * Change event's type between Duration and NonDuration-event .
      * @param event
      */
     @FXML
     void eventDuration(ActionEvent event) {
-    	
     	this.duration = !this.duration;
     	endTextField.setValue(startTextField.getValue());
     	endTextField.disableProperty().set(!endTextField.disableProperty().get());
@@ -180,60 +180,6 @@ public class eventHandlerController {
 		
 		
     }
-
-    /**
-     * Gives the event a name.
-     * @param event.
-     * @return name of the event.
-     */
-    @FXML
-    String nameEvent(ActionEvent event) {
-    	String eventName;
-    	eventName = NameEvent_textField.getText();
-    	
-    	return eventName;
-    }
-
-    /**
-     * Select recurring for the event.
-     * @param event.
-     * @return the recurring of the event. 
-     */
-    @FXML
-    public String recurring(ActionEvent event) {
-
-    	return this.Reccuring_ComboBox.getValue();
-    }
-
-    /**
-     * Select color for the event.
-     * @param event.
-     * @return returns the color of the event. 
-     */
-    @FXML
-    void selectEventColor(ActionEvent event) {
-    	eventColor = this.color_ComboBox.getValue();
-    }
-
-    /**
-     * Gets end value from the date pricker
-     * @param event
-     */
-    @FXML
-    void setEventEnd(ActionEvent event) {
-    	
-    	this.endTextField.getValue();
-    }
-    
-    /**
-     * Gets start value from the date pricker
-     * @param event
-     */
-    @FXML
-    void setEventStart(ActionEvent event) {
-    	
-    	this.startTextField.getValue();
-    }
     
     /**
      * Get value from start date of event.
@@ -269,14 +215,20 @@ public class eventHandlerController {
 
     
     /**
-     * Gives options in the comboBox
+     * Gives initial value to the components
      */
     @FXML
     public void initialize() {
+    	// save default image to use it for all events without image
     	if (eventImage==null) eventImage= eventImage_imageView.getImage();
-    	EventID=StartingModeController.eventIdToModify;
+    	
+    	EventID=StartingModeController.eventIdToModify; // Get event's Id to modify it (if 0, create new event)
+    	
+    	// dayCellFactory to disable the days of the calendar that are before or after timeline's date
     	startTextField.setDayCellFactory(dayCellFactory);
     	endTextField.setDayCellFactory(dayCellFactory);
+    	
+    	// if EventID !=0, then import all values from that events. and when user click save, modify that event
     	if (EventID!=0){
     		Timeline t=Main.project.getTimeline(TimelineID);
     		Event e = t.getEvent(EventID);
@@ -311,7 +263,7 @@ public class eventHandlerController {
     		
     		delete_btn.setDisable(false);
     	}
-    	else{
+    	else{// if EventID ==0, then ask the user to give new event's details. and when user click save, create new event
     		NameEvent_textField.setText("");
     		duration_checkBox.setSelected(false);
     		//startTextField.setValue(null);
@@ -336,16 +288,9 @@ public class eventHandlerController {
     }
     
     /**
-     * Adds description to event
-     * @return description of the event
+     * Create new event, or modify exists one.
+     * @param event
      */
-    @FXML
-    public String decsription() {
-    	String text;
-    	text = description.getText();
-    	
-    	return text;
-    }
     @FXML
     public void saveEvent() throws IOException, URISyntaxException {	// Add event
 		Image image = eventImage_imageView.getImage();
@@ -402,7 +347,7 @@ public class eventHandlerController {
         	}
 
         	
-        	// Search for time line by its ID to add the event
+        	// Search for time line by its ID to add or modify the event
         	for (Timeline temp : Main.project.getTimelines())
         		if (temp.getTimelineId()==TimelineID){
         			int initialSize = temp.getEvents().size();
@@ -444,11 +389,6 @@ public class eventHandlerController {
     	
     }
     
-
-    public void stop(){
-        System.out.println("Stage is closing");
-    }
-    
     /**
      * Warning popUp 
      * @param type of alert
@@ -466,6 +406,11 @@ public class eventHandlerController {
     	
     }
     
+    /**
+     * Return all recurring events that related to the current event 
+     * @param Event
+     * @return List <Event>
+     */
     private List <Event> allEventsRec(Event e){
     	List <Event> allEventsRec = new ArrayList<Event>();
     	Timeline t = Main.project.getTimeline(TimelineID);
@@ -476,6 +421,15 @@ public class eventHandlerController {
     	return allEventsRec;
     }
     
+    /**
+     * Check if the current event is recurring.
+     * @param Event
+     * @return 0 if not recurring
+     * @return 0 if Every day
+     * @return 0 if Every week
+     * @return 0 if Every month
+     * @return 0 if Every year
+     */
     private int isEventRec(Event e){
     	List <Event> allEventsRec= allEventsRec(e);
     	if (allEventsRec.size()>1){

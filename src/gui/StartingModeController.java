@@ -226,7 +226,7 @@ public class StartingModeController {
 	 */
 	@FXML
 	private void saveProject() throws IOException {
-
+		// if the project don't have any timeline, don't save
 		if (Main.project.getTimelines().size()>0){
 			if (dao.exists(Main.project.ProjectID)){
 				Alert alert = new Alert(AlertType.CONFIRMATION);
@@ -333,6 +333,9 @@ public class StartingModeController {
 		}
 	}
 	
+	/**
+     * Method for displaying the help window
+     */
 	public void displayInformation() {
 		Alert alert = new Alert(AlertType.INFORMATION);
 		alert.setTitle("Information Dialog");

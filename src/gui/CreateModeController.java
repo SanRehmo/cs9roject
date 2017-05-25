@@ -71,7 +71,7 @@ public class CreateModeController {
 						return;
 					}
 				}
-				// if all inputs was correct then add timeline
+				// if all inputs was correct, then create and add the timeline
 				Timeline temp = new Timeline(StartDate.getValue(),EndDate.getValue(),TimelineName.getText(), false );
 				if (TimelineID == 0){
 				    Main.project.addTimeline(temp);
@@ -97,7 +97,7 @@ public class CreateModeController {
     }
 	
 	@FXML
-	private void removeTimeline() throws IOException{
+	private void removeTimeline(){
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		alert.setTitle("Please confirm");
 		alert.setHeaderText("You are going to delete the timeline: "+Main.project.getTimeline(TimelineID).getTitle()+" ID: "+Main.project.getTimeline(TimelineID).getTimelineId());
@@ -110,7 +110,7 @@ public class CreateModeController {
 		}	
 	}
 	
-	
+	// dayCellFactory to disable all days in the calendar that are after first event-start date
 	final Callback<DatePicker, DateCell> dayCellFactoryStartDate = new Callback<DatePicker, DateCell>() {
 		public DateCell call(final DatePicker datePicker) {
 			return new DateCell() {
@@ -125,6 +125,8 @@ public class CreateModeController {
 			};
 		}
 	};
+	
+	// dayCellFactory to disable all days in the calendar that are before last event-end date
 	final Callback<DatePicker, DateCell> dayCellFactoryEndDate = new Callback<DatePicker, DateCell>() {
 		public DateCell call(final DatePicker datePicker) {
 			return new DateCell() {
