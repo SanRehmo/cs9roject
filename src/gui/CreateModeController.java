@@ -3,9 +3,8 @@ package gui;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
-
+import cs_9roject.DurationEvent;
 import cs_9roject.Event;
-import cs_9roject.Project;
 import cs_9roject.Timeline;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -17,9 +16,7 @@ import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Tooltip;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import gui.Main;
@@ -136,7 +133,7 @@ public class CreateModeController {
 					super.updateItem(item, empty);
 					List<Event> events = Main.project.getTimeline(StartingModeController.timelineIdToModify).getEvents();
 					for (Event e : events)
-						if (e.isDurationEvent() && item.isBefore(e.getEndTime().toLocalDate()))
+						if (e.isDurationEvent() && item.isBefore(((DurationEvent)e).getEndTime().toLocalDate()))
 							this.setDisable(true);
 						else if (!e.isDurationEvent() && item.isBefore(e.getStartTime().toLocalDate()))
 							this.setDisable(true);

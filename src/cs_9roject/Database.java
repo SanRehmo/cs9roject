@@ -3,7 +3,6 @@ package cs_9roject;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 /**
  * Created by krischan on 24.04.17.
@@ -22,7 +21,6 @@ public class Database {
 
         // initialization of variables
         Connection connection = null;
-        Statement stmt = null;
 
         // attempt to connect to our database with our credentials
         try {

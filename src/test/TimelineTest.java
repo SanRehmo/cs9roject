@@ -5,12 +5,8 @@ import cs_9roject.Timeline;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
 import static org.junit.Assert.*;
-
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 public class TimelineTest {
 	

@@ -55,7 +55,7 @@ public class Timeline {
 	
 	// Add new event to timeline
 	public boolean addEvent(Event event){
-		if ((event.isDurationEvent() && !event.getStartTime().toLocalDate().isBefore(startDate) && !event.getEndTime().toLocalDate().isAfter(endDate)) || (!event.isDurationEvent() && !event.getStartTime().toLocalDate().isBefore(startDate)&& !event.getStartTime().toLocalDate().isAfter(endDate))){
+		if ((event.isDurationEvent() && !event.getStartTime().toLocalDate().isBefore(startDate) && !((DurationEvent)event).getEndTime().toLocalDate().isAfter(endDate)) || (!event.isDurationEvent() && !event.getStartTime().toLocalDate().isBefore(startDate)&& !event.getStartTime().toLocalDate().isAfter(endDate))){
 			events.add(event);
 			return true;
 		}

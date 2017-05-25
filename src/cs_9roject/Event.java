@@ -2,25 +2,19 @@ package cs_9roject;
 
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
-
 import java.io.File;
-import java.io.IOException;
 import java.net.MalformedURLException;
-import java.sql.Date;
 import java.time.LocalDateTime;
 
 
 
 // This class to present Event. it has 2 children: DurationEvent and NonDurationEvent
 public class Event {
-	private static int count=1;	// Variable to give unique ID for each Event
+	private static int count=1;	// to give unique ID for each Event
 	protected int eventid;
 	protected String title= new String ();
 	protected String description= "";
 	protected LocalDateTime startTime;
-	protected LocalDateTime endTime;
-    protected Date startDate;
-    protected Date endDate;
     protected boolean isDurationEvent = true;
     protected int imageid = 0;
     protected Image eventImage = null;
@@ -30,19 +24,16 @@ public class Event {
 
     // mine
     // Create new event with specific ID. Almost used when importing events from database
-	public Event(int timelineID, int eventID, String eventTitle, LocalDateTime eventStart_time, LocalDateTime eventEnd_time, String Description, Color color, String Imagepath) throws MalformedURLException {
+	public Event(int timelineID, int eventID, String eventTitle, LocalDateTime eventStart_time, String Description, Color color, String Imagepath) throws MalformedURLException {
 		timelineid = timelineID;
 		eventid = eventID;
 		title = eventTitle;
 		startTime = eventStart_time;
-		endTime = eventEnd_time;
         description = Description;
         if (description.equals("null")) description="";
         imagepath = Imagepath;
         if (imagepath.equals("null")) imagepath="";
         this.setImage(imagepath);
-        startDate = Date.valueOf(eventStart_time.toLocalDate());
-        endDate = Date.valueOf(eventEnd_time.toLocalDate());
         eventColor=color;
     }
 	
@@ -101,14 +92,6 @@ public class Event {
 
 	public LocalDateTime getStartTime() {
 		return startTime;
-	}
-	
-	public void setEndTime(LocalDateTime EndTime) {
-		endTime = EndTime;
-	}
-	
-	public LocalDateTime getEndTime() {
-		return endTime;
 	}
 	
 	public void setIsDurationEvent(boolean IsDurationEvent){

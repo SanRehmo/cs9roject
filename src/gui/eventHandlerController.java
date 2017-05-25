@@ -8,7 +8,6 @@ import cs_9roject.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
@@ -25,14 +24,12 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 public class eventHandlerController {
 	
@@ -300,9 +297,9 @@ public class eventHandlerController {
     		eventImage_imageView.setImage(e.getImage());
     		color_ComboBox.setValue(e.getColorName());
     		if (e.isDurationEvent()){
-    			endTextField.setValue(e.getEndTime().toLocalDate());
-    			endHH.setValueFactory((SpinnerValueFactory<Integer>)new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 23, e.getEndTime().toLocalTime().getHour()));
-    			endMM.setValueFactory((SpinnerValueFactory<Integer>)new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 59, e.getEndTime().toLocalTime().getMinute()));
+    			endTextField.setValue(((DurationEvent)e).getEndTime().toLocalDate());
+    			endHH.setValueFactory((SpinnerValueFactory<Integer>)new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 23, ((DurationEvent)e).getEndTime().toLocalTime().getHour()));
+    			endMM.setValueFactory((SpinnerValueFactory<Integer>)new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 59, ((DurationEvent)e).getEndTime().toLocalTime().getMinute()));
     		}
     		switch (isEventRec(e)){
     		case 0: Reccuring_ComboBox.setValue("None"); break;
@@ -354,6 +351,7 @@ public class eventHandlerController {
 		Image image = eventImage_imageView.getImage();
 		String imagePath="";
 		if (image!=null){
+			@SuppressWarnings("deprecation")
 			URL url = new URL(image.impl_getUrl());
 			imagePath = new File(url.toURI()).getPath();
 		}
@@ -418,19 +416,19 @@ public class eventHandlerController {
             			}
         				else if (Reccuring_ComboBox.getValue().equals("Every day")){
         					e.setStartTime(e.getStartTime().plusDays(1));
-            				if (e.isDurationEvent()) e.setEndTime(e.getEndTime().plusDays(1));
+            				if (e.isDurationEvent()) ((DurationEvent)e).setEndTime(((DurationEvent)e).getEndTime().plusDays(1));
         				}
         				else if (Reccuring_ComboBox.getValue().equals("Every week")){
         					e.setStartTime(e.getStartTime().plusWeeks(1));
-            				if (e.isDurationEvent()) e.setEndTime(e.getEndTime().plusWeeks(1));
+            				if (e.isDurationEvent()) ((DurationEvent)e).setEndTime(((DurationEvent)e).getEndTime().plusWeeks(1));
         				}
         				else if (Reccuring_ComboBox.getValue().equals("Every month")){
         					e.setStartTime(e.getStartTime().plusMonths(1));
-            				if (e.isDurationEvent()) e.setEndTime(e.getEndTime().plusMonths(1));
+            				if (e.isDurationEvent()) ((DurationEvent)e).setEndTime(((DurationEvent)e).getEndTime().plusMonths(1));
         				}
         				else if (Reccuring_ComboBox.getValue().equals("Every year")){
         					e.setStartTime(e.getStartTime().plusYears(1));
-            				if (e.isDurationEvent()) e.setEndTime(e.getEndTime().plusYears(1));
+            				if (e.isDurationEvent()) ((DurationEvent)e).setEndTime(((DurationEvent)e).getEndTime().plusYears(1));
         				}	
         			}
         			if (temp.getEvents().size()==initialSize){
