@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 public class NonDurationEvent extends Event {
 	
 	
-	// mine
+	// to import events from database
     // Create new event with specific ID. Almost used when importing events from database
 	public NonDurationEvent(int timelineID, int eventID, String eventTitle, LocalDateTime eventStart_time, String description, Color color, String imagepath) throws MalformedURLException {
 		super(timelineID, eventID, eventTitle, eventStart_time, description, color, imagepath);
@@ -23,6 +23,7 @@ public class NonDurationEvent extends Event {
 		isDurationEvent=false;
 	}
 	
+	// Create new event with new ID. copy all parameters from another event
 	public NonDurationEvent(NonDurationEvent e) {
 		super(e);
 		isDurationEvent=false;
