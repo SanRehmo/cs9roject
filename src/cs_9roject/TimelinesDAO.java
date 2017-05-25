@@ -2,6 +2,8 @@ package cs_9roject;
 
 
 import javafx.scene.paint.Color;
+import javafx.util.Pair;
+
 import java.sql.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -99,9 +101,9 @@ public class TimelinesDAO {
     }
 
 
-    public ArrayList<ArrayList<DataHelper>> loadAllProjectNames() {
+    public List<Pair<Integer, String>> loadAllProjectNames() {
 
-        ArrayList<ArrayList<DataHelper>> result = new ArrayList<>();
+        List<Pair<Integer, String>> result = new ArrayList<>();
         Connection connection = null;
         Statement stmt = null;
 
@@ -118,26 +120,19 @@ public class TimelinesDAO {
             try {
                 stmt = connection.createStatement();
                 ResultSet rs = stmt.executeQuery(query);
-                while (rs.next()) {
-                  //  highestID = rs.getInt("PROJECT_ID");
-                }
 
                 String temp = "SELECT DISTINCT PROJECT_NAME, PROJECT_ID FROM Projects";
                 ResultSet rss = stmt.executeQuery(temp);
 
-
-                ArrayList<DataHelper> data = new ArrayList<>();
+                List<Pair<Integer, String>> data = new ArrayList<>();
 
                 while(rss.next()) {
-                    data.add(new DataHelper(rss.getInt("PROJECT_ID"), rss.getString("PROJECT_NAME")));
+                    data.add(new Pair<>(rss.getInt("PROJECT_ID"), rss.getString("PROJECT_NAME")));
                     highestID++;
                 }
 
                 for (int i = 1; i <= highestID; i++) {
-
-                        ArrayList<DataHelper> tempList = new ArrayList<>();
-                        tempList.add(new DataHelper(data.get(i-1).getID(), data.get(i-1).getName()));
-                        result.add(tempList);
+                        result.add(new Pair<>(data.get(i-1).getKey(), data.get(i-1).getValue()));
                 }
             } catch (Exception ex) {
                 ex.printStackTrace();
