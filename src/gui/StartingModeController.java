@@ -49,25 +49,8 @@ public class StartingModeController {
 	public static int timelineIdToModify=0;
 	public static int eventIdToModify=0;
 	
-	//test
+
 	public void initialize() {
-		/* Alert alert = new Alert(AlertType.CONFIRMATION);
-		alert.setTitle("Confirmation Dialog");
-		alert.setHeaderText("Please select an action");
-		alert.setContentText("Choose your option.");
-
-		ButtonType buttonTypeNewProject = new ButtonType("New Project");
-		ButtonType buttonTypeLoadProject = new ButtonType("Load Project");
-
-		alert.getButtonTypes().setAll(buttonTypeNewProject, buttonTypeLoadProject);
-		
-		Optional<ButtonType> result = alert.showAndWait();
-		if (result.get() == buttonTypeNewProject){
-			modifyProject();
-		}
-		else{
-			loadProject();
-		} */
 		name_label.setText(Main.project.projectName);
 		name_label.setStyle("-fx-background-color: " + "white");
 		name_label.setOnMouseClicked(event -> {modifyProject();});

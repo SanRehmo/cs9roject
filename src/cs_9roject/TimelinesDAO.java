@@ -43,9 +43,6 @@ public class TimelinesDAO {
                 ResultSet rss = stmt.executeQuery("SELECT Projects.PROJECT_NAME, Timelines.TIMELINE_ID, Events.EVENT_ID, Events.Title, Events.START_DATE, Events.END_DATE, Events.START_TIME, Events.END_TIME, Events.DESCRIPTION, Events.IMAGE_PATH, Events.DURATIONEVENT, Events.COLOR"
                         + " FROM Projects JOIN (Timelines, Events) ON Projects.TIMELINE_ID=Timelines.TIMELINE_ID WHERE Timelines.EVENT_ID=Events.EVENT_ID AND PROJECT_ID=" + ID);
 
-                // empty
-
-
                 while (rss.next()) {
 
 
@@ -216,9 +213,7 @@ public class TimelinesDAO {
                 }
             }
         }
-        return load(project.ProjectID) != null;
-                // && !(load(project.ProjectID).timelines.isEmpty())
-                // && !(load(project.ProjectID).timelines.get(load(project.ProjectID).timelines.size()-1).events.isEmpty()));
+        return exists(project.ProjectID);
     }
 
     public boolean exists(int ID) {

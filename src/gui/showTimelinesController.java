@@ -113,11 +113,7 @@ public class showTimelinesController {
 	public void showTimeline(){		//Method that is showing the timelines in the scrollPane
 		if(displayAll.isSelected()){//If DisplayAll is selected the program will show every timeline
 			for (CheckBox c : timelines)
-				c.setSelected(true);;
-			//for(int i=0; i<timelines.size(); i++){
-			//scrollBox.getChildren().addAll(yearShow(Main.project.getTimelines().get(i).getTimelineId(),Main.project.getTimelines().get(i).getStartDate(),Main.project.getTimelines().get(i).getEndDate()),generateTimeL(Main.project.getTimelines().get(i).getTimelineId(), Main.project.getTimelines().get(i).getStartDate(), Main.project.getTimelines().get(i).getEndDate()),spaceBetween());
-			//}
-			
+				c.setSelected(true);
 		}
 		for(int i=0; i<timelines.size(); i++){	//Just displaying the checked timelines
 			if(timelines.get(i).isSelected()){
@@ -134,10 +130,7 @@ public void refreshTimeline(){	//Method that is showing the timelines in the scr
 		
 		if(displayAll.isSelected()){//If DisplayAll is selected the program will show every timeline
 			for (CheckBox c : timelines)
-				c.setSelected(true);;
-			//for(int i=0; i<timelines.size(); i++){
-			//scrollBox.getChildren().addAll(yearShow(Main.project.getTimelines().get(i).getTimelineId(),Main.project.getTimelines().get(i).getStartDate(),Main.project.getTimelines().get(i).getEndDate()),generateTimeL(Main.project.getTimelines().get(i).getTimelineId(), Main.project.getTimelines().get(i).getStartDate(), Main.project.getTimelines().get(i).getEndDate()),spaceBetween());
-			//}
+				c.setSelected(true);
 			
 		}
 		for(int i=0; i<timelines.size(); i++){	//Just displaying the checked timelines
@@ -211,8 +204,6 @@ public void refreshTimeline(){	//Method that is showing the timelines in the scr
 			showInfoByMonth (0, startDate.getYear(), startDate.getMonthValue(), timeLine);
 		});
 			primaryScrollpane.setContent(scrollBox);
-			//Stage stage = (Stage) doneButton.getScene().getWindow();
-			//stage.close();
 
 		disableIfOutTimeline (timeLine, startDate, id );
 	
