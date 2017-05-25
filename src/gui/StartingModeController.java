@@ -11,6 +11,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.util.Pair;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -154,12 +155,11 @@ public class StartingModeController {
 				return;
 		}
 
-		
-		ArrayList<ArrayList<DataHelper>> projects = Main.dao.loadAllProjectNames();
+		List<Pair<Integer, String>> projects = Main.dao.loadAllProjectNames();
 		ArrayList<String> projectNames = new ArrayList<>();
 
 		for(int i = 0; i < projects.size(); i++) {
-			projectNames.add(projects.get(i).get(0).getName());
+			projectNames.add(projects.get(i).getValue());
 		}
 
 		if (projects.size()>0){
@@ -175,7 +175,7 @@ public class StartingModeController {
 			if (result.isPresent()){
 				System.out.println("OPTIONAL RESULT: " + result.get());
 				Project project = dao.load(projects.get(projectNames.indexOf(result.get()))
-									.get(0).getID());
+									.getKey());
 			    Main.project=project;
 			    name_label.setText(Main.project.projectName);
 			    delete_btn.setDisable(false);
