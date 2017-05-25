@@ -1,9 +1,7 @@
 package cs_9roject;
 
 
-import com.sun.org.apache.bcel.internal.generic.ARRAYLENGTH;
 import javafx.scene.paint.Color;
-
 import java.sql.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -293,8 +291,6 @@ public class TimelinesDAO {
         if (isConnected()) {
             query = "DELETE FROM Events WHERE EVENT_ID=" + event.eventid;
             execute(query);
-            // query = "UPDATE Timelines SET EVENT_ID=NULL WHERE EVENT_ID=" + event.eventid;
-            // execute(query);
             return true;
         } else return false;
     }
@@ -310,13 +306,6 @@ public class TimelinesDAO {
         if (isConnected()) {
             query = "DELETE FROM Timelines WHERE TIMELINE_ID=" + timeline.timelineId;
             execute(query);
-            /*
-            query = "UPDATE Projects SET TIMELINE_ID=NULL WHERE TIMELINE_ID=" + timeline.timelineId;
-            execute(query);
-            for (int i = 0; i < timeline.events.size(); i++) {
-                delete(timeline.events.get(i));
-            }
-            */
             return true;
         } else return false;
     }
