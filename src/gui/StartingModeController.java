@@ -1,10 +1,7 @@
 package gui;
 
 
-import cs_9roject.Event;
-import cs_9roject.Project;
-import cs_9roject.Timeline;
-import cs_9roject.TimelinesDAO;
+import cs_9roject.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -16,6 +13,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -49,7 +47,7 @@ public class StartingModeController {
 	public static int timelineIdToModify=0;
 	public static int eventIdToModify=0;
 	
-
+	//test
 	public void initialize() {
 		name_label.setText(Main.project.projectName);
 		name_label.setStyle("-fx-background-color: " + "white");
@@ -120,7 +118,11 @@ public class StartingModeController {
 	@FXML
 	private void newProject(){
 		if (Main.project.getTimelines().size()>0){
-			if (alertWindow(AlertType.CONFIRMATION, "Please confirm", "All changes are deleted. Please save each change before proceeding!", "Are you sure you like to proceed?")== ButtonType.CANCEL)
+			Alert alert = new Alert(AlertType.CONFIRMATION);
+			alert.setTitle("Please confirm");
+			alert.setHeaderText("All changes are deleted. Please save each change before proceeding!");
+			alert.setContentText("Are you sure you like to proceed?");
+			if (alert.showAndWait().get() == ButtonType.CANCEL)
 				return;
 		}
 		Main.project=new Project();
@@ -144,21 +146,37 @@ public class StartingModeController {
 	@FXML
 	private void loadProject() throws IOException{
 		if (Main.project.getTimelines().size()>0){
-			if (alertWindow(AlertType.CONFIRMATION, "Please confirm", "All changes are deleted. Please save each change before proceeding!", "Are you sure you like to proceed?")== ButtonType.CANCEL)
+			Alert alert = new Alert(AlertType.CONFIRMATION);
+			alert.setTitle("Please confirm");
+			alert.setHeaderText("All changes are deleted. Please save each change before proceeding!");
+			alert.setContentText("Are you sure you like to proceed?");
+			if (alert.showAndWait().get() == ButtonType.CANCEL)
 				return;
 		}
 
-		List <Project> projects = Main.dao.loadAllProjects();
+		
+		ArrayList<ArrayList<DataHelper>> projects = Main.dao.loadAllProjectNames();
+		ArrayList<String> projectNames = new ArrayList<>();
+
+		for(int i = 0; i < projects.size(); i++) {
+			projectNames.add(projects.get(i).get(0).getName());
+		}
+
 		if (projects.size()>0){
-			ChoiceDialog<Project> choiceDialog = new ChoiceDialog<Project>(projects.get(0), projects);
+			ChoiceDialog<String> choiceDialog = new ChoiceDialog<String>(projectNames.get(0), projectNames);
 			choiceDialog.setTitle("Choice Dialog");
 			choiceDialog.setHeaderText("Load project");
 			choiceDialog.setContentText("Choose your project:");
 
+
 			// Traditional way to get the response value.
-			Optional<Project> result = choiceDialog.showAndWait();
+			Optional<String> result = choiceDialog.showAndWait();
+
 			if (result.isPresent()){
-			    Main.project=result.get();
+				System.out.println("OPTIONAL RESULT: " + result.get());
+				Project project = dao.load(projects.get(projectNames.indexOf(result.get()))
+									.get(0).getID());
+			    Main.project=project;
 			    name_label.setText(Main.project.projectName);
 			    delete_btn.setDisable(false);
 			    start_scrollpane.setContent(new VBox());
@@ -173,9 +191,12 @@ public class StartingModeController {
 
 		}
 		else{
-			alertWindow(AlertType.INFORMATION, "INFORMATION!", "Cannot load project!", "Database is empty!");
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setTitle("INFORMATION!");
+			alert.setHeaderText("Cannot load project!");
+			alert.setContentText("Database is empty!");
+			alert.showAndWait();
 		}
-		
 		System.out.println("Current project: "+ Main.project.projectName+" ID: "+ Main.project.ProjectID);
 	}
 
@@ -184,7 +205,11 @@ public class StartingModeController {
 	 */
 	@FXML
 	private void deleteProject() throws IOException {
-		if (alertWindow(AlertType.CONFIRMATION, "Please confirm", "You are going to delete the project: "+Main.project.projectName+" ID: "+Main.project.ProjectID, "Are you sure you like to proceed?")== ButtonType.OK) {
+		Alert alert = new Alert(AlertType.CONFIRMATION);
+		alert.setTitle("Please confirm");
+		alert.setHeaderText("You are going to delete the project: "+Main.project.projectName+" ID: "+Main.project.ProjectID);
+		alert.setContentText("Are you sure you like to proceed?");
+		if (alert.showAndWait().get() == ButtonType.OK){
 			delete_btn.setDisable(false);
 			dao.delete(Main.project);
 			Main.project = new Project();
@@ -249,7 +274,11 @@ public class StartingModeController {
 			
 		}
 		else{
-			alertWindow(AlertType.ERROR, "ERROR!", "Nothing to save!" , "To save a project, it should have at least 1 timeline.");
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("ERROR!");
+			alert.setHeaderText("Nothing to save!");
+			alert.setContentText("To save a project, it should have at least 1 timeline.");
+			alert.showAndWait();
 		}
 		
 		System.out.println("Current project: "+ Main.project.projectName+" ID: "+ Main.project.ProjectID);
@@ -280,7 +309,11 @@ public class StartingModeController {
 	@FXML
 	private void showEventHandler() throws IOException{
 			if (Main.project.getTimelines().size()==0){
-			alertWindow(AlertType.ERROR, "ERROR!", "Cannot add event!", "You should have at least 1 timeline to add events");
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("ERROR!");
+			alert.setHeaderText("Cannot add event!");
+			alert.setContentText("You should have at least 1 timeline to add events");
+			alert.showAndWait();
 			return;
 		}
 		else {
@@ -304,16 +337,18 @@ public class StartingModeController {
 		Alert alert = new Alert(AlertType.INFORMATION);
 		alert.setTitle("Information Dialog");
 		alert.setHeaderText(null);
-		alert.setContentText("Hej, we are happy that you use the timeline manager. \nJust start creating a new project by clicking the appropriate button in the menu. In the next step you need to add a timeline(s) and belonging events to your project - do not forget your appointments any longer!!\nIf you need more help, have a look to our manual: https://goo.gl/i80Qdm");
+		alert.setContentText("Hej, we are happy that you use the timeline manager. Just start creating a new project by clicking the appropriate button in the menu. In the next step you need to add a timeline(s) and belonging events to your project - do not forget your appointments any longer!!If you need more help, have a look to our manual: https://www.dropbox.com/s/slfxjrs88b5dudp/Timeline-Manual_Group9.pdf?dl=0");
+
 		alert.showAndWait();
 	}
 	
-	public ButtonType alertWindow(AlertType type, String Title, String headText, String contentText) {
+	public void alertWindow(AlertType type, String Title, String headText, String contentText) {
+    	
     	Alert alert = new Alert(type);
 		alert.setTitle(Title);
 		alert.setHeaderText(headText);
 		alert.setContentText(contentText);
-		return alert.showAndWait().get();
+		alert.showAndWait();
     	
     }
 }

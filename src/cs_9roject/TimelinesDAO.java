@@ -1,6 +1,7 @@
 package cs_9roject;
 
 
+import com.sun.org.apache.bcel.internal.generic.ARRAYLENGTH;
 import javafx.scene.paint.Color;
 
 import java.sql.*;
@@ -99,6 +100,55 @@ public class TimelinesDAO {
         return result;
     }
 
+
+    public ArrayList<ArrayList<DataHelper>> loadAllProjectNames() {
+
+        ArrayList<ArrayList<DataHelper>> result = new ArrayList<>();
+        Connection connection = null;
+        Statement stmt = null;
+
+        try {
+            connection = Database.establishConnection();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        int highestID = 0;
+
+        if (connection != null) {
+            String query = "SELECT PROJECT_ID FROM Projects ORDER BY PROJECT_ID DESC LIMIT 1";
+            try {
+                stmt = connection.createStatement();
+                ResultSet rs = stmt.executeQuery(query);
+                while (rs.next()) {
+                  //  highestID = rs.getInt("PROJECT_ID");
+                }
+
+                String temp = "SELECT DISTINCT PROJECT_NAME, PROJECT_ID FROM Projects";
+                ResultSet rss = stmt.executeQuery(temp);
+
+
+                ArrayList<DataHelper> data = new ArrayList<>();
+
+                while(rss.next()) {
+                    data.add(new DataHelper(rss.getInt("PROJECT_ID"), rss.getString("PROJECT_NAME")));
+                    highestID++;
+                }
+
+                for (int i = 1; i <= highestID; i++) {
+
+                        ArrayList<DataHelper> tempList = new ArrayList<>();
+                        tempList.add(new DataHelper(data.get(i-1).getID(), data.get(i-1).getName()));
+                        result.add(tempList);
+                }
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        } else {
+            System.out.println("Failed to make connection");
+        }
+        return result;
+    }
 
     // load all Projects at once
     public List<Project> loadAllProjects() {
@@ -243,8 +293,8 @@ public class TimelinesDAO {
         if (isConnected()) {
             query = "DELETE FROM Events WHERE EVENT_ID=" + event.eventid;
             execute(query);
-            query = "UPDATE Timelines SET EVENT_ID=NULL WHERE EVENT_ID=" + event.eventid;
-            execute(query);
+            // query = "UPDATE Timelines SET EVENT_ID=NULL WHERE EVENT_ID=" + event.eventid;
+            // execute(query);
             return true;
         } else return false;
     }
@@ -260,11 +310,13 @@ public class TimelinesDAO {
         if (isConnected()) {
             query = "DELETE FROM Timelines WHERE TIMELINE_ID=" + timeline.timelineId;
             execute(query);
+            /*
             query = "UPDATE Projects SET TIMELINE_ID=NULL WHERE TIMELINE_ID=" + timeline.timelineId;
             execute(query);
             for (int i = 0; i < timeline.events.size(); i++) {
                 delete(timeline.events.get(i));
             }
+            */
             return true;
         } else return false;
     }
