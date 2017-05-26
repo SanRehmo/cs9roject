@@ -17,6 +17,12 @@ public class TimelinesDAO {
     String query;
 
     // used to load a project from the DB through an ID
+
+    /**
+     * Loads a Project from the database. Projects include Timelines which include Events
+     * @param ID
+     * @return Project
+     */
     public Project load(int ID) {
 
         Statement stmt = null;
@@ -35,6 +41,7 @@ public class TimelinesDAO {
 
         if (connection != null) {
             try {
+
                 // load all events in the project
                 stmt = connection.createStatement();
                 ResultSet rss = stmt.executeQuery("SELECT Projects.PROJECT_NAME, Timelines.TIMELINE_ID, Events.EVENT_ID, Events.Title, Events.START_DATE, Events.END_DATE, Events.START_TIME, Events.END_TIME, Events.DESCRIPTION, Events.IMAGE_PATH, Events.DURATIONEVENT, Events.COLOR"
@@ -59,7 +66,7 @@ public class TimelinesDAO {
                     	Event event = new NonDurationEvent(timelineID, eventID, eventTitle, eventStart_time, eventDescription, color, imagePath);
                         eventList.add(event);
                     }
-                    
+
                 }
 
 
@@ -83,12 +90,10 @@ public class TimelinesDAO {
                 }
 
                 // retrieving ProjectName seperately
-                // doesn't work in the general query for Projects without Events
                 stmt = connection.createStatement();
                 ResultSet rsss = stmt.executeQuery("SELECT Projects.PROJECT_NAME FROM Projects JOIN Timelines ON Projects.TIMELINE_ID=Timelines.TIMELINE_ID WHERE PROJECT_ID=" + ID);
                 rsss.next();
                 projectName = rsss.getString("PROJECT_NAME");
-
                 result.projectName = projectName;
 
             } catch (Exception ex) {
@@ -100,7 +105,10 @@ public class TimelinesDAO {
         return result;
     }
 
-
+    /**
+     * Return all Project names in the database
+     * @return List<Pair<Integer, String>></Integer,> <Event>
+     */
     public List<Pair<Integer, String>> loadAllProjectNames() {
 
         List<Pair<Integer, String>> result = new ArrayList<>();
@@ -143,7 +151,11 @@ public class TimelinesDAO {
         return result;
     }
 
-    // load all Projects at once
+    /**
+     * Deprecated, too slow
+     * Loads all projects from the database at once and returns them in a List
+     * @return List <Project>
+     */
     public List<Project> loadAllProjects() {
 
         List<Project> result = new ArrayList<Project>();
@@ -182,7 +194,11 @@ public class TimelinesDAO {
     }
 
 
-    // save a Project
+    /**
+     * Saves a Project, all of its Timelines and all of its Events into the database
+     * @param project
+     * @return boolean
+     */
     public boolean save(Project project) {
 
         try {
@@ -202,7 +218,7 @@ public class TimelinesDAO {
 
                 Timeline tl = project.timelines.get(i);
                 String projects = "INSERT INTO Projects " + "VALUES (" + project.ProjectID + ", " + project.timelines.get(i).timelineId + ", '" + project.projectName + "')";
-                execute(projects);
+                executeUpdate(projects);
 
 
                 // extracting Date and Time from LocalDateTime
@@ -211,7 +227,7 @@ public class TimelinesDAO {
 
                 if (tl.events.size() < 1) {
                     String timelines = "INSERT INTO Timelines " + "VALUES (" + tl.timelineId + ", " + null + ", '" + startDate + "', '" + endDate + "', '" + tl.title + "', " + tl.isOnlyYears + ")";
-                    execute(timelines);
+                    executeUpdate(timelines);
                 } else {
                     // Timelines & Events loop
                     for (int j = 0; j < tl.events.size(); j++) {
@@ -221,7 +237,7 @@ public class TimelinesDAO {
 
                         int boolToInt = (tl.isOnlyYears) ? 1 : 0;
                         String timelines = "INSERT INTO Timelines " + "VALUES (" + tl.timelineId + ", " + ev.eventid + ", '" + startDate + "', '" + endDate + "', '" + tl.title + "', " + boolToInt + ")";
-                    execute(timelines);
+                    executeUpdate(timelines);
 
                     // extracting Date and Time from LocalDateTime
                     startDate = Date.valueOf(ev.startTime.toLocalDate());
@@ -239,7 +255,7 @@ public class TimelinesDAO {
                         String imagePath= ev.imagepath.replace("\\", "\\\\");
                         String events = "INSERT INTO Events " + "VALUES (" + ev.eventid + ", '" + ev.title + "', '" + startTime + "', '" + endTime + "', '"
                                 + startDate + "', '" + endDate + "', '" + ev.description + "', " + boolToInt + ", '" + ev.eventColor.toString() + "', '" + imagePath + "')";
-                    execute(events);
+                    executeUpdate(events);
 
                 }
                 }
@@ -248,6 +264,11 @@ public class TimelinesDAO {
         return exists(project.ProjectID);
     }
 
+    /**
+     * Checks if a Project exists in the Database
+     * @param ID
+     * @return boolean
+     */
     public boolean exists(int ID) {
 
         try {
@@ -275,6 +296,11 @@ public class TimelinesDAO {
         return result;
     }
 
+    /**
+     * Deletes an Event
+     * @param event
+     * @return boolean
+     */
     public boolean delete(Event event) {
 
         try {
@@ -285,11 +311,16 @@ public class TimelinesDAO {
 
         if (isConnected()) {
             query = "DELETE FROM Events WHERE EVENT_ID=" + event.eventid;
-            execute(query);
+            executeUpdate(query);
             return true;
         } else return false;
     }
 
+    /**
+     * Deletes a Timeline
+     * @param timeline
+     * @return boolean
+     */
     public boolean delete(Timeline timeline) {
 
         try {
@@ -300,11 +331,16 @@ public class TimelinesDAO {
 
         if (isConnected()) {
             query = "DELETE FROM Timelines WHERE TIMELINE_ID=" + timeline.timelineId;
-            execute(query);
+            executeUpdate(query);
             return true;
         } else return false;
     }
 
+    /**
+     * Deletes a Project
+     * @param project
+     * @return boolean
+     */
     public boolean delete(Project project) {
 
         try {
@@ -315,7 +351,7 @@ public class TimelinesDAO {
 
         if (isConnected()) {
             query = "DELETE FROM Projects WHERE PROJECT_ID=" + project.ProjectID;
-            execute(query);
+            executeUpdate(query);
             for (int i = 0; i < project.timelines.size(); i++) {
                 delete(project.timelines.get(i));
                 for (int j = 0; j < project.timelines.get(i).events.size(); j++) {
@@ -326,6 +362,10 @@ public class TimelinesDAO {
         } else return false;
     }
 
+    /**
+     * Gets the highest ProjectID that is in the database
+     * @return int
+     */
     public int getHighestProjectID() {
 
         int highestID = 0;
@@ -354,6 +394,10 @@ public class TimelinesDAO {
         return highestID;
     }
 
+    /**
+     * Gets the highest TimelineID that is in the database
+     * @return int
+     */
     public int getHighestTimelineID() {
 
         int highestID = 0;
@@ -382,6 +426,10 @@ public class TimelinesDAO {
         return highestID;
     }
 
+    /**
+     * Gets the highest EventID that is in the database
+     * @return int
+     */
     public int getHighestEventID() {
 
         int highestID = 0;
@@ -410,73 +458,37 @@ public class TimelinesDAO {
         return highestID;
     }
 
-    // CAREFUL WITH THIS
-    public boolean deleteAllProjects() {
+    /**
+     * Deletes all content from the database
+     * @return int
+     */
+    public boolean nukeDatabase() {
 
-        int count = 1;
+        boolean result = false;
 
-        if (isConnected()) {
-            while (load(count) != null) {
-                delete(load(count));
-                count++;
-            }
+        try {
+            connection = Database.establishConnection();
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
-        return (count > 1);
-    }
 
-    public boolean modify(Event eventToModify, Event newEvent) {
-
-        // secure integrity
-        newEvent.eventid = eventToModify.eventid;
-
-        if (isConnected()) {
-            query = "DELETE FROM Events WHERE EVENT_ID=" + eventToModify.eventid;
-            execute(query);
-            query = "INSERT INTO Events VALUES (" + eventProperties(newEvent) + ")";
-            execute(query);
-            return true;
-        } else return false;
-    }
-
-    public boolean modify(Timeline timelineToModify, Timeline newTimeline) {
-
-        newTimeline.timelineId = timelineToModify.timelineId;
-        int count = 1;
-
-        if (isConnected()) {
-            query = "DELETE FROM Timelines WHERE TIMELINE_ID=" + timelineToModify.timelineId;
-            execute(query);
-            while (newTimeline.events.get(count) != null) {
-                query = "INSERT INTO Timelines VALUES (" + newTimeline.timelineId + ", " + newTimeline.events.get(count).eventid + ", "
-                        + newTimeline.startDate + ", " + newTimeline.endDate + ", " + newTimeline.title + ")";
-                execute(query);
-                count++;
-            }
+        try {
+            query = "DELETE * FROM Projects; DELETE * FROM Events; DELETE * FROM Events";
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            result = true;
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
-        return (count > 1);
+        return result;
     }
 
-    public boolean modify(Project projectToModify, Project newProject) {
-
-        newProject.ProjectID = projectToModify.ProjectID;
-        int count = 1;
-
-        if (isConnected()) {
-            query = "DELETE FROM Projects WHERE PROJECT_ID=" + projectToModify.ProjectID;
-            execute(query);
-            while (newProject.timelines.get(count) != null) {
-                query = "INSERT INTO Projects VALUES (" + newProject.ProjectID + ", " + newProject.timelines.get(count).timelineId + ")";
-                execute(query);
-                count++;
-            }
-        }
-        return (count > 1);
-    }
-
-
-
-    // helper method to execute a query on the DB
-    public void execute(String query) {
+    /**
+     * Helper method, updates database with given query
+     * @param query
+     * @return int
+     */
+    public void executeUpdate(String query) {
 
 
         Statement stmt = null;
@@ -499,36 +511,34 @@ public class TimelinesDAO {
         }
     }
 
-    // helper method to check if JDBC is connectedd
+    /**
+     * Helper method, checks if database is connected
+     * @return boolean
+     */
     public boolean isConnected() {
         return (connection != null);
     }
 
-    // helper method to stress test the DB with infinite queries
-    // provokes connection refusal from DB
+    /**
+     * Helper method, infinite queries against the database, provokes connection refusal
+     * @return int
+     */
     public void stressTest() {
 
         String query = "SELECT * FROM Projects";
+        int queryCount = 0;
 
-        if (isConnected()) {
-            while (true) {
-                execute(query);
+        try {
+            if (isConnected()) {
+                while (true) {
+                    executeUpdate(query);
+                    queryCount++;
+                }
             }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            System.out.println("Queries until connection refusal: " + queryCount);
         }
-    }
-
-    public String eventProperties(Event event) {
-    	if (event.isDurationEvent)
-    		return event.eventid + ", " + event.title + ", " + event.startTime + ", " + ((DurationEvent)event).getEventId() + ", "
-                    + event.getStartTime().toLocalDate() + ", " + ((DurationEvent)event).getEndTime().toLocalDate() + ", " + event.description + ", " + event.imagepath;
-    	else
-    		return event.eventid + ", " + event.title + ", " + event.startTime + ", " + LocalDate.now() + ", "
-                + event.getStartTime().toLocalDate() + ", " + LocalDate.now() + ", " + event.description + ", " + event.imagepath;
-    }
-
-    public String timelineProperties(Timeline timeline) {
-
-        return timeline.timelineId + ", " + timeline.startDate + ", " + timeline.endDate + ", " + timeline.title + ", " + timeline.events;
     }
 }
 
