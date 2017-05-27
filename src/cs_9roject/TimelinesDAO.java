@@ -129,9 +129,11 @@ public class TimelinesDAO {
      * Loads all projects from the database at once and returns them in a List
      * @return List <Project>
      */
-    public List<Project> loadAllProjects() {
+    @SuppressWarnings("null")
+	public List<Project> loadAllProjects() {
 
         List<Project> result = new ArrayList<>();
+        Connection connection = null;
         int i = 0;
 
         connect();
@@ -140,6 +142,8 @@ public class TimelinesDAO {
             String query = "SELECT PROJECT_ID FROM Projects ORDER BY PROJECT_ID DESC LIMIT 1";
 
             try {
+
+                stmt = connection.createStatement();
                 ResultSet rs = stmt.executeQuery(query);
                 while (rs.next()) {
                     i++;
@@ -432,7 +436,8 @@ public class TimelinesDAO {
         try {
             query = "DELETE * FROM Projects; DELETE * FROM Events; DELETE * FROM Events";
             Statement stmt = connection.createStatement();
-            ResultSet rs = stmt.executeQuery(query);
+            @SuppressWarnings("unused")
+			ResultSet rs = stmt.executeQuery(query);
             result = true;
         } catch (Exception ex) {
             ex.printStackTrace();
