@@ -174,9 +174,7 @@ public class StartingModeController {
 
 			if (result.isPresent()){
 				System.out.println("OPTIONAL RESULT: " + result.get());
-				Project project = dao.load(projects.get(projectNames.indexOf(result.get()))
-									.getKey());
-			    Main.project=project;
+				Main.project = dao.load(projects.get(projectNames.indexOf(result.get())).getKey());
 			    name_label.setText(Main.project.projectName);
 			    delete_btn.setDisable(false);
 			    start_scrollpane.setContent(new VBox());

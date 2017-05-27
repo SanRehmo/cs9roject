@@ -19,8 +19,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Callback;
-import gui.Main;
-
 
 public class CreateModeController {
 

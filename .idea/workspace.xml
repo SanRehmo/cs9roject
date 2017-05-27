@@ -2,10 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="26f1f1d1-31ab-4a57-aef1-212eec71d102" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/gui/LoginHandler.fxml" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cs_9roject/Event.java" afterPath="$PROJECT_DIR$/src/cs_9roject/Event.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cs_9roject/Project.java" afterPath="$PROJECT_DIR$/src/cs_9roject/Project.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cs_9roject/TimelinesDAO.java" afterPath="$PROJECT_DIR$/src/cs_9roject/TimelinesDAO.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/gui/CreateModeController.java" afterPath="$PROJECT_DIR$/src/gui/CreateModeController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/gui/StartingModeController.java" afterPath="$PROJECT_DIR$/src/gui/StartingModeController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/gui/eventHandler.fxml" afterPath="$PROJECT_DIR$/src/gui/eventHandler.fxml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/gui/eventHandlerController.java" afterPath="$PROJECT_DIR$/src/gui/eventHandlerController.java" />
     </list>
     <ignored path="cs9roject.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -77,11 +79,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="TimelinesDAO.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="TimelinesDAO.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/cs_9roject/TimelinesDAO.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-209">
-              <caret line="450" column="18" lean-forward="true" selection-start-line="450" selection-start-column="18" selection-end-line="450" selection-end-column="18" />
+            <state relative-caret-position="-3404">
+              <caret line="60" column="39" lean-forward="true" selection-start-line="60" selection-start-column="39" selection-end-line="60" selection-end-column="39" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <marker date="1495878294872" expanded="true" signature="925:1353" ph="SELECT Proje... Projects" />
@@ -103,72 +105,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="console.sql" pinned="false" current-in-tab="false">
-        <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/b0202c0a-96a1-47ab-9079-3d8c2281075e/console.sql">
+      <file leaf-file-name="showTimelinesController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/gui/showTimelinesController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="8" column="20" lean-forward="false" selection-start-line="8" selection-start-column="20" selection-end-line="8" selection-end-column="20" />
-              <folding>
-                <marker date="1495734121077" expanded="true" signature="188:202" ph="SELECT * FRO... Timelines" />
-              </folding>
+            <state relative-caret-position="378">
+              <caret line="866" column="79" lean-forward="false" selection-start-line="866" selection-start-column="73" selection-end-line="866" selection-end-column="79" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="StartingModeController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/gui/StartingModeController.java">
+      <file leaf-file-name="eventHandler.fxml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/gui/eventHandler.fxml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2397">
-              <caret line="156" column="0" lean-forward="false" selection-start-line="156" selection-start-column="0" selection-end-line="156" selection-end-column="0" />
-              <folding>
-                <element signature="imports" expanded="false" />
-                <marker date="1495876801641" expanded="true" signature="11166:11729" ph="{...}" />
-                <marker date="1495876801641" expanded="true" signature="11824:11997" ph="{...}" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Project.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/cs_9roject/Project.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="747">
-              <caret line="85" column="56" lean-forward="false" selection-start-line="85" selection-start-column="56" selection-end-line="85" selection-end-column="56" />
-              <folding>
-                <element signature="e#1799#1800#0" expanded="true" />
-                <element signature="e#1818#1819#0" expanded="true" />
-                <element signature="e#1848#1849#0" expanded="true" />
-                <element signature="e#1871#1872#0" expanded="true" />
-                <element signature="e#1906#1907#0" expanded="true" />
-                <element signature="e#1931#1932#0" expanded="true" />
-                <element signature="e#2019#2020#0" expanded="true" />
-                <element signature="e#2063#2064#0" expanded="true" />
-                <element signature="e#2091#2092#0" expanded="true" />
-                <element signature="e#2142#2143#0" expanded="true" />
-                <element signature="e#2179#2180#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Database.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/cs_9roject/Database.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="16" column="44" lean-forward="false" selection-start-line="16" selection-start-column="44" selection-end-line="16" selection-end-column="44" />
-              <folding>
-                <element signature="imports" expanded="false" />
-                <marker date="1495734159569" expanded="true" signature="526:938" ph="{...}" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="StartingMode.fxml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/gui/StartingMode.fxml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="18" column="65" lean-forward="false" selection-start-line="18" selection-start-column="65" selection-end-line="18" selection-end-column="65" />
+            <state relative-caret-position="408">
+              <caret line="33" column="17" lean-forward="true" selection-start-line="33" selection-start-column="17" selection-end-line="33" selection-end-column="17" />
               <folding />
             </state>
           </provider>
@@ -177,48 +128,74 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Timeline.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/cs_9roject/Timeline.java">
+      <file leaf-file-name="CreateMode.fxml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/gui/CreateMode.fxml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="8" column="13" lean-forward="false" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+          <provider editor-type-id="JavaFX-Scene-Builder">
+            <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="showTimelines.fxml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/gui/showTimelines.fxml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+          <provider editor-type-id="JavaFX-Scene-Builder">
+            <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="StartingMode.fxml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/gui/StartingMode.fxml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-51">
+              <caret line="39" column="30" lean-forward="true" selection-start-line="39" selection-start-column="30" selection-end-line="39" selection-end-column="30" />
+              <folding />
+            </state>
+          </provider>
+          <provider editor-type-id="JavaFX-Scene-Builder">
+            <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="StartingModeController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/gui/StartingModeController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-1092">
+              <caret line="155" column="9" lean-forward="true" selection-start-line="155" selection-start-column="9" selection-end-line="155" selection-end-column="9" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CreateModeController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/gui/CreateModeController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="286">
+              <caret line="85" column="25" lean-forward="false" selection-start-line="85" selection-start-column="25" selection-end-line="85" selection-end-column="25" />
               <folding>
-                <element signature="imports" expanded="false" />
-                <marker date="1495876801632" expanded="true" signature="761:1073" ph="{...}" />
-                <marker date="1495876801632" expanded="true" signature="1226:1467" ph="{...}" />
-                <marker date="1495876801632" expanded="true" signature="1555:1733" ph="{...}" />
-                <marker date="1495876801632" expanded="true" signature="1803:2174" ph="{...}" />
-                <marker date="1495876801632" expanded="true" signature="2235:2321" ph="{...}" />
-                <marker date="1495876801632" expanded="true" signature="2387:2492" ph="{...}" />
-                <marker date="1495876801632" expanded="true" signature="2569:2678" ph="{...}" />
-                <marker date="1495876801632" expanded="false" signature="2770:2774" ph=" { " />
-                <marker date="1495876801632" expanded="false" signature="2799:2802" ph=" }" />
-                <marker date="1495876801632" expanded="false" signature="2888:2892" ph=" { " />
-                <marker date="1495876801632" expanded="false" signature="2906:2909" ph=" }" />
-                <marker date="1495876801632" expanded="true" signature="2961:3039" ph="{...}" />
-                <marker date="1495876801632" expanded="false" signature="3074:3078" ph=" { " />
-                <marker date="1495876801632" expanded="false" signature="3095:3098" ph=" }" />
-                <marker date="1495876801632" expanded="true" signature="3143:3217" ph="{...}" />
-                <marker date="1495876801632" expanded="false" signature="3250:3254" ph=" { " />
-                <marker date="1495876801632" expanded="false" signature="3269:3272" ph=" }" />
-                <marker date="1495876801632" expanded="true" signature="3316:3381" ph="{...}" />
-                <marker date="1495876801632" expanded="true" signature="3412:3438" ph="{...}" />
-                <marker date="1495876801632" expanded="false" signature="3476:3480" ph=" { " />
-                <marker date="1495876801632" expanded="false" signature="3494:3497" ph=" }" />
-                <marker date="1495876801632" expanded="true" signature="3525:3548" ph="{...}" />
-                <marker date="1495876801632" expanded="false" signature="3585:3589" ph=" { " />
-                <marker date="1495876801632" expanded="false" signature="3605:3608" ph=" }" />
-                <marker date="1495876801632" expanded="false" signature="3638:3642" ph=" { " />
-                <marker date="1495876801632" expanded="false" signature="3660:3663" ph=" }" />
-                <marker date="1495876801632" expanded="false" signature="3714:3718" ph=" { " />
-                <marker date="1495876801632" expanded="false" signature="3744:3747" ph=" }" />
-                <marker date="1495876801632" expanded="false" signature="3782:3786" ph=" { " />
-                <marker date="1495876801632" expanded="false" signature="3805:3808" ph=" }" />
-                <marker date="1495876801632" expanded="false" signature="3847:3851" ph=" { " />
-                <marker date="1495876801632" expanded="false" signature="3914:3917" ph=" }" />
-                <marker date="1495876801632" expanded="false" signature="3959:3963" ph=" { " />
-                <marker date="1495876801632" expanded="false" signature="3977:3980" ph=" }" />
-                <marker date="1495876801632" expanded="true" signature="4060:4251" ph="{...}" />
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="eventHandlerController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/gui/eventHandlerController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="290">
+              <caret line="342" column="45" lean-forward="false" selection-start-line="342" selection-start-column="41" selection-end-line="342" selection-end-column="45" />
+              <folding>
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -227,11 +204,9 @@
       <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/gui/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="33" column="40" lean-forward="false" selection-start-line="33" selection-start-column="36" selection-end-line="33" selection-end-column="40" />
-              <folding>
-                <element signature="imports" expanded="false" />
-              </folding>
+            <state relative-caret-position="340">
+              <caret line="30" column="5" lean-forward="true" selection-start-line="30" selection-start-column="5" selection-end-line="30" selection-end-column="5" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -253,7 +228,6 @@
       <find>exists</find>
       <find>userID</find>
       <find>user</find>
-      <find>load</find>
       <find>projects</find>
       <find>loadAllP</find>
       <find>result</find>
@@ -264,6 +238,15 @@
       <find>isConnected</find>
       <find>isConnected()</find>
       <find>stmt</find>
+      <find>loadAll</find>
+      <find>loader</find>
+      <find>Main.project</find>
+      <find>load</find>
+      <find>Main.</find>
+      <find>File</find>
+      <find>delete</find>
+      <find>onAction</find>
+      <find>name</find>
     </findStrings>
     <replaceStrings>
       <replace>isConnected</replace>
@@ -303,9 +286,12 @@
         <option value="$PROJECT_DIR$/src/cs_9roject/Pair.java" />
         <option value="$PROJECT_DIR$/src/cs_9roject/DataHelper.java" />
         <option value="$APPLICATION_CONFIG_DIR$/consoles/db/b0202c0a-96a1-47ab-9079-3d8c2281075e/console.sql" />
-        <option value="$PROJECT_DIR$/src/gui/StartingModeController.java" />
         <option value="$PROJECT_DIR$/src/cs_9roject/Project.java" />
         <option value="$PROJECT_DIR$/src/cs_9roject/TimelinesDAO.java" />
+        <option value="$PROJECT_DIR$/src/gui/CreateModeController.java" />
+        <option value="$PROJECT_DIR$/src/gui/eventHandlerController.java" />
+        <option value="$PROJECT_DIR$/src/gui/StartingModeController.java" />
+        <option value="$PROJECT_DIR$/src/gui/eventHandler.fxml" />
       </list>
     </option>
   </component>
@@ -1020,7 +1006,7 @@
       <workItem from="1495535897969" duration="3323000" />
       <workItem from="1495726964771" duration="11011000" />
       <workItem from="1495836355649" duration="599000" />
-      <workItem from="1495876779976" duration="1514000" />
+      <workItem from="1495876779976" duration="3470000" />
     </task>
     <task id="LOCAL-00001" summary="DB saving and loading Event Image, also backend preparation for access control">
       <created>1495017646470</created>
@@ -1085,11 +1071,18 @@
       <option name="project" value="LOCAL" />
       <updated>1495738787848</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Refactoring, commenting, cleanup">
+      <created>1495878315815</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1495878315815</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="29861000" />
+    <option name="totallyTimeSpent" value="31817000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1121,6 +1114,7 @@
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14456391" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1845878" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32967034" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1133,7 +1127,6 @@
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32967034" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32967034" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1190,7 +1183,8 @@
     <MESSAGE value="access control removal" />
     <MESSAGE value="Big performance improvements" />
     <MESSAGE value="changed DataHelper to Pair&lt;&gt;" />
-    <option name="LAST_COMMIT_MESSAGE" value="changed DataHelper to Pair&lt;&gt;" />
+    <MESSAGE value="Refactoring, commenting, cleanup" />
+    <option name="LAST_COMMIT_MESSAGE" value="Refactoring, commenting, cleanup" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1203,17 +1197,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/cs_9roject/DurationEvent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="18" column="153" lean-forward="false" selection-start-line="18" selection-start-column="153" selection-end-line="18" selection-end-column="153" />
-          <folding>
-            <marker date="1495876801616" expanded="false" signature="1629:1633" ph=" { " />
-            <marker date="1495876801616" expanded="false" signature="1649:1652" ph=" }" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/cs_9roject/Event.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="442">
@@ -1228,9 +1211,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="374">
           <caret line="33" column="4" lean-forward="false" selection-start-line="33" selection-start-column="4" selection-end-line="33" selection-end-column="4" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1333,9 +1314,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="374">
           <caret line="33" column="4" lean-forward="false" selection-start-line="33" selection-start-column="4" selection-end-line="33" selection-end-column="4" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1438,9 +1417,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1534,49 +1511,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/gui/CreateMode.fxml">
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/gui/showTimelines.fxml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/gui/eventHandler.fxml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/gui/CreateModeController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="27" column="13" lean-forward="false" selection-start-line="27" selection-start-column="13" selection-end-line="27" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/gui/LoginHandler.fxml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
@@ -1586,13 +1520,6 @@
       </provider>
       <provider editor-type-id="JavaFX-Scene-Builder">
         <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/gui/showTimelinesController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="127" column="4" lean-forward="false" selection-start-line="127" selection-start-column="4" selection-end-line="127" selection-end-column="4" />
-        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/cs_9roject/Timeline.java">
@@ -1640,16 +1567,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/gui/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="33" column="40" lean-forward="false" selection-start-line="33" selection-start-column="36" selection-end-line="33" selection-end-column="40" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/cs_9roject/Database.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
@@ -1662,17 +1579,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/cs_9roject/Pair.java" />
-    <entry file="file://$PROJECT_DIR$/src/gui/StartingMode.fxml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="18" column="65" lean-forward="false" selection-start-line="18" selection-start-column="65" selection-end-line="18" selection-end-column="65" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/b0202c0a-96a1-47ab-9079-3d8c2281075e/console.sql">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
@@ -1691,18 +1597,6 @@
           <folding>
             <marker date="1495876801616" expanded="false" signature="1629:1633" ph=" { " />
             <marker date="1495876801616" expanded="false" signature="1649:1652" ph=" }" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/gui/StartingModeController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2397">
-          <caret line="156" column="0" lean-forward="false" selection-start-line="156" selection-start-column="0" selection-end-line="156" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <marker date="1495876801641" expanded="true" signature="11166:11729" ph="{...}" />
-            <marker date="1495876801641" expanded="true" signature="11824:11997" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -1727,10 +1621,59 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/gui/CreateMode.fxml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gui/showTimelines.fxml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gui/StartingMode.fxml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-51">
+          <caret line="39" column="30" lean-forward="true" selection-start-line="39" selection-start-column="30" selection-end-line="39" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gui/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="30" column="5" lean-forward="true" selection-start-line="30" selection-start-column="5" selection-end-line="30" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gui/showTimelinesController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="378">
+          <caret line="866" column="79" lean-forward="false" selection-start-line="866" selection-start-column="73" selection-end-line="866" selection-end-column="79" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/cs_9roject/TimelinesDAO.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-209">
-          <caret line="450" column="18" lean-forward="true" selection-start-line="450" selection-start-column="18" selection-end-line="450" selection-end-column="18" />
+        <state relative-caret-position="-3404">
+          <caret line="60" column="39" lean-forward="true" selection-start-line="60" selection-start-column="39" selection-end-line="60" selection-end-column="39" />
           <folding>
             <element signature="imports" expanded="true" />
             <marker date="1495878294872" expanded="true" signature="925:1353" ph="SELECT Proje... Projects" />
@@ -1749,6 +1692,45 @@
             <marker date="1495878294872" expanded="true" signature="15162:15182" ph="DELETE * FRO... " />
           </folding>
         </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gui/CreateModeController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="286">
+          <caret line="85" column="25" lean-forward="false" selection-start-line="85" selection-start-column="25" selection-end-line="85" selection-end-column="25" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gui/StartingModeController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1092">
+          <caret line="155" column="9" lean-forward="true" selection-start-line="155" selection-start-column="9" selection-end-line="155" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gui/eventHandlerController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="290">
+          <caret line="342" column="45" lean-forward="false" selection-start-line="342" selection-start-column="41" selection-end-line="342" selection-end-column="45" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gui/eventHandler.fxml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="33" column="17" lean-forward="true" selection-start-line="33" selection-start-column="17" selection-end-line="33" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
       </provider>
     </entry>
   </component>
