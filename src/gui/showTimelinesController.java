@@ -853,8 +853,7 @@ public class showTimelinesController {
 										stage2.showAndWait();
 										startDatePicker.setValue(handler.getStartValue().getValue().plusDays(1));
 										startDatePicker.setValue(handler.getStartValue().getValue());
-										dp.setValue(null);
-										dp.setValue(handler.startTextField.getValue());
+
 										
 									}
 									else{
@@ -881,8 +880,7 @@ public class showTimelinesController {
 										stage2.showAndWait();
 										startDatePicker.setValue(handler.getStartValue().getValue().plusDays(1));
 										startDatePicker.setValue(handler.getStartValue().getValue());
-										dp.setValue(null);
-										dp.setValue(handler.startTextField.getValue());
+										
 										
 									}
 								} catch (IOException e1) {

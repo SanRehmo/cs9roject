@@ -215,6 +215,7 @@ public class StartingModeController {
 			start_scrollpane.setContent(new VBox());
 			delete_btn.setDisable(true);
 		}
+		name_label.setText(Main.project.projectName);
 		System.out.println("Current project: "+ Main.project.projectName+" ID: "+ Main.project.ProjectID);
 	}
 
@@ -260,6 +261,7 @@ public class StartingModeController {
 					else
 						alertWindow(AlertType.INFORMATION, "Saving", "Saving failed", null);
 					delete_btn.setDisable(false);
+					name_label.setText(Main.project.projectName);
 				}
 			}
 			else{
@@ -326,7 +328,6 @@ public class StartingModeController {
 			    timelineIdToModify= result.get().getTimelineId();
 			    eventIdToModify=0;
 			    Main.showEventHandler();
-			    refreshTimeline();
 			}
 		}
 	}

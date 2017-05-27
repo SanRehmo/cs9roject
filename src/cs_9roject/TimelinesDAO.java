@@ -106,10 +106,8 @@ public class TimelinesDAO {
         }
 
         if (connect()) {
-            String query = "SELECT PROJECT_ID FROM Projects ORDER BY PROJECT_ID DESC LIMIT 1";
             try {
                 stmt = connection.createStatement();
-                ResultSet rs = stmt.executeQuery(query);
                 String temp = "SELECT DISTINCT PROJECT_NAME, PROJECT_ID FROM Projects";
                 ResultSet rss = stmt.executeQuery(temp);
 
@@ -134,7 +132,6 @@ public class TimelinesDAO {
     public List<Project> loadAllProjects() {
 
         List<Project> result = new ArrayList<>();
-        Connection connection = null;
         int i = 0;
 
         connect();
@@ -143,8 +140,6 @@ public class TimelinesDAO {
             String query = "SELECT PROJECT_ID FROM Projects ORDER BY PROJECT_ID DESC LIMIT 1";
 
             try {
-
-                stmt = connection.createStatement();
                 ResultSet rs = stmt.executeQuery(query);
                 while (rs.next()) {
                     i++;
