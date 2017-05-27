@@ -1,6 +1,5 @@
 package cs_9roject;
 
-
 import javafx.scene.paint.Color;
 import javafx.util.Pair;
 
@@ -13,10 +12,8 @@ import java.util.List;
 public class TimelinesDAO {
 
     private Connection connection = null;
-    List<List<Event>> listOfEventLists = new ArrayList<List<Event>>();
-    String query;
-
-    // used to load a project from the DB through an ID
+    private String query;
+    private Statement stmt;
 
     /**
      * Loads a Project from the database. Projects include Timelines which include Events
@@ -25,29 +22,24 @@ public class TimelinesDAO {
      */
     public Project load(int ID) {
 
-        Statement stmt = null;
         Project result = new Project(ID);
         Timeline timeline = null;
-        ArrayList<Event> eventList = new ArrayList<Event>();
-
-        String projectName = "";
+        ArrayList<Event> eventList = new ArrayList<>();
 
         // attempt to establish a connection to the DB
-        try {
-            connection = Database.establishConnection();
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
+        connect();
 
-        if (connection != null) {
+        if (connect()) {
+
             try {
 
                 // load all events in the project
                 stmt = connection.createStatement();
                 ResultSet rss = stmt.executeQuery("SELECT Projects.PROJECT_NAME, Timelines.TIMELINE_ID, Events.EVENT_ID, Events.Title, Events.START_DATE, Events.END_DATE, Events.START_TIME, Events.END_TIME, Events.DESCRIPTION, Events.IMAGE_PATH, Events.DURATIONEVENT, Events.COLOR"
-                        + " FROM Projects JOIN (Timelines, Events) ON Projects.TIMELINE_ID=Timelines.TIMELINE_ID WHERE Timelines.EVENT_ID=Events.EVENT_ID AND PROJECT_ID=" + ID);
+                                                    + " FROM Projects JOIN (Timelines, Events) ON Projects.TIMELINE_ID=Timelines.TIMELINE_ID WHERE Timelines.EVENT_ID=Events.EVENT_ID AND PROJECT_ID=" + ID);
 
                 while (rss.next()) {
+
                     int eventID = rss.getInt("EVENT_ID");
                     String eventTitle = rss.getString("TITLE");
                     LocalDateTime eventStart_time = LocalDateTime.of(rss.getDate("START_DATE").toLocalDate(), rss.getTime("START_TIME").toLocalTime());
@@ -59,21 +51,17 @@ public class TimelinesDAO {
                     Color color = Color.valueOf(rss.getString("COLOR"));
 
                     if (isDurationEvent){
-                        Event event = new DurationEvent(timelineID, eventID, eventTitle, eventStart_time, eventEnd_time, eventDescription, color, imagePath);
-                        eventList.add(event);
+                        eventList.add(new DurationEvent(timelineID, eventID, eventTitle, eventStart_time, eventEnd_time, eventDescription, color, imagePath));
                     }
                     else{
-                    	Event event = new NonDurationEvent(timelineID, eventID, eventTitle, eventStart_time, eventDescription, color, imagePath);
-                        eventList.add(event);
+                        eventList.add(new NonDurationEvent(timelineID, eventID, eventTitle, eventStart_time, eventDescription, color, imagePath));
                     }
-
                 }
-
 
                 // load all timelines in the project
                 stmt = connection.createStatement();
                 ResultSet rs = stmt.executeQuery("SELECT Timelines.TIMELINE_ID, Timelines.EVENT_ID, Timelines.START_DATE, Timelines.END_DATE, Timelines.TITLE"
-                        + " FROM Timelines JOIN Projects ON Projects.TIMELINE_ID=Timelines.TIMELINE_ID WHERE PROJECT_ID=" + ID);
+                                                    + " FROM Timelines JOIN Projects ON Projects.TIMELINE_ID=Timelines.TIMELINE_ID WHERE PROJECT_ID=" + ID);
 
                 while (rs.next()) {
 
@@ -82,9 +70,7 @@ public class TimelinesDAO {
                         LocalDate timelineStart = rs.getDate("START_DATE").toLocalDate();
                         LocalDate timelineEnd = rs.getDate("END_DATE").toLocalDate();
                         String timelineTitle = rs.getString("TITLE");
-
                         timeline = new Timeline(timelineID, timelineStart, timelineEnd, timelineTitle, eventList);
-
                         result.addTimeline(timeline);
                     }
                 }
@@ -93,8 +79,7 @@ public class TimelinesDAO {
                 stmt = connection.createStatement();
                 ResultSet rsss = stmt.executeQuery("SELECT Projects.PROJECT_NAME FROM Projects JOIN Timelines ON Projects.TIMELINE_ID=Timelines.TIMELINE_ID WHERE PROJECT_ID=" + ID);
                 rsss.next();
-                projectName = rsss.getString("PROJECT_NAME");
-                result.projectName = projectName;
+                result.setProjectName(rsss.getString("PROJECT_NAME"));
 
             } catch (Exception ex) {
                 ex.printStackTrace();
@@ -113,7 +98,6 @@ public class TimelinesDAO {
 
         List<Pair<Integer, String>> result = new ArrayList<>();
         Connection connection = null;
-        Statement stmt = null;
 
         try {
             connection = Database.establishConnection();
@@ -121,27 +105,18 @@ public class TimelinesDAO {
             ex.printStackTrace();
         }
 
-        int highestID = 0;
-
-        if (connection != null) {
+        if (connect()) {
             String query = "SELECT PROJECT_ID FROM Projects ORDER BY PROJECT_ID DESC LIMIT 1";
             try {
                 stmt = connection.createStatement();
                 ResultSet rs = stmt.executeQuery(query);
-
                 String temp = "SELECT DISTINCT PROJECT_NAME, PROJECT_ID FROM Projects";
                 ResultSet rss = stmt.executeQuery(temp);
 
-                List<Pair<Integer, String>> data = new ArrayList<>();
-
                 while(rss.next()) {
-                    data.add(new Pair<>(rss.getInt("PROJECT_ID"), rss.getString("PROJECT_NAME")));
-                    highestID++;
+                    result.add(new Pair<>(rss.getInt("PROJECT_ID"), rss.getString("PROJECT_NAME")));
                 }
 
-                for (int i = 1; i <= highestID; i++) {
-                        result.add(new Pair<>(data.get(i-1).getKey(), data.get(i-1).getValue()));
-                }
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
@@ -158,31 +133,23 @@ public class TimelinesDAO {
      */
     public List<Project> loadAllProjects() {
 
-        List<Project> result = new ArrayList<Project>();
+        List<Project> result = new ArrayList<>();
         Connection connection = null;
-        Statement stmt = null;
-        try {
-            connection = Database.establishConnection();
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
+        int i = 0;
 
-        int highestID = 0;
+        connect();
 
-        if (connection != null) {
+        if (connect()) {
             String query = "SELECT PROJECT_ID FROM Projects ORDER BY PROJECT_ID DESC LIMIT 1";
+
             try {
+
                 stmt = connection.createStatement();
                 ResultSet rs = stmt.executeQuery(query);
                 while (rs.next()) {
-                    highestID = rs.getInt("PROJECT_ID");
-                }
-                for (int i = 1; i <= highestID; i++) {
-                    if (exists(i)) {
-                    	Project temp = load(i);
-                    		System.out.println(temp.ProjectID);
-                            result.add(temp);
-                    }
+                    i++;
+                    if(exists(i))
+                        result.add(load(i));
                 }
             } catch (Exception ex) {
                 ex.printStackTrace();
@@ -201,13 +168,9 @@ public class TimelinesDAO {
      */
     public boolean save(Project project) {
 
-        try {
-            connection = Database.establishConnection();
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
+        connect();
 
-        if (isConnected()) {
+        if (connect()) {
 
             // delte existing project (overwrite)
             if (exists(project.ProjectID))
@@ -219,7 +182,6 @@ public class TimelinesDAO {
                 Timeline tl = project.timelines.get(i);
                 String projects = "INSERT INTO Projects " + "VALUES (" + project.ProjectID + ", " + project.timelines.get(i).timelineId + ", '" + project.projectName + "')";
                 executeUpdate(projects);
-
 
                 // extracting Date and Time from LocalDateTime
                 Date startDate = Date.valueOf(tl.startDate);
@@ -309,7 +271,7 @@ public class TimelinesDAO {
             ex.printStackTrace();
         }
 
-        if (isConnected()) {
+        if (connect()) {
             query = "DELETE FROM Events WHERE EVENT_ID=" + event.eventid;
             executeUpdate(query);
             return true;
@@ -329,7 +291,7 @@ public class TimelinesDAO {
             ex.printStackTrace();
         }
 
-        if (isConnected()) {
+        if (connect()) {
             query = "DELETE FROM Timelines WHERE TIMELINE_ID=" + timeline.timelineId;
             executeUpdate(query);
             return true;
@@ -349,7 +311,7 @@ public class TimelinesDAO {
             ex.printStackTrace();
         }
 
-        if (isConnected()) {
+        if (connect()) {
             query = "DELETE FROM Projects WHERE PROJECT_ID=" + project.ProjectID;
             executeUpdate(query);
             for (int i = 0; i < project.timelines.size(); i++) {
@@ -376,7 +338,7 @@ public class TimelinesDAO {
             ex.printStackTrace();
         }
 
-        if (connection != null) {
+        if (connect()) {
             String query = "SELECT PROJECT_ID FROM Projects ORDER BY PROJECT_ID DESC LIMIT 1";
             try {
                 Statement stmt = connection.createStatement();
@@ -408,7 +370,7 @@ public class TimelinesDAO {
             ex.printStackTrace();
         }
 
-        if (connection != null) {
+        if (connect()) {
             String query = "SELECT TIMELINE_ID FROM Timelines ORDER BY TIMELINE_ID DESC LIMIT 1";
             try {
                 Statement stmt = connection.createStatement();
@@ -440,7 +402,7 @@ public class TimelinesDAO {
             ex.printStackTrace();
         }
 
-        if (connection != null) {
+        if (connect()) {
             String query = "SELECT EVENT_ID FROM Events ORDER BY EVENT_ID DESC LIMIT 1";
             try {
                 Statement stmt = connection.createStatement();
@@ -488,10 +450,9 @@ public class TimelinesDAO {
      * @param query
      * @return int
      */
-    public void executeUpdate(String query) {
+    private void executeUpdate(String query) {
 
 
-        Statement stmt = null;
 
         try {
             connection = Database.establishConnection();
@@ -499,8 +460,7 @@ public class TimelinesDAO {
             ex.printStackTrace();
         }
 
-        if (connection != null) {
-
+        if (connect()) {
             try {
                 stmt = connection.createStatement();
                 stmt.executeUpdate(query);
@@ -509,14 +469,6 @@ public class TimelinesDAO {
                 ex.printStackTrace();
             }
         }
-    }
-
-    /**
-     * Helper method, checks if database is connected
-     * @return boolean
-     */
-    public boolean isConnected() {
-        return (connection != null);
     }
 
     /**
@@ -529,7 +481,7 @@ public class TimelinesDAO {
         int queryCount = 0;
 
         try {
-            if (isConnected()) {
+            if (connect()) {
                 while (true) {
                     executeUpdate(query);
                     queryCount++;
@@ -539,6 +491,20 @@ public class TimelinesDAO {
             ex.printStackTrace();
             System.out.println("Queries until connection refusal: " + queryCount);
         }
+    }
+
+    /**
+     * Helper method, establishes connection to the database, returns if it was successful
+     * @return boolean
+     */
+    private boolean connect() {
+
+        try {
+            connection = Database.establishConnection();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return connection!=null;
     }
 }
 

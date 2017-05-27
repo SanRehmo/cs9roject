@@ -70,4 +70,28 @@ public class Project {
 	public static void setCount(int Count){
 		count = Count;
 	}
+
+	public static int getCount() {
+		return count;
+	}
+
+	public int getProjectID() {
+		return ProjectID;
+	}
+
+	public String getProjectName() {
+		return projectName;
+	}
+
+	public void setTimelines(List<Timeline> timelines) {
+		this.timelines = timelines;
+	}
+
+	public void setProjectID(int projectID) {
+		ProjectID = projectID;
+	}
+
+	public void setProjectName(String projectName) {
+		this.projectName = projectName;
+	}
 }
