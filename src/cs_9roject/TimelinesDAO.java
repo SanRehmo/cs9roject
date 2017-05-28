@@ -180,7 +180,7 @@ public class TimelinesDAO {
 
                         int boolToInt = (tl.isOnlyYears) ? 1 : 0;
                         String timelines = "INSERT INTO Timelines " + "VALUES (" + tl.timelineId + ", " + ev.eventid + ", '" + startDate + "', '" + endDate + "', '" + tl.title + "', " + boolToInt + ")";
-                    executeUpdate(timelines);
+                        executeUpdate(timelines);
 
                     // extracting Date and Time from LocalDateTime
                     startDate = Date.valueOf(ev.startTime.toLocalDate());
@@ -401,7 +401,7 @@ public class TimelinesDAO {
      * @param query
      * @return int
      */
-    public void executeUpdate(String query) {
+    private void executeUpdate(String query) {
 
         if (connect()) {
             try {
