@@ -4,11 +4,12 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-/**
- * Created by krischan on 24.04.17.
- */
 public class Database {
 
+    /**
+     * Attemps to establish a connection to the database which is then used by the DAO class
+     * @return Connection
+     */
     public static Connection establishConnection() {
 
         // attempts to load the JDBC driver
