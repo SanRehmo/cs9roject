@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="26f1f1d1-31ab-4a57-aef1-212eec71d102" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources/b0202c0a-96a1-47ab-9079-3d8c2281075e.xml" afterPath="$PROJECT_DIR$/.idea/dataSources/b0202c0a-96a1-47ab-9079-3d8c2281075e.xml" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/SCHEMA" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cs_9roject/Database.java" afterPath="$PROJECT_DIR$/src/cs_9roject/Database.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cs_9roject/TimelinesDAO.java" afterPath="$PROJECT_DIR$/src/cs_9roject/TimelinesDAO.java" />
     </list>
     <ignored path="cs9roject.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -52,42 +49,6 @@
         <option name="myItemId" value="bedrock" />
         <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
       </PATH_ELEMENT>
-      <PATH_ELEMENT>
-        <option name="myItemId" value="Timelines" />
-        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
-      </PATH_ELEMENT>
-    </PATH>
-    <PATH>
-      <PATH_ELEMENT>
-        <option name="myItemId" />
-        <option name="myItemType" value="com.intellij.database.view.DatabaseStructure$Root" />
-      </PATH_ELEMENT>
-      <PATH_ELEMENT>
-        <option name="myItemId" value="@remote" />
-        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
-      </PATH_ELEMENT>
-      <PATH_ELEMENT>
-        <option name="myItemId" value="bedrock" />
-        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
-      </PATH_ELEMENT>
-    </PATH>
-    <PATH>
-      <PATH_ELEMENT>
-        <option name="myItemId" />
-        <option name="myItemType" value="com.intellij.database.view.DatabaseStructure$Root" />
-      </PATH_ELEMENT>
-      <PATH_ELEMENT>
-        <option name="myItemId" value="@remote" />
-        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
-      </PATH_ELEMENT>
-      <PATH_ELEMENT>
-        <option name="myItemId" value="bedrock" />
-        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
-      </PATH_ELEMENT>
-      <PATH_ELEMENT>
-        <option name="myItemId" value="Events" />
-        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
-      </PATH_ELEMENT>
     </PATH>
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
@@ -96,7 +57,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="TimelinesDAO.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="TimelinesDAO.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/cs_9roject/TimelinesDAO.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="1312">
@@ -119,6 +80,116 @@
                 <marker date="1495966817948" expanded="true" signature="14205:14225" ph="DELETE * FRO... " />
                 <marker date="1495966817948" expanded="true" signature="14227:14247" ph="DELETE * FRO... " />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DATABASE/b0202c0a-96a1-47ab-9079-3d8c2281075e.SCHEMA:bedrock" pinned="false" current-in-tab="false">
+        <entry file="uml://DATABASE/b0202c0a-96a1-47ab-9079-3d8c2281075e.SCHEMA:bedrock">
+          <provider selected="true" editor-type-id="UmlEditorProvider">
+            <state>
+              <ID>DATABASE</ID>
+              <OriginalElement>b0202c0a-96a1-47ab-9079-3d8c2281075e.SCHEMA:bedrock</OriginalElement>
+              <nodes>
+                <node x="101.0" y="-51.0">b0202c0a-96a1-47ab-9079-3d8c2281075e.TABLE:bedrock.Projects</node>
+                <node x="548.0" y="300.0">b0202c0a-96a1-47ab-9079-3d8c2281075e.TABLE:bedrock.Events</node>
+                <node x="59.25" y="399.0">b0202c0a-96a1-47ab-9079-3d8c2281075e.TABLE:bedrock.Timelines</node>
+              </nodes>
+              <notes />
+              <edges>
+                <edge source="b0202c0a-96a1-47ab-9079-3d8c2281075e.TABLE:bedrock.Timelines" target="b0202c0a-96a1-47ab-9079-3d8c2281075e.TABLE:bedrock.Projects">
+                  <point x="-60.25" y="-69.5" />
+                  <point x="137.5" y="274.0" />
+                  <point x="100.5" y="275.0" />
+                  <point x="0.0" y="48.0" />
+                </edge>
+                <edge source="b0202c0a-96a1-47ab-9079-3d8c2281075e.TABLE:bedrock.Timelines" target="b0202c0a-96a1-47ab-9079-3d8c2281075e.TABLE:bedrock.Events">
+                  <point x="60.25" y="-69.5" />
+                  <point x="302.0" y="275.0" />
+                  <point x="383.0" y="275.0" />
+                  <point x="0.0" y="125.0" />
+                </edge>
+              </edges>
+              <settings layout="Hierarchic Group" zoom="1.0" x="-34.5" y="-3.5" />
+              <SelectedNodes>
+                <node>b0202c0a-96a1-47ab-9079-3d8c2281075e.TABLE:bedrock.Projects</node>
+              </SelectedNodes>
+              <Categories>
+                <Category>Key columns</Category>
+                <Category>Columns</Category>
+              </Categories>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DATABASE/b0202c0a-96a1-47ab-9079-3d8c2281075e.TABLE:bedrock.Timelines" pinned="false" current-in-tab="false">
+        <entry file="uml://DATABASE/b0202c0a-96a1-47ab-9079-3d8c2281075e.TABLE:bedrock.Timelines">
+          <provider selected="true" editor-type-id="UmlEditorProvider">
+            <state>
+              <ID>DATABASE</ID>
+              <OriginalElement>b0202c0a-96a1-47ab-9079-3d8c2281075e.TABLE:bedrock.Timelines</OriginalElement>
+              <nodes>
+                <node x="-199.0" y="177.0">b0202c0a-96a1-47ab-9079-3d8c2281075e.TABLE:bedrock.Projects</node>
+                <node x="467.0" y="36.0">b0202c0a-96a1-47ab-9079-3d8c2281075e.TABLE:bedrock.Events</node>
+                <node x="121.25" y="300.0">b0202c0a-96a1-47ab-9079-3d8c2281075e.TABLE:bedrock.Timelines</node>
+              </nodes>
+              <notes />
+              <edges>
+                <edge source="b0202c0a-96a1-47ab-9079-3d8c2281075e.TABLE:bedrock.Timelines" target="b0202c0a-96a1-47ab-9079-3d8c2281075e.TABLE:bedrock.Projects">
+                  <point x="-60.25" y="-69.5" />
+                  <point x="181.5" y="275.0" />
+                  <point x="112.5" y="246.0" />
+                  <point x="0.0" y="48.0" />
+                </edge>
+                <edge source="b0202c0a-96a1-47ab-9079-3d8c2281075e.TABLE:bedrock.Timelines" target="b0202c0a-96a1-47ab-9079-3d8c2281075e.TABLE:bedrock.Events">
+                  <point x="60.25" y="-69.5" />
+                  <point x="302.0" y="275.0" />
+                  <point x="383.0" y="275.0" />
+                  <point x="0.0" y="125.0" />
+                </edge>
+              </edges>
+              <settings layout="Hierarchic Group" zoom="1.0" x="-34.5" y="-3.5" />
+              <SelectedNodes />
+              <Categories>
+                <Category>Key columns</Category>
+                <Category>Columns</Category>
+              </Categories>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DATABASE/b0202c0a-96a1-47ab-9079-3d8c2281075e" pinned="false" current-in-tab="true">
+        <entry file="uml://DATABASE/b0202c0a-96a1-47ab-9079-3d8c2281075e">
+          <provider selected="true" editor-type-id="UmlEditorProvider">
+            <state>
+              <ID>DATABASE</ID>
+              <OriginalElement>b0202c0a-96a1-47ab-9079-3d8c2281075e</OriginalElement>
+              <nodes>
+                <node x="-1.0" y="-10.0">b0202c0a-96a1-47ab-9079-3d8c2281075e.TABLE:bedrock.Projects</node>
+                <node x="220.0" y="-83.0">b0202c0a-96a1-47ab-9079-3d8c2281075e.TABLE:bedrock.Events</node>
+                <node x="122.25" y="311.0">b0202c0a-96a1-47ab-9079-3d8c2281075e.TABLE:bedrock.Timelines</node>
+              </nodes>
+              <notes />
+              <edges>
+                <edge source="b0202c0a-96a1-47ab-9079-3d8c2281075e.TABLE:bedrock.Timelines" target="b0202c0a-96a1-47ab-9079-3d8c2281075e.TABLE:bedrock.Projects">
+                  <point x="-60.25" y="-69.5" />
+                  <point x="181.5" y="275.0" />
+                  <point x="100.5" y="275.0" />
+                  <point x="0.0" y="48.0" />
+                </edge>
+                <edge source="b0202c0a-96a1-47ab-9079-3d8c2281075e.TABLE:bedrock.Timelines" target="b0202c0a-96a1-47ab-9079-3d8c2281075e.TABLE:bedrock.Events">
+                  <point x="60.25" y="-69.5" />
+                  <point x="302.0" y="275.0" />
+                  <point x="383.0" y="275.0" />
+                  <point x="0.0" y="125.0" />
+                </edge>
+              </edges>
+              <settings layout="Hierarchic Group" zoom="1.0" x="272.5" y="219.5" />
+              <SelectedNodes />
+              <Categories>
+                <Category>Key columns</Category>
+                <Category>Columns</Category>
+              </Categories>
             </state>
           </provider>
         </entry>
@@ -155,16 +226,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-1139">
               <caret line="8" column="13" lean-forward="false" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DurationEvent.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/cs_9roject/DurationEvent.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="17" column="153" lean-forward="false" selection-start-line="17" selection-start-column="153" selection-end-line="17" selection-end-column="153" />
               <folding />
             </state>
           </provider>
@@ -210,18 +271,6 @@
                 <element signature="e#5548#5549#0" expanded="true" />
                 <element signature="e#9819#9851#1" expanded="true" />
                 <marker date="1495958859423" expanded="false" signature="14865:14872" ph="&lt;~&gt;" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CreateModeController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/gui/CreateModeController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1445">
-              <caret line="85" column="25" lean-forward="false" selection-start-line="85" selection-start-column="25" selection-end-line="85" selection-end-column="25" />
-              <folding>
-                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -432,7 +481,7 @@
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
-    <property name="last_opened_file_path" value="$USER_HOME$/Java Librarires/mysql-connector-java-5.1.42/mysql-connector-java-5.1.42-bin.jar!/" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/Database Diagram.png" />
     <property name="com.intellij.database.dataSource.DataSourceTemplate" value="MySQL" />
     <property name="full.screen.before.presentation.mode" value="false" />
   </component>
@@ -1028,7 +1077,7 @@
       <workItem from="1495726964771" duration="11011000" />
       <workItem from="1495836355649" duration="599000" />
       <workItem from="1495876779976" duration="6296000" />
-      <workItem from="1495958785636" duration="7312000" />
+      <workItem from="1495958785636" duration="7765000" />
     </task>
     <task id="LOCAL-00001" summary="DB saving and loading Event Image, also backend preparation for access control">
       <created>1495017646470</created>
@@ -1121,11 +1170,25 @@
       <option name="project" value="LOCAL" />
       <updated>1495960679857</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Refactoring, Database &amp; Server adjustments">
+      <created>1495966855384</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1495966855384</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Database Schema">
+      <created>1495967037536</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1495967037536</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="41955000" />
+    <option name="totallyTimeSpent" value="42408000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1229,7 +1292,9 @@
     <MESSAGE value="Refactoring, commenting, cleanup" />
     <MESSAGE value="fixed bug with eventHandler.fxml" />
     <MESSAGE value="Backend Refactoring" />
-    <option name="LAST_COMMIT_MESSAGE" value="Backend Refactoring" />
+    <MESSAGE value="Refactoring, Database &amp; Server adjustments" />
+    <MESSAGE value="Database Schema" />
+    <option name="LAST_COMMIT_MESSAGE" value="Database Schema" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1242,48 +1307,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/15528d06-e735-47b2-a1ac-9f005a8ae7ed/console.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="53" lean-forward="false" selection-start-line="12" selection-start-column="53" selection-end-line="12" selection-end-column="53" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/cs_9roject/TimelinesDAO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#5239#5264#0" expanded="true" />
-            <element signature="e#14329#14356#1" expanded="true" />
-            <marker date="1495966817948" expanded="true" signature="843:1271" ph="SELECT Proje... Projects" />
-            <marker date="1495966817948" expanded="true" signature="2693:2800" ph="SELECT Timel... " />
-            <marker date="1495966817948" expanded="true" signature="2693:2950" ph="SELECT Timel... Timelines" />
-            <marker date="1495966817948" expanded="true" signature="3778:3899" ph="SELECT Proje... Projects" />
-            <marker date="1495966817948" expanded="true" signature="4602:4656" ph="SELECT DISTI... Projects" />
-            <marker date="1495966817948" expanded="true" signature="5469:5533" ph="SELECT PROJE... Projects" />
-            <marker date="1495966817948" expanded="true" signature="9383:9414" ph="SELECT PROJE... Projects" />
-            <marker date="1495966817948" expanded="true" signature="11737:11801" ph="SELECT PROJE... Projects" />
-            <marker date="1495966817948" expanded="true" signature="12555:12622" ph="SELECT TIMEL... Timelines" />
-            <marker date="1495966817948" expanded="true" signature="13372:13430" ph="SELECT EVENT... Events" />
-            <marker date="1495966817948" expanded="true" signature="14181:14203" ph="DELETE * FRO... " />
-            <marker date="1495966817948" expanded="true" signature="14205:14225" ph="DELETE * FRO... " />
-            <marker date="1495966817948" expanded="true" signature="14227:14247" ph="DELETE * FRO... " />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/cs_9roject/Project.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="11" column="27" lean-forward="false" selection-start-line="11" selection-start-column="27" selection-end-line="11" selection-end-column="27" />
-          <folding>
-            <element signature="e#2019#2020#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/EventValidate.java" />
     <entry file="file://$PROJECT_DIR$/src/cs_9roject/NonDurationEvent.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -1669,27 +1692,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="uml://DATABASE/b0202c0a-96a1-47ab-9079-3d8c2281075e.SCHEMA:bedrock">
-      <provider selected="true" editor-type-id="UmlEditorProvider">
-        <state>
-          <ID>DATABASE</ID>
-          <OriginalElement>b0202c0a-96a1-47ab-9079-3d8c2281075e.SCHEMA:bedrock</OriginalElement>
-          <nodes>
-            <node x="" y="">b0202c0a-96a1-47ab-9079-3d8c2281075e.TABLE:bedrock.Projects</node>
-            <node x="" y="">b0202c0a-96a1-47ab-9079-3d8c2281075e.TABLE:bedrock.Events</node>
-            <node x="" y="">b0202c0a-96a1-47ab-9079-3d8c2281075e.TABLE:bedrock.Timelines</node>
-          </nodes>
-          <notes />
-          <edges />
-          <settings layout="Hierarchic Group" zoom="1.0" x="162.0" y="290.0" />
-          <SelectedNodes />
-          <Categories>
-            <Category>Key columns</Category>
-            <Category>Columns</Category>
-          </Categories>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/b0202c0a-96a1-47ab-9079-3d8c2281075e/console.sql">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="459">
@@ -1722,6 +1724,131 @@
             <marker date="1495966817948" expanded="true" signature="14205:14225" ph="DELETE * FRO... " />
             <marker date="1495966817948" expanded="true" signature="14227:14247" ph="DELETE * FRO... " />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SCHEMA:bedrock.uml">
+      <provider selected="true" editor-type-id="UmlEditorProvider">
+        <state>
+          <ID>DATABASE</ID>
+          <OriginalElement>b0202c0a-96a1-47ab-9079-3d8c2281075e.SCHEMA:bedrock</OriginalElement>
+          <nodes>
+            <node x="" y="">b0202c0a-96a1-47ab-9079-3d8c2281075e.TABLE:bedrock.Projects</node>
+            <node x="" y="">b0202c0a-96a1-47ab-9079-3d8c2281075e.TABLE:bedrock.Events</node>
+            <node x="" y="">b0202c0a-96a1-47ab-9079-3d8c2281075e.TABLE:bedrock.Timelines</node>
+          </nodes>
+          <notes />
+          <edges />
+          <settings layout="Hierarchic Group" zoom="1.0" x="273.0" y="220.0" />
+          <SelectedNodes />
+          <Categories>
+            <Category>Columns</Category>
+            <Category>Key columns</Category>
+          </Categories>
+        </state>
+      </provider>
+    </entry>
+    <entry file="uml://DATABASE/b0202c0a-96a1-47ab-9079-3d8c2281075e.SCHEMA:bedrock">
+      <provider selected="true" editor-type-id="UmlEditorProvider">
+        <state>
+          <ID>DATABASE</ID>
+          <OriginalElement>b0202c0a-96a1-47ab-9079-3d8c2281075e.SCHEMA:bedrock</OriginalElement>
+          <nodes>
+            <node x="101.0" y="-51.0">b0202c0a-96a1-47ab-9079-3d8c2281075e.TABLE:bedrock.Projects</node>
+            <node x="548.0" y="300.0">b0202c0a-96a1-47ab-9079-3d8c2281075e.TABLE:bedrock.Events</node>
+            <node x="59.25" y="399.0">b0202c0a-96a1-47ab-9079-3d8c2281075e.TABLE:bedrock.Timelines</node>
+          </nodes>
+          <notes />
+          <edges>
+            <edge source="b0202c0a-96a1-47ab-9079-3d8c2281075e.TABLE:bedrock.Timelines" target="b0202c0a-96a1-47ab-9079-3d8c2281075e.TABLE:bedrock.Projects">
+              <point x="-60.25" y="-69.5" />
+              <point x="137.5" y="274.0" />
+              <point x="100.5" y="275.0" />
+              <point x="0.0" y="48.0" />
+            </edge>
+            <edge source="b0202c0a-96a1-47ab-9079-3d8c2281075e.TABLE:bedrock.Timelines" target="b0202c0a-96a1-47ab-9079-3d8c2281075e.TABLE:bedrock.Events">
+              <point x="60.25" y="-69.5" />
+              <point x="302.0" y="275.0" />
+              <point x="383.0" y="275.0" />
+              <point x="0.0" y="125.0" />
+            </edge>
+          </edges>
+          <settings layout="Hierarchic Group" zoom="1.0" x="-34.5" y="-3.5" />
+          <SelectedNodes>
+            <node>b0202c0a-96a1-47ab-9079-3d8c2281075e.TABLE:bedrock.Projects</node>
+          </SelectedNodes>
+          <Categories>
+            <Category>Key columns</Category>
+            <Category>Columns</Category>
+          </Categories>
+        </state>
+      </provider>
+    </entry>
+    <entry file="uml://DATABASE/b0202c0a-96a1-47ab-9079-3d8c2281075e.TABLE:bedrock.Timelines">
+      <provider selected="true" editor-type-id="UmlEditorProvider">
+        <state>
+          <ID>DATABASE</ID>
+          <OriginalElement>b0202c0a-96a1-47ab-9079-3d8c2281075e.TABLE:bedrock.Timelines</OriginalElement>
+          <nodes>
+            <node x="-199.0" y="177.0">b0202c0a-96a1-47ab-9079-3d8c2281075e.TABLE:bedrock.Projects</node>
+            <node x="467.0" y="36.0">b0202c0a-96a1-47ab-9079-3d8c2281075e.TABLE:bedrock.Events</node>
+            <node x="121.25" y="300.0">b0202c0a-96a1-47ab-9079-3d8c2281075e.TABLE:bedrock.Timelines</node>
+          </nodes>
+          <notes />
+          <edges>
+            <edge source="b0202c0a-96a1-47ab-9079-3d8c2281075e.TABLE:bedrock.Timelines" target="b0202c0a-96a1-47ab-9079-3d8c2281075e.TABLE:bedrock.Projects">
+              <point x="-60.25" y="-69.5" />
+              <point x="181.5" y="275.0" />
+              <point x="112.5" y="246.0" />
+              <point x="0.0" y="48.0" />
+            </edge>
+            <edge source="b0202c0a-96a1-47ab-9079-3d8c2281075e.TABLE:bedrock.Timelines" target="b0202c0a-96a1-47ab-9079-3d8c2281075e.TABLE:bedrock.Events">
+              <point x="60.25" y="-69.5" />
+              <point x="302.0" y="275.0" />
+              <point x="383.0" y="275.0" />
+              <point x="0.0" y="125.0" />
+            </edge>
+          </edges>
+          <settings layout="Hierarchic Group" zoom="1.0" x="-34.5" y="-3.5" />
+          <SelectedNodes />
+          <Categories>
+            <Category>Key columns</Category>
+            <Category>Columns</Category>
+          </Categories>
+        </state>
+      </provider>
+    </entry>
+    <entry file="uml://DATABASE/b0202c0a-96a1-47ab-9079-3d8c2281075e">
+      <provider selected="true" editor-type-id="UmlEditorProvider">
+        <state>
+          <ID>DATABASE</ID>
+          <OriginalElement>b0202c0a-96a1-47ab-9079-3d8c2281075e</OriginalElement>
+          <nodes>
+            <node x="-1.0" y="-10.0">b0202c0a-96a1-47ab-9079-3d8c2281075e.TABLE:bedrock.Projects</node>
+            <node x="220.0" y="-83.0">b0202c0a-96a1-47ab-9079-3d8c2281075e.TABLE:bedrock.Events</node>
+            <node x="122.25" y="311.0">b0202c0a-96a1-47ab-9079-3d8c2281075e.TABLE:bedrock.Timelines</node>
+          </nodes>
+          <notes />
+          <edges>
+            <edge source="b0202c0a-96a1-47ab-9079-3d8c2281075e.TABLE:bedrock.Timelines" target="b0202c0a-96a1-47ab-9079-3d8c2281075e.TABLE:bedrock.Projects">
+              <point x="-60.25" y="-69.5" />
+              <point x="181.5" y="275.0" />
+              <point x="100.5" y="275.0" />
+              <point x="0.0" y="48.0" />
+            </edge>
+            <edge source="b0202c0a-96a1-47ab-9079-3d8c2281075e.TABLE:bedrock.Timelines" target="b0202c0a-96a1-47ab-9079-3d8c2281075e.TABLE:bedrock.Events">
+              <point x="60.25" y="-69.5" />
+              <point x="302.0" y="275.0" />
+              <point x="383.0" y="275.0" />
+              <point x="0.0" y="125.0" />
+            </edge>
+          </edges>
+          <settings layout="Hierarchic Group" zoom="1.0" x="272.5" y="219.5" />
+          <SelectedNodes />
+          <Categories>
+            <Category>Key columns</Category>
+            <Category>Columns</Category>
+          </Categories>
         </state>
       </provider>
     </entry>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>DATABASE</ID>
+  <OriginalElement>b0202c0a-96a1-47ab-9079-3d8c2281075e</OriginalElement>
+  <nodes>
+    <node x="-1.0" y="-10.0">b0202c0a-96a1-47ab-9079-3d8c2281075e.TABLE:bedrock.Projects</node>
+    <node x="220.0" y="-83.0">b0202c0a-96a1-47ab-9079-3d8c2281075e.TABLE:bedrock.Events</node>
+    <node x="122.25" y="311.0">b0202c0a-96a1-47ab-9079-3d8c2281075e.TABLE:bedrock.Timelines</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="b0202c0a-96a1-47ab-9079-3d8c2281075e.TABLE:bedrock.Timelines" target="b0202c0a-96a1-47ab-9079-3d8c2281075e.TABLE:bedrock.Projects">
+      <point x="-60.25" y="-69.5" />
+      <point x="181.5" y="275.0" />
+      <point x="100.5" y="275.0" />
+      <point x="0.0" y="48.0" />
+    </edge>
+    <edge source="b0202c0a-96a1-47ab-9079-3d8c2281075e.TABLE:bedrock.Timelines" target="b0202c0a-96a1-47ab-9079-3d8c2281075e.TABLE:bedrock.Events">
+      <point x="60.25" y="-69.5" />
+      <point x="302.0" y="275.0" />
+      <point x="383.0" y="275.0" />
+      <point x="0.0" y="125.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="1.0" x="272.5" y="219.5" />
+  <SelectedNodes>
+    <node>b0202c0a-96a1-47ab-9079-3d8c2281075e.TABLE:bedrock.Timelines</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Key columns</Category>
+    <Category>Columns</Category>
+  </Categories>
+</Diagram>
+
