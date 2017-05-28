@@ -19,8 +19,6 @@ public class Database {
             e.printStackTrace();
             return null;
         }
-
-        // initialization of variables
         Connection connection;
 
         // attempt to connect to our database with our credentials

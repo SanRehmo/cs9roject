@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="26f1f1d1-31ab-4a57-aef1-212eec71d102" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources/b0202c0a-96a1-47ab-9079-3d8c2281075e.xml" afterPath="$PROJECT_DIR$/.idea/dataSources/b0202c0a-96a1-47ab-9079-3d8c2281075e.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cs_9roject/Database.java" afterPath="$PROJECT_DIR$/src/cs_9roject/Database.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cs_9roject/TimelinesDAO.java" afterPath="$PROJECT_DIR$/src/cs_9roject/TimelinesDAO.java" />
     </list>
@@ -50,6 +52,24 @@
         <option name="myItemId" value="bedrock" />
         <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
       </PATH_ELEMENT>
+      <PATH_ELEMENT>
+        <option name="myItemId" value="Timelines" />
+        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
+      </PATH_ELEMENT>
+    </PATH>
+    <PATH>
+      <PATH_ELEMENT>
+        <option name="myItemId" />
+        <option name="myItemType" value="com.intellij.database.view.DatabaseStructure$Root" />
+      </PATH_ELEMENT>
+      <PATH_ELEMENT>
+        <option name="myItemId" value="@remote" />
+        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
+      </PATH_ELEMENT>
+      <PATH_ELEMENT>
+        <option name="myItemId" value="bedrock" />
+        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
+      </PATH_ELEMENT>
     </PATH>
     <PATH>
       <PATH_ELEMENT>
@@ -65,7 +85,7 @@
         <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
       </PATH_ELEMENT>
       <PATH_ELEMENT>
-        <option name="myItemId" value="Projects" />
+        <option name="myItemId" value="Events" />
         <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
       </PATH_ELEMENT>
     </PATH>
@@ -76,28 +96,28 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="TimelinesDAO.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="TimelinesDAO.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/cs_9roject/TimelinesDAO.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="392">
-              <caret line="348" column="2" lean-forward="false" selection-start-line="348" selection-start-column="2" selection-end-line="351" selection-end-column="7" />
+            <state relative-caret-position="1312">
+              <caret line="198" column="24" lean-forward="false" selection-start-line="198" selection-start-column="24" selection-end-line="198" selection-end-column="24" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#5239#5264#0" expanded="true" />
-                <element signature="e#14210#14237#1" expanded="true" />
-                <marker date="1495960669216" expanded="true" signature="843:1271" ph="SELECT Proje... Projects" />
-                <marker date="1495960669216" expanded="true" signature="2693:2800" ph="SELECT Timel... " />
-                <marker date="1495960669216" expanded="true" signature="2693:2950" ph="SELECT Timel... Timelines" />
-                <marker date="1495960669216" expanded="true" signature="3778:3899" ph="SELECT Proje... Projects" />
-                <marker date="1495960669216" expanded="true" signature="4602:4656" ph="SELECT DISTI... Projects" />
-                <marker date="1495960669216" expanded="true" signature="5469:5533" ph="SELECT PROJE... Projects" />
-                <marker date="1495960669216" expanded="true" signature="9294:9325" ph="SELECT PROJE... Projects" />
-                <marker date="1495960669216" expanded="true" signature="11618:11682" ph="SELECT PROJE... Projects" />
-                <marker date="1495960669216" expanded="true" signature="12436:12503" ph="SELECT TIMEL... Timelines" />
-                <marker date="1495960669216" expanded="true" signature="13253:13311" ph="SELECT EVENT... Events" />
-                <marker date="1495960669216" expanded="true" signature="14062:14084" ph="DELETE * FRO... " />
-                <marker date="1495960669216" expanded="true" signature="14086:14106" ph="DELETE * FRO... " />
-                <marker date="1495960669216" expanded="true" signature="14108:14128" ph="DELETE * FRO... " />
+                <element signature="e#14329#14356#1" expanded="true" />
+                <marker date="1495966817948" expanded="true" signature="843:1271" ph="SELECT Proje... Projects" />
+                <marker date="1495966817948" expanded="true" signature="2693:2800" ph="SELECT Timel... " />
+                <marker date="1495966817948" expanded="true" signature="2693:2950" ph="SELECT Timel... Timelines" />
+                <marker date="1495966817948" expanded="true" signature="3778:3899" ph="SELECT Proje... Projects" />
+                <marker date="1495966817948" expanded="true" signature="4602:4656" ph="SELECT DISTI... Projects" />
+                <marker date="1495966817948" expanded="true" signature="5469:5533" ph="SELECT PROJE... Projects" />
+                <marker date="1495966817948" expanded="true" signature="9383:9414" ph="SELECT PROJE... Projects" />
+                <marker date="1495966817948" expanded="true" signature="11737:11801" ph="SELECT PROJE... Projects" />
+                <marker date="1495966817948" expanded="true" signature="12555:12622" ph="SELECT TIMEL... Timelines" />
+                <marker date="1495966817948" expanded="true" signature="13372:13430" ph="SELECT EVENT... Events" />
+                <marker date="1495966817948" expanded="true" signature="14181:14203" ph="DELETE * FRO... " />
+                <marker date="1495966817948" expanded="true" signature="14205:14225" ph="DELETE * FRO... " />
+                <marker date="1495966817948" expanded="true" signature="14227:14247" ph="DELETE * FRO... " />
               </folding>
             </state>
           </provider>
@@ -106,11 +126,26 @@
       <file leaf-file-name="console.sql" pinned="false" current-in-tab="false">
         <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/b0202c0a-96a1-47ab-9079-3d8c2281075e/console.sql">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="8" column="21" lean-forward="false" selection-start-line="8" selection-start-column="21" selection-end-line="8" selection-end-column="21" />
+            <state relative-caret-position="459">
+              <caret line="27" column="21" lean-forward="false" selection-start-line="27" selection-start-column="21" selection-end-line="27" selection-end-column="21" />
               <folding>
-                <marker date="1495734121077" expanded="true" signature="188:202" ph="SELECT * FRO... Timelines" />
+                <marker date="1495966323349" expanded="true" signature="188:202" ph="SELECT * FRO... Timelines" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="bedrock.Timelines" pinned="false" current-in-tab="false">
+        <entry file="dbDummy://dbtable:/9fb0e5c3/b0202c0a-96a1-47ab-9079-3d8c2281075e/bedrock.Timelines">
+          <provider editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+            <state>
+              <filtering enabled="true" />
             </state>
           </provider>
         </entry>
@@ -120,38 +155,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-1139">
               <caret line="8" column="13" lean-forward="false" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Project.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/cs_9roject/Project.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1156">
-              <caret line="85" column="56" lean-forward="false" selection-start-line="85" selection-start-column="56" selection-end-line="85" selection-end-column="56" />
-              <folding>
-                <element signature="e#2019#2020#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="NonDurationEvent.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/cs_9roject/NonDurationEvent.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="15" column="91" lean-forward="false" selection-start-line="15" selection-start-column="91" selection-end-line="15" selection-end-column="91" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Event.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/cs_9roject/Event.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="442">
-              <caret line="33" column="30" lean-forward="false" selection-start-line="33" selection-start-column="30" selection-end-line="33" selection-end-column="30" />
               <folding />
             </state>
           </provider>
@@ -167,15 +170,28 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Database.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Database.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/cs_9roject/Database.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="9" column="92" lean-forward="false" selection-start-line="9" selection-start-column="92" selection-end-line="9" selection-end-column="92" />
+            <state relative-caret-position="459">
+              <caret line="27" column="0" lean-forward="false" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <marker date="1495960669206" expanded="true" signature="617:1022" ph="{...}" />
+                <marker date="1495962225735" expanded="true" signature="577:982" ph="{...}" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="221">
+                <caret line="13" column="33" lean-forward="false" selection-start-line="13" selection-start-column="33" selection-end-line="13" selection-end-column="33" />
+                <folding />
+              </first_editor>
+              <second_editor />
             </state>
           </provider>
         </entry>
@@ -223,13 +239,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>return</find>
-      <find>showEventHandler</find>
-      <find>userID</find>
-      <find>user</find>
-      <find>projects</find>
-      <find>loadAllP</find>
-      <find>result</find>
       <find>exist</find>
       <find>loadAllPro</find>
       <find>connection !=</find>
@@ -253,6 +262,13 @@
       <find>connect()</find>
       <find>Failed to make connection</find>
       <find>connection</find>
+      <find>isOnl</find>
+      <find>Timelines</find>
+      <find>getTimeline</find>
+      <find>timelines</find>
+      <find>events</find>
+      <find>projects</find>
+      <find>null</find>
     </findStrings>
     <replaceStrings>
       <replace>isConnected</replace>
@@ -260,6 +276,10 @@
       <replace>connect()</replace>
       <replace>connect();</replace>
       <replace>Connection failed</replace>
+      <replace>getTimelines</replace>
+      <replace>getTimelines()</replace>
+      <replace>getEvents()</replace>
+      <replace>getProjects()</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -292,14 +312,16 @@
         <option value="$PROJECT_DIR$/src/gui/Main.java" />
         <option value="$PROJECT_DIR$/src/cs_9roject/Pair.java" />
         <option value="$PROJECT_DIR$/src/cs_9roject/DataHelper.java" />
-        <option value="$APPLICATION_CONFIG_DIR$/consoles/db/b0202c0a-96a1-47ab-9079-3d8c2281075e/console.sql" />
         <option value="$PROJECT_DIR$/src/cs_9roject/Project.java" />
         <option value="$PROJECT_DIR$/src/gui/CreateModeController.java" />
         <option value="$PROJECT_DIR$/src/gui/StartingModeController.java" />
         <option value="$PROJECT_DIR$/src/gui/eventHandler.fxml" />
         <option value="$PROJECT_DIR$/src/gui/eventHandlerController.java" />
-        <option value="$PROJECT_DIR$/src/cs_9roject/TimelinesDAO.java" />
+        <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/src/cs_9roject/Database.java" />
+        <option value="dbtable:/9fb0e5c3/b0202c0a-96a1-47ab-9079-3d8c2281075e/bedrock.Timelines" />
+        <option value="$APPLICATION_CONFIG_DIR$/consoles/db/b0202c0a-96a1-47ab-9079-3d8c2281075e/console.sql" />
+        <option value="$PROJECT_DIR$/src/cs_9roject/TimelinesDAO.java" />
       </list>
     </option>
   </component>
@@ -1006,7 +1028,7 @@
       <workItem from="1495726964771" duration="11011000" />
       <workItem from="1495836355649" duration="599000" />
       <workItem from="1495876779976" duration="6296000" />
-      <workItem from="1495958785636" duration="1885000" />
+      <workItem from="1495958785636" duration="7312000" />
     </task>
     <task id="LOCAL-00001" summary="DB saving and loading Event Image, also backend preparation for access control">
       <created>1495017646470</created>
@@ -1092,11 +1114,18 @@
       <option name="project" value="LOCAL" />
       <updated>1495960054437</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Backend Refactoring">
+      <created>1495960679857</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1495960679857</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="36528000" />
+    <option name="totallyTimeSpent" value="41955000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1213,31 +1242,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/cs_9roject/Event.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="33" column="32" lean-forward="false" selection-start-line="33" selection-start-column="32" selection-end-line="33" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/gui/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="33" column="4" lean-forward="false" selection-start-line="33" selection-start-column="4" selection-end-line="33" selection-end-column="4" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/gui/showTimelinesController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2023">
-          <caret line="119" column="4" lean-forward="false" selection-start-line="119" selection-start-column="4" selection-end-line="119" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/15528d06-e735-47b2-a1ac-9f005a8ae7ed/console.sql">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
@@ -1252,20 +1256,20 @@
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#5239#5264#0" expanded="true" />
-            <element signature="e#14210#14237#1" expanded="true" />
-            <marker date="1495960669216" expanded="true" signature="843:1271" ph="SELECT Proje... Projects" />
-            <marker date="1495960669216" expanded="true" signature="2693:2800" ph="SELECT Timel... " />
-            <marker date="1495960669216" expanded="true" signature="2693:2950" ph="SELECT Timel... Timelines" />
-            <marker date="1495960669216" expanded="true" signature="3778:3899" ph="SELECT Proje... Projects" />
-            <marker date="1495960669216" expanded="true" signature="4602:4656" ph="SELECT DISTI... Projects" />
-            <marker date="1495960669216" expanded="true" signature="5469:5533" ph="SELECT PROJE... Projects" />
-            <marker date="1495960669216" expanded="true" signature="9294:9325" ph="SELECT PROJE... Projects" />
-            <marker date="1495960669216" expanded="true" signature="11618:11682" ph="SELECT PROJE... Projects" />
-            <marker date="1495960669216" expanded="true" signature="12436:12503" ph="SELECT TIMEL... Timelines" />
-            <marker date="1495960669216" expanded="true" signature="13253:13311" ph="SELECT EVENT... Events" />
-            <marker date="1495960669216" expanded="true" signature="14062:14084" ph="DELETE * FRO... " />
-            <marker date="1495960669216" expanded="true" signature="14086:14106" ph="DELETE * FRO... " />
-            <marker date="1495960669216" expanded="true" signature="14108:14128" ph="DELETE * FRO... " />
+            <element signature="e#14329#14356#1" expanded="true" />
+            <marker date="1495966817948" expanded="true" signature="843:1271" ph="SELECT Proje... Projects" />
+            <marker date="1495966817948" expanded="true" signature="2693:2800" ph="SELECT Timel... " />
+            <marker date="1495966817948" expanded="true" signature="2693:2950" ph="SELECT Timel... Timelines" />
+            <marker date="1495966817948" expanded="true" signature="3778:3899" ph="SELECT Proje... Projects" />
+            <marker date="1495966817948" expanded="true" signature="4602:4656" ph="SELECT DISTI... Projects" />
+            <marker date="1495966817948" expanded="true" signature="5469:5533" ph="SELECT PROJE... Projects" />
+            <marker date="1495966817948" expanded="true" signature="9383:9414" ph="SELECT PROJE... Projects" />
+            <marker date="1495966817948" expanded="true" signature="11737:11801" ph="SELECT PROJE... Projects" />
+            <marker date="1495966817948" expanded="true" signature="12555:12622" ph="SELECT TIMEL... Timelines" />
+            <marker date="1495966817948" expanded="true" signature="13372:13430" ph="SELECT EVENT... Events" />
+            <marker date="1495966817948" expanded="true" signature="14181:14203" ph="DELETE * FRO... " />
+            <marker date="1495966817948" expanded="true" signature="14205:14225" ph="DELETE * FRO... " />
+            <marker date="1495966817948" expanded="true" signature="14227:14247" ph="DELETE * FRO... " />
           </folding>
         </state>
       </provider>
@@ -1275,7 +1279,7 @@
         <state relative-caret-position="170">
           <caret line="11" column="27" lean-forward="false" selection-start-line="11" selection-start-column="27" selection-end-line="11" selection-end-column="27" />
           <folding>
-            <element signature="e#2019#2020#0" expanded="true" />
+            <element signature="e#2019#2020#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1341,20 +1345,20 @@
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#5239#5264#0" expanded="true" />
-            <element signature="e#14210#14237#1" expanded="true" />
-            <marker date="1495960669216" expanded="true" signature="843:1271" ph="SELECT Proje... Projects" />
-            <marker date="1495960669216" expanded="true" signature="2693:2800" ph="SELECT Timel... " />
-            <marker date="1495960669216" expanded="true" signature="2693:2950" ph="SELECT Timel... Timelines" />
-            <marker date="1495960669216" expanded="true" signature="3778:3899" ph="SELECT Proje... Projects" />
-            <marker date="1495960669216" expanded="true" signature="4602:4656" ph="SELECT DISTI... Projects" />
-            <marker date="1495960669216" expanded="true" signature="5469:5533" ph="SELECT PROJE... Projects" />
-            <marker date="1495960669216" expanded="true" signature="9294:9325" ph="SELECT PROJE... Projects" />
-            <marker date="1495960669216" expanded="true" signature="11618:11682" ph="SELECT PROJE... Projects" />
-            <marker date="1495960669216" expanded="true" signature="12436:12503" ph="SELECT TIMEL... Timelines" />
-            <marker date="1495960669216" expanded="true" signature="13253:13311" ph="SELECT EVENT... Events" />
-            <marker date="1495960669216" expanded="true" signature="14062:14084" ph="DELETE * FRO... " />
-            <marker date="1495960669216" expanded="true" signature="14086:14106" ph="DELETE * FRO... " />
-            <marker date="1495960669216" expanded="true" signature="14108:14128" ph="DELETE * FRO... " />
+            <element signature="e#14329#14356#1" expanded="true" />
+            <marker date="1495966817948" expanded="true" signature="843:1271" ph="SELECT Proje... Projects" />
+            <marker date="1495966817948" expanded="true" signature="2693:2800" ph="SELECT Timel... " />
+            <marker date="1495966817948" expanded="true" signature="2693:2950" ph="SELECT Timel... Timelines" />
+            <marker date="1495966817948" expanded="true" signature="3778:3899" ph="SELECT Proje... Projects" />
+            <marker date="1495966817948" expanded="true" signature="4602:4656" ph="SELECT DISTI... Projects" />
+            <marker date="1495966817948" expanded="true" signature="5469:5533" ph="SELECT PROJE... Projects" />
+            <marker date="1495966817948" expanded="true" signature="9383:9414" ph="SELECT PROJE... Projects" />
+            <marker date="1495966817948" expanded="true" signature="11737:11801" ph="SELECT PROJE... Projects" />
+            <marker date="1495966817948" expanded="true" signature="12555:12622" ph="SELECT TIMEL... Timelines" />
+            <marker date="1495966817948" expanded="true" signature="13372:13430" ph="SELECT EVENT... Events" />
+            <marker date="1495966817948" expanded="true" signature="14181:14203" ph="DELETE * FRO... " />
+            <marker date="1495966817948" expanded="true" signature="14205:14225" ph="DELETE * FRO... " />
+            <marker date="1495966817948" expanded="true" signature="14227:14247" ph="DELETE * FRO... " />
           </folding>
         </state>
       </provider>
@@ -1364,7 +1368,7 @@
         <state relative-caret-position="170">
           <caret line="11" column="27" lean-forward="false" selection-start-line="11" selection-start-column="27" selection-end-line="11" selection-end-column="27" />
           <folding>
-            <element signature="e#2019#2020#0" expanded="true" />
+            <element signature="e#2019#2020#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1422,7 +1426,7 @@
           <caret line="29" column="64" lean-forward="false" selection-start-line="29" selection-start-column="49" selection-end-line="29" selection-end-column="66" />
           <folding>
             <element signature="imports" expanded="true" />
-            <marker date="1495960669206" expanded="true" signature="617:1022" ph="{...}" />
+            <marker date="1495962225735" expanded="true" signature="577:982" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -1441,20 +1445,20 @@
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#5239#5264#0" expanded="true" />
-            <element signature="e#14210#14237#1" expanded="true" />
-            <marker date="1495960669216" expanded="true" signature="843:1271" ph="SELECT Proje... Projects" />
-            <marker date="1495960669216" expanded="true" signature="2693:2800" ph="SELECT Timel... " />
-            <marker date="1495960669216" expanded="true" signature="2693:2950" ph="SELECT Timel... Timelines" />
-            <marker date="1495960669216" expanded="true" signature="3778:3899" ph="SELECT Proje... Projects" />
-            <marker date="1495960669216" expanded="true" signature="4602:4656" ph="SELECT DISTI... Projects" />
-            <marker date="1495960669216" expanded="true" signature="5469:5533" ph="SELECT PROJE... Projects" />
-            <marker date="1495960669216" expanded="true" signature="9294:9325" ph="SELECT PROJE... Projects" />
-            <marker date="1495960669216" expanded="true" signature="11618:11682" ph="SELECT PROJE... Projects" />
-            <marker date="1495960669216" expanded="true" signature="12436:12503" ph="SELECT TIMEL... Timelines" />
-            <marker date="1495960669216" expanded="true" signature="13253:13311" ph="SELECT EVENT... Events" />
-            <marker date="1495960669216" expanded="true" signature="14062:14084" ph="DELETE * FRO... " />
-            <marker date="1495960669216" expanded="true" signature="14086:14106" ph="DELETE * FRO... " />
-            <marker date="1495960669216" expanded="true" signature="14108:14128" ph="DELETE * FRO... " />
+            <element signature="e#14329#14356#1" expanded="true" />
+            <marker date="1495966817948" expanded="true" signature="843:1271" ph="SELECT Proje... Projects" />
+            <marker date="1495966817948" expanded="true" signature="2693:2800" ph="SELECT Timel... " />
+            <marker date="1495966817948" expanded="true" signature="2693:2950" ph="SELECT Timel... Timelines" />
+            <marker date="1495966817948" expanded="true" signature="3778:3899" ph="SELECT Proje... Projects" />
+            <marker date="1495966817948" expanded="true" signature="4602:4656" ph="SELECT DISTI... Projects" />
+            <marker date="1495966817948" expanded="true" signature="5469:5533" ph="SELECT PROJE... Projects" />
+            <marker date="1495966817948" expanded="true" signature="9383:9414" ph="SELECT PROJE... Projects" />
+            <marker date="1495966817948" expanded="true" signature="11737:11801" ph="SELECT PROJE... Projects" />
+            <marker date="1495966817948" expanded="true" signature="12555:12622" ph="SELECT TIMEL... Timelines" />
+            <marker date="1495966817948" expanded="true" signature="13372:13430" ph="SELECT EVENT... Events" />
+            <marker date="1495966817948" expanded="true" signature="14181:14203" ph="DELETE * FRO... " />
+            <marker date="1495966817948" expanded="true" signature="14205:14225" ph="DELETE * FRO... " />
+            <marker date="1495966817948" expanded="true" signature="14227:14247" ph="DELETE * FRO... " />
           </folding>
         </state>
       </provider>
@@ -1566,7 +1570,7 @@
         <state relative-caret-position="1156">
           <caret line="85" column="56" lean-forward="false" selection-start-line="85" selection-start-column="56" selection-end-line="85" selection-end-column="56" />
           <folding>
-            <element signature="e#2019#2020#0" expanded="true" />
+            <element signature="e#2019#2020#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1630,48 +1634,93 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="221">
+            <caret line="13" column="33" lean-forward="false" selection-start-line="13" selection-start-column="33" selection-end-line="13" selection-end-column="33" />
+            <folding />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cs_9roject/Database.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="459">
+          <caret line="27" column="0" lean-forward="false" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <marker date="1495962225735" expanded="true" signature="577:982" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="dbDummy://dbtable:/9fb0e5c3/b0202c0a-96a1-47ab-9079-3d8c2281075e/bedrock.Timelines">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="uml://DATABASE/b0202c0a-96a1-47ab-9079-3d8c2281075e.SCHEMA:bedrock">
+      <provider selected="true" editor-type-id="UmlEditorProvider">
+        <state>
+          <ID>DATABASE</ID>
+          <OriginalElement>b0202c0a-96a1-47ab-9079-3d8c2281075e.SCHEMA:bedrock</OriginalElement>
+          <nodes>
+            <node x="" y="">b0202c0a-96a1-47ab-9079-3d8c2281075e.TABLE:bedrock.Projects</node>
+            <node x="" y="">b0202c0a-96a1-47ab-9079-3d8c2281075e.TABLE:bedrock.Events</node>
+            <node x="" y="">b0202c0a-96a1-47ab-9079-3d8c2281075e.TABLE:bedrock.Timelines</node>
+          </nodes>
+          <notes />
+          <edges />
+          <settings layout="Hierarchic Group" zoom="1.0" x="162.0" y="290.0" />
+          <SelectedNodes />
+          <Categories>
+            <Category>Key columns</Category>
+            <Category>Columns</Category>
+          </Categories>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/b0202c0a-96a1-47ab-9079-3d8c2281075e/console.sql">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="21" lean-forward="false" selection-start-line="8" selection-start-column="21" selection-end-line="8" selection-end-column="21" />
+        <state relative-caret-position="459">
+          <caret line="27" column="21" lean-forward="false" selection-start-line="27" selection-start-column="21" selection-end-line="27" selection-end-column="21" />
           <folding>
-            <marker date="1495734121077" expanded="true" signature="188:202" ph="SELECT * FRO... Timelines" />
+            <marker date="1495966323349" expanded="true" signature="188:202" ph="SELECT * FRO... Timelines" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/cs_9roject/TimelinesDAO.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="392">
-          <caret line="348" column="2" lean-forward="false" selection-start-line="348" selection-start-column="2" selection-end-line="351" selection-end-column="7" />
+        <state relative-caret-position="1312">
+          <caret line="198" column="24" lean-forward="false" selection-start-line="198" selection-start-column="24" selection-end-line="198" selection-end-column="24" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#5239#5264#0" expanded="true" />
-            <element signature="e#14210#14237#1" expanded="true" />
-            <marker date="1495960669216" expanded="true" signature="843:1271" ph="SELECT Proje... Projects" />
-            <marker date="1495960669216" expanded="true" signature="2693:2800" ph="SELECT Timel... " />
-            <marker date="1495960669216" expanded="true" signature="2693:2950" ph="SELECT Timel... Timelines" />
-            <marker date="1495960669216" expanded="true" signature="3778:3899" ph="SELECT Proje... Projects" />
-            <marker date="1495960669216" expanded="true" signature="4602:4656" ph="SELECT DISTI... Projects" />
-            <marker date="1495960669216" expanded="true" signature="5469:5533" ph="SELECT PROJE... Projects" />
-            <marker date="1495960669216" expanded="true" signature="9294:9325" ph="SELECT PROJE... Projects" />
-            <marker date="1495960669216" expanded="true" signature="11618:11682" ph="SELECT PROJE... Projects" />
-            <marker date="1495960669216" expanded="true" signature="12436:12503" ph="SELECT TIMEL... Timelines" />
-            <marker date="1495960669216" expanded="true" signature="13253:13311" ph="SELECT EVENT... Events" />
-            <marker date="1495960669216" expanded="true" signature="14062:14084" ph="DELETE * FRO... " />
-            <marker date="1495960669216" expanded="true" signature="14086:14106" ph="DELETE * FRO... " />
-            <marker date="1495960669216" expanded="true" signature="14108:14128" ph="DELETE * FRO... " />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/cs_9roject/Database.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="92" lean-forward="false" selection-start-line="9" selection-start-column="92" selection-end-line="9" selection-end-column="92" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <marker date="1495960669206" expanded="true" signature="617:1022" ph="{...}" />
+            <element signature="e#14329#14356#1" expanded="true" />
+            <marker date="1495966817948" expanded="true" signature="843:1271" ph="SELECT Proje... Projects" />
+            <marker date="1495966817948" expanded="true" signature="2693:2800" ph="SELECT Timel... " />
+            <marker date="1495966817948" expanded="true" signature="2693:2950" ph="SELECT Timel... Timelines" />
+            <marker date="1495966817948" expanded="true" signature="3778:3899" ph="SELECT Proje... Projects" />
+            <marker date="1495966817948" expanded="true" signature="4602:4656" ph="SELECT DISTI... Projects" />
+            <marker date="1495966817948" expanded="true" signature="5469:5533" ph="SELECT PROJE... Projects" />
+            <marker date="1495966817948" expanded="true" signature="9383:9414" ph="SELECT PROJE... Projects" />
+            <marker date="1495966817948" expanded="true" signature="11737:11801" ph="SELECT PROJE... Projects" />
+            <marker date="1495966817948" expanded="true" signature="12555:12622" ph="SELECT TIMEL... Timelines" />
+            <marker date="1495966817948" expanded="true" signature="13372:13430" ph="SELECT EVENT... Events" />
+            <marker date="1495966817948" expanded="true" signature="14181:14203" ph="DELETE * FRO... " />
+            <marker date="1495966817948" expanded="true" signature="14205:14225" ph="DELETE * FRO... " />
+            <marker date="1495966817948" expanded="true" signature="14227:14247" ph="DELETE * FRO... " />
           </folding>
         </state>
       </provider>
