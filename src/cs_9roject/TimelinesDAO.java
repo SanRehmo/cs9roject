@@ -158,47 +158,52 @@ public class TimelinesDAO {
                 delete(project);
 
             // Projects loop
-            for (int i = 0; i < project.timelines.size(); i++) {
+            for (int i = 0; i < project.getTimelines().size(); i++) {
 
-                Timeline tl = project.timelines.get(i);
-                String projects = "INSERT INTO Projects " + "VALUES (" + project.ProjectID + ", " + project.timelines.get(i).timelineId + ", '" + project.projectName + "')";
-                executeUpdate(projects);
+                Timeline tl = project.getTimelines().get(i);
+                String projectsQuery = "INSERT INTO Projects " + "VALUES (" + project.ProjectID + ", " + project.getTimelines().get(i).timelineId + ", '" + project.projectName + "')";
+                executeUpdate(projectsQuery);
 
                 // extracting Date and Time from LocalDateTime
                 Date startDate = Date.valueOf(tl.startDate);
                 Date endDate = Date.valueOf(tl.endDate);
 
-                if (tl.events.size() < 1) {
-                    String timelines = "INSERT INTO Timelines " + "VALUES (" + tl.timelineId + ", " + null + ", '" + startDate + "', '" + endDate + "', '" + tl.title + "', " + tl.isOnlyYears + ")";
-                    executeUpdate(timelines);
+                if (tl.getEvents().size() < 1) {
+                    String timelinesQuery = "INSERT INTO Timelines " + "VALUES (" + tl.timelineId + ", " + 0 + ", '" + startDate + "', '" + endDate + "', '" + tl.title + "')";
+                    executeUpdate(timelinesQuery);
                 } else {
                     // Timelines & Events loop
-                    for (int j = 0; j < tl.events.size(); j++) {
+                    for (int j = 0; j < tl.getEvents().size(); j++) {
 
 
-                        Event ev = tl.events.get(j);
+                        Event ev = tl.getEvents().get(j);
 
-                        int boolToInt = (tl.isOnlyYears) ? 1 : 0;
-                        String timelines = "INSERT INTO Timelines " + "VALUES (" + tl.timelineId + ", " + ev.eventid + ", '" + startDate + "', '" + endDate + "', '" + tl.title + "', " + boolToInt + ")";
-                        executeUpdate(timelines);
+                        // extracting Date and Time from LocalDateTime
+                        startDate = Date.valueOf(ev.startTime.toLocalDate());
+                        Time startTime = Time.valueOf(ev.startTime.toLocalTime());
 
-                    // extracting Date and Time from LocalDateTime
-                    startDate = Date.valueOf(ev.startTime.toLocalDate());
-                    Time startTime = Time.valueOf(ev.startTime.toLocalTime());
+                        endDate = Date.valueOf("0000-01-01");
+                        Time endTime = Time.valueOf("12:00:00");
 
-                    endDate = Date.valueOf("0000-01-01");
-                    Time endTime = Time.valueOf("12:00:00");
+                        if (ev.isDurationEvent()) {
+                            endDate = Date.valueOf(((DurationEvent)ev).getEndTime().toLocalDate());
+                            endTime = Time.valueOf(((DurationEvent)ev).getEndTime().toLocalTime());
+                        }
 
-                    if (ev.isDurationEvent()) {
-                        endDate = Date.valueOf(((DurationEvent)ev).getEndTime().toLocalDate());
-                        endTime = Time.valueOf(((DurationEvent)ev).getEndTime().toLocalTime());
-                    }
-
-                        boolToInt = (ev.isDurationEvent) ? 1 : 0;
+                        int boolToInt = (ev.isDurationEvent) ? 1 : 0;
                         String imagePath= ev.imagepath.replace("\\", "\\\\");
-                        String events = "INSERT INTO Events " + "VALUES (" + ev.eventid + ", '" + ev.title + "', '" + startTime + "', '" + endTime + "', '"
+
+                        // Saving Event
+                        String eventsQuery = "INSERT INTO Events " + "VALUES (" + ev.eventid + ", '" + ev.title + "', '" + startTime + "', '" + endTime + "', '"
                                 + startDate + "', '" + endDate + "', '" + ev.description + "', " + boolToInt + ", '" + ev.eventColor.toString() + "', '" + imagePath + "')";
-                    executeUpdate(events);
+                        executeUpdate(eventsQuery);
+
+                        // Saving Timeline
+                        String timelinesQuery = "INSERT INTO Timelines " + "VALUES (" + tl.timelineId + ", " + ev.eventid + ", '" + startDate + "', '" + endDate + "', '" + tl.title + "')";
+                        executeUpdate(timelinesQuery);
+
+
+
 
                     }
                 }
@@ -279,14 +284,14 @@ public class TimelinesDAO {
     public boolean delete(Project project) {
 
         if (connect()) {
-            query = "DELETE FROM Projects WHERE PROJECT_ID=" + project.ProjectID;
-            executeUpdate(query);
-            for (int i = 0; i < project.timelines.size(); i++) {
-                delete(project.timelines.get(i));
-                for (int j = 0; j < project.timelines.get(i).events.size(); j++) {
-                    delete(project.timelines.get(i).events.get(j));
+            for (int i = 0; i < project.getTimelines().size(); i++) {
+                delete(project.getTimelines().get(i));
+                for (int j = 0; j < project.getTimelines().get(i).getEvents().size(); j++) {
+                    delete(project.getTimelines().get(i).getEvents().get(j));
                 }
             }
+            query = "DELETE FROM Projects WHERE PROJECT_ID=" + project.ProjectID;
+            executeUpdate(query);
             return true;
         } else {
             System.out.println("Connection to Database failed");
