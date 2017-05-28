@@ -11,7 +11,7 @@ import java.util.List;
 
 public class TimelinesDAO {
 
-    private Connection connection = null;
+    private Connection connection;
     private String query;
     private Statement stmt;
 
@@ -25,9 +25,6 @@ public class TimelinesDAO {
         Project result = new Project(ID);
         Timeline timeline = null;
         ArrayList<Event> eventList = new ArrayList<>();
-
-        // attempt to establish a connection to the DB
-        connect();
 
         if (connect()) {
 
@@ -85,7 +82,7 @@ public class TimelinesDAO {
                 ex.printStackTrace();
             }
         } else {
-            System.out.println("Failed to make connection");
+            System.out.println("Connection to Database failed");
         }
         return result;
     }
@@ -97,29 +94,20 @@ public class TimelinesDAO {
     public List<Pair<Integer, String>> loadAllProjectNames() {
 
         List<Pair<Integer, String>> result = new ArrayList<>();
-        Connection connection = null;
-
-        try {
-            connection = Database.establishConnection();
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
 
         if (connect()) {
             try {
                 stmt = connection.createStatement();
                 String temp = "SELECT DISTINCT PROJECT_NAME, PROJECT_ID FROM Projects";
                 ResultSet rss = stmt.executeQuery(temp);
-
                 while(rss.next()) {
                     result.add(new Pair<>(rss.getInt("PROJECT_ID"), rss.getString("PROJECT_NAME")));
                 }
-
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
         } else {
-            System.out.println("Failed to make connection");
+            System.out.println("Connection to Database failed");
         }
         return result;
     }
@@ -136,13 +124,9 @@ public class TimelinesDAO {
         Connection connection = null;
         int i = 0;
 
-        connect();
-
         if (connect()) {
             String query = "SELECT PROJECT_ID FROM Projects ORDER BY PROJECT_ID DESC LIMIT 1";
-
             try {
-
                 stmt = connection.createStatement();
                 ResultSet rs = stmt.executeQuery(query);
                 while (rs.next()) {
@@ -154,7 +138,7 @@ public class TimelinesDAO {
                 ex.printStackTrace();
             }
         } else {
-            System.out.println("Failed to make connection");
+            System.out.println("Connection to Database failed");
         }
         return result;
     }
@@ -167,11 +151,9 @@ public class TimelinesDAO {
      */
     public boolean save(Project project) {
 
-        connect();
-
         if (connect()) {
 
-            // delte existing project (overwrite)
+            // delete existing project (overwrite)
             if (exists(project.ProjectID))
                 delete(project);
 
@@ -218,9 +200,11 @@ public class TimelinesDAO {
                                 + startDate + "', '" + endDate + "', '" + ev.description + "', " + boolToInt + ", '" + ev.eventColor.toString() + "', '" + imagePath + "')";
                     executeUpdate(events);
 
-                }
+                    }
                 }
             }
+        } else {
+            System.out.println("Connection to Database failed");
         }
         return exists(project.ProjectID);
     }
@@ -232,27 +216,23 @@ public class TimelinesDAO {
      */
     public boolean exists(int ID) {
 
-        try {
-            connection = Database.establishConnection();
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-
         boolean result = false;
 
-        try {
-            String query = "SELECT PROJECT_ID FROM Projects";
-            Statement stmt = connection.createStatement();
-            stmt.execute(query);
-
-            ResultSet rs = stmt.executeQuery(query);
-
-            while (rs.next()) {
-                if (rs.getInt("PROJECT_ID") == ID)
-                    result = true;
+        if(connect()) {
+            try {
+                String query = "SELECT PROJECT_ID FROM Projects";
+                Statement stmt = connection.createStatement();
+                stmt.execute(query);
+                ResultSet rs = stmt.executeQuery(query);
+                while (rs.next()) {
+                    if (rs.getInt("PROJECT_ID") == ID)
+                        result = true;
+                }
+            } catch (Exception ex) {
+                ex.printStackTrace();
             }
-        } catch (Exception ex) {
-            ex.printStackTrace();
+        } else {
+            System.out.println("Connection to Database failed");
         }
         return result;
     }
@@ -264,17 +244,14 @@ public class TimelinesDAO {
      */
     public boolean delete(Event event) {
 
-        try {
-            connection = Database.establishConnection();
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-
         if (connect()) {
             query = "DELETE FROM Events WHERE EVENT_ID=" + event.eventid;
             executeUpdate(query);
             return true;
-        } else return false;
+        } else {
+            System.out.println("Connection to Database failed");
+            return false;
+        }
     }
 
     /**
@@ -284,17 +261,14 @@ public class TimelinesDAO {
      */
     public boolean delete(Timeline timeline) {
 
-        try {
-            connection = Database.establishConnection();
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-
         if (connect()) {
             query = "DELETE FROM Timelines WHERE TIMELINE_ID=" + timeline.timelineId;
             executeUpdate(query);
             return true;
-        } else return false;
+        } else {
+            System.out.println("Connection to Database failed");
+            return false;
+        }
     }
 
     /**
@@ -303,12 +277,6 @@ public class TimelinesDAO {
      * @return boolean
      */
     public boolean delete(Project project) {
-
-        try {
-            connection = Database.establishConnection();
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
 
         if (connect()) {
             query = "DELETE FROM Projects WHERE PROJECT_ID=" + project.ProjectID;
@@ -320,7 +288,10 @@ public class TimelinesDAO {
                 }
             }
             return true;
-        } else return false;
+        } else {
+            System.out.println("Connection to Database failed");
+            return false;
+        }
     }
 
     /**
@@ -330,12 +301,6 @@ public class TimelinesDAO {
     public int getHighestProjectID() {
 
         int highestID = 0;
-
-        try {
-            connection = Database.establishConnection();
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
 
         if (connect()) {
             String query = "SELECT PROJECT_ID FROM Projects ORDER BY PROJECT_ID DESC LIMIT 1";
@@ -350,7 +315,7 @@ public class TimelinesDAO {
                 ex.printStackTrace();
             }
         } else {
-            System.out.println("Failed to make connection");
+            System.out.println("Connection to Database failed");
         }
         return highestID;
     }
@@ -362,12 +327,6 @@ public class TimelinesDAO {
     public int getHighestTimelineID() {
 
         int highestID = 0;
-
-        try {
-            connection = Database.establishConnection();
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
 
         if (connect()) {
             String query = "SELECT TIMELINE_ID FROM Timelines ORDER BY TIMELINE_ID DESC LIMIT 1";
@@ -382,7 +341,7 @@ public class TimelinesDAO {
                 ex.printStackTrace();
             }
         } else {
-            System.out.println("Failed to make connection");
+            System.out.println("Connection to Database failed");
         }
         return highestID;
     }
@@ -394,12 +353,6 @@ public class TimelinesDAO {
     public int getHighestEventID() {
 
         int highestID = 0;
-
-        try {
-            connection = Database.establishConnection();
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
 
         if (connect()) {
             String query = "SELECT EVENT_ID FROM Events ORDER BY EVENT_ID DESC LIMIT 1";
@@ -414,7 +367,7 @@ public class TimelinesDAO {
                 ex.printStackTrace();
             }
         } else {
-            System.out.println("Failed to make connection");
+            System.out.println("Connection to Database failed");
         }
         return highestID;
     }
@@ -427,20 +380,18 @@ public class TimelinesDAO {
 
         boolean result = false;
 
-        try {
-            connection = Database.establishConnection();
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-
-        try {
-            query = "DELETE * FROM Projects; DELETE * FROM Events; DELETE * FROM Events";
-            Statement stmt = connection.createStatement();
-            @SuppressWarnings("unused")
-			ResultSet rs = stmt.executeQuery(query);
-            result = true;
-        } catch (Exception ex) {
-            ex.printStackTrace();
+        if(connect()) {
+            try {
+                query = "DELETE * FROM Projects; DELETE * FROM Events; DELETE * FROM Events";
+                Statement stmt = connection.createStatement();
+                @SuppressWarnings("unused")
+                ResultSet rs = stmt.executeQuery(query);
+                result = true;
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        } else {
+            System.out.println("Connection to Database failed");
         }
         return result;
     }
@@ -450,15 +401,7 @@ public class TimelinesDAO {
      * @param query
      * @return int
      */
-    private void executeUpdate(String query) {
-
-
-
-        try {
-            connection = Database.establishConnection();
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
+    public void executeUpdate(String query) {
 
         if (connect()) {
             try {
@@ -468,6 +411,8 @@ public class TimelinesDAO {
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
+        } else {
+            System.out.println("Connection to Database failed");
         }
     }
 
@@ -479,17 +424,23 @@ public class TimelinesDAO {
 
         String query = "SELECT * FROM Projects";
         int queryCount = 0;
+        int i = 0;
 
-        try {
-            if (connect()) {
-                while (true) {
-                    executeUpdate(query);
-                    queryCount++;
+        if(connect()) {
+            try {
+                if (connect()) {
+                    while (i < 100000) {
+                        executeUpdate(query);
+                        queryCount++;
+                        i++;
+                    }
                 }
+            } catch (Exception ex) {
+                ex.printStackTrace();
+                System.out.println("Queries until connection refusal: " + queryCount);
             }
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            System.out.println("Queries until connection refusal: " + queryCount);
+        } else {
+            System.out.println("Connection to Database failed");
         }
     }
 

@@ -20,7 +20,7 @@ public class Database {
         }
 
         // initialization of variables
-        Connection connection = null;
+        Connection connection;
 
         // attempt to connect to our database with our credentials
         try {
